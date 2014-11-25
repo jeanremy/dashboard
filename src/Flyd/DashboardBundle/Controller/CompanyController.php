@@ -8,6 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Flyd\DashboardBundle\Entity\Company;
+use Flyd\DashboardBundle\Entity\Contact;
+use Flyd\DashboardBundle\Entity\Client;
 use Flyd\DashboardBundle\Form\CompanyType;
 
 /**
@@ -28,12 +30,27 @@ class CompanyController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
+        /*
+        $client = new Company();
+        $client->setName('Client');
+        $client->setReminder(new \DateTime() );
+        $contact = new Contact();
+        $contact->setFirstname('Contact');
+        $contact->setLastname('Contact last');
+        $contact->setEmail('tw@tw.fr');
+        $contact->setJob('Maçon');
+        $contact->setPhone('0241857845');
+        $contact->setMobile('0241857845');
+        $client->addContact($contact );
+        $em->persist($client);
+        $em->persist($contact);
+        $em->flush();*/
 
         $entities = $em->getRepository('FlydDashboardBundle:Company')->findAll();
 
-        return array(
-            'entities' => $entities,
-        );
+        return $this->render('FlydDashboardBundle:Company:index.html.twig', array(
+            'entities' => $entities
+        ));
     }
     /**
      * Creates a new Company entity.

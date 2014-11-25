@@ -1,3 +1,16 @@
 flyd_dashboard_homepage:
     path:     /dashboard
-    defaults: { _controller: FlydDashboardBundle:Home:index }
+    defaults: { _controller: FlydDashboardBundle:Company:index }
+
+company_show:
+    path:     /company/{id}
+    defaults: { _controller: FlydDashboardBundle:Company:show }
+
+company_edit:
+    path:     /company/{id}/edit
+    defaults: { _controller: FlydDashboardBundle:Company:edit }
+
+company_new:
+    path:     /company/add
+    defaults: { _controller: FlydDashboardBundle:Company:create }
+

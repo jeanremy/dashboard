@@ -45,6 +45,7 @@ class Company
     */
     private $contacts;
 
+
     /**
      * @var \DateTime
      *
@@ -60,9 +61,7 @@ class Company
     private $reminder;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="origin", type="string", nullable=true)
+     * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\Origin")
      */
     private $origin;
 
@@ -85,6 +84,7 @@ class Company
         $this->createdAt    = new \Datetime();
         $this->addresses    = new ArrayCollection();
         $this->contacts     = new ArrayCollection();
+        $this->companies     = new ArrayCollection();
     }
 
 
@@ -129,7 +129,6 @@ class Company
     {
         $this->addresses[] = $address;
 
-        // On lie l'annonce à la candidature
         $address->setCompany($this);
 
         return $this;
@@ -159,8 +158,7 @@ class Company
     {
         $this->contacts[] = $contact;
 
-        // On lie l'annonce à la candidature
-        $contact->setAdvert($this);
+        $contact->setCompany($this);
 
         return $this;
     }
@@ -168,7 +166,7 @@ class Company
     /**
     * @param Contact $contact
     */
-    public function removeContact(Address $contact)
+    public function removeContact(Contact $contact)
     {
         $this->contacts->removeElement($contact);
     }
@@ -226,6 +224,17 @@ class Company
     public function getReminder()
     {
         return $this->reminder;
+    }
+
+    public function setCreatedAt(\Datetime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+        return $this;
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
     }
 
     /**
