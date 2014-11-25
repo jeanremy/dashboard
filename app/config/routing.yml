@@ -1,0 +1,4 @@
+flyd_dashboard:
+    resource: "@FlydDashboardBundle/Resources/config/routing.yml"
+    prefix:   /
+
