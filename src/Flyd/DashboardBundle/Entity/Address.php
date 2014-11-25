@@ -30,6 +30,11 @@ class Address
     private $id;
 
     /**
+    * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\Company", inversedBy="addresses")
+    */
+    private $company;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="street", type="string", length=255)
@@ -72,11 +77,6 @@ class Address
     private $type;
 
 
-    public function __construct()
-    {
-        $this->$type = self::GLOBALE;
-    }
-
 
     /**
      * Get id
@@ -86,6 +86,23 @@ class Address
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set Company
+     *
+     * @return Company 
+     */
+    public function setCompany(Company $company)
+    {
+        $this->company = $company;
+
+        return $this;
+    }
+
+    public function getCompany()
+    {
+        return $this->company;
     }
 
     /**

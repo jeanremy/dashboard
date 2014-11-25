@@ -5,5 +5,14 @@
 {% endblock %}
 
 {% block body %}
-	Welcome. Bien tot le dashboard
+	Welcome. Bientot le dashboard
+	{% for company in companies %}
+    <li>
+        {{ company.name }}
+		{% for address in company.addresses %}
+        	{{ address.street }}
+		{% endfor%}
+
+    </li>
+  {% endfor %}
 {% endblock %}

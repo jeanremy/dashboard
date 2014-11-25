@@ -16,7 +16,7 @@ class Client extends Company
     /**
      * @var integer
      *
-     * @ORM\Column(name="type", type="smallint")
+     * @ORM\Column(name="type", type="smallint", nullable=true)
      */
     private $type;
 

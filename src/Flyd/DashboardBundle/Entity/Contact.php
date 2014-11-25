@@ -22,6 +22,11 @@ class Contact
     private $id;
 
     /**
+    * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\Company", inversedBy="contacts")
+    */
+    private $company;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="firstname", type="string", length=255)
@@ -72,6 +77,23 @@ class Contact
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set Company
+     *
+     * @return Company 
+     */
+    public function setCompany(Company $company)
+    {
+        $this->company = $company;
+
+        return $this;
+    }
+
+    public function getCompany()
+    {
+        return $this->company;
     }
 
     /**
