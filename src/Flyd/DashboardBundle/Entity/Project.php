@@ -45,7 +45,7 @@ class Project
     private $project_canvas;
 
     /**
-    * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\ProjectTaskUser", inversedBy="project")
+    * @ORM\OneToMany(targetEntity="Flyd\DashboardBundle\Entity\ProjectTaskUser", mappedBy="project")
     */
     private $project_task_users;
 

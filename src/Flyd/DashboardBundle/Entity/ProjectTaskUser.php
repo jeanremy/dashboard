@@ -14,40 +14,33 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class ProjectTaskUser
 {
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
+
 
     /**
      * @var \Flyd\DashboardBundle\Entity\Project
-     * @ORM\OneToMany(targetEntity="Flyd\DashboardBundle\Entity\Project", mappedBy="project_task_users")
-     * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
      * @ORM\Id
+     * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\Project", inversedBy="project_task_users")
+     * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
      */
     private $project;
 
     /**
-     * @ORM\OneToMany(targetEntity="Flyd\DashboardBundle\Entity\Task", mappedBy="project_task_users")
-     * @ORM\JoinColumn(name="task_id", referencedColumnName="id")
      * @ORM\Id
+     * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\Task", inversedBy="project_task_users")
+     * @ORM\JoinColumn(name="task_id", referencedColumnName="id")
      */
     private $task;
 
     /**
-     * @ORM\OneToMany(targetEntity="Flyd\DashboardBundle\Entity\User", mappedBy="project_task_users")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      * @ORM\Id
+     * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\User", inversedBy="project_task_users")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
 
     /**
      * @var integer
-     *
+     * @ORM\Id
      * @ORM\Column(name="position", type="integer")
      */
     private $position;
@@ -58,6 +51,7 @@ class ProjectTaskUser
      * @ORM\Column(name="status", type="string")
      */
     private $status;
+
 
     /**
      * Set position

@@ -26,7 +26,7 @@ class Task
     private $id;
 
     /**
-    * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\ProjectTaskUser", inversedBy="task")
+    * @ORM\OneToMany(targetEntity="Flyd\DashboardBundle\Entity\ProjectTaskUser", mappedBy="task")
     */
     private $project_task_users;
 

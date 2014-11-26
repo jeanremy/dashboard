@@ -23,7 +23,7 @@ class User extends BaseUser
     protected $id;
 
     /**
-    * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\ProjectTaskUser", inversedBy="user")
+    * @ORM\OneToMany(targetEntity="Flyd\DashboardBundle\Entity\ProjectTaskUser", mappedBy="user")
     */
     private $project_task_users;
 
