@@ -26,7 +26,7 @@ class Need
     /**
     * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\Client", inversedBy="needs")
     */
-    private $clients;
+    private $client;
 
     /**
     * @ORM\OneToMany(targetEntity="Flyd\DashboardBundle\Entity\Project", mappedBy="need", cascade={"persist", "remove"})
@@ -293,7 +293,7 @@ class Need
      * @param \Flyd\DashboardBundle\Entity\Client $clients
      * @return Need
      */
-    public function setClients(\Flyd\DashboardBundle\Entity\Client $clients = null)
+    public function setClient(\Flyd\DashboardBundle\Entity\Client $client = null)
     {
         $this->clients = $clients;
 

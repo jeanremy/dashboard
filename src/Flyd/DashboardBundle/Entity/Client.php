@@ -29,7 +29,7 @@ class Client extends Company
     private $reminder;
 
     /**
-    * @ORM\OneToMany(targetEntity="Flyd\DashboardBundle\Entity\Need", mappedBy="Client", cascade={"persist", "remove"})
+    * @ORM\OneToMany(targetEntity="Flyd\DashboardBundle\Entity\Need", mappedBy="client", cascade={"persist", "remove"})
     */
     private $needs;
 
