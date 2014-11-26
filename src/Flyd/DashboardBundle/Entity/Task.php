@@ -2,17 +2,20 @@
 
 namespace Flyd\DashboardBundle\Entity;
 
-use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * User
+ * Task
  *
- * @ORM\Table(name="fos_user")
- * @ORM\Entity()
+ * @ORM\Table()
+ * @ORM\Entity
  */
-class User extends BaseUser
+class Task
 {
+    const ADMINISTRATIF = 0;
+    const STUDIO = 1;
+
     /**
      * @var integer
      *
@@ -20,20 +23,26 @@ class User extends BaseUser
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    private $id;
 
     /**
-    * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\ProjectTaskUser", inversedBy="users")
+    * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\ProjectTaskUser", inversedBy="task")
     */
     private $project_task_users;
-
 
     /**
      * @var string
      *
-     * @ORM\Column(name="job", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255)
      */
-    private $job;
+    private $name;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="step", type="integer")
+     */
+    private $step;
 
     public function __construct()
     {
@@ -81,33 +90,56 @@ class User extends BaseUser
     }
 
     /**
-     * Set job
+     * Set name
      *
-     * @param string $job
-     * @return Contact
+     * @param string $name
+     * @return Task
      */
-    public function setJob($job)
+    public function setName($name)
     {
-        $this->job = $job;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get job
+     * Get name
      *
      * @return string 
      */
-    public function getJob()
+    public function getName()
     {
-        return $this->job;
+        return $this->name;
+    }
+
+    /**
+     * Set step
+     *
+     * @param integer $step
+     * @return Task
+     */
+    public function setStep($step)
+    {
+        $this->step = $step;
+
+        return $this;
+    }
+
+    /**
+     * Get step
+     *
+     * @return integer 
+     */
+    public function getStep()
+    {
+        return $this->step;
     }
 
     /**
      * Set project_task_users
      *
      * @param \Flyd\DashboardBundle\Entity\ProjectTaskUser $projectTaskUsers
-     * @return User
+     * @return Task
      */
     public function setProjectTaskUsers(\Flyd\DashboardBundle\Entity\ProjectTaskUser $projectTaskUsers = null)
     {
