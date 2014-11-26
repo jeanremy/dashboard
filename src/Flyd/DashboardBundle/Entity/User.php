@@ -23,7 +23,7 @@ class User extends BaseUser
     protected $id;
 
     /**
-    * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\ProjectTaskUser", inversedBy="users")
+    * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\ProjectTaskUser", inversedBy="user")
     */
     private $project_task_users;
 
@@ -103,16 +103,4 @@ class User extends BaseUser
         return $this->job;
     }
 
-    /**
-     * Set project_task_users
-     *
-     * @param \Flyd\DashboardBundle\Entity\ProjectTaskUser $projectTaskUsers
-     * @return User
-     */
-    public function setProjectTaskUsers(\Flyd\DashboardBundle\Entity\ProjectTaskUser $projectTaskUsers = null)
-    {
-        $this->project_task_users = $projectTaskUsers;
-
-        return $this;
-    }
 }

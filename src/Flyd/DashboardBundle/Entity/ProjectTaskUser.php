@@ -27,18 +27,21 @@ class ProjectTaskUser
      * @var \Flyd\DashboardBundle\Entity\Project
      * @ORM\OneToMany(targetEntity="Flyd\DashboardBundle\Entity\Project", mappedBy="project_task_users")
      * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
+     * @ORM\Id
      */
     private $project;
 
     /**
      * @ORM\OneToMany(targetEntity="Flyd\DashboardBundle\Entity\Task", mappedBy="project_task_users")
      * @ORM\JoinColumn(name="task_id", referencedColumnName="id")
+     * @ORM\Id
      */
     private $task;
 
     /**
      * @ORM\OneToMany(targetEntity="Flyd\DashboardBundle\Entity\User", mappedBy="project_task_users")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\Id
      */
     private $user;
 
