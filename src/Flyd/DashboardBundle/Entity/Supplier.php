@@ -8,5 +8,8 @@ use Flyd\DashboardBundle\Entity\Company;
 /** @ORM\Entity */
 class Supplier extends Company
 {
+	public function __toString() {
+        return 'hop';
+    }
 
 }

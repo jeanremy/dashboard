@@ -36,8 +36,15 @@ class Client extends Company
 
     public function __construct()
     {
+        parent::__construct();
         $this->needs        = new ArrayCollection();
     }
+
+
+    public function __toString() {
+        return 'hop';
+    }
+
 
     /**
      * Set type

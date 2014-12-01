@@ -7,61 +7,44 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Flyd\DashboardBundle\Entity\Company;
-use Flyd\DashboardBundle\Entity\Contact;
-use Flyd\DashboardBundle\Entity\Client;
-use Flyd\DashboardBundle\Form\CompanyType;
+use Flyd\DashboardBundle\Entity\Project;
+use Flyd\DashboardBundle\Form\ProjectType;
 
 /**
- * Company controller.
+ * Project controller.
  *
- * @Route("/")
+ * @Route("/project")
  */
-class CompanyController extends Controller
+class ProjectController extends Controller
 {
 
     /**
-     * Lists all Company entities.
+     * Lists all Project entities.
      *
-     * @Route("/", name="")
+     * @Route("/", name="project")
      * @Method("GET")
      * @Template()
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        /*
-        $client = new Company();
-        $client->setName('Client');
-        $client->setReminder(new \DateTime() );
-        $contact = new Contact();
-        $contact->setFirstname('Contact');
-        $contact->setLastname('Contact last');
-        $contact->setEmail('tw@tw.fr');
-        $contact->setJob('Maçon');
-        $contact->setPhone('0241857845');
-        $contact->setMobile('0241857845');
-        $client->addContact($contact );
-        $em->persist($client);
-        $em->persist($contact);
-        $em->flush();*/
 
-        $entities = $em->getRepository('FlydDashboardBundle:Company')->findAll();
+        $entities = $em->getRepository('FlydDashboardBundle:Project')->findAll();
 
-        return $this->render('FlydDashboardBundle:Company:index.html.twig', array(
-            'entities' => $entities
-        ));
+        return array(
+            'entities' => $entities,
+        );
     }
     /**
-     * Creates a new Company entity.
+     * Creates a new Project entity.
      *
-     * @Route("/", name="_create")
+     * @Route("/", name="project_create")
      * @Method("POST")
-     * @Template("FlydDashboardBundle:Company:new.html.twig")
+     * @Template("FlydDashboardBundle:Project:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new Company();
+        $entity = new Project();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -70,7 +53,7 @@ class CompanyController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('project_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -80,16 +63,16 @@ class CompanyController extends Controller
     }
 
     /**
-     * Creates a form to create a Company entity.
+     * Creates a form to create a Project entity.
      *
-     * @param Company $entity The entity
+     * @param Project $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Company $entity)
+    private function createCreateForm(Project $entity)
     {
-        $form = $this->createForm(new CompanyType(), $entity, array(
-            'action' => $this->generateUrl('_create'),
+        $form = $this->createForm(new ProjectType(), $entity, array(
+            'action' => $this->generateUrl('project_create'),
             'method' => 'POST',
         ));
 
@@ -99,15 +82,15 @@ class CompanyController extends Controller
     }
 
     /**
-     * Displays a form to create a new Company entity.
+     * Displays a form to create a new Project entity.
      *
-     * @Route("/new", name="_new")
+     * @Route("/new", name="project_new")
      * @Method("GET")
      * @Template()
      */
     public function newAction()
     {
-        $entity = new Company();
+        $entity = new Project();
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -117,9 +100,9 @@ class CompanyController extends Controller
     }
 
     /**
-     * Finds and displays a Company entity.
+     * Finds and displays a Project entity.
      *
-     * @Route("/{id}", name="_show")
+     * @Route("/{id}", name="project_show")
      * @Method("GET")
      * @Template()
      */
@@ -127,10 +110,10 @@ class CompanyController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('FlydDashboardBundle:Company')->find($id);
+        $entity = $em->getRepository('FlydDashboardBundle:Project')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Company entity.');
+            throw $this->createNotFoundException('Unable to find Project entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -142,9 +125,9 @@ class CompanyController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Company entity.
+     * Displays a form to edit an existing Project entity.
      *
-     * @Route("/{id}/edit", name="_edit")
+     * @Route("/{id}/edit", name="project_edit")
      * @Method("GET")
      * @Template()
      */
@@ -152,10 +135,10 @@ class CompanyController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('FlydDashboardBundle:Company')->find($id);
+        $entity = $em->getRepository('FlydDashboardBundle:Project')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Company entity.');
+            throw $this->createNotFoundException('Unable to find Project entity.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -169,16 +152,16 @@ class CompanyController extends Controller
     }
 
     /**
-    * Creates a form to edit a Company entity.
+    * Creates a form to edit a Project entity.
     *
-    * @param Company $entity The entity
+    * @param Project $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Company $entity)
+    private function createEditForm(Project $entity)
     {
-        $form = $this->createForm(new CompanyType(), $entity, array(
-            'action' => $this->generateUrl('_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new ProjectType(), $entity, array(
+            'action' => $this->generateUrl('project_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -187,20 +170,20 @@ class CompanyController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Company entity.
+     * Edits an existing Project entity.
      *
-     * @Route("/{id}", name="_update")
+     * @Route("/{id}", name="project_update")
      * @Method("PUT")
-     * @Template("FlydDashboardBundle:Company:edit.html.twig")
+     * @Template("FlydDashboardBundle:Project:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('FlydDashboardBundle:Company')->find($id);
+        $entity = $em->getRepository('FlydDashboardBundle:Project')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Company entity.');
+            throw $this->createNotFoundException('Unable to find Project entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -210,7 +193,7 @@ class CompanyController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('project_edit', array('id' => $id)));
         }
 
         return array(
@@ -220,9 +203,9 @@ class CompanyController extends Controller
         );
     }
     /**
-     * Deletes a Company entity.
+     * Deletes a Project entity.
      *
-     * @Route("/{id}", name="_delete")
+     * @Route("/{id}", name="project_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -232,21 +215,21 @@ class CompanyController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('FlydDashboardBundle:Company')->find($id);
+            $entity = $em->getRepository('FlydDashboardBundle:Project')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Company entity.');
+                throw $this->createNotFoundException('Unable to find Project entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl(''));
+        return $this->redirect($this->generateUrl('project'));
     }
 
     /**
-     * Creates a form to delete a Company entity by id.
+     * Creates a form to delete a Project entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -255,7 +238,7 @@ class CompanyController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('project_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

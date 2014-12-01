@@ -1,16 +1,20 @@
 flyd_dashboard_homepage:
-    path:     /dashboard
-    defaults: { _controller: FlydDashboardBundle:Company:index }
+    path:     /
+    defaults: { _controller: FlydDashboardBundle:Client:index }
 
-company_show:
-    path:     /company/{id}
-    defaults: { _controller: FlydDashboardBundle:Company:show }
+client_list:
+    path:     /clients
+    defaults: { _controller: FlydDashboardBundle:Client:index }
 
-company_edit:
-    path:     /company/{id}/edit
-    defaults: { _controller: FlydDashboardBundle:Company:edit }
+client_show:
+    path:     /client/{id}
+    defaults: { _controller: FlydDashboardBundle:Client:show }
 
-company_new:
-    path:     /company/add
-    defaults: { _controller: FlydDashboardBundle:Company:create }
+client_edit:
+    path:     /client/{id}/edit
+    defaults: { _controller: FlydDashboardBundle:Client:edit }
+
+client_new:
+    path:     /client/add/
+    defaults: { _controller: FlydDashboardBundle:Client:add }
 

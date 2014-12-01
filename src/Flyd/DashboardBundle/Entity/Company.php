@@ -76,11 +76,10 @@ class Company
 
     public function __construct()
     {
-        $this->entrance     = new \Datetime();
-        $this->createdAt    = new \Datetime();
+        $this->entrance     = new \DateTime();
+        $this->createdAt    = new \DateTime();
         $this->addresses    = new ArrayCollection();
         $this->contacts     = new ArrayCollection();
-        $this->needs        = new ArrayCollection();
     }
 
 
@@ -217,7 +216,7 @@ class Company
     */
     public function updateDate()
     {
-        $this->setUpdatedAt(new \Datetime());
+        $this->setUpdatedAt(new \DateTime());
     }
 
     public function setUpdatedAt(\Datetime $updatedAt)
@@ -263,4 +262,5 @@ class Company
     {
         return $this->origin;
     }
+
 }

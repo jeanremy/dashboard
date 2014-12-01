@@ -1,0 +1,95 @@
+{% extends 'FlydDashboardBundle::layout.html.twig' %}
+
+{% block title %}
+    <title>{{entity.name}} - Edit </title>
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>{{entity.name}}</h1>
+        <div class="row">
+            <div class="col-sm-12 bloc">
+                <div class="form-group">
+                    
+                    <label class="col-sm-3 control-label">Date d'entrée</label>
+
+                    <div class="">
+                        {{ entity.entrance|date('Y-m-d H:i:s') }}
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    
+                    <label class="col-sm-3 control-label">Type de Client</label>
+
+                    <div class="">
+                        {{ entity.type }}
+                    </div>
+                    
+                </div>
+
+                <div class="form-group">
+                    
+                    <label class="col-sm-3 control-label">Adresse</label>
+
+                    <div class="">
+                        {{ entity.type }}
+                    </div>
+                    
+                </div>
+
+                <div class="form-group">
+                    
+                    <label class="col-sm-3 control-label">Adresse de facuration</label>
+
+                    <div class="">
+                        {{ entity.type }}
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- Contacts -->
+        <div class="row">
+            <div class="col-sm-12 bloc">
+                <h2 class="bloc__title">Contacts</h2>
+                <div class="row">
+                    {%for contact in entity.contacts %}
+                    <div class="col-sm-3">
+                        {% if contact.firstname %}<p class="contact__title">{{ contact.firstname }} {{ contact.lastname }}</p>{% endif %}
+                        {% if contact.job %}<p class="contact__job">{{ contact.job }}</p>{% endif %}
+                        {% if contact.email %}<p class="contact__email">{{ contact.email }}</p>{% endif %}
+                        {% if contact.phone %}<p class="contact__phone">{{ contact.phone }}</p>{% endif %}
+                        {% if contact.mobile %}<p class="contact__mobile">{{ contact.mobile }}</p>{% endif %}
+                    </div>
+                    {% endfor %}
+                </div> 
+                <a href="#" class="pull-right btn btn--add">+</a>             
+            </div>
+        </div>
+
+         <!-- Besoins -->
+        <div class="row">
+            <div class="col-sm-12 bloc">
+                <h2 class="bloc__title">Besoins</h2>
+                <div class="row">
+                    {%for contact in entity.contacts %}
+                    <div class="col-sm-3">
+                        {% if contact.firstname %}<p class="contact__title">{{ contact.firstname }} {{ contact.lastname }}</p>{% endif %}
+                        {% if contact.job %}<p class="contact__job">{{ contact.job }}</p>{% endif %}
+                        {% if contact.email %}<p class="contact__email">{{ contact.email }}</p>{% endif %}
+                        {% if contact.phone %}<p class="contact__phone">{{ contact.phone }}</p>{% endif %}
+                        {% if contact.mobile %}<p class="contact__mobile">{{ contact.mobile }}</p>{% endif %}
+                    </div>
+                    {% endfor %}
+                </div>              
+            </div>
+        </div>
+
+    </div>
+
+</ul>
+{% endblock %}
