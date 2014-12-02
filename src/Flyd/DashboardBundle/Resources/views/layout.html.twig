@@ -25,15 +25,17 @@
 				{% block body %}
 			  	{% endblock %}
 			</div>
-			
+
 		</div>
 		
 	</div>
 	
 
-	{% block js %}
+	{% block basejs %}
    	 	<script type="text/javascript" src="{{ asset('bundles/flyddashboard/js/vendor/jquery/dist/jquery.min.js') }}"></script>
    	 	<script type="text/javascript" src="{{ asset('bundles/flyddashboard/js/main.min.js') }}"></script>
+  	{% endblock %}
+  	{% block js %}
   	{% endblock %}
 </body>
 </html>

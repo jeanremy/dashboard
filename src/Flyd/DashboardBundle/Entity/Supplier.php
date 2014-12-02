@@ -9,7 +9,7 @@ use Flyd\DashboardBundle\Entity\Company;
 class Supplier extends Company
 {
 	public function __toString() {
-        return 'hop';
+        return $this->name;
     }
 
 }

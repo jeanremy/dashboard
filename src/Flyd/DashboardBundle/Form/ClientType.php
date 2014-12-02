@@ -17,23 +17,27 @@ class ClientType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('entrance')
-            ->add('createdAt')
-            ->add('updatedAt')
+            ->add('entrance', 'date', array(
+                'widget' => 'single_text'
+            ))
             ->add('type', 'choice', array(
                 'choices'   => array(
                     '0'   => 'Actuel',
                     '1' => 'Prospect'
                 )
             ))
-            ->add('reminder')
+            ->add('reminder', 'date', array(
+                'widget' => 'single_text'
+            ))
             ->add('contacts', 'collection', array(
                 'type'         => new ContactType(),
                 'allow_add'    => true,
                 'allow_delete' => true
             ))
-            ->add('save','submit')
-        ;
+            ->add('save','submit', array(
+                'attr' => array('class' => 'btn btn--save'),
+                'label' => 'Enregistrer',
+            ));
     }
     
     /**
