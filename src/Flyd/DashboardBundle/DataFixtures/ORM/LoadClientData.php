@@ -7,6 +7,7 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Flyd\DashboardBundle\Entity\Client;
 use Flyd\DashboardBundle\Entity\Contact;
+use Flyd\DashboardBundle\Entity\Address;
  
 class LoadClientData extends AbstractFixture implements OrderedFixtureInterface
 {
@@ -25,12 +26,22 @@ class LoadClientData extends AbstractFixture implements OrderedFixtureInterface
       $contact->setPhone('0241857845');
       $contact->setMobile('0241857845');
 
+      $address = new Address();
+      $address->setStreet($i.'rue factice');
+      $address->setStreetComp('complement');
+      $address->setZipcode('4402'.$i);
+      $address->setCity('Nantes');
+      $address->setCityComp('Cedex '.$i);
+      $address->setType(Address::FACTURATION);
+
+
       $client = new Client();
       $client->setName('Client '.$i);
       $client->setReminder(new \DateTime());
       $client->setEntrance(new \DateTime());
       $client->setType(Client::ACTUAL);
       $client->addContact($contact );
+      $client->addAddress($address );
       $em->persist($client);
 
       // On la persiste
