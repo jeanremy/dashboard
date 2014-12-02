@@ -1,13 +1,12 @@
 {% extends 'FlydDashboardBundle::layout.html.twig' %}
 
 {% block title %}
-    <title>{{entity.name}} - Edit </title>
+    <title>{{entity.name}}</title>
 {% endblock %}
 
 {% block body %}
 
-    <div class="container">
-        <h1>{{entity.name}}</h1>
+        <h1 class="lvl1">{{entity.name}}</h1>
         <div class="row">
             <div class="col-sm-12 bloc">
                 <div class="form-group">
@@ -88,8 +87,6 @@
                 </div>              
             </div>
         </div>
-
-    </div>
 
 </ul>
 {% endblock %}

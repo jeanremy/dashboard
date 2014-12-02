@@ -2,27 +2,36 @@
 <html lang="fr">
 <head>
 	<meta charset="UTF-8">
-	{% block title %}
-  	{% endblock %}
+	{% block title %}<title>Dashboard</title>{% endblock %}
 
   	{% block stylesheets %}
-    	{# On charge le CSS de bootstrap depuis le site directement #}
-   	 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+   	 	<link rel="stylesheet" href="{{ asset('bundles/flyddashboard/css/main.min.css') }}" type="text/css" media="all" />
   	{% endblock %}
+
 </head>
 <body>
-	<aside class="aside">
-		<nav class="nav">
-			<ul>
-				<li>Dashboard</li>
-				<li>Clients</li>
-				<li>Utilisateurs</li>
-				<li>Fournisseurs</li>
-				<li>Réglages</li>
-			</ul>
-		</nav>
-	</aside>
-	{% block body %}
+
+	<!-- Aside -->
+	{% include "FlydDashboardBundle::menu.html.twig" %}
+
+	<div class="main">
+
+		<!-- Top Bar -->
+		{% include "FlydDashboardBundle::top.html.twig" %}
+
+		<div class="content">
+			<div class="container">
+				{% block body %}
+			  	{% endblock %}
+			</div>
+		</div>
+		
+	</div>
+	
+
+	{% block js %}
+   	 	<script type="text/javascript" src="{{ asset('bundles/flyddashboard/js/vendor/jquery/dist/jquery.min.js') }}"></script>
+   	 	<script type="text/javascript" src="{{ asset('bundles/flyddashboard/js/main.min.js') }}"></script>
   	{% endblock %}
 </body>
 </html>
