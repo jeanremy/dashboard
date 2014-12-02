@@ -124,39 +124,7 @@ class ClientController extends Controller
     }
 
   
-    /**
-     * Edits an existing Client entity.
-     *
-     * @Route("/{id}", name="_update")
-     * @Method("PUT")
-     * @Template("FlydDashboardBundle:Client:edit.html.twig")
-     */
-    public function updateAction(Request $request, $id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('FlydDashboardBundle:Client')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Client entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createEditForm($entity);
-        $editForm->handleRequest($request);
-
-        if ($editForm->isValid()) {
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('_edit', array('id' => $id)));
-        }
-
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
-    }
+    
     /**
      * Deletes a Client entity.
      *

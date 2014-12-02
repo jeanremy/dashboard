@@ -18,3 +18,8 @@ client_new:
     path:     /client/add/
     defaults: { _controller: FlydDashboardBundle:Client:add }
 
+client_delete:
+    path:     /client/{id}/delete
+    defaults: { _controller: FlydDashboardBundle:Client:delete }
+
+

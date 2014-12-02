@@ -72,13 +72,32 @@
         </div>
     </div>
 
+     <!-- Adresse -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="bloc">
+                <h2 class="bloc__title">Adresses</h2>
+                <div class="row" id="address">
+                    {% for address in entity.addresses %}
+                    <div class="col-sm-3 address">
+                        <p class="address__type">{{ address.type }}</p>
+                        <p class="address__street">{{ address.street }} {{ address.streetComp }}</p>
+                        <p class="address__city">{{ address.zipcode }} {{ address.city }} {{ address.cityComp }}</p>
+                        <a class="line--remove" data-id="{{ address.id }}" href="#">Retirer</a>
+                    </div>
+                    {% endfor %}
+                </div> 
+                <a href="#" class="pull-right btn btn--add" id="address__more">+</a>             
+            </div>
+        </div>
+    </div>
 
      <!-- Contacts -->
     <div class="row">
         <div class="col-sm-12">
             <div class="bloc">
                 <h2 class="bloc__title">Contacts</h2>
-                <div class="row">
+                <div class="row" id="contacts">
                     {% for contact in entity.contacts %}
                     <div class="col-sm-3 contact">
                         <p class="contact__title">{{ contact.firstname }} {{ contact.lastname }}</p>
@@ -86,17 +105,19 @@
                         <p class="contact__email">{{ contact.email }}</p>
                         <p class="contact__phone">{{ contact.phone }}</p>
                         <p class="contact__mobile">{{ contact.mobile }}</p>
-                        <a class="remove" data-id="{{ contact.id }}">Retirer</a>
+                        <a class="line--remove" data-id="{{ contact.id }}" href="#">Retirer</a>
                     </div>
                     {% endfor %}
                 </div> 
-                <a href="#" class="pull-right btn btn--add">+</a>             
+                <a href="#" class="pull-right btn btn--add" id="contact__more">+</a>             
             </div>
         </div>
     </div>
 
 	{# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
+	<a href="{{ path('client_delete', { 'id': entity.id }) }}" class="btn btn--remove">Supprimer</a>
 	{{ form_widget(form.save) }}
+
 
 	{# Génération automatique des champs pas encore écrits.
 	Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
@@ -111,66 +132,45 @@
 {% block js %}
 <script type="text/javascript">
   $(document).ready(function() {
-    // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
-    var $container = $('#flyd_dashboardbundle_client_contacts');
 
-    // On ajoute un lien pour ajouter une nouvelle catégorie
-    var $addLink = $('<a href="#" id="add_contact" class="btn btn-default">Ajouter une catégorie</a>');
-    $container.append($addLink);
+  	var $contactContainer 	= $('#contacts'),
+  		$inputContainer 	= $('#flyd_dashboardbundle_client_contacts'),
+  		$more 				= $('#contact__more'),
+  		index 				= $('.contact').length;
+
 
     // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
-    $addLink.click(function(e) {
-      addContact($container);
+    $more.on('click', function(e) {
       e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+      // Ajoute le formulaire
+      addForm();
       return false;
     });
 
-    // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
-    var index = $container.find(':input').length;
-
-    // On ajoute un premier champ automatiquement s'il n'en existe pas déjà un (cas d'une nouvelle annonce par exemple).
-    if (index == 0) {
-      addContact($container);
-    } else {
-      // Pour chaque catégorie déjà existante, on ajoute un lien de suppression
-      $container.children('div').each(function() {
-        addDeleteLink($(this));
-      });
-    }
 
     // La fonction qui ajoute un formulaire Categorie
-    function addContact($container) {
+    function addForm() {
       // Dans le contenu de l'attribut « data-prototype », on remplace :
       // - le texte "__name__label__" qu'il contient par le label du champ
       // - le texte "__name__" qu'il contient par le numéro du champ
-      var $prototype = $($container.attr('data-prototype').replace(/__name__label__/g, 'Catégorie n°' + (index+1))
+      var $prototype = $($inputContainer.attr('data-prototype').replace(/__name__label__/g, 'Nouveau Contact' + (index+1))
           .replace(/__name__/g, index));
 
-      // On ajoute au prototype un lien pour pouvoir supprimer la catégorie
-      addDeleteLink($prototype);
 
       // On ajoute le prototype modifié à la fin de la balise <div>
-      $container.append($prototype);
+      $contactContainer.append($prototype);
 
       // Enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
       index++;
     }
 
-    // La fonction qui ajoute un lien de suppression d'une catégorie
-    function addDeleteLink($prototype) {
-      // Création du lien
-      $deleteLink = $('<a href="#" class="btn btn-danger">Retirer</a>');
 
-      // Ajout du lien
-      $prototype.append($deleteLink);
-
-      // Ajout du listener sur le clic du lien
-      $deleteLink.click(function(e) {
-        $prototype.remove();
-        e.preventDefault(); // évite qu'un # apparaisse dans l'URL
-        return false;
-      });
-    }
+	  // Ajout du listener sur le clic du lien
+	  $deleteLink.click(function(e) {
+	    $prototype.remove();
+	    e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+	    return false;
+	  });
   });
 </script>
 {% endblock %}
