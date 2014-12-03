@@ -3,6 +3,7 @@
 namespace Flyd\DashboardBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,12 +32,13 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="job", type="string", length=255)
+     * @ORM\Column(name="job", type="string", length=255, nullable=true)
      */
     private $job;
 
     public function __construct()
     {
+        parent::__construct();
         $this->project_task_users       = new ArrayCollection();
     }
 

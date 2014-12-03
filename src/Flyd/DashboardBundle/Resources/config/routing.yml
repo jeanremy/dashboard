@@ -2,6 +2,8 @@ flyd_dashboard_homepage:
     path:     /
     defaults: { _controller: FlydDashboardBundle:Client:index }
 
+#   CLIENTS
+
 client_list:
     path:     /clients
     defaults: { _controller: FlydDashboardBundle:Client:index }
@@ -22,4 +24,26 @@ client_delete:
     path:     /client/{id}/delete
     defaults: { _controller: FlydDashboardBundle:Client:delete }
 
+
+#   USERS
+
+user_list:
+    path:     /users
+    defaults: { _controller: FlydDashboardBundle:User:index }
+
+user_show:
+    path:     /user/{id}
+    defaults: { _controller: FlydDashboardBundle:User:show }
+
+user_edit:
+    path:     /user/{id}/edit
+    defaults: { _controller: FlydDashboardBundle:User:edit }
+
+user_new:
+    path:     /user/add/
+    defaults: { _controller: FlydDashboardBundle:User:add }
+
+user_delete:
+    path:     /user/{id}/delete
+    defaults: { _controller: FlydDashboardBundle:User:delete }
 

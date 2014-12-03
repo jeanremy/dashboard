@@ -1,6 +1,6 @@
 <?php
-// src/Ens/JobeetBundle/DataFixtures/ORM/LoadSupplierData.php
-namespace Ens\JobeetBundle\DataFixtures\ORM;
+// src/Flyd/DashboardBundle/DataFixtures/ORM/LoadSupplierData.php
+namespace Flyd\DashboardBundle\DataFixtures\ORM;
  
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;

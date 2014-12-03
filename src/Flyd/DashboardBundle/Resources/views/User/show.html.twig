@@ -1,0 +1,105 @@
+{% extends 'FlydDashboardBundle::layout.html.twig' %}
+
+{% block title %}
+    <title>{{entity.name}}</title>
+{% endblock %}
+
+{% block body %}
+        
+    <a href="{{ path('client_edit', { 'id': entity.id }) }}" class="btn btn--edit"></a>
+    <h1 class="lvl1">{{entity.name}}</h1>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="bloc bloc--general">
+                <h2 class="bloc__title">Informations générales</h2>
+
+                <div class="form-group">
+                    
+                    <label class="control-label">Date d'entrée</label>
+
+                    <div class="data">
+                        {{ entity.entrance| localizeddate('full', 'none', 'fr') }}
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    
+                    <label class="control-label">Type de Client</label>
+
+                    <div class="data">
+                    {% if entity.type == 0 %}
+                        <p>Actuel</p>
+                    {% elseif entity.type == 1 %}
+                        <p>Prospect</p>
+                    {% endif %}
+                    </div>
+                    
+                </div>
+
+                {%for address in entity.addresses %}
+
+                <div class="form-group">
+                    {% if address.type == 0 %}
+                        <label class="control-label">Adresse</label>
+                    {% elseif address.type == 1 %}
+                        <label class="control-label">Adresse de facturation</label>
+                    {% elseif address.type == 2 %}
+                        <label class="control-label">Adresse d'expédition</label>
+                    {% endif %}
+                    <div class="data">
+                        <p>{{ address.street }}</p>
+                        <p>{{ address.streetComp }}</p>
+                        <p>{{ address.zipcode }} {{ address.city }} {{ address.cityComp }}</p>
+                    </div>
+                    
+                </div>
+
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Contacts -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="bloc">
+                <h2 class="bloc__title">Contacts</h2>
+                <div class="row">
+                    {% for contact in entity.contacts %}
+                    <div class="col-sm-3 contact">
+                        <p class="contact__title">{{ contact.firstname }} {{ contact.lastname }}</p>
+                        <p class="contact__job">{{ contact.job }}</p>
+                        <p class="contact__email">{{ contact.email }}</p>
+                        <p class="contact__phone">{{ contact.phone }}</p>
+                        <p class="contact__mobile">{{ contact.mobile }}</p>
+                    </div>
+                    {% endfor %}
+                </div> 
+                <a href="#" class="pull-right btn btn--add" id="contact__more">+</a>             
+            </div>
+        </div>
+    </div>
+
+     <!-- Besoins -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="bloc">
+                <h2 class="bloc__title">Besoins</h2>
+                <div class="row">
+                    {%for contact in entity.contacts %}
+                    <div class="col-sm-3">
+                        {% if contact.firstname %}<p class="contact__title">{{ contact.firstname }} {{ contact.lastname }}</p>{% endif %}
+                        {% if contact.job %}<p class="contact__job">{{ contact.job }}</p>{% endif %}
+                        {% if contact.email %}<p class="contact__email">{{ contact.email }}</p>{% endif %}
+                        {% if contact.phone %}<p class="contact__phone">{{ contact.phone }}</p>{% endif %}
+                        {% if contact.mobile %}<p class="contact__mobile">{{ contact.mobile }}</p>{% endif %}
+                    </div>
+                    {% endfor %}
+                </div> 
+                <a href="#" class="pull-right btn btn--add">+</a>
+            </div>    
+        </div>
+    </div>
+
+{% endblock %}

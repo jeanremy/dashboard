@@ -1,6 +1,6 @@
 <?php
-// src/Ens/JobeetBundle/DataFixtures/ORM/LoadProjectCanvasData.php
-namespace Ens\JobeetBundle\DataFixtures\ORM;
+// src/Flyd/DashboardBundle/DataFixtures/ORM/LoadProjectCanvasData.php
+namespace Flyd\DashboardBundle\DataFixtures\ORM;
  
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;

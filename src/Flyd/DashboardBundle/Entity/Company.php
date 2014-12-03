@@ -38,12 +38,12 @@ class Company
     /**
     * @ORM\OneToMany(targetEntity="Flyd\DashboardBundle\Entity\Address", mappedBy="company", cascade={"persist", "remove"})
     */
-    private $addresses;
+    protected $addresses;
 
     /**
     * @ORM\OneToMany(targetEntity="Flyd\DashboardBundle\Entity\Contact", mappedBy="company", cascade={"persist", "remove"})
     */
-    private $contacts;
+    protected $contacts;
 
     
 
@@ -53,13 +53,13 @@ class Company
      *
      * @ORM\Column(name="entrance", type="date")
      */
-    private $entrance;
+    protected $entrance;
 
 
     /**
      * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\Origin")
      */
-    private $origin;
+    protected $origin;
 
     /**
      * @ORM\Column(name="created_at", type="datetime", nullable=true)
