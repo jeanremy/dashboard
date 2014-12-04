@@ -89,3 +89,14 @@ services:
         class: Twig_Extensions_Extension_Intl
         tags:
             - { name: twig.extension }
+
+# Avalanche
+avalanche_imagine:
+    filters:
+        miniature:
+            type:    thumbnail
+            options: {size: [100, 100], mode: outbound}
+
+
+
+

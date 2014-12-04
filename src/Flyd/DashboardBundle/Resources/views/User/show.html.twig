@@ -41,7 +41,7 @@
                 <div class="form-group">
                     <label class="control-label">Profil</label>
                     <div class="data">
-                        <p>{{ entity.image.webPath }}</p>
+                        <img src="{{ entity.image.webPath | apply_filter('miniature') }}" />
                     </div>
                     
                 </div>
