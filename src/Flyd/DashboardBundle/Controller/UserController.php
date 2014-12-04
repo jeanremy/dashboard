@@ -48,18 +48,18 @@ class UserController extends Controller
      */
     public function addAction(Request $request)
     {
-        $client = new User();
+        $user = new User();
 
-        $form = $this->get('form.factory')->create(new UserType(), $client);
+        $form = $this->get('form.factory')->create(new UserType(), $user);
 
         if ($form->handleRequest($request)->isValid()) {
           $em = $this->getDoctrine()->getManager();
-          $em->persist($client);
+          $em->persist($user);
           $em->flush();
 
-          $request->getSession()->getFlashBag()->add('notice', 'User bien enregistré.');
+          $request->getSession()->getFlashBag()->add('notice', 'Utilisateur bien enregistré.');
 
-          return $this->redirect($this->generateUrl('oc_platform_view', array('id' => $client->getId())));
+          return $this->redirect($this->generateUrl('user_show', array('id' => $user->getId())));
         }
 
         return $this->render('FlydDashboardBundle:User:add.html.twig', array(
@@ -100,24 +100,26 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $client = $em->getRepository('FlydDashboardBundle:User')->find($id);
-        $client->setUpdatedAt(new \DateTime());
+        $user = $em->getRepository('FlydDashboardBundle:User')->find($id);
+
+        //var_dump($request);
 
 
-        $form = $this->get('form.factory')->create(new UserType(), $client);
+        $form = $this->get('form.factory')->create(new UserType(), $user);
 
         if ($form->handleRequest($request)->isValid()) {
           $em = $this->getDoctrine()->getManager();
-          $em->persist($client);
+          $user->setplainPassword($user->getPassword());
+          $em->persist($user);
           $em->flush();
 
-          $request->getSession()->getFlashBag()->add('notice', 'User bien enregistré.');
+          $request->getSession()->getFlashBag()->add('notice', 'Utilisateur bien enregistré.');
 
-          return $this->redirect($this->generateUrl('client_show', array('id' => $client->getId())));
+          return $this->redirect($this->generateUrl('user_show', array('id' => $user->getId())));
         }
 
         return $this->render('FlydDashboardBundle:User:edit.html.twig', array(
-          'entity' => $client,
+          'entity' => $user,
           'form' => $form->createView()
         ));
     }

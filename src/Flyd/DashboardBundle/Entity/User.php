@@ -28,6 +28,12 @@ class User extends BaseUser
     */
     private $project_task_users;
 
+    /**
+    * @ORM\OneToOne(targetEntity="Flyd\DashboardBundle\Entity\Image", cascade={"persist", "remove"})
+    * @ORM\JoinColumn(nullable=true)
+    */
+    private $image;
+
 
     /**
      * @var string
@@ -36,10 +42,13 @@ class User extends BaseUser
      */
     private $job;
 
+
+    private $file;
+
     public function __construct()
     {
         parent::__construct();
-        $this->project_task_users       = new ArrayCollection();
+        $this->project_task_users = new ArrayCollection();
     }
 
 
@@ -83,6 +92,21 @@ class User extends BaseUser
     }
 
     /**
+     * Set image
+     *
+     * @param string $image
+     */
+    public function setImage(Image $image = null)
+    {
+        $this->image = $image;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
      * Set job
      *
      * @param string $job
@@ -103,6 +127,16 @@ class User extends BaseUser
     public function getJob()
     {
         return $this->job;
+    }
+
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    public function setFile(UploadedFile $file = null)
+    {
+        $this->file = $file;
     }
 
 }

@@ -16,7 +16,7 @@ client_edit:
     path:     /client/{id}/edit
     defaults: { _controller: FlydDashboardBundle:Client:edit }
 
-client_new:
+client_add:
     path:     /client/add/
     defaults: { _controller: FlydDashboardBundle:Client:add }
 
@@ -39,7 +39,7 @@ user_edit:
     path:     /user/{id}/edit
     defaults: { _controller: FlydDashboardBundle:User:edit }
 
-user_new:
+user_add:
     path:     /user/add/
     defaults: { _controller: FlydDashboardBundle:User:add }
 
