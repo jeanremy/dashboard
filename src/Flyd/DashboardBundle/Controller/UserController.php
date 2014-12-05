@@ -125,9 +125,9 @@ class UserController extends Controller
 
         } else {
             $this->get('session')->getFlashBag()->add('notice', 'Bien essayé, mais vous n\'avez pas le droit de changer les informations des autres.');
-            $response = $this->forward('FlydDashboardBundle:User:show', array(
-                'id'  => $id
-            ));
+            $response = $this->redirect($this->generateUrl('user_show', array(
+                'id' => $id
+            )));
             return $response;
 
         }
