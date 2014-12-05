@@ -3,18 +3,18 @@
 
 <aside class="aside" id="aside">
 	<nav class="nav">
-		<ul>
-			<li class="title"><a href="{{path('flyd_dashboard_homepage')}}">Dashboard</a></li>
-			<li class="title"><a href="{{path('client_list')}}">Clients</a></li>
-			<li class="title">Utilisateurs
-				<ul>
+		<ul class="menu">
+			<li><a href="{{path('flyd_dashboard_homepage')}}">Dashboard</a></li>
+			<li><a href="{{path('client_list')}}">Clients</a></li>
+			<li>Utilisateurs
+				<ul class="submenu">
 					<li><a href="{{path('user_add')}}">Ajouter un utilisateur</a></li>
 					<li><a href="{{path('fos_user_profile_show')}}">Mon compte</a></li>
 					<li><a href="{{path('user_list')}}">Tous les utilisateurs</a></li>
 				</ul>
 			</li>
-			<li class="title">Fournisseurs</li>
-			<li class="title">Réglages</li>
+			<li>Fournisseurs</li>
+			<li>Réglages</li>
 		</ul>
 	</nav>
 </aside>

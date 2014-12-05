@@ -29,16 +29,6 @@ class ClientType extends AbstractType
             ->add('reminder', 'date', array(
                 'widget' => 'single_text'
             ))
-            ->add('addresses', 'collection', array(
-                'type'         => new AddressType(),
-                'allow_add'    => true,
-                'allow_delete' => true
-            ))
-            ->add('contacts', 'collection', array(
-                'type'         => new ContactType(),
-                'allow_add'    => true,
-                'allow_delete' => true
-            ))
             ->add('save','submit', array(
                 'attr' => array('class' => 'btn btn--save'),
                 'label' => 'Enregistrer',

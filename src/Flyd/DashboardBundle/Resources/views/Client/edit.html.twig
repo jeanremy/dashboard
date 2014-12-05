@@ -89,7 +89,7 @@
                         {% endif %}
                         <p class="address__street">{{ address.street }} {{ address.streetComp }}</p>
                         <p class="address__city">{{ address.zipcode }} {{ address.city }} {{ address.cityComp }}</p>
-                        <a class="line--remove" data-id="{{ address.id }}" href="#">Retirer</a>
+                        <a class="line--remove" data-id="{{ address.id }}" href="{{ path('address_ajax_remove') }}">Retirer</a>
                     </div>
                     {% endfor %}
                 </div> 
@@ -111,7 +111,7 @@
                         <p class="contact__email">{{ contact.email }}</p>
                         <p class="contact__phone">{{ contact.phone }}</p>
                         <p class="contact__mobile">{{ contact.mobile }}</p>
-                        <a class="line--remove" data-id="{{ contact.id }}" href="#">Retirer</a>
+                        <a class="line--remove" data-id="{{ contact.id }}" href="{{ path('contact_ajax_remove') }}">Retirer</a>
                     </div>
                     {% endfor %}
                 </div> 
@@ -137,46 +137,33 @@
 
 {% block js %}
 <script type="text/javascript">
-  $(document).ready(function() {
 
-  	var $contactContainer 	= $('#contacts'),
-  		$inputContainer 	= $('#flyd_dashboardbundle_client_contacts'),
-  		$more 				= $('#contact__more'),
-  		index 				= $('.contact').length;
-
-
-    // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
-    $more.on('click', function(e) {
-      e.preventDefault(); // évite qu'un # apparaisse dans l'URL
-      // Ajoute le formulaire
-      addForm();
-      return false;
+$(document).on('click', '.line--remove', function(e){
+    e.preventDefault();
+    var $this = $(this),
+        $parentBloc = $this.parent();
+    $.ajax({
+      url:            $this.attr('href'),
+      type:           "POST",
+      data: {
+        element_id: $this.attr('data-id')
+      },
+      beforeSend: function(data) {
+        console.log('beforsend');
+      },
+      success: function(data) {
+        if(data['code'] == 200) {
+          $parentBloc.fadeOut(400).remove();
+        }
+        else {
+          console.log(data['response']);
+        }
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.log('error');
+      }
     });
-
-
-    // La fonction qui ajoute un formulaire Categorie
-    function addForm() {
-      // Dans le contenu de l'attribut « data-prototype », on remplace :
-      // - le texte "__name__label__" qu'il contient par le label du champ
-      // - le texte "__name__" qu'il contient par le numéro du champ
-      var $prototype = $($inputContainer.attr('data-prototype').replace(/__name__label__/g, 'Nouveau Contact' + (index+1))
-          .replace(/__name__/g, index));
-
-
-      // On ajoute le prototype modifié à la fin de la balise <div>
-      $contactContainer.append($prototype);
-
-      // Enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
-      index++;
-    }
-
-
-	  // Ajout du listener sur le clic du lien
-	  $deleteLink.click(function(e) {
-	    $prototype.remove();
-	    e.preventDefault(); // évite qu'un # apparaisse dans l'URL
-	    return false;
-	  });
   });
+
 </script>
 {% endblock %}
