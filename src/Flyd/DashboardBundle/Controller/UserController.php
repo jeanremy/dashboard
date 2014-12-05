@@ -100,28 +100,37 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
+        $currentUser = $this->getUser();
         $user = $em->getRepository('FlydDashboardBundle:User')->find($id);
 
-        //var_dump($request);
+        if($currentUser->getId() == $id) {
 
+            $form = $this->get('form.factory')->create(new UserType(), $user);
 
-        $form = $this->get('form.factory')->create(new UserType(), $user);
+            if ($form->handleRequest($request)->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $user->setplainPassword($user->getPassword());
+                $em->persist($user);
+                $em->flush();
 
-        if ($form->handleRequest($request)->isValid()) {
-          $em = $this->getDoctrine()->getManager();
-          $user->setplainPassword($user->getPassword());
-          $em->persist($user);
-          $em->flush();
+                $request->getSession()->getFlashBag()->add('notice', 'Utilisateur bien enregistré.');
 
-          $request->getSession()->getFlashBag()->add('notice', 'Utilisateur bien enregistré.');
+                return $this->redirect($this->generateUrl('user_show', array('id' => $user->getId())));
+            }
 
-          return $this->redirect($this->generateUrl('user_show', array('id' => $user->getId())));
+            return $this->render('FlydDashboardBundle:User:edit.html.twig', array(
+              'entity' => $user,
+              'form' => $form->createView()
+            ));
+
+        } else {
+            $this->get('session')->getFlashBag()->add('notice', 'Bien essayé, mais vous n\'avez pas le droit de changer les informations des autres.');
+            $response = $this->forward('FlydDashboardBundle:User:show', array(
+                'id'  => $id
+            ));
+            return $response;
+
         }
-
-        return $this->render('FlydDashboardBundle:User:edit.html.twig', array(
-          'entity' => $user,
-          'form' => $form->createView()
-        ));
     }
 
   

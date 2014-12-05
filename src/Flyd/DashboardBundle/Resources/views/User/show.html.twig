@@ -6,7 +6,9 @@
 
 {% block body %}
         
-    <a href="{{ path('user_edit', { 'id': entity.id }) }}" class="btn btn--edit"></a>
+    {% if app.user.id == entity.id %}
+        <a href="{{ path('user_edit', { 'id': entity.id }) }}" class="btn btn--edit"></a>
+    {% endif %}
     <h1 class="lvl1">{{entity.username}}</h1>
 
     {% include "FlydDashboardBundle::flash.html.twig" %}
@@ -41,7 +43,7 @@
                 <div class="form-group">
                     <label class="control-label">Profil</label>
                     <div class="data">
-                        <img src="{{ entity.image.webPath | apply_filter('miniature') }}" />
+                        {% if entity.image %}<img src="{{ entity.image.webPath | apply_filter('miniature') }}" />{% endif %}
                     </div>
                     
                 </div>
