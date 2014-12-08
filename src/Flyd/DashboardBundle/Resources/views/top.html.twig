@@ -7,18 +7,20 @@
 		{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 			<p class="user__name">
 				{{ app.user.username }}
+				{% if app.user.image %}
 				<img src="{{ app.user.image.webPath | apply_filter('small') }}" / class="profil__pic">
+				{% endif %}
 			</p>
 			<ul class="user__menu">
 				<li>
-					<a href="{{ path('fos_user_profile_show') }}">{{ 'Mon compte' }}</a>
+					<a href="{{ path('user_show', { 'id': app.user.id }) }}">{{ 'Mon compte' }}</a>
 				</li>
 				<li>
 					<a href="{{ path('fos_user_security_logout') }}">{{ 'Déconnexion' }}</a>
 				</li>
 			</ul>
         {% else %}
-            <p class="user__login"><a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></p>
+            <p class="user__login"><a href="{{ path('fos_user_security_login') }}">Login</a></p>
         {% endif %}
 	</div>
 </header>

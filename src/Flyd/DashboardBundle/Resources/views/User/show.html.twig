@@ -43,7 +43,9 @@
                 <div class="form-group">
                     <label class="control-label">Profil</label>
                     <div class="data">
-                        {% if entity.image %}<img src="{{ entity.image.webPath | apply_filter('miniature') }}" />{% endif %}
+                        {% if entity.image %}
+                            <img src="{{ entity.image.webPath | apply_filter('miniature') }}" />
+                        {% endif %}
                     </div>
                     
                 </div>
