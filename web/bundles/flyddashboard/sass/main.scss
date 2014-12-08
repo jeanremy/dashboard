@@ -1,0 +1,218 @@
+/*
+	Kickstart files for html/css project. Based on Kaelig documentation (blog.kaelig.fr) and on sass
+*/
+
+@import "variables";
+@import "mixins";
+@import "reset";
+@import "grid_system";
+@import "grid";
+@import "commons";
+@import "fonts";
+@import "typo";
+@import "forms";
+
+/*  GLOBAL
+	======  */
+
+body {
+	color: $primary;
+	background-color: $greybg;
+	&.deploy {
+		overflow: hidden;
+	}
+}
+
+p {
+	color: $primary;
+	font-family: $varela;
+	font-size: 14px;
+}
+
+/*  HEADER
+	======  */
+.header {
+	border-bottom: 1px solid $darkgrey;
+	background-color: #fff;
+}
+
+
+.user {
+	float: right;
+	height: 85px;
+	padding: 0 25px;
+	border-left: 1px solid $darkgrey;
+	position: relative;
+	cursor: pointer;
+	&:hover,
+	&:focus {
+		.user__menu {
+			transform: scale(1,1);
+		}
+	}
+	.user__name {
+		line-height: 85px;
+		&::before {
+			content: "";
+			display: inline-block;
+			width: 0;
+			height: 0;
+			border-style: solid;
+			border-width: 8.7px 5px 0 5px;
+			border-color: $primary transparent transparent transparent;
+			margin-right: 7px;
+			transition: all 200ms ease;
+		}
+		.profil__pic {margin-left: 15px;}
+	}
+	.user__login {
+		line-height: 85px;
+	}
+	.user__menu {
+		position: absolute;
+		top: 100%;
+		right: 0;
+		font-family: $varela;
+		background-color: #fff;
+		padding: 25px;
+		transition: all 200ms ease;
+		transform: scale(1,0);
+		transform-origin: 0 0;
+		min-width: 100%;
+		margin-left: 1px;
+		border-left: 1px solid $darkgrey;
+		border-bottom: 1px solid $darkgrey;
+	}
+}
+
+
+/*  ASIDE
+	=====  */
+	
+#menu--toggle {
+	display: inline-block;
+	height: 85px;
+	line-height: 85px;
+	padding: 0 25px;
+	text-align: center;
+	border-right: 1px solid $darkgrey;
+	&::before {
+		content: "";
+		display: inline-block;
+		width: 0;
+		height: 0;
+		border-style: solid;
+		border-width: 5px 8.7px 5px 0;
+		border-color: transparent $primary transparent transparent;
+		margin-right: 7px;
+		transition: all 200ms ease;
+		.deploy & {
+			transform: rotate(180deg);
+		}
+	}
+}
+
+.menu > li {
+	color: $greybg;
+	font-family: $montserratbold;
+	text-transform: uppercase;
+	padding: 2px 0;
+}
+.submenu > li {
+	font-family: $varela;
+	text-transform: none;
+	margin-left: 20px;
+	color: $grey;
+}
+
+
+/*  MAIN
+	====   */
+.main {
+	transition: all 200ms ease;
+	.deploy & {
+		transform: translate3d(320px, 0, 0);
+	}
+
+}
+
+.main .content {	
+	padding: 75px 0;
+}
+
+form .btn--save,
+form .btn--remove {
+	margin-left: 15px;
+}
+
+/* Blocs */
+
+.bloc--general {
+	.control-label {
+		display: inline-block;
+		vertical-align: middle;
+		width: 20%;
+		font-size: 14px;
+	}
+	.data {
+		display: inline-block;
+		font-family: $varela;
+		vertical-align: middle;
+		font-size: 14px;
+	}
+}
+
+.contact {
+	border-right: 1px solid $grey;
+	margin-bottom: 15px;
+	&:nth-child(4n) {border-right: none;}
+	&:nth-child(4n +1) {clear: left;}
+	@media(max-width: $medium) {
+		border-right: none;
+		border-bottom: 1px solid $grey;
+		&:last-of-type {border-bottom: none;}
+	}
+	& > p {color: $darkgrey;}
+}
+
+p.contact__title {
+	color: $primary;
+	font-size: 16px;
+	font-family: $montserrat;
+}
+
+
+
+/*  ASIDE
+	=====  */
+.aside {
+	background-color: $primary;
+	height: 100%;
+	color: #fff;
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: 320px;
+	padding: 15px;
+	transform: translate3d(-100%, 0, 0);
+	transform-origin: 100% 50%;
+    transform-style: preserve-3d;
+	transition: all 200ms ease;
+	.deploy & {
+		transform: translate3d(0, 0, 0);
+	}
+}
+
+
+
+
+/*  FOOTER
+	======  */
+
+
+
+@import "print";
+
+
+

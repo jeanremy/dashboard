@@ -1,0 +1,25 @@
+/*  TYPOGRAPHY
+	==========  */
+
+
+.title {
+	font-family: $montserratbold;
+	text-transform: uppercase;
+}
+
+body {font-size: 14px;}
+
+.lvl1 {
+	font-family: $varela;
+	font-size: 40px;
+	margin-bottom: 30px;
+	.profil__pic {
+		margin: 0 15px 0 0;
+	}
+}
+
+.bloc__title {
+	@extend .title;
+	font-size: 16px;
+	margin-bottom: 20px;
+}

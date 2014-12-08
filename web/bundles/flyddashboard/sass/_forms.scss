@@ -1,0 +1,45 @@
+/*  FORMS
+	=====  */
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	clip: rect(0,0,0,0);
+	border: 0;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {	
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	padding: 10px;
+}
+
+.control-label {
+	font-family: $montserratbold;
+	color: $darkgrey;
+	text-transform: uppercase;
+}
+
+.form-group {
+	border-bottom: 1px solid $grey;
+	.edit & {border-bottom: none;}
+	padding: 20px 0;
+	&:nth-of-type(1) {padding-top: 0;}
+	&:last-child {border-bottom: none;}
+}
+
+.form-control {
+	box-shadow: none;
+	border: none;	
+	font-family: $varela;
+	font-size: 14px;
+	color: $primary;
+	border-bottom: 1px dashed $darkgrey;
+}

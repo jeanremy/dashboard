@@ -1,0 +1,85 @@
+/*
+	COMMONS
+	=======
+*/
+
+.btn {
+	font-weight: 700;
+	font-family: $montserratbold;
+	text-transform: uppercase;
+	background-color: $primary;
+	color: #fff;
+	border-radius: 3px;
+	padding: 0 15px;
+	cursor: pointer;
+	border: none;
+}
+
+
+.btn--edit {
+	@extend .btn;
+	display: block;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	float: right;
+}
+
+.btn--remove {
+	@extend .btn;
+	background-color: $alert;
+	display: block;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	float: right;
+}
+
+.btn--add {
+	@extend .btn;
+	display: block;
+	height: 30px;
+	width: 30px;
+	line-height: 30px;
+	text-align: center;
+	float: right;
+}
+
+.btn--save {
+	@extend .btn;
+	display: block;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	float: right;
+}
+
+.line--remove {
+	font-family: $varela;
+	color: $alert;
+}
+
+/* Sprite */
+.sprite {
+	background: url(../img/sprite.svg);/* IE 9+ & Android 3+ */
+	.no-svg & {
+		background: url(../img/sprite.png);
+	}
+}
+
+.bloc {
+	@extend %clearfix;
+	background-color: #fff;
+	padding: 15px;
+	margin-bottom: 30px;
+}
+
+.alert {color: $alert;}
+
+.profil__pic {
+	display: inline-block;
+	vertical-align: middle;
+	border-radius: 50%;
+}
+
+

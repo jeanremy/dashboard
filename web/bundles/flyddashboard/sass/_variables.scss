@@ -1,0 +1,31 @@
+// VARIABLES
+
+// Colors
+$primary: #2B303E; 
+$darkgrey: #8F979E; 
+$grey: #D6D7D8; 
+$greybg: #F2F2F2;
+
+$alert: #D14232; 
+$pending: #FFA305; 
+$success: #38914D; 
+
+// Breakpoints
+$large: 960px;
+$medium: 768px;
+$small: 480px;
+
+// Fonts
+$montserrat: 'montserrat', sans-serif;
+$montserratbold: 'montserratbold', sans-serif;
+$varela: 'varela', sans-serif;
+
+:selection {
+  color: #fff;
+  background-color: #dd5b6a;
+}
+
+::-moz-selection {
+	color:#fff;
+	background-color: $primary;
+}
