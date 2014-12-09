@@ -9,7 +9,7 @@
 
 ::-moz-selection {
 	color: #fff;
-	background-color: #2B303E;
+	background-color: #2b303e;
 }
 
 .clearfix:after {
@@ -510,7 +510,7 @@ a {
 	font-weight: 700;
 	font-family: "montserratbold", sans-serif;
 	text-transform: uppercase;
-	background-color: #2B303E;
+	background-color: #2b303e;
 	color: #fff;
 	border-radius: 3px;
 	padding: 0 15px;
@@ -528,7 +528,7 @@ a {
 }
 
 .btn--remove {
-	background-color: #D14232;
+	background-color: #d14232;
 	display: block;
 	height: 40px;
 	line-height: 40px;
@@ -558,7 +558,7 @@ a {
 
 .line--remove {
 	font-family: "varela", sans-serif;
-	color: #D14232;
+	color: #d14232;
 }
 
 /* Sprite */
@@ -578,7 +578,7 @@ a {
 }
 
 .alert {
-	color: #D14232;
+	color: #d14232;
 }
 
 .profil__pic {
@@ -658,25 +658,27 @@ body {
 
 input[type="text"],
 input[type="email"],
+input[type="date"],
 input[type="password"],
-textarea {
+textarea,
+select {
 	-webkit-appearance: none;
 	-moz-appearance: none;
-	padding: 10px;
+	padding: 5px;
 }
 
 .control-label {
 	font-family: "montserratbold", sans-serif;
-	color: #8F979E;
+	color: #8f979e;
 	text-transform: uppercase;
 }
 
 .form-group {
-	border-bottom: 1px solid #D6D7D8;
+	border-bottom: 1px solid #d6d7d8;
 	padding: 20px 0;
 }
 
-.edit .form-group {
+.bloc-inline-edition .form-group {
 	border-bottom: none;
 }
 
@@ -695,16 +697,16 @@ textarea {
 	font-family: "varela", sans-serif;
 	font-size: 14px;
 	font-size: 0.875rem;
-	color: #2B303E;
-	border-bottom: 1px dashed #8F979E;
+	color: #2b303e;
+	border-bottom: 1px dashed #8f979e;
 }
 
 /*  GLOBAL
 	======  */
 
 body {
-	color: #2B303E;
-	background-color: #F2F2F2;
+	color: #2b303e;
+	background-color: #f2f2f2;
 }
 
 body.deploy {
@@ -712,7 +714,7 @@ body.deploy {
 }
 
 p {
-	color: #2B303E;
+	color: #2b303e;
 	font-family: "varela", sans-serif;
 	font-size: 14px;
 	font-size: 0.875rem;
@@ -722,7 +724,7 @@ p {
 	======  */
 
 .header {
-	border-bottom: 1px solid #8F979E;
+	border-bottom: 1px solid #8f979e;
 	background-color: #fff;
 }
 
@@ -730,7 +732,7 @@ p {
 	float: right;
 	height: 85px;
 	padding: 0 25px;
-	border-left: 1px solid #8F979E;
+	border-left: 1px solid #8f979e;
 	position: relative;
 	cursor: pointer;
 }
@@ -754,7 +756,7 @@ p {
 	height: 0;
 	border-style: solid;
 	border-width: 8.7px 5px 0 5px;
-	border-color: #2B303E transparent transparent transparent;
+	border-color: #2b303e transparent transparent transparent;
 	margin-right: 7px;
 	-webkit-transition: all 200ms ease;
 	        transition: all 200ms ease;
@@ -773,6 +775,7 @@ p {
 	position: absolute;
 	top: 100%;
 	right: 0;
+	left: -1px;
 	font-family: "varela", sans-serif;
 	background-color: #fff;
 	padding: 25px;
@@ -784,14 +787,38 @@ p {
 	-webkit-transform-origin: 0 0;
 	    -ms-transform-origin: 0 0;
 	        transform-origin: 0 0;
-	min-width: 100%;
-	margin-left: 1px;
-	border-left: 1px solid #8F979E;
-	border-bottom: 1px solid #8F979E;
+	border-left: 1px solid #8f979e;
+	border-bottom: 1px solid #8f979e;
 }
 
 /*  ASIDE
 	=====  */
+
+.aside {
+	background-color: #2b303e;
+	height: 100%;
+	color: #fff;
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: 320px;
+	padding: 15px;
+	-webkit-transform: translate3d(-100%, 0, 0);
+	        transform: translate3d(-100%, 0, 0);
+	-webkit-transform-origin: 100% 50%;
+	    -ms-transform-origin: 100% 50%;
+	        transform-origin: 100% 50%;
+	-webkit-transform-style: preserve-3d;
+	        transform-style: preserve-3d;
+	-webkit-transition: all 200ms ease;
+	        transition: all 200ms ease;
+}
+
+.deploy .aside {
+	-webkit-transform: translate3d(0, 0, 0);
+	        transform: translate3d(0, 0, 0);
+}
 
 #menu--toggle {
 	display: inline-block;
@@ -800,7 +827,7 @@ p {
 	line-height: 5.3125rem;
 	padding: 0 25px;
 	text-align: center;
-	border-right: 1px solid #8F979E;
+	border-right: 1px solid #8f979e;
 }
 
 #menu--toggle::before {
@@ -810,7 +837,7 @@ p {
 	height: 0;
 	border-style: solid;
 	border-width: 5px 8.7px 5px 0;
-	border-color: transparent #2B303E transparent transparent;
+	border-color: transparent #2b303e transparent transparent;
 	margin-right: 7px;
 	-webkit-transition: all 200ms ease;
 	        transition: all 200ms ease;
@@ -823,7 +850,7 @@ p {
 }
 
 .menu > li {
-	color: #F2F2F2;
+	color: #f2f2f2;
 	font-family: "montserratbold", sans-serif;
 	text-transform: uppercase;
 	padding: 2px 0;
@@ -833,7 +860,7 @@ p {
 	font-family: "varela", sans-serif;
 	text-transform: none;
 	margin-left: 20px;
-	color: #D6D7D8;
+	color: #d6d7d8;
 }
 
 /*  MAIN
@@ -860,7 +887,7 @@ form .btn--remove {
 
 /* Blocs */
 
-.bloc--general .control-label {
+.bloc-inline-edition .control-label {
 	display: inline-block;
 	vertical-align: middle;
 	width: 20%;
@@ -868,7 +895,7 @@ form .btn--remove {
 	font-size: 0.875rem;
 }
 
-.bloc--general .data {
+.bloc-inline-edition .data {
 	display: inline-block;
 	font-family: "varela", sans-serif;
 	vertical-align: middle;
@@ -877,7 +904,7 @@ form .btn--remove {
 }
 
 .contact {
-	border-right: 1px solid #D6D7D8;
+	border-right: 1px solid #d6d7d8;
 	margin-bottom: 15px;
 }
 
@@ -890,43 +917,14 @@ form .btn--remove {
 }
 
 .contact > p {
-	color: #8F979E;
+	color: #8f979e;
 }
 
 p.contact__title {
-	color: #2B303E;
+	color: #2b303e;
 	font-size: 16px;
 	font-size: 1rem;
 	font-family: "montserrat", sans-serif;
-}
-
-/*  ASIDE
-	=====  */
-
-.aside {
-	background-color: #2B303E;
-	height: 100%;
-	color: #fff;
-	position: absolute;
-	left: 0;
-	top: 0;
-	bottom: 0;
-	width: 320px;
-	padding: 15px;
-	-webkit-transform: translate3d(-100%, 0, 0);
-	        transform: translate3d(-100%, 0, 0);
-	-webkit-transform-origin: 100% 50%;
-	    -ms-transform-origin: 100% 50%;
-	        transform-origin: 100% 50%;
-	-webkit-transform-style: preserve-3d;
-	        transform-style: preserve-3d;
-	-webkit-transition: all 200ms ease;
-	        transition: all 200ms ease;
-}
-
-.deploy .aside {
-	-webkit-transform: translate3d(0, 0, 0);
-	        transform: translate3d(0, 0, 0);
 }
 
 /*  FOOTER
@@ -1620,7 +1618,7 @@ p.contact__title {
 
 .contact {
 	border-right: none;
-	border-bottom: 1px solid #D6D7D8;
+	border-bottom: 1px solid #d6d7d8;
 }
 
 .contact:last-of-type {

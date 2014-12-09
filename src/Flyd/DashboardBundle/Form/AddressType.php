@@ -27,6 +27,10 @@ class AddressType extends AbstractType
                     '2' => 'Expedition'
                 )
             ))
+            ->add('save','submit', array(
+                'attr' => array('class' => 'btn btn--save'),
+                'label' => 'Enregistrer',
+            ));
         ;
     }
     

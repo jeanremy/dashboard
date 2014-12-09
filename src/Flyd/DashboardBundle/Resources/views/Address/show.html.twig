@@ -1,0 +1,12 @@
+<div class="col-sm-3 address">
+    {% if address.type == 0 %}
+        <p class="address_type">Globale</p>
+    {% elseif address.type == 1 %}
+        <p class="address_type">Facturation</p>
+    {% elseif address.type == 1 %}
+        <p class="address_type">Expédition</p>
+    {% endif %}
+    <p class="address__street">{{ address.street }} {{ address.streetComp }}</p>
+    <p class="address__city">{{ address.zipcode }} {{ address.city }} {{ address.cityComp }}</p>
+    <a class="line--remove" data-id="{{ address.id }}" href="{{ path('address_ajax_delete') }}">Retirer</a>
+</div>

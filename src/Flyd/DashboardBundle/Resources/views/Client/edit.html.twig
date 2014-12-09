@@ -22,7 +22,7 @@
 
     <div class="row">
         <div class="col-sm-12">
-            <div class="bloc bloc--general edit">
+            <div class="bloc bloc--general bloc-inline-edition edit">
                 <h2 class="bloc__title">Informations générales</h2>
 
                 <div class="form-group">
@@ -77,23 +77,12 @@
         <div class="col-sm-12">
             <div class="bloc">
                 <h2 class="bloc__title">Adresses</h2>
-                <div class="row" id="address">
+                <div class="row" id="addresses">
                     {% for address in entity.addresses %}
-                    <div class="col-sm-3 address">
-                        {% if address.type == 0 %}
-                            <p class="address_type">Globale</p>
-                        {% elseif address.type == 1 %}
-                            <p class="address_type">Facturation</p>
-                        {% elseif address.type == 1 %}
-                            <p class="address_type">Expédition</p>
-                        {% endif %}
-                        <p class="address__street">{{ address.street }} {{ address.streetComp }}</p>
-                        <p class="address__city">{{ address.zipcode }} {{ address.city }} {{ address.cityComp }}</p>
-                        <a class="line--remove" data-id="{{ address.id }}" href="{{ path('address_ajax_remove') }}">Retirer</a>
-                    </div>
+                      {% include "FlydDashboardBundle:Address:show.html.twig" %}                    
                     {% endfor %}
                 </div> 
-                <a href="#" class="pull-right btn btn--add" id="address__more">+</a> 
+                <a href="{{ path('address_ajax_getform') }}" class="pull-right btn btn--add" id="address__more">+</a> 
             </div>
         </div>
     </div>
@@ -111,11 +100,12 @@
                         <p class="contact__email">{{ contact.email }}</p>
                         <p class="contact__phone">{{ contact.phone }}</p>
                         <p class="contact__mobile">{{ contact.mobile }}</p>
-                        <a class="line--remove" data-id="{{ contact.id }}" href="{{ path('contact_ajax_remove') }}">Retirer</a>
+                        <a class="line--remove" data-id="{{ contact.id }}" href="{{ path('contact_ajax_delete') }}">Retirer</a>
                     </div>
                     {% endfor %}
                 </div> 
-                <a href="#" class="pull-right btn btn--add" id="address__more">+</a> 
+                {{ render(controller('FlydDashboardBundle:Address:getform')) }}
+                <a href="{{ path('address_ajax_add') }}" class="pull-right btn btn--add" id="address__more">+</a> 
             </div>
         </div>
     </div>
@@ -137,33 +127,93 @@
 
 {% block js %}
 <script type="text/javascript">
+$(document).ready(function() {
 
-$(document).on('click', '.line--remove', function(e){
-    e.preventDefault();
-    var $this = $(this),
-        $parentBloc = $this.parent();
-    $.ajax({
-      url:            $this.attr('href'),
-      type:           "POST",
-      data: {
-        element_id: $this.attr('data-id')
-      },
-      beforeSend: function(data) {
-        console.log('beforsend');
-      },
-      success: function(data) {
-        if(data['code'] == 200) {
-          $parentBloc.fadeOut(400).remove();
-        }
-        else {
-          console.log(data['response']);
-        }
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        console.log('error');
-      }
+    $('.line--remove').on('click', function(e){
+        e.preventDefault();
+        var $this = $(this),
+            $parentBloc = $this.parent();
+        $.ajax({
+          url:            $this.attr('href'),
+          type:           "POST",
+          data: {
+            element_id: $this.attr('data-id')
+          },
+          beforeSend: function(data) {
+            console.log('beforsend');
+          },
+          success: function(data) {
+            if(data['code'] == 200) {
+              $parentBloc.fadeOut(400).remove();
+            }
+            else {
+              console.log(data['response']);
+            }
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            console.log('error');
+          }
+        });
     });
-  });
+
+    $('#address__more').on('click', function(e){
+        e.preventDefault();
+        var $this = $(this),
+            $parentBloc = $this.parent();
+        $.ajax({
+          url:            $this.attr('href'),
+          type:           "POST",
+          data: {},
+          success: function(data) {
+            if(data['code'] == 200) {
+              $parentBloc.append($(data['response']));
+              console.log(data['response']);
+              
+            }
+            else {
+              $parentBloc.append('erreur');
+            }
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            console.log('error');
+          }
+        });
+    });
+
+    $(document).on('submit', '#flyd_dashboardbundle_address', function(e){
+        e.preventDefault();
+        var $this = $(this),
+            $parentBloc = $this.parent();
+        $.ajax({
+          url:            $this.attr('action'),
+          type:           $this.attr('method'),
+          data: {
+            street: $('#flyd_dashboardbundle_address_street').val(),
+            streetComp: $('#flyd_dashboardbundle_address_streetComp').val(),
+            zipcode: $('#flyd_dashboardbundle_address_zipcode').val(),
+            city: $('#flyd_dashboardbundle_address_city').val(),
+            cityComp: $('#flyd_dashboardbundle_address_cityComp').val(),
+            type: $('#flyd_dashboardbundle_address_type').val()
+          },
+          beforeSend: function(data) {
+            console.log('beforsend');
+          },
+          success: function(data) {
+            if(data['code'] == 200) {
+                $('#contacts').append(data['response']);
+            }
+            else {
+              $parentBloc.append('erreur');
+            }
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            console.log('error');
+          }
+        });
+    });
+
+});
+
 
 </script>
 {% endblock %}
