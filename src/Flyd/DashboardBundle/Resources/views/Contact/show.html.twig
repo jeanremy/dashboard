@@ -1,0 +1,8 @@
+<div class="col-sm-3 contact">
+    <p class="contact__title">{{ contact.firstname }} {{ contact.lastname }}</p>
+    <p class="contact__job">{{ contact.job }}</p>
+    <p class="contact__email">{{ contact.email }}</p>
+    <p class="contact__phone">{{ contact.phone }}</p>
+    <p class="contact__mobile">{{ contact.mobile }}</p>
+    <a class="line--remove" data-id="{{ contact.id }}" href="{{ path('contact_ajax_delete') }}">Retirer</a>
+</div>

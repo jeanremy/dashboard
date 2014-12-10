@@ -53,6 +53,18 @@ user_delete:
 
 # CONTACTS
 
+contact_ajax_getform:
+    path:     /contact/getform
+    defaults: { _controller: FlydDashboardBundle:Contact:getform }
+    requirements:
+        _method: POST
+
+contact_ajax_add:
+    path:     /contact/add
+    defaults: { _controller: FlydDashboardBundle:Contact:add }
+    requirements:
+        _method: POST
+
 contact_ajax_delete:
     path:     /contact/delete
     defaults: { _controller: FlydDashboardBundle:Contact:delete }
@@ -65,14 +77,14 @@ contact_ajax_delete:
 address_ajax_getform:
     path:     /address/getform
     defaults: { _controller: FlydDashboardBundle:Address:getform }
-    # requirements:
-    #     _method: POST
+    requirements:
+        _method: POST
 
 address_ajax_add:
     path:     /address/add
     defaults: { _controller: FlydDashboardBundle:Address:add }
-    # requirements:
-    #     _method: POST
+    requirements:
+        _method: POST
 
 address_ajax_delete:
     path:     /address/delete

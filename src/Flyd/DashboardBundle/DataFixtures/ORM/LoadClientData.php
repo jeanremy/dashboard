@@ -41,7 +41,7 @@ class LoadClientData extends AbstractFixture implements OrderedFixtureInterface
       $client->setEntrance(new \DateTime());
       $client->setType(Client::ACTUAL);
       $client->addContact($contact );
-      $client->addAddress($address );
+      $client->addAddress($address);
       $em->persist($client);
 
       // On la persiste

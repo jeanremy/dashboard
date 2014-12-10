@@ -4,6 +4,7 @@ namespace Flyd\DashboardBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Flyd\DashboardBundle\Entity\Company;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class AddressType extends AbstractType
@@ -27,10 +28,14 @@ class AddressType extends AbstractType
                     '2' => 'Expedition'
                 )
             ))
+            ->add('company', 'entity', array(
+                'class' => 'FlydDashboardBundle:Company'
+            ))
             ->add('save','submit', array(
                 'attr' => array('class' => 'btn btn--save'),
                 'label' => 'Enregistrer',
             ));
+
         ;
     }
     

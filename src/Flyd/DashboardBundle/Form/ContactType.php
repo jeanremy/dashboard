@@ -22,6 +22,13 @@ class ContactType extends AbstractType
             ->add('email')
             ->add('phone')
             ->add('mobile')
+            ->add('company', 'entity', array(
+                'class' => 'FlydDashboardBundle:Company'
+            ))
+            ->add('save','submit', array(
+                'attr' => array('class' => 'btn btn--save'),
+                'label' => 'Enregistrer',
+            ))
         ;
     }
     

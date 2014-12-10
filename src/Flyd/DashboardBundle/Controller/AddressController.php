@@ -8,7 +8,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Flyd\DashboardBundle\Entity\Address;
+use Flyd\DashboardBundle\Entity\Client;
 use Flyd\DashboardBundle\Form\AddressType;
 
 class AddressController extends Controller
@@ -20,11 +22,14 @@ class AddressController extends Controller
      * @Method("POST")
      * @Template("FlydDashboardBundle:Address:add.html.twig")
      */
-	public function getFormAction()
+	public function getFormAction($id)
 	{
         $request = $this->container->get('request');
 	    $response = new JsonResponse();
 	    $address = new Address();
+	    $em = $this->getDoctrine()->getManager();
+        $client = $em->getRepository('FlydDashboardBundle:Client')->find($id);
+        $address->setCompany($client);
         $form = $this->get('form.factory')->create(new AddressType(), $address);
 
 		return $this->render('FlydDashboardBundle:Address:add.html.twig', array(
@@ -33,7 +38,6 @@ class AddressController extends Controller
 
 	    /*if($request->isXmlHttpRequest())
 	    {						
-	        $em = $this->container->get('doctrine')->getEntityManager();
 	        $response_form = $this->container->get('templating')->render('FlydDashboardBundle:Address:add.html.twig', array(
 				'form'=> $form->createView()
 			));
@@ -57,20 +61,16 @@ class AddressController extends Controller
 		$params = $this->getRequest()->request->all();
 	    $response = new JsonResponse();
 	    $address = new Address();
+	    $em = $this->getDoctrine()->getManager();
 
 	    if($request->isXmlHttpRequest())
 	    {
-	    	$address->setStreet($params['street']);
-	    	$address->setStreetComp($params['streetComp']);
-	    	$address->setZipcode($params['zipcode']);
-	    	$address->setCity($params['city']);
-	    	$address->setCityComp($params['cityComp']);
-        	
+	    	
         	$form = $this->get('form.factory')->create(new AddressType(), $address);
 
 	    	if ($form->handleRequest($request)->isValid()) {
-				$em = $this->getDoctrine()->getManager();
-				$em->persist($client);
+	          
+				$em->persist($address);
 				$em->flush();
 
 				// get address show template ( à faire)
@@ -81,21 +81,14 @@ class AddressController extends Controller
 					'code' => 200,
 					'response'=> $addressHtml
 				));
-	          
-
-	            return $this->redirect($this->generateUrl('oc_platform_view', array('id' => $client->getId())));
 	        }
-	    	// validation of the form
-								
-	        $em = $this->container->get('doctrine')->getEntityManager();
-	        $response_form = $this->container->get('templating')->render('FlydDashboardBundle:Address:add.html.twig', array(
-				'form'=> $form->createView()
-			));
-
-			return $response->setData(array(
-				'code' => 200,
-				'response'=> $response_form
-			));
+	        else {
+        		$errors = $form->getErrors();
+	        	return $response->setData(array(
+					'code' => 500,
+					'response'=> $errors
+				));
+	        }
 		}
 	}
 
