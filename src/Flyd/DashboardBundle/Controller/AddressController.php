@@ -35,18 +35,6 @@ class AddressController extends Controller
 		return $this->render('FlydDashboardBundle:Address:add.html.twig', array(
 			'form'=> $form->createView()
 		));
-
-	    /*if($request->isXmlHttpRequest())
-	    {						
-	        $response_form = $this->container->get('templating')->render('FlydDashboardBundle:Address:add.html.twig', array(
-				'form'=> $form->createView()
-			));
-
-			return $response->setData(array(
-				'code' => 200,
-				'response'=> $response_form
-			));
-		}*/
 	}	
 	/**
      * Add address from clients.

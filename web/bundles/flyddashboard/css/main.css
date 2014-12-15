@@ -741,13 +741,6 @@ p {
 	cursor: pointer;
 }
 
-.user:hover .user__menu,
-.user:focus .user__menu {
-	-webkit-transform: scale(1, 1);
-	    -ms-transform: scale(1, 1);
-	        transform: scale(1, 1);
-}
-
 .user .user__name {
 	line-height: 85px;
 	line-height: 5.3125rem;
@@ -793,6 +786,12 @@ p {
 	        transform-origin: 0 0;
 	border-left: 1px solid #8f979e;
 	border-bottom: 1px solid #8f979e;
+}
+
+.user .user__menu.deploy {
+	-webkit-transform: scale(1, 1);
+	    -ms-transform: scale(1, 1);
+	        transform: scale(1, 1);
 }
 
 /*  ASIDE
@@ -907,20 +906,20 @@ form .btn--remove {
 	font-size: 0.875rem;
 }
 
-.contact {
+.item {
 	border-right: 1px solid #d6d7d8;
 	margin-bottom: 15px;
 }
 
-.contact:nth-child(4n) {
+.item:nth-child(4n) {
 	border-right: none;
 }
 
-.contact:nth-child(4n +1) {
+.item:nth-child(4n +1) {
 	clear: left;
 }
 
-.contact > p {
+.item > p {
 	color: #8f979e;
 }
 
@@ -1620,12 +1619,12 @@ p.contact__title {
 
 @media (max-width: 768px) {
 
-.contact {
+.item {
 	border-right: none;
 	border-bottom: 1px solid #d6d7d8;
 }
 
-.contact:last-of-type {
+.item:last-of-type {
 	border-bottom: none;
 }
 

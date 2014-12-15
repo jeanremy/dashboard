@@ -44,12 +44,6 @@ p {
 	border-left: 1px solid $darkgrey;
 	position: relative;
 	cursor: pointer;
-	&:hover,
-	&:focus {
-		.user__menu {
-			transform: scale(1,1);
-		}
-	}
 	.user__name {
 		line-height: 85px;
 		&::before {
@@ -81,6 +75,9 @@ p {
 		transform-origin: 0 0;
 		border-left: 1px solid $darkgrey;
 		border-bottom: 1px solid $darkgrey;
+		&.deploy {
+			transform: scale(1,1);
+		}
 	}
 }
 
@@ -179,7 +176,10 @@ form .btn--remove {
 	}
 }
 
-.contact {
+// Client Page
+
+
+.item {
 	border-right: 1px solid $grey;
 	margin-bottom: 15px;
 	&:nth-child(4n) {border-right: none;}

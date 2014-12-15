@@ -22,9 +22,8 @@ class ClientController extends Controller
     /**
      * Lists all Client entities.
      *
-     * @Route("/", name="")
+     * @Route("/", name="client_list")
      * @Method("GET")
-     * @Template()
      */
     public function indexAction()
     {
@@ -43,7 +42,7 @@ class ClientController extends Controller
     /**
      * Displays a form to create a new Client entity.
      *
-     * @Route("/add", name="client_add")
+     * @Route("/client/add", name="client_add")
      * @Method("GET")
      * @Template("FlydDashboardBundle:Client:add.html.twig")
      */
@@ -60,7 +59,7 @@ class ClientController extends Controller
 
           $request->getSession()->getFlashBag()->add('notice', 'Client bien enregistré.');
 
-          return $this->redirect($this->generateUrl('oc_platform_view', array('id' => $client->getId())));
+          return $this->redirect($this->generateUrl('client_show', array('id' => $client->getId())));
         }
 
         return $this->render('FlydDashboardBundle:Client:add.html.twig', array(
@@ -71,7 +70,7 @@ class ClientController extends Controller
     /**
      * Finds and displays a Client entity.
      *
-     * @Route("/{id}", name="_show")
+     * @Route("/client/{id}", name="client_show")
      * @Method("GET")
      * @Template()
      */
@@ -93,7 +92,7 @@ class ClientController extends Controller
     /**
      * Displays a form to edit an existing Client entity.
      *
-     * @Route("/{id}/edit", name="_edit")
+     * @Route("/client/{id}/edit", name="client_edit")
      * @Method("GET")
      * @Template()
      */
@@ -128,7 +127,7 @@ class ClientController extends Controller
     /**
      * Deletes a Client entity.
      *
-     * @Route("/{id}", name="_delete")
+     * @Route("client/{id}/delete", name="client_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)

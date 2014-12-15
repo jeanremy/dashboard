@@ -25,6 +25,12 @@
 			$('body').toggleClass('deploy');
 		});
 
+		/* User menu */
+		$('.user__name').on('click', function(e) {
+			e.preventDefault();
+			$('.user__menu').toggleClass('deploy');
+		});
+
 	});
 
 })();
