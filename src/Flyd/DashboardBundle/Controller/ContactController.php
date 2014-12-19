@@ -29,7 +29,7 @@ class ContactController extends Controller
 	    $response = new JsonResponse();
 	    $contact = new Contact();
 	    $em = $this->getDoctrine()->getManager();
-        $client = $em->getRepository('FlydDashboardBundle:Client')->find($id);
+        $client = $em->getRepository('FlydDashboardBundle:Company')->find($id);
         $contact->setCompany($client);
         $form = $this->get('form.factory')->create(new ContactType(), $contact);
 

@@ -28,6 +28,28 @@ client_delete:
     defaults: { _controller: FlydDashboardBundle:Client:delete }
 
 
+#   SUPPLIERS
+
+supplier_list:
+    path:     /suppliers
+    defaults: { _controller: FlydDashboardBundle:Supplier:index }
+
+supplier_add:
+    path:     /supplier/add
+    defaults: { _controller: FlydDashboardBundle:Supplier:add }
+
+supplier_show:
+    path:     /supplier/{id}
+    defaults: { _controller: FlydDashboardBundle:Supplier:show }
+
+supplier_edit:
+    path:     /supplier/{id}/edit
+    defaults: { _controller: FlydDashboardBundle:Supplier:edit }
+
+supplier_delete:
+    path:     /supplier/{id}/delete
+    defaults: { _controller: FlydDashboardBundle:Supplier:delete }
+
 #   USERS
 
 user_list:

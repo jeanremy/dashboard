@@ -100,7 +100,7 @@
         </div>
     </div>
 
-     <!-- Contacts -->
+    <!-- Contacts -->
     <div class="row">
         <div class="col-sm-12">
             <div class="bloc">
@@ -111,8 +111,7 @@
                     {% endfor %}
                 </div> 
                 <a href="{{ path('contact_ajax_delete') }}" class="pull-right btn btn--add">+</a> 
-                {{ render(controller('FlydDashboardBundle:Contact:getForm', {'id': entity.id})) }}               
-
+                {{ render(controller('FlydDashboardBundle:Contact:getForm', {'id': entity.id})) }}
             </div>
         </div>
     </div>

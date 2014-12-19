@@ -28,7 +28,7 @@ class AddressController extends Controller
 	    $response = new JsonResponse();
 	    $address = new Address();
 	    $em = $this->getDoctrine()->getManager();
-        $client = $em->getRepository('FlydDashboardBundle:Client')->find($id);
+        $client = $em->getRepository('FlydDashboardBundle:Company')->find($id);
         $address->setCompany($client);
         $form = $this->get('form.factory')->create(new AddressType(), $address);
 

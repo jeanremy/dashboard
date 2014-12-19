@@ -1,8 +1,178 @@
 {% extends 'FlydDashboardBundle::layout.html.twig' %}
 
+{% block title %}
+    <title>Nouveau client</title>
+{% endblock %}
+
 {% block body -%}
-    <h1>Supplier creation</h1>
+    
+    <h1 class="lvl1">Nouveau client</h1>
 
-    {{ form(form) }}
+    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 
+	{% if form_errors(form) %}
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="bloc">
+    			{{ form_errors(form) }}
+			</div>
+		</div>
+	</div>
+	{% endif %}
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="bloc bloc--general bloc-inline-edition edit">
+                <h2 class="bloc__title">Informations générales</h2>
+
+                <div class="form-group">
+                    {{ form_label(form.name, "Nom", {'label_attr': {'class': 'control-label'}}) }}
+
+                    {{ form_errors(form.name) }}
+
+                  <div class="data">
+                    {# Génération de l'input. #}
+                    {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                  </div>
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.entrance, "Date d'entrée", {'label_attr': {'class': 'control-label'}}) }}
+
+                    {{ form_errors(form.entrance) }}
+
+                    <div class="data">
+                        {# Génération de l'input. #}
+                        {{ form_widget(form.entrance, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+
+
+                
+                {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
+                {{ form_widget(form.save) }}
+
+
+                {# Génération automatique des champs pas encore écrits.
+                Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
+                et tous les champs cachés (type « hidden »). #}
+                {{ form_rest(form) }}
+
+                {# Fermeture de la balise <form> du formulaire HTML #}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+    <!-- Adresse -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="bloc">
+                <h2 class="bloc__title">Adresses</h2>
+                <div class="row" id="addresses">
+                </div> 
+                <a href="{{ path('address_ajax_getform') }}" class="pull-right btn btn--add">+</a> 
+                {# Faire test avec formulaire imbriqué... #}                
+                {# render(controller('FlydDashboardBundle:Address:getForm', {'id': entity.id})) #}                
+            </div>
+        </div>
+    </div>
+
+     <!-- Contacts -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="bloc">
+                <h2 class="bloc__title">Contacts</h2>
+                <div class="row" id="contacts">
+                </div> 
+                <a href="{{ path('contact_ajax_delete') }}" class="pull-right btn btn--add">+</a> 
+                {# render(controller('FlydDashboardBundle:Contact:getForm', {'id': entity.id})) #}               
+
+            </div>
+        </div>
+    </div>
+
+
+
+    
+
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+$(document).ready(function() {
+
+    $('.line--remove').on('click', function(e){
+        e.preventDefault();
+        var $this = $(this),
+            $parentBloc = $this.parent();
+        $.ajax({
+          url:            $this.attr('href'),
+          type:           "POST",
+          data: {
+            element_id: $this.attr('data-id')
+          },
+          beforeSend: function(data) {
+            console.log('beforsend');
+          },
+          success: function(data) {
+            if(data['code'] == 200) {
+              $parentBloc.fadeOut(400).remove();
+            }
+            else {
+              console.log(data['response']);
+            }
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            console.log('error');
+          }
+        });
+    });
+
+    // more buttons
+    $('.btn--add').next().hide();
+    $('.btn--add').on('click', function(e){
+        e.preventDefault();
+        var $this = $(this);
+        $this.next().toggle();
+    });
+
+    $(document).on('submit', '#flyd_dashboardbundle_address, #flyd_dashboardbundle_contact', function(e){
+        e.preventDefault();
+        var $this = $(this);
+            loadItem($this);
+    });
+
+    function loadItem($this) {
+        var $parentBloc = $this.parent();
+
+        $.ajax({
+          url:            $this.attr('action'),
+          type:           $this.attr('method'),
+          data: $this.serialize(),
+          beforeSend: function(data) {
+            console.log('beforsend');
+          },
+          success: function(data) {
+            console.log(data);
+            if(data['code'] == 200) {
+                $parentBloc.parent().find('h2 + .row').append(data['response']);
+                $parentBloc.find('input, select').val('');
+            }
+            else {
+
+              $('#addresses').prepend('erreur');
+            }
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            console.log('error');
+          }
+        });
+
+    }
+
+});
+
+
+</script>
 {% endblock %}
