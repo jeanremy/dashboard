@@ -20,6 +20,10 @@ class SupplierType extends AbstractType
             ->add('entrance', 'date', array(
                 'widget' => 'single_text'
             ))
+            ->add('origin', 'entity', array(
+                'class' => 'FlydDashboardBundle:Origin',
+                'property' => 'name',
+            ))
             ->add('save','submit', array(
                 'attr' => array('class' => 'btn btn--save'),
                 'label' => 'Enregistrer',

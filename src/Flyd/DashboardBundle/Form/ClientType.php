@@ -20,6 +20,10 @@ class ClientType extends AbstractType
             ->add('entrance', 'date', array(
                 'widget' => 'single_text'
             ))
+            ->add('origin', 'entity', array(
+                'class' => 'FlydDashboardBundle:Origin',
+                'property' => 'name',
+            ))
             ->add('type', 'choice', array(
                 'choices'   => array(
                     '0'   => 'Actuel',

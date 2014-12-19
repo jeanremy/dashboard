@@ -23,6 +23,18 @@
 
                 </div>
 
+                {% if entity.origin %}
+                <div class="form-group">
+                    
+                    <label class="control-label">Origine</label>
+
+                    <div class="data">
+                        {{ entity.origin.name }}
+                    </div>
+
+                </div>
+                {% endif %}
+                
                 <div class="form-group">
                     
                     <label class="control-label">Type de Client</label>
