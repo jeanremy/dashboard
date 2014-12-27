@@ -6,7 +6,8 @@
 
 {% block body %}
         
-    <a href="{{ path('client_edit', { 'id': entity.id }) }}" class="btn btn--edit"></a>
+    <a href="{{ path('client_delete', { 'id': entity.id }) }}" class="btn btn--delete">Delete</a>
+    <a href="{{ path('client_edit', { 'id': entity.id }) }}" class="btn btn--edit">Edit</a>
     <h1 class="lvl1">{{entity.name}}</h1>
     <div class="row">
         <div class="col-sm-12">
@@ -95,13 +96,21 @@
                 <h2 class="bloc__title">Besoins</h2>
                 <a href="{{ path('need_add', { 'id': entity.id }) }}" class="pull-right btn btn--new">+</a>
                 <div class="row">
-                    {%for contact in entity.contacts %}
-                    <div class="col-sm-3">
-                        {% if contact.firstname %}<p class="contact__title">{{ contact.firstname }} {{ contact.lastname }}</p>{% endif %}
-                        {% if contact.job %}<p class="contact__job">{{ contact.job }}</p>{% endif %}
-                        {% if contact.email %}<p class="contact__email">{{ contact.email }}</p>{% endif %}
-                        {% if contact.phone %}<p class="contact__phone">{{ contact.phone }}</p>{% endif %}
-                        {% if contact.mobile %}<p class="contact__mobile">{{ contact.mobile }}</p>{% endif %}
+                    {%for need in entity.needs %}
+                    <div class="col-sm-6">
+                        <p class="need__dates">
+                            {{ need.startDate| localizeddate('full', 'none', 'fr') }} > 
+                            {% if need.endDate %}
+                            {{ need.endDate| localizeddate('full', 'none', 'fr') }}
+                            {% else %}...
+                            {% endif %}
+                        </p>
+                        <a href="{{ path('need_delete', { 'id': need.id }) }}" class="pull-right btn btn--delete">+</a>
+                        <a href="{{ path('need_edit', { 'id': need.id }) }}" class="pull-right btn btn--edit">+</a>
+
+                        <p class="need__title">{{need.title}}</p>
+                        <p class="need__description">{{need.description}}</p>
+                        
                     </div>
                     {% endfor %}
                 </div> 

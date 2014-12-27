@@ -56,4 +56,49 @@ class NeedController extends Controller
             'entity' => $entity
         ));
     }
+
+     public function editAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $need = $em->getRepository('FlydDashboardBundle:Need')->find($id);
+
+
+        $form = $this->get('form.factory')->create(new NeedType(), $need);
+
+        if ($form->handleRequest($request)->isValid()) {
+          $em = $this->getDoctrine()->getManager();
+          $em->persist($need);
+          $em->flush();
+
+          $request->getSession()->getFlashBag()->add('notice', 'Need bien enregistré.');
+
+          return $this->redirect($this->generateUrl('need_show', array('id' => $need->getId())));
+        }
+
+        return $this->render('FlydDashboardBundle:Need:add.html.twig', array(
+          'entity' => $need,
+          'form' => $form->createView()
+        ));
+    }
+
+  
+    public function deleteAction(Request $request, $id)
+    {
+        
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('FlydDashboardBundle:Need')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Need entity.');
+        }
+        $client = $entity->getClient();
+
+        $em->remove($entity);
+        $em->flush();
+
+        return $this->render('FlydDashboardBundle:Client:show.html.twig', array(
+          'entity' => $client
+        ));
+    }
 }

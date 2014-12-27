@@ -29,7 +29,7 @@ class UserType extends AbstractType
                 'required' => false
                 ))
             ->add('save','submit', array(
-                'attr' => array('class' => 'btn btn--save'),
+                'attr' => array('class' => 'btn--reverse btn--save'),
                 'label' => 'Enregistrer',
             ));
         ;

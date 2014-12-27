@@ -504,7 +504,7 @@ a {
 
 .btn,
 .btn--edit,
-.btn--remove,
+.btn--delete,
 .btn--add,
 .btn--save,
 .btn--reverse {
@@ -528,7 +528,7 @@ a {
 	float: right;
 }
 
-.btn--remove {
+.btn--delete {
 	background-color: #d14232;
 	display: block;
 	height: 40px;
@@ -890,6 +890,10 @@ p {
 
 .main .content {
 	padding: 75px 0;
+}
+
+.breadcrumb a {
+	color: #8f979e;
 }
 
 form .btn--save,

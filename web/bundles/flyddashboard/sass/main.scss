@@ -154,6 +154,10 @@ p {
 	padding: 75px 0;
 }
 
+.breadcrumb a {
+	color: $darkgrey;
+}
+
 form .btn--save,
 form .btn--remove {
 	margin-left: 15px;

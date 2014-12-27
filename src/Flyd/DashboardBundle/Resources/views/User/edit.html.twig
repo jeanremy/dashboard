@@ -93,15 +93,14 @@
                   </div>
                 </div>
 
+	       {{ form_widget(form.save) }}
             </div>
         </div>
     </div>
 
 
 
-	{# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
-	<a href="{{ path('client_delete', { 'id': entity.id }) }}" class="btn btn--remove">Supprimer</a>
-	{{ form_widget(form.save) }}
+  {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
 
 
 	{# Génération automatique des champs pas encore écrits.

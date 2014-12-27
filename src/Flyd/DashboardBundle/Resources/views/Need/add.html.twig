@@ -6,7 +6,7 @@
 
 {% block body -%}
 
-    <p class="breadcrumb">{{entity.client}}</p>
+    <p class="breadcrumb"><a href="{{ path('client_show', { 'id': entity.client.id }) }}">{{entity.client}}</a></p>
     
     <h1 class="lvl1">Nouveau besoin</h1>
 
