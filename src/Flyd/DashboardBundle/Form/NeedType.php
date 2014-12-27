@@ -6,7 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ContactType extends AbstractType
+
+class NeedType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,21 +16,25 @@ class ContactType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstname')
-            ->add('company')
-            ->add('lastname')
-            ->add('job')
-            ->add('email')
-            ->add('phone')
-            ->add('mobile')
-            ->add('company', 'entity', array(
-                'class' => 'FlydDashboardBundle:Company'
+            ->add('title')
+            ->add('description', 'textarea')
+            ->add('startDate', 'date', array(
+                'widget' => 'single_text'
+            ))
+            ->add('endDate', 'date', array(
+                'widget' => 'single_text'
+            ))
+            ->add('deadline', 'date', array(
+                'widget' => 'single_text'
+            ))
+            ->add('client', 'entity', array(
+                'class' => 'FlydDashboardBundle:Client',
+                'property' => 'name',
             ))
             ->add('save','submit', array(
-                'attr' => array('class' => 'btn--reverse btn--save'),
+                'attr' => array('class' => 'btn btn--save'),
                 'label' => 'Enregistrer',
-            ))
-        ;
+            ));
     }
     
     /**
@@ -38,7 +43,7 @@ class ContactType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Flyd\DashboardBundle\Entity\Contact'
+            'data_class' => 'Flyd\DashboardBundle\Entity\Need'
         ));
     }
 
@@ -47,6 +52,6 @@ class ContactType extends AbstractType
      */
     public function getName()
     {
-        return 'flyd_dashboardbundle_contact';
+        return 'flyd_dashboardbundle_client';
     }
 }

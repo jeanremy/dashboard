@@ -113,3 +113,25 @@ address_ajax_delete:
     defaults: { _controller: FlydDashboardBundle:Address:delete }
     requirements:
         _method: POST
+
+#   NEEDS
+
+need_list:
+    path:     /needs
+    defaults: { _controller: FlydDashboardBundle:Need:index }
+
+need_add:
+    path:     /client/{id}/need/add
+    defaults: { _controller: FlydDashboardBundle:Need:add }
+
+need_show:
+    path:     /need/{id}
+    defaults: { _controller: FlydDashboardBundle:Need:show }
+
+need_edit:
+    path:     /need/{id}/edit
+    defaults: { _controller: FlydDashboardBundle:Need:edit }
+
+need_delete:
+    path:     /need/{id}/delete
+    defaults: { _controller: FlydDashboardBundle:Need:delete }

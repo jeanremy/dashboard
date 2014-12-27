@@ -57,6 +57,13 @@
 	float: right;
 }
 
+.btn--reverse {
+	@extend .btn;
+	background-color: transparent;
+	border: 1px solid $primary;
+	color: $primary;
+}
+
 .line--remove {
 	font-family: $varela;
 	color: $alert;
@@ -73,8 +80,9 @@
 .bloc {
 	@extend %clearfix;
 	background-color: #fff;
-	padding: 15px;
+	padding: 30px;
 	margin-bottom: 30px;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
 .alert {color: $alert;}

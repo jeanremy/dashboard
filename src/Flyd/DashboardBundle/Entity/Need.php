@@ -288,25 +288,25 @@ class Need
     }
 
     /**
-     * Set clients
+     * Set client
      *
      * @param \Flyd\DashboardBundle\Entity\Client $clients
      * @return Need
      */
     public function setClient(\Flyd\DashboardBundle\Entity\Client $client = null)
     {
-        $this->clients = $clients;
+        $this->client = $client;
 
         return $this;
     }
 
     /**
-     * Get clients
+     * Get client
      *
      * @return \Flyd\DashboardBundle\Entity\Client 
      */
-    public function getClients()
+    public function getClient()
     {
-        return $this->clients;
+        return $this->client;
     }
 }

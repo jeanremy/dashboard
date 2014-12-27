@@ -38,6 +38,7 @@ class Client extends Company
     {
         parent::__construct();
         $this->needs        = new ArrayCollection();
+        $this->reminder     = new \DateTime("+1 year");
     }
 
 
