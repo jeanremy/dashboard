@@ -12,7 +12,14 @@
 	border-radius: 3px;
 	padding: 0 15px;
 	cursor: pointer;
-	border: none;
+	border: 1px solid transparent;
+	transition: all 200ms ease;
+	&:hover,
+	&:focus {
+		color: $primary;
+		border-color: $primary;
+		background-color: transparent;
+	}
 }
 
 
@@ -33,6 +40,25 @@
 	line-height: 40px;
 	text-align: center;
 	float: right;
+	margin-left: 10px;
+	&:hover,
+	&:focus {
+		color: $alert;
+		border-color: $alert;
+		background-color: transparent;
+	}
+}
+
+.btn--delete--reverse {
+	@extend .btn--delete;
+	background-color: transparent;
+	color: $alert;
+	border-color: $alert;
+	&:hover,
+	&:focus {
+		color: #fff;
+		background-color: $alert;
+	}
 }
 
 .btn--add {
@@ -48,6 +74,10 @@
 	font-size: 18px;
 }
 
+.btn--new {
+	@extend .btn--add;
+}
+
 .btn--save {
 	@extend .btn;
 	display: block;
@@ -57,11 +87,17 @@
 	float: right;
 }
 
-.btn--reverse {
-	@extend .btn;
+.btn--save--reverse {
+	@extend .btn--save;
 	background-color: transparent;
 	border: 1px solid $primary;
 	color: $primary;
+	&:hover,
+	&:focus {
+		background-color: $primary;
+		border: 1px solid transparent;
+		color: #fff;
+	}
 }
 
 .line--remove {
@@ -92,5 +128,4 @@
 	vertical-align: middle;
 	border-radius: 50%;
 }
-
 

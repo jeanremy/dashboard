@@ -71,7 +71,7 @@ class NeedController extends Controller
           $em->persist($need);
           $em->flush();
 
-          $request->getSession()->getFlashBag()->add('notice', 'Need bien enregistré.');
+          $request->getSession()->getFlashBag()->add('notice', 'Besoin bien enregistré.');
 
           return $this->redirect($this->generateUrl('need_show', array('id' => $need->getId())));
         }
@@ -96,6 +96,8 @@ class NeedController extends Controller
 
         $em->remove($entity);
         $em->flush();
+        $request->getSession()->getFlashBag()->add('notice', 'Le besoin a bien été supprimé.');
+
 
         return $this->render('FlydDashboardBundle:Client:show.html.twig', array(
           'entity' => $client

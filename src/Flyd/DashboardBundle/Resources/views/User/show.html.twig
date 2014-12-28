@@ -7,9 +7,11 @@
 {% block body %}
         
     {% if app.user.id == entity.id %}
-        <a href="{{ path('client_delete', { 'id': entity.id }) }}" class="btn btn--delete">Supprimer</a>
+        <a href="{{ path('user_delete', { 'id': entity.id }) }}" class="btn btn--delete">Supprimer</a>
         <a href="{{ path('user_edit', { 'id': entity.id }) }}" class="btn btn--edit">Edit</a>
-
+    {% endif %}
+    {% if entity.image %}
+        <img src="{{ entity.image.webPath | apply_filter('miniature') }}" class="profil__pic" />
     {% endif %}
     <h1 class="lvl1">{{entity.username}}</h1>
 

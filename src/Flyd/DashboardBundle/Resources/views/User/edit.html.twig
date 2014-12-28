@@ -8,8 +8,6 @@
     
     <h1 class="lvl1">{{entity.username}}</h1>
 
-    {% include "FlydDashboardBundle::flash.html.twig" %}
-
     {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 
 	{% if form_errors(form) %}

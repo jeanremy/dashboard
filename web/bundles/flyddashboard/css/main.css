@@ -505,9 +505,11 @@ a {
 .btn,
 .btn--edit,
 .btn--delete,
+.btn--delete--reverse,
 .btn--add,
+.btn--new,
 .btn--save,
-.btn--reverse {
+.btn--save--reverse {
 	font-weight: 700;
 	font-family: "montserratbold", sans-serif;
 	text-transform: uppercase;
@@ -516,7 +518,30 @@ a {
 	border-radius: 3px;
 	padding: 0 15px;
 	cursor: pointer;
-	border: none;
+	border: 1px solid transparent;
+	-webkit-transition: all 200ms ease;
+	        transition: all 200ms ease;
+}
+
+.btn:hover,
+.btn--edit:hover,
+.btn--delete:hover,
+.btn--delete--reverse:hover,
+.btn--add:hover,
+.btn--new:hover,
+.btn--save:hover,
+.btn--save--reverse:hover,
+.btn:focus,
+.btn--edit:focus,
+.btn--delete:focus,
+.btn--delete--reverse:focus,
+.btn--add:focus,
+.btn--new:focus,
+.btn--save:focus,
+.btn--save--reverse:focus {
+	color: #2b303e;
+	border-color: #2b303e;
+	background-color: transparent;
 }
 
 .btn--edit {
@@ -528,7 +553,8 @@ a {
 	float: right;
 }
 
-.btn--delete {
+.btn--delete,
+.btn--delete--reverse {
 	background-color: #d14232;
 	display: block;
 	height: 40px;
@@ -536,9 +562,32 @@ a {
 	line-height: 2.5rem;
 	text-align: center;
 	float: right;
+	margin-left: 10px;
 }
 
-.btn--add {
+.btn--delete:hover,
+.btn--delete--reverse:hover,
+.btn--delete:focus,
+.btn--delete--reverse:focus {
+	color: #d14232;
+	border-color: #d14232;
+	background-color: transparent;
+}
+
+.btn--delete--reverse {
+	background-color: transparent;
+	color: #d14232;
+	border-color: #d14232;
+}
+
+.btn--delete--reverse:hover,
+.btn--delete--reverse:focus {
+	color: #fff;
+	background-color: #d14232;
+}
+
+.btn--add,
+.btn--new {
 	display: block;
 	height: 30px;
 	width: 30px;
@@ -552,7 +601,8 @@ a {
 	font-size: 1.125rem;
 }
 
-.btn--save {
+.btn--save,
+.btn--save--reverse {
 	display: block;
 	height: 40px;
 	line-height: 40px;
@@ -561,10 +611,17 @@ a {
 	float: right;
 }
 
-.btn--reverse {
+.btn--save--reverse {
 	background-color: transparent;
 	border: 1px solid #2b303e;
 	color: #2b303e;
+}
+
+.btn--save--reverse:hover,
+.btn--save--reverse:focus {
+	background-color: #2b303e;
+	border: 1px solid transparent;
+	color: #fff;
 }
 
 .line--remove {
@@ -897,6 +954,7 @@ p {
 }
 
 form .btn--save,
+form .btn--save--reverse,
 form .btn--remove {
 	margin-left: 15px;
 }

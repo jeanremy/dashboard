@@ -5,7 +5,13 @@
 	<nav class="nav">
 		<ul class="menu">
 			<li><a href="{{path('flyd_dashboard_homepage')}}">Dashboard</a></li>
-			<li><a href="{{path('client_list')}}">Clients</a></li>
+			<li>Clients
+				<ul class="submenu">
+					<li><a href="{{path('client_add')}}">Ajouter un client</a></li>
+					<li><a href="">Mes clients</a></li>
+					<li><a href="{{path('client_list')}}">Tous les clients</a></li>
+				</ul>
+			</li>
 			<li>Utilisateurs
 				<ul class="submenu">
 					<li><a href="{{path('user_add')}}">Ajouter un utilisateur</a></li>

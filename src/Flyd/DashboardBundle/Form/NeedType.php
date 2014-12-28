@@ -19,20 +19,23 @@ class NeedType extends AbstractType
             ->add('title')
             ->add('description', 'textarea')
             ->add('startDate', 'date', array(
-                'widget' => 'single_text'
+                'widget' => 'single_text',
+                'required' => false
             ))
             ->add('endDate', 'date', array(
-                'widget' => 'single_text'
+                'widget' => 'single_text',
+                'required' => false
             ))
             ->add('deadline', 'date', array(
-                'widget' => 'single_text'
+                'widget' => 'single_text',
+                'required' => false
             ))
             ->add('client', 'entity', array(
                 'class' => 'FlydDashboardBundle:Client',
                 'property' => 'name',
             ))
             ->add('save','submit', array(
-                'attr' => array('class' => 'btn--reverse btn--save'),
+                'attr' => array('class' => 'btn--save--reverse'),
                 'label' => 'Enregistrer',
             ));
     }

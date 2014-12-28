@@ -34,7 +34,7 @@ class ClientType extends AbstractType
                 'widget' => 'single_text'
             ))
             ->add('save','submit', array(
-                'attr' => array('class' => 'btn--reverse btn--save'),
+                'attr' => array('class' => 'btn--save--reverse'),
                 'label' => 'Enregistrer',
             ));
     }

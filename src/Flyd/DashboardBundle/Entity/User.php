@@ -30,6 +30,11 @@ class User extends BaseUser
     private $project_task_users;
 
     /**
+    * @ORM\OneToMany(targetEntity="Flyd\DashboardBundle\Entity\Project", mappedBy="user")
+    */
+    private $projects;
+
+    /**
     * @ORM\OneToOne(targetEntity="Flyd\DashboardBundle\Entity\Image", cascade={"persist", "remove"})
     * @ORM\JoinColumn(nullable=true)
     */
@@ -49,7 +54,8 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
-        $this->project_task_users = new ArrayCollection();
+        $this->project_task_users   = new ArrayCollection();
+        $this->projects             = new ArrayCollection();
     }
 
 
@@ -90,6 +96,45 @@ class User extends BaseUser
     public function getProjectTaskUsers()
     {
         return $this->project_task_users;
+    }
+
+    /**
+     * Get reminder
+     *
+     * @return \DateTime 
+     */
+    public function getReminder()
+    {
+        return $this->reminder;
+    }
+
+    /**
+     * @param Project $project
+     * @return User
+     */
+    public function addProject(Project $project)
+    {
+        $this->projects[] = $project;
+
+        $project->setCompany($this);
+
+        return $this;
+    }
+
+    /**
+    * @param Project $project
+    */
+    public function removeProject(Project $project)
+    {
+        $this->projects->removeElement($project);
+    }
+
+    /**
+    * @return ArrayCollection
+    */
+    public function getProjects()
+    {
+        return $this->projects;
     }
 
     /**

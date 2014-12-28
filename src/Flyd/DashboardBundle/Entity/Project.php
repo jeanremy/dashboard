@@ -50,6 +50,11 @@ class Project
     private $project_task_users;
 
     /**
+    * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\User", inversedBy="projects")
+    */
+    private $user;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
@@ -358,5 +363,28 @@ class Project
         $this->project_task_users = $projectTaskUsers;
 
         return $this;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Flyd\DashboardBundle\Entity\User $users
+     * @return Project
+     */
+    public function setUser(\Flyd\DashboardBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Flyd\DashboardBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }
