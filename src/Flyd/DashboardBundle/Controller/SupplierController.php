@@ -57,7 +57,7 @@ class SupplierController extends Controller
           $em->persist($supplier);
           $em->flush();
 
-          $request->getSession()->getFlashBag()->add('notice', 'Supplier bien enregistré.');
+          $request->getSession()->getFlashBag()->add('notice', 'Fournisseur bien enregistré.');
 
           return $this->redirect($this->generateUrl('supplier_show', array('id' => $supplier->getId())));
         }

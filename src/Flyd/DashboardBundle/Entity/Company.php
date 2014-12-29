@@ -45,7 +45,12 @@ class Company
     */
     protected $contacts;
 
-    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="job", type="string", length=255)
+     */
+    protected $job;
 
 
     /**
@@ -175,6 +180,28 @@ class Company
     }
 
 
+    /**
+     * Set job
+     *
+     * @param string $job
+     * @return Company
+     */
+    public function setJob($job)
+    {
+        $this->job = $job;
+
+        return $this;
+    }
+
+    /**
+     * Get job
+     *
+     * @return string 
+     */
+    public function getJob()
+    {
+        return $this->job;
+    }
 
     /**
      * Set entrance

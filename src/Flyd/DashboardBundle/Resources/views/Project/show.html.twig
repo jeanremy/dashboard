@@ -1,120 +1,74 @@
 {% extends 'FlydDashboardBundle::layout.html.twig' %}
 
 {% block title %}
-    <title>{{entity.name}}</title>
+    <title>{{entity.title}}</title>
 {% endblock %}
 
 {% block body %}
-        
-    <a href="{{ path('client_delete', { 'id': entity.id }) }}" class="btn--delete">Delete</a>
-    <a href="{{ path('client_edit', { 'id': entity.id }) }}" class="btn--edit">Edit</a>
-    <h1 class="lvl1">{{entity.name}}</h1>
+    
+    <a href="{{ path('supplier_delete', { 'id': entity.id }) }}" class="btn--delete">Delete</a>
+    <a href="{{ path('supplier_edit', { 'id': entity.id }) }}" class="btn--edit">Edit</a>
+    <h1 class="lvl1">{{entity.title}}</h1>
     <div class="row">
-        <div class="col-sm-12">
-            <div class="bloc bloc--general bloc-inline-edition">
+        <div class="col-sm-8">
+            <div class="bloc bloc-inline-edition">
                 <h2 class="bloc__title">Informations générales</h2>
 
                 <div class="form-group">
-                    
-                    <label class="control-label">Date d'entrée</label>
+                    <label class="control-label">Catégorie</label>
 
                     <div class="data">
-                        {{ entity.entrance| localizeddate('full', 'none', 'fr') }}
+                        {% if entity.category == 0 %}
+                            <p>Design</p>
+                        {% elseif entity.category == 1 %}
+                            <p>Motion</p>
+                        {% elseif entity.category == 2 %}
+                            <p>Web</p>
+                        {% endif %}
                     </div>
-
                 </div>
-
-                {% if entity.origin %}
-                <div class="form-group">
-                    
-                    <label class="control-label">Origine</label>
-
-                    <div class="data">
-                        {{ entity.origin.name }}
-                    </div>
-
-                </div>
-                {% endif %}
-                
-                <div class="form-group">
-                    
-                    <label class="control-label">Type de Client</label>
-
-                    <div class="data">
-                    {% if entity.type == 0 %}
-                        <p>Actuel</p>
-                    {% elseif entity.type == 1 %}
-                        <p>Prospect</p>
-                    {% endif %}
-                    </div>
-                    
-                </div>
-
-                {%for address in entity.addresses %}
 
                 <div class="form-group">
-                    {% if address.type == 0 %}
-                        <label class="control-label">Adresse</label>
-                    {% elseif address.type == 1 %}
-                        <label class="control-label">Adresse de facturation</label>
-                    {% elseif address.type == 2 %}
-                        <label class="control-label">Adresse d'expédition</label>
-                    {% endif %}
+                    <label class="control-label">Date de début</label>
+
                     <div class="data">
-                        <p>{{ address.street }}</p>
-                        <p>{{ address.streetComp }}</p>
-                        <p>{{ address.zipcode }} {{ address.city }} {{ address.cityComp }}</p>
+                        {{ entity.startDate| localizeddate('full', 'none', 'fr') }}
                     </div>
-                    
                 </div>
 
+                <div class="form-group">
+                    <label class="control-label">Deadline</label>
+
+                    <div class="data">
+                        {{ entity.deadline| localizeddate('full', 'none', 'fr') }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Date de fin</label>
+
+                    <div class="data">
+                        {{ entity.endDate| localizeddate('full', 'none', 'fr') }}
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="bloc">
+                <h2 class="bloc__title">Fournisseurs</h2>
+                {% for supplier in entity.suppliers %}
+                    {% include "FlydDashboardBundle:Supplier:mini.html.twig" %}
                 {% endfor %}
+                
             </div>
         </div>
-    </div>
-
-    <!-- Contacts -->
-    <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-4">
             <div class="bloc">
-                <h2 class="bloc__title">Contacts</h2>
-                <div class="row" id="contacts">
-                    {% for contact in entity.contacts %}
-                      {% include "FlydDashboardBundle:Contact:show.html.twig" %}                    
-                    {% endfor %}
-                </div> 
-                <a href="{{ path('contact_ajax_delete') }}" class="pull-right btn--add">+</a> 
-                {{ render(controller('FlydDashboardBundle:Contact:getForm', {'id': entity.id})) }}
+                <h2 class="bloc__title">équipe</h2>
+                {# for user in users #}
+                    <h4 class="lvl4"></h4>
+                {# endfor #}
             </div>
-        </div>
-    </div>
-
-     <!-- Besoins -->
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="bloc">
-                <a href="{{ path('need_add', { 'id': entity.id }) }}" class="btn--new">+</a>
-                <h2 class="bloc__title">Besoins</h2>
-                <div class="row">
-                    {%for need in entity.needs %}
-                    <div class="col-sm-6">
-                        <p class="need__dates">
-                            {{ need.startDate| localizeddate('full', 'none', 'fr') }} > 
-                            {% if need.endDate %}
-                            {{ need.endDate| localizeddate('full', 'none', 'fr') }}
-                            {% else %}...
-                            {% endif %}
-                        </p>
-                        <a href="{{ path('need_delete', { 'id': need.id }) }}" class="pull-right btn--delete">+</a>
-                        <a href="{{ path('need_edit', { 'id': need.id }) }}" class="pull-right btn--edit">+</a>
-
-                        <p class="need__title">{{need.title}}</p>
-                        <p class="need__description">{{need.description}}</p>
-                        
-                    </div>
-                    {% endfor %}
-                </div> 
-            </div>    
         </div>
     </div>
 

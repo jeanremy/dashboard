@@ -17,6 +17,7 @@ class SupplierType extends AbstractType
     {
         $builder
             ->add('name')
+            ->add('job')
             ->add('entrance', 'date', array(
                 'widget' => 'single_text'
             ))

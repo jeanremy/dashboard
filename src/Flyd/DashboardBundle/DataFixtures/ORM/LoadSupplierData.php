@@ -37,6 +37,7 @@ class LoadSupplierData extends AbstractFixture implements OrderedFixtureInterfac
 
         $supplier = new Supplier();
         $supplier->setName('Fournisseur '.$i);
+        $supplier->setJob('Imprimeur');
         $supplier->addAddress($address);
         $supplier->addContact($contact);
         $supplier->setEntrance(new \DateTime());
