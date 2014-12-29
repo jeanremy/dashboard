@@ -16,15 +16,26 @@ class ProjectType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('category')
-            ->add('startDate')
-            ->add('deadline')
-            ->add('endDate')
-            ->add('createdAt')
-            ->add('updatedAt')
-            ->add('need')
-            ->add('suppliers')
-            ->add('project_canvas')
+            ->add('category', 'choice', array(
+                'choices'   => array(
+                    '0'     => 'Design',
+                    '1'     => 'Motion',
+                    '2'     => 'Web'
+                )
+            ))
+            ->add('startDate', 'date', array(
+                'widget' => 'single_text'
+            ))
+            ->add('deadline', 'date', array(
+                'widget' => 'single_text'
+            ))
+            ->add('endDate', 'date', array(
+                'widget' => 'single_text'
+            ))
+            ->add('save','submit', array(
+                'attr' => array('class' => 'btn--save--reverse'),
+                'label' => 'Enregistrer',
+            ));
         ;
     }
     

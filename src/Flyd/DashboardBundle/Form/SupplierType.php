@@ -25,7 +25,7 @@ class SupplierType extends AbstractType
                 'property' => 'name',
             ))
             ->add('save','submit', array(
-                'attr' => array('class' => 'btn--save'),
+                'attr' => array('class' => 'btn--save--reverse'),
                 'label' => 'Enregistrer',
             ));
     }

@@ -26,7 +26,7 @@ class ContactType extends AbstractType
                 'class' => 'FlydDashboardBundle:Company'
             ))
             ->add('save','submit', array(
-                'attr' => array('class' => 'btn--reverse btn--save'),
+                'attr' => array('class' => 'btn--save--reverse'),
                 'label' => 'Enregistrer',
             ))
         ;

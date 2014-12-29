@@ -21,7 +21,7 @@ class ProjectController extends Controller
     /**
      * Lists all Project entities.
      *
-     * @Route("/", name="project")
+     * @Route("/", name="project_list")
      * @Method("GET")
      * @Template()
      */
@@ -35,69 +35,48 @@ class ProjectController extends Controller
             'entities' => $entities,
         );
     }
+
     /**
      * Creates a new Project entity.
      *
-     * @Route("/", name="project_create")
+     * @Route("/", name="project_add")
      * @Method("POST")
-     * @Template("FlydDashboardBundle:Project:new.html.twig")
+     * @Template("FlydDashboardBundle:Project:add.html.twig")
      */
-    public function createAction(Request $request)
+    public function addAction(Request $request, $id)
     {
-        $entity = new Project();
-        $form = $this->createCreateForm($entity);
-        $form->handleRequest($request);
+        $project = new Project();
+        $em = $this->getDoctrine()->getManager();
+        $need = $em->getRepository('FlydDashboardBundle:Need')->find($id);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
+        $project->setStartDate(new \DateTime() );
+        $project->setDeadline(new \DateTime('+1 month') );
+        $project->setEndDate(new \DateTime('+1 month') );
 
-            return $this->redirect($this->generateUrl('project_show', array('id' => $entity->getId())));
+        // Default values (besoin)
+        $project->setNeed($need);
+
+
+        $form = $this->get('form.factory')->create(new ProjectType(), $project);
+
+        if ($form->handleRequest($request)->isValid()) {
+          $em = $this->getDoctrine()->getManager();
+          $em->persist($project);
+          $em->flush();
+
+          $request->getSession()->getFlashBag()->add('notice', 'Projet bien enregistré.');
+
+          return $this->redirect($this->generateUrl('project_show', array('id' => $project->getId())));
         }
 
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
-    }
-
-    /**
-     * Creates a form to create a Project entity.
-     *
-     * @param Project $entity The entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createCreateForm(Project $entity)
-    {
-        $form = $this->createForm(new ProjectType(), $entity, array(
-            'action' => $this->generateUrl('project_create'),
-            'method' => 'POST',
+        return $this->render('FlydDashboardBundle:Project:add.html.twig', array(
+          'form' => $form->createView(),
+          'entity' => $project
         ));
-
-        $form->add('submit', 'submit', array('label' => 'Create'));
-
-        return $form;
     }
 
-    /**
-     * Displays a form to create a new Project entity.
-     *
-     * @Route("/new", name="project_new")
-     * @Method("GET")
-     * @Template()
-     */
-    public function newAction()
-    {
-        $entity = new Project();
-        $form   = $this->createCreateForm($entity);
+    
 
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
-    }
 
     /**
      * Finds and displays a Project entity.
@@ -151,57 +130,7 @@ class ProjectController extends Controller
         );
     }
 
-    /**
-    * Creates a form to edit a Project entity.
-    *
-    * @param Project $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createEditForm(Project $entity)
-    {
-        $form = $this->createForm(new ProjectType(), $entity, array(
-            'action' => $this->generateUrl('project_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Update'));
-
-        return $form;
-    }
-    /**
-     * Edits an existing Project entity.
-     *
-     * @Route("/{id}", name="project_update")
-     * @Method("PUT")
-     * @Template("FlydDashboardBundle:Project:edit.html.twig")
-     */
-    public function updateAction(Request $request, $id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('FlydDashboardBundle:Project')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Project entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createEditForm($entity);
-        $editForm->handleRequest($request);
-
-        if ($editForm->isValid()) {
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('project_edit', array('id' => $id)));
-        }
-
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
-    }
+   
     /**
      * Deletes a Project entity.
      *

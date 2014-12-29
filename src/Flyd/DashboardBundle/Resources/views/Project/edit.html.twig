@@ -58,9 +58,30 @@
                   </div>
                 </div>
 
-                
+                <div class="form-group">
+                	{{ form_label(form.reminder, "Date de relance", {'label_attr': {'class': 'control-label'}}) }}
+
+        					{{ form_errors(form.reminder) }}
+
+        					<div class="data">
+        						{# Génération de l'input. #}
+        						{{ form_widget(form.reminder, {'attr': {'class': 'form-control'}}) }}
+        					</div>
+                </div>
+
+                <div class="form-group">
+                	{{ form_label(form.type, "Type de client", {'label_attr': {'class': 'control-label'}}) }}
+
+        					{{ form_errors(form.type) }}
+
+        					<div class="data">
+        						{# Génération de l'input. #}
+        						{{ form_widget(form.type, {'attr': {'class': 'form-control'}}) }}
+        					</div>
+                </div>
                 {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
                 <a href="{{ path('client_delete', { 'id': entity.id }) }}" class="btn--delete--reverse">Delete</a>
+
                 {{ form_widget(form.save) }}
 
 
@@ -85,13 +106,13 @@
                       {% include "FlydDashboardBundle:Address:show.html.twig" %}                    
                     {% endfor %}
                 </div> 
-                <a href="{{ path('address_ajax_getform') }}" class="pull-right btn--add">+</a> 
+                <a href="{{ path('address_ajax_getform') }}" class="pull-right btn btn--add">+</a> 
                 {{ render(controller('FlydDashboardBundle:Address:getForm', {'id': entity.id})) }}                
             </div>
         </div>
     </div>
 
-     <!-- Contacts -->
+    <!-- Contacts -->
     <div class="row">
         <div class="col-sm-12">
             <div class="bloc">
@@ -101,9 +122,8 @@
                       {% include "FlydDashboardBundle:Contact:show.html.twig" %}                    
                     {% endfor %}
                 </div> 
-                <a href="{{ path('contact_ajax_delete') }}" class="pull-right btn--add">+</a> 
-                {{ render(controller('FlydDashboardBundle:Contact:getForm', {'id': entity.id})) }}               
-
+                <a href="{{ path('contact_ajax_delete') }}" class="pull-right btn btn--add">+</a> 
+                {{ render(controller('FlydDashboardBundle:Contact:getForm', {'id': entity.id})) }}
             </div>
         </div>
     </div>

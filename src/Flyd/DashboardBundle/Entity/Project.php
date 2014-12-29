@@ -39,6 +39,11 @@ class Project
     private $suppliers;
 
     /**
+    * @ORM\ManyToMany(targetEntity="Flyd\DashboardBundle\Entity\User")
+    */
+    private $users;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\ProjectCanvas")
      * @ORM\JoinColumn(nullable=true)
      */
@@ -49,10 +54,6 @@ class Project
     */
     private $project_task_users;
 
-    /**
-    * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\User", inversedBy="projects")
-    */
-    private $user;
 
     /**
      * @var string
@@ -78,7 +79,7 @@ class Project
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="deadline", type="date")
+     * @ORM\Column(name="deadline", type="date", nullable=true)
      */
     private $deadline;
 
@@ -104,6 +105,7 @@ class Project
     {
         $this->createdAt                = new \Datetime();
         $this->suppliers                = new ArrayCollection();
+        $this->users                    = new ArrayCollection();
         $this->project_task_users       = new ArrayCollection();
     }
 
@@ -163,6 +165,7 @@ class Project
     {
         return $this->suppliers;
     }
+
 
     /**
      * @param ProjectTaskUser $project_task_user
@@ -365,26 +368,5 @@ class Project
         return $this;
     }
 
-    /**
-     * Set user
-     *
-     * @param \Flyd\DashboardBundle\Entity\User $users
-     * @return Project
-     */
-    public function setUser(\Flyd\DashboardBundle\Entity\User $user = null)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \Flyd\DashboardBundle\Entity\User 
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
+    
 }

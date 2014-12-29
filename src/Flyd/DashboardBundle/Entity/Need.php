@@ -309,4 +309,8 @@ class Need
     {
         return $this->client;
     }
+
+    public function __toString() {
+        return $this->title;
+    }
 }

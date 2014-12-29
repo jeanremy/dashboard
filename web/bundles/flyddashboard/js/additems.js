@@ -7,6 +7,7 @@ $(document).ready(function() {
         e.preventDefault();
         var $this = $(this);
         $this.next().toggle();
+        console.log('e');
     });
 
     $(document).on('submit', '#flyd_dashboardbundle_address, #flyd_dashboardbundle_contact', function(e){

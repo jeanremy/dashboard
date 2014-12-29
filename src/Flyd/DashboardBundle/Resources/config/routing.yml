@@ -50,6 +50,7 @@ supplier_delete:
     path:     /supplier/{id}/delete
     defaults: { _controller: FlydDashboardBundle:Supplier:delete }
 
+
 #   USERS
 
 user_list:
@@ -135,3 +136,26 @@ need_edit:
 need_delete:
     path:     /need/{id}/delete
     defaults: { _controller: FlydDashboardBundle:Need:delete }
+
+
+#   PROJECTS
+
+project_list:
+    path:     /projects
+    defaults: { _controller: FlydDashboardBundle:Project:index }
+
+project_add:
+    path:     /need/{id}/project/add
+    defaults: { _controller: FlydDashboardBundle:Project:add }
+
+project_show:
+    path:     /project/{id}
+    defaults: { _controller: FlydDashboardBundle:Project:show }
+
+project_edit:
+    path:     /project/{id}/edit
+    defaults: { _controller: FlydDashboardBundle:Project:edit }
+
+project_delete:
+    path:     /project/{id}/delete
+    defaults: { _controller: FlydDashboardBundle:Project:delete }

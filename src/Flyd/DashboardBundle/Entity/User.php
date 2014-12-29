@@ -30,7 +30,7 @@ class User extends BaseUser
     private $project_task_users;
 
     /**
-    * @ORM\OneToMany(targetEntity="Flyd\DashboardBundle\Entity\Project", mappedBy="user")
+    * @ORM\ManyToMany(targetEntity="Flyd\DashboardBundle\Entity\Project")
     */
     private $projects;
 
@@ -116,7 +116,7 @@ class User extends BaseUser
     {
         $this->projects[] = $project;
 
-        $project->setCompany($this);
+        $project->addUser($this);
 
         return $this;
     }

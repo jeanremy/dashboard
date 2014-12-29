@@ -46,7 +46,7 @@ gulp.task('postprocess', function() {
 
 // Scripts
 gulp.task('scripts', function() {  
-    return gulp.src(['js/*.js', '!js/vendor/**', '!js/main.min.js'])
+    return gulp.src(['!js/vendor/**', 'js/main.js', '!js/main.min.js'])
         .pipe(concat('main.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('js/'))

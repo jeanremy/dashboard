@@ -22,18 +22,19 @@
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('supplier_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td><a href="{{ path('client_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.name }}</td>
                 <td>{% if entity.entrance %}{{ entity.entrance|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.reminder %}{{ entity.reminder|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if entity.createdAt %}{{ entity.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if entity.updatedAt %}{{ entity.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>
                 <ul>
                     <li>
-                        <a href="{{ path('supplier_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('client_show', { 'id': entity.id }) }}">show</a>
                     </li>
                     <li>
-                        <a href="{{ path('supplier_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('client_edit', { 'id': entity.id }) }}">edit</a>
                     </li>
                 </ul>
                 </td>
@@ -44,7 +45,7 @@
 
         <ul>
         <li>
-            <a href="{{ path('supplier_add') }}">
+            <a href="{{ path('client_add') }}">
                 Create a new entry
             </a>
         </li>
