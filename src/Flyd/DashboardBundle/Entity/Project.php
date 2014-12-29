@@ -166,6 +166,34 @@ class Project
         return $this->suppliers;
     }
 
+    /**
+     * @param User $user
+     * @return Project
+     */
+    public function addUser(User $user)
+    {
+        $this->users[] = $user;
+
+        $user->addProject($this);
+
+        return $this;
+    }
+
+    /**
+    * @param User $user
+    */
+    public function removeUser(User $user)
+    {
+        $this->users->removeElement($user);
+    }
+
+    /**
+    * @return ArrayCollection
+    */
+    public function getUsers()
+    {
+        return $this->users;
+    }
 
     /**
      * @param ProjectTaskUser $project_task_user

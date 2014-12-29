@@ -10,8 +10,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 /**
  * User
  *
- * @ORM\Table(name="fos_user")
- * @ORM\Entity()
+ * @ORM\Table(name="fos_user") 
+ * @ORM\Entity(repositoryClass="Flyd\DashboardBundle\Entity\UserRepository")
  */
 class User extends BaseUser
 {
@@ -115,8 +115,6 @@ class User extends BaseUser
     public function addProject(Project $project)
     {
         $this->projects[] = $project;
-
-        $project->addUser($this);
 
         return $this;
     }

@@ -40,9 +40,12 @@ class LoadClientData extends AbstractFixture implements OrderedFixtureInterface
       $client->setReminder(new \DateTime());
       $client->setEntrance(new \DateTime());
       $client->setType(Client::ACTUAL);
+      $client->setJob('Imprimeur');
       $client->addContact($contact );
       $client->addAddress($address);
       $em->persist($client);
+      $this->setReference('client '.$i, $client);
+
 
       // On la persiste
       $em->persist($client);
@@ -54,7 +57,7 @@ class LoadClientData extends AbstractFixture implements OrderedFixtureInterface
  
   public function getOrder()
   {
-    return 2; // the order in which fixtures will be loaded
+    return 3; // the order in which fixtures will be loaded
   }
 }
 

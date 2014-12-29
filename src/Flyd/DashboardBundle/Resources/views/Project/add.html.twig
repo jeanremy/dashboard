@@ -7,9 +7,9 @@
 {% block body %}
     
     <p class="breadcrumb">
-       <a href="{{ path('client_show', { 'id': entity.need.client.id }) }}">{{entity.need.client}}</a>
-         > 
-        <a href="{{ path('need_show', { 'id': entity.need.id }) }}">{{entity.need}}</a></p>
+       <a href="{{ path('client_show', { 'id': entity.need.client.id }) }}">{{entity.need.client}} ></a>
+       <a href="{{ path('need_show', { 'id': entity.need.id }) }}">{{entity.need}}</a>
+    </p>
     <h1 class="lvl1">Nouveau projet</h1>
 
     {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}

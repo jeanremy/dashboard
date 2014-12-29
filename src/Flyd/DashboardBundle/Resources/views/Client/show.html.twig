@@ -120,7 +120,9 @@
 
                         <p class="need__title">{{need.title}}</p>
                         <p class="need__description">{{need.description}}</p>
-                        
+                        {% for project in need.projects %}
+                            <p class="need__project"><a href="{{ path('project_show', { 'id': project.id }) }}">{{project.title}}</a></p>
+                        {% endfor %}
                     </div>
                     {% endfor %}
                 </div> 

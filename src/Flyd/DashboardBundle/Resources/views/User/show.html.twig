@@ -52,6 +52,16 @@
                     
                 </div>
 
+                <div class="form-group">
+                    <label class="control-label">test projet</label>
+                    <div class="data">
+                        {% for project in entity.projects %}
+                            {{project.title}}
+                        {% endfor %}
+                    </div>
+                    
+                </div>
+
             </div>
         </div>
     </div>

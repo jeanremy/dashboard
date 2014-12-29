@@ -56,6 +56,9 @@ class ProjectController extends Controller
         // Default values (besoin)
         $project->setNeed($need);
 
+        //Get all users of a project
+
+
 
         $form = $this->get('form.factory')->create(new ProjectType(), $project);
 
@@ -91,16 +94,15 @@ class ProjectController extends Controller
 
         $entity = $em->getRepository('FlydDashboardBundle:Project')->find($id);
 
+        //Get all users of a project
+
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Project entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
-
-        return array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
-        );
+        return $this->render('FlydDashboardBundle:Project:show.html.twig', array(
+          'entity' => $entity
+        ));
     }
 
     /**

@@ -96,6 +96,9 @@ avalanche_imagine:
         miniature:
             type:    thumbnail
             options: {size: [100, 100], mode: outbound}
+        demi:
+            type:    thumbnail
+            options: {size: [75, 75], mode: outbound}
         small:
             type:    thumbnail
             options: {size: [46, 46], mode: outbound}

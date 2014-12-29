@@ -33,6 +33,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
     $user->setEnabled(true);
     $user->setRoles(array('ROLE_ADMIN'));
     $user->setJob('jongleur');
+    $this->setReference('user', $user);
 
     // Update the user
     $em->updateUser($user, true);
@@ -53,7 +54,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
  
   public function getOrder()
   {
-    return 8; // the order in which fixtures will be loaded
+    return 4; // the order in which fixtures will be loaded
   }
 }
 
