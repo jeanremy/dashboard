@@ -102,30 +102,15 @@
      <!-- Besoins -->
     <div class="row">
         <div class="col-sm-12">
-            <div class="bloc">
-                <a href="{{ path('need_add', { 'id': entity.id }) }}" class="btn--new">+</a>
+            <div class="bloc needs">
                 <h2 class="bloc__title">Besoins</h2>
                 <div class="row">
                     {%for need in entity.needs %}
-                    <div class="col-sm-6">
-                        <p class="need__dates">
-                            {{ need.startDate| localizeddate('full', 'none', 'fr') }} > 
-                            {% if need.endDate %}
-                            {{ need.endDate| localizeddate('full', 'none', 'fr') }}
-                            {% else %}...
-                            {% endif %}
-                        </p>
-                        <a href="{{ path('need_delete', { 'id': need.id }) }}" class="pull-right btn--delete">+</a>
-                        <a href="{{ path('need_edit', { 'id': need.id }) }}" class="pull-right btn--edit">+</a>
-
-                        <p class="need__title">{{need.title}}</p>
-                        <p class="need__description">{{need.description}}</p>
-                        {% for project in need.projects %}
-                            <p class="need__project"><a href="{{ path('project_show', { 'id': project.id }) }}">{{project.title}}</a></p>
-                        {% endfor %}
-                    </div>
+                        {% include "FlydDashboardBundle:Need:mini.html.twig" %} 
                     {% endfor %}
                 </div> 
+                <a href="{{ path('need_ajax_add') }}" class="btn--add">+</a>
+                {{ render(controller('FlydDashboardBundle:Need:getForm', {'id': entity.id})) }}
             </div>    
         </div>
     </div>

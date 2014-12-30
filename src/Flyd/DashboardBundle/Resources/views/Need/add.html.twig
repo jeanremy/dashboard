@@ -1,32 +1,17 @@
-{% extends 'FlydDashboardBundle::layout.html.twig' %}
+<div class="row">
 
-{% block title %}
-    <title>Nouveau besoin</title>
-{% endblock %}
+    {{ form_start(form, {'attr': {'class': 'form-horizontal', 'id': 'flyd_dashboardbundle_need'}, 'action': path('need_ajax_add')}) }}
 
-{% block body %}
 
-    <p class="breadcrumb"><a href="{{ path('client_show', { 'id': entity.client.id }) }}">{{entity.client}}</a></p>
-    
-    <h1 class="lvl1">Nouveau besoin</h1>
-
-    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
-
-  {% if form_errors(form) %}
-  <div class="row">
+    {% if form_errors(form) %}
     <div class="col-sm-12">
-      <div class="bloc">
-          {{ form_errors(form) }}
-      </div>
+        {{ form_errors(form) }}
     </div>
-  </div>
-  {% endif %}
-
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="bloc bloc--general bloc-inline-edition edit">
-                <h2 class="bloc__title">Informations générales</h2>
-
+    {% endif %}
+    <div class="col-sm-12 bloc-inline-edition edit">
+        <h2 class="bloc__title">Informations générales</h2>
+        <div class="row">
+            <div class="col-sm-6">
                 <div class="form-group">
                     {{ form_label(form.title, "Titre", {'label_attr': {'class': 'control-label'}}) }}
 
@@ -48,7 +33,8 @@
                         {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
                     </div>
                 </div>
-
+            </div>
+            <div class="col-sm-6">
                 <div class="form-group">
                     {{ form_label(form.startDate, "Date de début", {'label_attr': {'class': 'control-label'}}) }}
 
@@ -59,7 +45,6 @@
                         {{ form_widget(form.startDate, {'attr': {'class': 'form-control'}}) }}
                     </div>
                 </div>
-
                 <div class="form-group">
                     {{ form_label(form.deadline, "Deadline", {'label_attr': {'class': 'control-label'}}) }}
 
@@ -83,25 +68,11 @@
                     {{ form_widget(form.client, {'attr': {'style': 'display: none;'}}) }}
 
                 </div>
-
-                
-                {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
-                {{ form_widget(form.save) }}
-
-
-                {# Génération automatique des champs pas encore écrits.
-                Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
-                et tous les champs cachés (type « hidden »). #}
-                {{ form_rest(form) }}
-
-                {# Fermeture de la balise <form> du formulaire HTML #}
-                {{ form_end(form) }}
+            
+            {{ form_rest(form) }}
             </div>
         </div>
+        {{ form_widget(form.save) }}
     </div>
-
-
-
-    
-
-{% endblock %}
+{{ form_end(form) }}
+</div>

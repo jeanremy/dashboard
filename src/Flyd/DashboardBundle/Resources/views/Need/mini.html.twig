@@ -1,0 +1,22 @@
+<div class="need col-sm-6">
+    <p class="need__dates">
+        {{ need.startDate| localizeddate('full', 'none', 'fr') }} > 
+        {% if need.endDate %}
+        {{ need.endDate| localizeddate('full', 'none', 'fr') }}
+        {% else %}...
+        {% endif %}
+    </p>
+    <a href="{{ path('need_ajax_delete', { 'id': need.id }) }}" data-id="{{ need.id }}" class="pull-right btn--delete remove">+</a>
+    <a href="{{ path('need_edit', { 'id': need.id }) }}" class="pull-right btn--edit">+</a>
+
+    <p class="need__title"><a href="{{ path('need_show', { 'id': need.id }) }}">{{need.title}}</a></p>
+    <p class="need__description">{{need.description}}</p>
+    {% if need.projects %}
+        <h3 class="bloc__subtitle">Projets</h3>
+        <ul class="need__projects">                                
+        {% for project in need.projects %}
+            <li class="need__project"><a href="{{ path('project_show', { 'id': project.id }) }}">{{project.title}}</a></li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+</div>
