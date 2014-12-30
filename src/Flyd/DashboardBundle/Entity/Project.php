@@ -39,7 +39,7 @@ class Project
     private $suppliers;
 
     /**
-    * @ORM\ManyToMany(targetEntity="Flyd\DashboardBundle\Entity\User")
+    * @ORM\ManyToMany(targetEntity="Flyd\DashboardBundle\Entity\User", mappedBy="projects")
     */
     private $users;
 

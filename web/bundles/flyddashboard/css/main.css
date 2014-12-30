@@ -771,6 +771,28 @@ select {
 	border-bottom: 1px dashed #8f979e;
 }
 
+.supplier--mini span {
+	color: #8f979e;
+}
+
+.team .user {
+	text-align: center;
+}
+
+.team .user__name {
+	font-size: 16px;
+	font-size: 1rem;
+	font-family: "montserrat", sans-serif;
+	color: #2b303e;
+}
+
+.team .user__job {
+	font-size: 15px;
+	font-size: 0.9375rem;
+	font-family: "varela", sans-serif;
+	color: #8f979e;
+}
+
 /*  GLOBAL
 	======  */
 
@@ -798,7 +820,7 @@ p {
 	background-color: #fff;
 }
 
-.user {
+.header .user {
 	float: right;
 	height: 85px;
 	padding: 0 25px;
@@ -807,12 +829,12 @@ p {
 	cursor: pointer;
 }
 
-.user .user__name {
+.header .user .user__name {
 	line-height: 85px;
 	line-height: 5.3125rem;
 }
 
-.user .user__name::before {
+.header .user .user__name::before {
 	content: "";
 	display: inline-block;
 	width: 0;
@@ -825,16 +847,16 @@ p {
 	        transition: all 200ms ease;
 }
 
-.user .user__name .profil__pic {
+.header .user .user__name .profil__pic {
 	margin-left: 15px;
 }
 
-.user .user__login {
+.header .user .user__login {
 	line-height: 85px;
 	line-height: 5.3125rem;
 }
 
-.user .user__menu {
+.header .user .user__menu {
 	position: absolute;
 	top: 100%;
 	right: 0;
@@ -854,7 +876,7 @@ p {
 	border-bottom: 1px solid #8f979e;
 }
 
-.user .user__menu.deploy {
+.header .user .user__menu.deploy {
 	-webkit-transform: scale(1, 1);
 	    -ms-transform: scale(1, 1);
 	        transform: scale(1, 1);
@@ -953,6 +975,11 @@ p {
 	color: #8f979e;
 }
 
+.breadcrumb a:hover,
+.breadcrumb a:focus {
+	color: #2b303e;
+}
+
 form .btn--save,
 form .btn--save--reverse,
 form .btn--remove {
@@ -978,10 +1005,6 @@ form .btn--remove {
 }
 
 /* Project */
-
-.supplier--mini span {
-	color: #8f979e;
-}
 
 .item {
 	border-right: 1px solid #d6d7d8;

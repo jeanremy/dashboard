@@ -69,15 +69,19 @@
             </div>
         </div>
         <div class="col-sm-4">
-            <div class="bloc">
+            <div class="bloc team">
                 <h2 class="bloc__title">équipe</h2>
+                <div class="row">                    
                 {% for user in entity.users %}
-                    {% if user.image %}
-                        <img src="{{ user.image.webPath | apply_filter('demi') }}" class="profil__pic" />
-                    {% endif %}
-                    <h4 class="lvl4"><a href="{{ path('user_show', { 'id': user.id }) }}">{{user.username}}</a></h4>
-                    <p class="job">{{user.job}}</p>
+                    <div class="user col-sm-6">                        
+                        {% if user.image %}
+                            <img src="{{ user.image.webPath | apply_filter('demi') }}" class="profil__pic" />
+                        {% endif %}
+                        <p class="user__name"><a href="{{ path('user_show', { 'id': user.id }) }}">{{user.username|capitalize}}</a></p>
+                        <p class="user__job">{{user.job|capitalize}}</p>
+                    </div>
                 {% endfor %}
+                </div>
             </div>
         </div>
     </div>

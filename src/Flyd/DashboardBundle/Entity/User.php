@@ -30,7 +30,7 @@ class User extends BaseUser
     private $project_task_users;
 
     /**
-    * @ORM\ManyToMany(targetEntity="Flyd\DashboardBundle\Entity\Project")
+    * @ORM\ManyToMany(targetEntity="Flyd\DashboardBundle\Entity\Project", inversedBy="users")
     */
     private $projects;
 

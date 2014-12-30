@@ -11,6 +11,7 @@
 @import "fonts";
 @import "typo";
 @import "forms";
+@import "project";
 
 /*  GLOBAL
 	======  */
@@ -34,52 +35,52 @@ p {
 .header {
 	border-bottom: 1px solid $darkgrey;
 	background-color: #fff;
-}
-
-
-.user {
-	float: right;
-	height: 85px;
-	padding: 0 25px;
-	border-left: 1px solid $darkgrey;
-	position: relative;
-	cursor: pointer;
-	.user__name {
-		line-height: 85px;
-		&::before {
-			content: "";
-			display: inline-block;
-			width: 0;
-			height: 0;
-			border-style: solid;
-			border-width: 8.7px 5px 0 5px;
-			border-color: $primary transparent transparent transparent;
-			margin-right: 7px;
-			transition: all 200ms ease;
-		}
-		.profil__pic {margin-left: 15px;}
-	}
-	.user__login {
-		line-height: 85px;
-	}
-	.user__menu {
-		position: absolute;
-		top: 100%;
-		right: 0;
-		left: -1px;
-		font-family: $varela;
-		background-color: #fff;
-		padding: 25px;
-		transition: all 200ms ease;
-		transform: scale(1,0);
-		transform-origin: 0 0;
+	.user {
+		float: right;
+		height: 85px;
+		padding: 0 25px;
 		border-left: 1px solid $darkgrey;
-		border-bottom: 1px solid $darkgrey;
-		&.deploy {
-			transform: scale(1,1);
+		position: relative;
+		cursor: pointer;
+		.user__name {
+			line-height: 85px;
+			&::before {
+				content: "";
+				display: inline-block;
+				width: 0;
+				height: 0;
+				border-style: solid;
+				border-width: 8.7px 5px 0 5px;
+				border-color: $primary transparent transparent transparent;
+				margin-right: 7px;
+				transition: all 200ms ease;
+			}
+			.profil__pic {margin-left: 15px;}
+		}
+		.user__login {
+			line-height: 85px;
+		}
+		.user__menu {
+			position: absolute;
+			top: 100%;
+			right: 0;
+			left: -1px;
+			font-family: $varela;
+			background-color: #fff;
+			padding: 25px;
+			transition: all 200ms ease;
+			transform: scale(1,0);
+			transform-origin: 0 0;
+			border-left: 1px solid $darkgrey;
+			border-bottom: 1px solid $darkgrey;
+			&.deploy {
+				transform: scale(1,1);
+			}
 		}
 	}
 }
+
+
 
 
 /*  ASIDE
@@ -156,6 +157,10 @@ p {
 
 .breadcrumb a {
 	color: $darkgrey;
+	&:hover,
+	&:focus {
+		color: $primary;
+	}
 }
 
 form .btn--save,
@@ -181,7 +186,7 @@ form .btn--remove {
 }
 
 /* Project */
-.supplier--mini span {color: $darkgrey;}
+
 
 // Client Page
 

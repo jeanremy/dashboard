@@ -1,0 +1,17 @@
+.supplier--mini span {color: $darkgrey;}
+
+.team {
+	.user {
+		text-align: center;
+	}
+	.user__name{
+		font-size: 16px;
+		font-family: $montserrat;
+		color: $primary;
+	}
+	.user__job {
+		font-size: 15px;
+		font-family: $varela;
+		color: $darkgrey;
+	}
+}
