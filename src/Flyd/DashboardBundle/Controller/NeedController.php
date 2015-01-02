@@ -114,7 +114,7 @@ class NeedController extends Controller
 		  return $this->redirect($this->generateUrl('need_show', array('id' => $need->getId())));
 		}
 
-		return $this->render('FlydDashboardBundle:Need:add.html.twig', array(
+		return $this->render('FlydDashboardBundle:Need:edit.html.twig', array(
 		  'entity' => $need,
 		  'form' => $form->createView()
 		));
@@ -200,7 +200,7 @@ class NeedController extends Controller
         $need->setClient($client);
         $form = $this->get('form.factory')->create(new NeedType(), $need);
 
-		return $this->render('FlydDashboardBundle:Need:add.html.twig', array(
+		return $this->render('FlydDashboardBundle:Need:ajaxadd.html.twig', array(
 			'form'=> $form->createView()
 		));
 	}	

@@ -145,8 +145,6 @@ class Project
     {
         $this->suppliers[] = $supplier;
 
-        $supplier->setCompany($this);
-
         return $this;
     }
 

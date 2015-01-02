@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Flyd\DashboardBundle\Entity\Supplier;
 use Flyd\DashboardBundle\Entity\Contact;
 use Flyd\DashboardBundle\Form\SupplierType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Supplier controller.
@@ -150,5 +151,19 @@ class SupplierController extends Controller
         return $this->redirect($this->generateUrl(''));
     }
 
+    /**
+     * Add suppliers to projects.
+     *
+     * @Route("/supplier/getform", name="supplier_ajax_form")
+     * @Method("POST")
+     */
+    public function getFormAction()
+    {
+        $entities = $this->getDoctrine()->getManager()->getRepository('FlydDashboardBundle:Supplier')->findAll();
+
+        return $this->render('FlydDashboardBundle:Supplier:select.html.twig', array(
+            'entities' => $entities
+        ));
+    }   
 
 }

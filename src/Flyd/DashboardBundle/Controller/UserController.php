@@ -161,5 +161,20 @@ class UserController extends Controller
         return $this->redirect($this->generateUrl(''));
     }
 
+    /**
+     * Add users to projects.
+     *
+     * @Route("/user/getform", name="user_ajax_form")
+     * @Method("POST")
+     */
+    public function getFormAction()
+    {
+        $entities = $this->getDoctrine()->getManager()->getRepository('FlydDashboardBundle:User')->findAll();
+
+        return $this->render('FlydDashboardBundle:User:select.html.twig', array(
+            'entities' => $entities
+        ));
+    }  
+
 
 }

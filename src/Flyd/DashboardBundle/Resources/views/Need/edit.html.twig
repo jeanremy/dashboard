@@ -1,0 +1,94 @@
+{% extends 'FlydDashboardBundle::layout.html.twig' %}
+
+{% block title %}
+    <title>{{entity.client}} >  {{entity.title}}</title>
+{% endblock %}
+
+{% block body %}
+    
+    <p class="breadcrumb"><a href="{{ path('client_show', { 'id': entity.client.id }) }}">{{entity.client}}</a></p>
+    <h1 class="lvl1">{{entity.title}}</h1>
+
+    <div class="row">
+
+        {{ form_start(form, {'attr': {'class': 'form-horizontal', 'id': 'flyd_dashboardbundle_need'}, 'action': path('need_ajax_add')}) }}
+
+
+        {% if form_errors(form) %}
+        <div class="col-sm-12">
+            {{ form_errors(form) }}
+        </div>
+        {% endif %}
+        <div class="col-sm-12">
+            <div class="bloc bloc-inline-edition ">
+                <h2 class="bloc__title">Informations générales</h2>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            {{ form_label(form.title, "Titre", {'label_attr': {'class': 'control-label'}}) }}
+
+                            {{ form_errors(form.title) }}
+
+                          <div class="data">
+                            {# Génération de l'input. #}
+                            {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_label(form.description, "Description", {'label_attr': {'class': 'control-label'}}) }}
+
+                            {{ form_errors(form.description) }}
+
+                            <div class="data">
+                                {# Génération de l'input. #}
+                                {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            {{ form_label(form.startDate, "Date de début", {'label_attr': {'class': 'control-label'}}) }}
+
+                            {{ form_errors(form.startDate) }}
+
+                            <div class="data">
+                                {# Génération de l'input. #}
+                                {{ form_widget(form.startDate, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.deadline, "Deadline", {'label_attr': {'class': 'control-label'}}) }}
+
+                            {{ form_errors(form.deadline) }}
+
+                            <div class="data">
+                                {# Génération de l'input. #}
+                                {{ form_widget(form.deadline, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_label(form.endDate, "Date de fin", {'label_attr': {'class': 'control-label'}}) }}
+
+                            {{ form_errors(form.endDate) }}
+
+                            <div class="data">
+                                {# Génération de l'input. #}
+                                {{ form_widget(form.endDate, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            {{ form_widget(form.client, {'attr': {'style': 'display: none;'}}) }}
+
+                        </div>
+                        <a href="{{ path('need_delete', { 'id': entity.id }) }}" class="btn--delete--reverse">Delete</a>
+                        {{ form_widget(form.save) }}
+                    
+                    {{ form_rest(form) }}
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    {{ form_end(form) }}
+    </div>
+{% endblock %}

@@ -16,7 +16,7 @@ use Flyd\DashboardBundle\Form\ContactType;
 
 class ContactController extends Controller
 {
-/**
+	/**
      * Add contact from clients.
      *
      * @Route("/contact/getform", name="contact_ajax_form")

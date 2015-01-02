@@ -65,6 +65,8 @@
                 {% for supplier in entity.suppliers %}
                     {% include "FlydDashboardBundle:Supplier:mini.html.twig" %}
                 {% endfor %}
+                <a href="{{ path('supplier_ajax_add') }}" class="btn--add">+</a>
+                {{ render(controller('FlydDashboardBundle:Supplier:getForm')) }}
                 
             </div>
         </div>
@@ -81,7 +83,9 @@
                         <p class="user__job">{{user.job|capitalize}}</p>
                     </div>
                 {% endfor %}
-                </div>
+                </div>                
+                <a href="{{ path('user_ajax_add') }}" class="btn--add">+</a>
+                {{ render(controller('FlydDashboardBundle:User:getForm')) }}
             </div>
         </div>
     </div>

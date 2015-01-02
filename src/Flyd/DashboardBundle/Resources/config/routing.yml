@@ -38,6 +38,12 @@ supplier_add:
     path:     /supplier/add
     defaults: { _controller: FlydDashboardBundle:Supplier:add }
 
+supplier_ajax_add:
+    path:     /supplier/getform
+    defaults: { _controller: FlydDashboardBundle:Supplier:getForm }
+    requirements:
+        _method: POST
+
 supplier_show:
     path:     /supplier/{id}
     defaults: { _controller: FlydDashboardBundle:Supplier:show }
@@ -60,6 +66,12 @@ user_list:
 user_add:
     path:     /user/add
     defaults: { _controller: FlydDashboardBundle:User:add }
+
+user_ajax_add:
+    path:     /user/getform
+    defaults: { _controller: FlydDashboardBundle:User:getForm }
+    requirements:
+        _method: POST
 
 user_show:
     path:     /user/{id}

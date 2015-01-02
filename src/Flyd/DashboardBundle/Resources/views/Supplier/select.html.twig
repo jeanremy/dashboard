@@ -1,0 +1,12 @@
+<div class="row" id="newsupplier">
+	<div class="col-sm-12 bloc-inline-edition">
+		<h2 class="bloc__title">Ajouter un fournisseur</h2>
+		<a href="{{ path('supplier_add') }}">Créer un fournisseur ?</a>
+		<select name="project_supplier" id="project_supplier">
+		{% for entity in entities %}
+			<option value="entity.id">{{entity.name}} - {{entity.job}}</option>
+		{% endfor %}
+		</select>
+		<button class="btn--save--reverse">Ajouter</button>
+	</div>
+</div>
