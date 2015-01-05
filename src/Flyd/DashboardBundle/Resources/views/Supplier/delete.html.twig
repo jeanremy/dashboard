@@ -1,0 +1,38 @@
+{% extends 'FlydDashboardBundle::layout.html.twig' %}
+
+{% block title %}
+    <title>{{entity.name}} - Supprimer </title>
+{% endblock %}
+
+{% block body %}
+    
+    <h1 class="lvl1">{{entity.name}}</h1>
+
+
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="bloc bloc--general bloc-inline-edition edit">
+                <p>Êtes-vous sûr de vouloir effacer {{entity.name}} ?</p>
+                 <form action="{{ path('supplier_delete', {'id': entity.id}) }}" method="post">
+                    <a href="{{ path('supplier_show', {'id': entity.id}) }}" class="btn--save--reverse">
+                      Retour au fournisseur
+                    </a>
+                    {# Ici j'ai écrit le bouton de soumission à la main #}
+                    <button type="submit" class="btn--delete--reverse">Supprimer</button>
+                    {# Ceci va générer le champ CSRF #}
+                    {{ form_rest(form) }}
+                  </form>
+            </div>
+        </div>
+    </div>
+
+
+
+	
+
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript" src="{{ asset('bundles/flyddashboard/js/additems.js') }}"></script>
+{% endblock %}

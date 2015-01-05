@@ -25,22 +25,32 @@
 
                 </div>
 
+
                 <div class="form-group">
                     
                     <label class="control-label">Deadline</label>
 
                     <div class="data">
-                        {{ entity.deadline| localizeddate('full', 'none', 'fr') }}
+                        {% if entity.deadline %}
+                            {{ entity.deadline| localizeddate('full', 'none', 'fr') }}
+                        {% else %}
+                            Aucun(e)
+                        {% endif %}
                     </div>
 
                 </div>
+
 
                 <div class="form-group">
                     
                     <label class="control-label">Date de fin</label>
 
                     <div class="data">
-                        {{ entity.endDate| localizeddate('full', 'none', 'fr') }}
+                        {% if entity.endDate %}
+                            {{ entity.endDate| localizeddate('full', 'none', 'fr') }}
+                        {% else %}
+                            Aucun(e)
+                        {% endif %}
                     </div>
 
                 </div>

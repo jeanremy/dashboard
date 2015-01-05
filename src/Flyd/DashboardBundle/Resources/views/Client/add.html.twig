@@ -80,6 +80,17 @@
                 </div>
 
                 <div class="form-group">
+                    {{ form_label(form.codes, "Codes", {'label_attr': {'class': 'control-label'}}) }}
+
+                    {{ form_errors(form.codes) }}
+
+                    <div class="data">
+                        {# Génération de l'input. #}
+                        {{ form_widget(form.codes, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+
+                <div class="form-group">
                     {{ form_label(form.type, "Type de client", {'label_attr': {'class': 'control-label'}}) }}
 
                     {{ form_errors(form.type) }}
@@ -102,39 +113,27 @@
                 {{ form_end(form) }}
             </div>
         </div>
-    </div>
+    </div>    
 
-    <!-- Adresse -->
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="bloc">
-                <h2 class="bloc__title">Adresses</h2>
-                <div class="row" id="addresses">
-                </div> 
-                <a href="{{ path('address_ajax_getform') }}" class="pull-right btn btn--add">+</a> 
-                {# Faire test avec formulaire imbriqué... #}                
-                {# render(controller('FlydDashboardBundle:Address:getForm', {'id': entity.id})) #}                
-            </div>
-        </div>
-    </div>
-
-     <!-- Contacts -->
+    <!-- Contacts -->
     <div class="row">
         <div class="col-sm-12">
             <div class="bloc">
                 <h2 class="bloc__title">Contacts</h2>
-                <div class="row" id="contacts">
-                </div> 
-                <a href="{{ path('contact_ajax_delete') }}" class="pull-right btn btn--add">+</a> 
-                {# render(controller('FlydDashboardBundle:Contact:getForm', {'id': entity.id})) #}               
-
+                <p>Impossible d'ajouter des fournisseurs pour le moment. Veuillez enregistrer le client.</p>
             </div>
         </div>
     </div>
 
-
-
-    
+     <!-- Besoins -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="bloc needs">
+                <h2 class="bloc__title">Besoins</h2>
+                <p>Impossible d'ajouter des fournisseurs pour le moment. Veuillez enregistrer le client.</p>
+            </div>    
+        </div>
+    </div>
 
 {% endblock %}
 

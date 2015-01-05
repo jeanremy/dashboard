@@ -1,12 +1,13 @@
 <div class="row" id="newsupplier">
 	<div class="col-sm-12 bloc-inline-edition">
-		<h2 class="bloc__title">Ajouter un fournisseur</h2>
-		<a href="{{ path('supplier_add') }}">Créer un fournisseur ?</a>
-		<select name="project_supplier" id="project_supplier">
-		{% for entity in entities %}
-			<option value="entity.id">{{entity.name}} - {{entity.job}}</option>
-		{% endfor %}
-		</select>
-		<button class="btn--save--reverse">Ajouter</button>
+		<h2 class="bloc__title">Ajouter un fournisseur <span>- <a href="{{ path('supplier_add') }}">Créer un fournisseur ?</a></span></h2>	
+		<form  id="add_supplier" action="{{path('project_ajax_add_supplier',  {'id': entity.id} )}}" method="post">
+			<select name="supplier_id" id="supplier_id" class="form-control">
+			{% for entity in entities %}
+				<option value="entity.id">{{entity.name}} - {{entity.job}}</option>
+			{% endfor %}
+			</select>
+			<input type="submit" class="btn--save--reverse" value="Ajouter" />
+		</form>	
 	</div>
 </div>

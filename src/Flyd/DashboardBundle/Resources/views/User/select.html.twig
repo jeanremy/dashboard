@@ -1,8 +1,7 @@
 <div class="row" id="newuser">
 	<div class="col-sm-12 bloc-inline-edition">
-		<h2 class="bloc__title">Ajouter un utilisateur</h2>
-		<a href="{{ path('user_add') }}">Créer un utilisateur ?</a>
-		<select name="project_user" id="project_user">
+		<h2 class="bloc__title">Ajouter un utilisateur <span>- <a href="{{ path('user_add') }}">Créer un utilisateur ?</a></span></h2>		
+		<select name="project_user" id="project_user" class="form-control">
 		{% for entity in entities %}
 			<option value="entity.id">{{entity.username}} - {{entity.job}}</option>
 		{% endfor %}

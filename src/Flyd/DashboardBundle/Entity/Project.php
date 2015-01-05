@@ -15,7 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Project
 {
     /**/
-    const DESIGN     = 0;
+    const DESIGN    = 0;
     const MOTION    = 1;
     const WEB       = 2;
 
@@ -279,7 +279,18 @@ class Project
      */
     public function getCategory()
     {
-        return $this->category;
+        switch($this->category) {
+            case 0:
+                return 'Design';
+            break;
+            case 1:
+                return 'Motion';
+            break;
+            case 2:
+                return 'Web';
+            break;
+
+        } 
     }
 
     /**

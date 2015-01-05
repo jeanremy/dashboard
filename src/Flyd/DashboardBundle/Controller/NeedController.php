@@ -20,8 +20,6 @@ class NeedController extends Controller
 		$client = $em->getRepository('FlydDashboardBundle:Client')->find($id);
 
 		$need->setStartDate(new \DateTime() );
-		$need->setDeadline(new \DateTime('+1 month') );
-		$need->setEndDate(new \DateTime('+1 month') );
 		$need->setClient($client);
 
 
@@ -111,7 +109,7 @@ class NeedController extends Controller
 
 		  $request->getSession()->getFlashBag()->add('notice', 'Besoin bien enregistré.');
 
-		  return $this->redirect($this->generateUrl('need_show', array('id' => $need->getId())));
+		  return $this->redirect($this->generateUrl('need_show', array('id' => $id)));
 		}
 
 		return $this->render('FlydDashboardBundle:Need:edit.html.twig', array(
@@ -123,68 +121,36 @@ class NeedController extends Controller
   
 	public function deleteAction(Request $request, $id)
 	{
-		
-		$em = $this->getDoctrine()->getManager();
-		$entity = $em->getRepository('FlydDashboardBundle:Need')->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('FlydDashboardBundle:Need')->find($id);
 
-		if (!$entity) {
-			throw $this->createNotFoundException('Unable to find Need entity.');
+
+		if (null === $entity) {
+		throw new NotFoundHttpException("Le besoin d'id ".$id." n'existe pas.");
 		}
-		$client = $entity->getClient();
 
-		$em->remove($entity);
-		$em->flush();
-		$request->getSession()->getFlashBag()->add('notice', 'Le besoin a bien été supprimé.');
+		// On crée un formulaire vide, qui ne contiendra que le champ CSRF
+		// Cela permet de protéger la suppression d'annonce contre cette faille
+		$form = $this->createFormBuilder()->getForm();
 
+		if ($form->handleRequest($request)->isValid()) {
+			$em->remove($entity);
+			$em->flush();
 
-		return $this->render('FlydDashboardBundle:Client:show.html.twig', array(
-		  'entity' => $client
-		));
-	}
+			$request->getSession()->getFlashBag()->add('info', "Le besoin a bien été supprimé.");
 
-	public function ajaxDeleteAction()
-	{               
-		$request = $this->container->get('request');
-		$params = $this->getRequest()->request->all();
-	    $response = new JsonResponse();
+			return $this->redirect($this->generateUrl('client_list'));
+		}
 
-	    if($request->isXmlHttpRequest())
-	     {
-
-	        $em = $this->container->get('doctrine')->getEntityManager();
-
-	        if($params['element_id'] != '')
-	        {
-	               $qb = $em->createQueryBuilder();
-
-	               $qb->delete('FlydDashboardBundle:Need', 'a')
-	                  ->where("a.id LIKE :element_id")
-	                  ->setParameter('element_id', '%'.$params['element_id'].'%');
-
-	               $query = $qb->getQuery();               
-	               $results = $query->getResult();
-
-			        return $response->setData(array(
-					    'code' => 200,
-					    'response' => 'Need deleted'
-					));
-	        }
-	        else {
-	            return $response->setData(array(
-				    'code' => 500,
-				    'response' => 'Need ID missing'
-				));
-	        }
-
-	    }
-	    else {
-	        return $response->setData(array(
-			    'code' => 500,
-			    'response' => 'Not an ajax request',
-			    'element' => $params['element_id']
+		// Si la requête est en GET, on affiche une page de confirmation avant de supprimer
+		return $this->render('FlydDashboardBundle:Need:delete.html.twig', array(
+			  'entity' => $entity,
+			  'form'   => $form->createView()
 			));
-	    }
-	}
+
+    }
+
+	
 
 	public function getFormAction($id)
 	{

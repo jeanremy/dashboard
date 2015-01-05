@@ -3,6 +3,7 @@
 namespace Flyd\DashboardBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Address
@@ -51,7 +52,8 @@ class Address
     /**
      * @var string
      *
-     * @ORM\Column(name="zipcode", type="string", length=10)
+     * @ORM\Column(name="zipcode", type="string", length=6)
+     * @Assert\Length(max=6, maxMessage="Le code postal doit faire au moins {{ limit }} caractères.")
      */
     private $zipcode;
 
@@ -240,6 +242,21 @@ class Address
      */
     public function getType()
     {
-        return $this->type;
+        switch ($this->type) {
+            case 0:
+                return 'globale';
+                break;
+            case 1:
+                return 'facturation';
+                break;
+            case 2:
+                return 'expédition';
+                break;
+        }
+        
+    }
+
+    public function __toString() {
+        return $this->city;
     }
 }

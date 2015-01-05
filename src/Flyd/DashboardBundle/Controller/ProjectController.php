@@ -8,7 +8,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Flyd\DashboardBundle\Entity\Project;
+use Flyd\DashboardBundle\Entity\Supplier;
 use Flyd\DashboardBundle\Form\ProjectType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Project controller.
@@ -133,46 +135,78 @@ class ProjectController extends Controller
     }
 
    
-    /**
-     * Deletes a Project entity.
-     *
-     * @Route("/{id}", name="project_delete")
-     * @Method("DELETE")
-     */
     public function deleteAction(Request $request, $id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('FlydDashboardBundle:Project')->find($id);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('FlydDashboardBundle:Project')->find($id);
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Project entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
+        if (null === $entity) {
+            throw new NotFoundHttpException("Le projet d'id ".$id." n'existe pas.");
         }
 
-        return $this->redirect($this->generateUrl('project'));
+        // On crée un formulaire vide, qui ne contiendra que le champ CSRF
+        // Cela permet de protéger la suppression d'annonce contre cette faille
+        $form = $this->createFormBuilder()->getForm();
+
+        if ($form->handleRequest($request)->isValid()) {
+            $em->remove($entity);
+            $em->flush();
+
+            $request->getSession()->getFlashBag()->add('info', "Le projet a bien été supprimé.");
+
+            return $this->redirect($this->generateUrl('client_list'));
+        }
+
+        // Si la requête est en GET, on affiche une page de confirmation avant de supprimer
+        return $this->render('FlydDashboardBundle:Project:delete.html.twig', array(
+              'entity' => $entity,
+              'form'   => $form->createView()
+            ));
+
     }
 
-    /**
-     * Creates a form to delete a Project entity by id.
-     *
-     * @param mixed $id The entity id
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm($id)
+    public function ajaxAddSupplierAction($id)
     {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('project_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
+        $response = new JsonResponse();
+        $request = $this->container->get('request');
+        $params = $this->getRequest()->request->all();
+        $em = $this->getDoctrine()->getManager();
+        $project = $em->getRepository('FlydDashboardBundle:Project')->find($id);
+        return $project;
+
+        if($request->isXmlHttpRequest())
+        {
+            return $response->setData(array(
+                    'code' => 200,
+                    'response' => 'httpres'
+                ));
+            if($params)
+            {
+                $supplier = $em->getRepository('FlydDashboardBundle:Supplier')->find($params['supplier_id']);
+                $project->addSupplier($supplier);
+                
+                $response->setData(array(
+                    'code' => 200,
+                    'response' => 'Fournisseur bien ajouté'
+                ));
+                
+
+            }
+            else {
+                $response->setData(array(
+                    'code' => 500,
+                    'response' => 'Supplier missing'
+                ));
+            }
+
+        } else {
+            $response->setData(array(
+                'code' => 500,
+                'response' => 'Not an ajax request',
+                'element' => $params['supplier_id']
+            ));            
+        }
+        return $response;
     }
 }

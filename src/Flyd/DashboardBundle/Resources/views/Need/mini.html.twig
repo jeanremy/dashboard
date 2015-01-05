@@ -6,7 +6,7 @@
         {% else %}...
         {% endif %}
     </p>
-    <a href="{{ path('need_ajax_delete', { 'id': need.id }) }}" data-id="{{ need.id }}" class="pull-right btn--delete remove">+</a>
+    <a href="{{ path('need_delete', { 'id': need.id }) }}" data-id="{{ need.id }}" class="pull-right btn--delete">+</a>
     <a href="{{ path('need_edit', { 'id': need.id }) }}" class="pull-right btn--edit">+</a>
 
     <p class="need__title"><a href="{{ path('need_show', { 'id': need.id }) }}">{{need.title}}</a></p>
@@ -19,4 +19,5 @@
         {% endfor %}
         </ul>
     {% endif %}
+    <a href="{{ path('project_add', { 'id': need.id }) }}" class="pull-right btn--save--reverse">Ajouter un projet</a>
 </div>

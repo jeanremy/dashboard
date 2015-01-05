@@ -38,11 +38,10 @@ supplier_add:
     path:     /supplier/add
     defaults: { _controller: FlydDashboardBundle:Supplier:add }
 
-supplier_ajax_add:
+
+supplier_get_form:
     path:     /supplier/getform
     defaults: { _controller: FlydDashboardBundle:Supplier:getForm }
-    requirements:
-        _method: POST
 
 supplier_show:
     path:     /supplier/{id}
@@ -183,3 +182,8 @@ project_edit:
 project_delete:
     path:     /project/{id}/delete
     defaults: { _controller: FlydDashboardBundle:Project:delete }
+
+project_ajax_add_supplier:
+    path:     /project/{id}/ajaxaddsupplier
+    defaults: { _controller: FlydDashboardBundle:Project:ajaxaddsupplier }
+    

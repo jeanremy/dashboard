@@ -133,22 +133,33 @@ class SupplierController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('FlydDashboardBundle:Supplier')->find($id);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('FlydDashboardBundle:Supplier')->find($id);
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Supplier entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
+        if (null === $entity) {
+        throw new NotFoundHttpException("Le fournisseur d'id ".$id." n'existe pas.");
         }
 
-        return $this->redirect($this->generateUrl(''));
+        // On crée un formulaire vide, qui ne contiendra que le champ CSRF
+        // Cela permet de protéger la suppression d'annonce contre cette faille
+        $form = $this->createFormBuilder()->getForm();
+
+        if ($form->handleRequest($request)->isValid()) {
+            $em->remove($entity);
+            $em->flush();
+
+            $request->getSession()->getFlashBag()->add('info', "Le fournisseur a bien été supprimé.");
+
+            return $this->redirect($this->generateUrl('client_list'));
+        }
+
+        // Si la requête est en GET, on affiche une page de confirmation avant de supprimer
+        return $this->render('FlydDashboardBundle:Supplier:delete.html.twig', array(
+              'entity' => $entity,
+              'form'   => $form->createView()
+            ));
+
     }
 
     /**
@@ -157,12 +168,15 @@ class SupplierController extends Controller
      * @Route("/supplier/getform", name="supplier_ajax_form")
      * @Method("POST")
      */
-    public function getFormAction()
+    public function getFormAction($id)
     {
-        $entities = $this->getDoctrine()->getManager()->getRepository('FlydDashboardBundle:Supplier')->findAll();
+        $em = $this->getDoctrine()->getManager();
+        $entities = $em->getRepository('FlydDashboardBundle:Supplier')->findAll();
+        $project = $em->getRepository('FlydDashboardBundle:Project')->find($id);
 
         return $this->render('FlydDashboardBundle:Supplier:select.html.twig', array(
-            'entities' => $entities
+            'entities' => $entities,
+            'entity' => $project
         ));
     }   
 

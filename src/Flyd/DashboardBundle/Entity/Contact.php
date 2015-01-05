@@ -236,5 +236,9 @@ class Contact
         return $this->mobile;
     }
 
+    public function __toString() {
+        return $this->firstname . ' ' . $this->lastname;
+    }
+
 
 }

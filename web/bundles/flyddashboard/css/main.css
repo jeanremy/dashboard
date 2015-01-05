@@ -714,6 +714,21 @@ body {
 	margin-bottom: 20px;
 }
 
+.bloc__title span a,
+.bloc__subtitle span a {
+	font-family: "varela", sans-serif;
+	font-size: 14px;
+	font-size: 0.875rem;
+	text-transform: none;
+}
+
+.bloc__title span a:hover,
+.bloc__subtitle span a:hover,
+.bloc__title span a:focus,
+.bloc__subtitle span a:focus {
+	border-bottom: 1px dashed #2b303e;
+}
+
 .bloc__subtitle {
 	font-size: 14px;
 	font-size: 0.875rem;

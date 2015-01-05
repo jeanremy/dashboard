@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Flyd\DashboardBundle\Entity\Client;
 use Flyd\DashboardBundle\Entity\Contact;
 use Flyd\DashboardBundle\Form\ClientType;
+use Flyd\DashboardBundle\Form\EditClientType;
 
 /**
  * Client controller.
@@ -121,6 +122,7 @@ class ClientController extends Controller
 		));
 	}
 
+
   
 	
 	/**
@@ -134,13 +136,29 @@ class ClientController extends Controller
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('FlydDashboardBundle:Client')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Client entity.');
-        }
-        $em->remove($entity);
-        $em->flush();
-        $request->getSession()->getFlashBag()->add('notice', 'Le client a bien été supprimé.');
-        return $this->redirect($this->generateUrl('client_list'));
+
+		if (null === $entity) {
+		throw new NotFoundHttpException("Le client d'id ".$id." n'existe pas.");
+		}
+
+		// On crée un formulaire vide, qui ne contiendra que le champ CSRF
+		// Cela permet de protéger la suppression d'annonce contre cette faille
+		$form = $this->createFormBuilder()->getForm();
+
+		if ($form->handleRequest($request)->isValid()) {
+			$em->remove($entity);
+			$em->flush();
+
+			$request->getSession()->getFlashBag()->add('info', "Le client a bien été supprimé.");
+
+			return $this->redirect($this->generateUrl('client_list'));
+		}
+
+		// Si la requête est en GET, on affiche une page de confirmation avant de supprimer
+		return $this->render('FlydDashboardBundle:Client:delete.html.twig', array(
+			  'entity' => $entity,
+			  'form'   => $form->createView()
+			));
 
     }
 

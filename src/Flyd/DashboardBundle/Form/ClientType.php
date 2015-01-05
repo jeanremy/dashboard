@@ -34,6 +34,7 @@ class ClientType extends AbstractType
             ->add('reminder', 'date', array(
                 'widget' => 'single_text'
             ))
+            ->add('codes', 'textarea')
             ->add('save','submit', array(
                 'attr' => array('class' => 'btn--save--reverse'),
                 'label' => 'Enregistrer',

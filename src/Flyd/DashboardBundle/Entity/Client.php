@@ -5,6 +5,7 @@ namespace Flyd\DashboardBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Flyd\DashboardBundle\Entity\Company;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /** @ORM\Entity */
 class Client extends Company
@@ -32,6 +33,13 @@ class Client extends Company
     * @ORM\OneToMany(targetEntity="Flyd\DashboardBundle\Entity\Need", mappedBy="client", cascade={"persist", "remove"})
     */
     private $needs;
+
+    /**
+     * @var \String
+     *
+     * @ORM\Column(name="codes", type="string", length=255)
+     */
+    private $codes;
 
 
 
@@ -121,5 +129,28 @@ class Client extends Company
     public function getNeeds()
     {
         return $this->needs;
+    }
+
+    /**
+     * Set codes
+     *
+     * @param string $codes
+     * @return Need
+     */
+    public function setCodes($codes)
+    {
+        $this->codes = $codes;
+
+        return $this;
+    }
+
+    /**
+     * Get codes
+     *
+     * @return string 
+     */
+    public function getCodes()
+    {
+        return $this->codes;
     }
 }
