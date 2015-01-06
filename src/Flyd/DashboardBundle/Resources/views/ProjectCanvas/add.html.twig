@@ -1,0 +1,64 @@
+{% extends 'FlydDashboardBundle::layout.html.twig' %}
+
+{% block title %}
+    <title>Nouveau canevas de projet</title>
+{% endblock %}
+
+{% block body %}
+    
+    
+    <h1 class="lvl1">Nouveau canevas de projet</h1>
+
+    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+    {% if form_errors(form) %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="bloc">
+                {{ form_errors(form) }}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="bloc bloc-inline-edition">
+                <h2 class="bloc__title">Informations générales</h2>
+
+                <div class="form-group">
+                    {{ form_label(form.name, "Nom du canevas", {'label_attr': {'class': 'control-label'}}) }}
+
+                    {{ form_errors(form.name) }}
+
+                  <div class="data">
+                    {# Génération de l'input. #}
+                    {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                  </div>
+                </div>
+
+               
+                
+                {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
+                {{ form_widget(form.save) }}
+
+
+                {# Génération automatique des champs pas encore écrits.
+                Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
+                et tous les champs cachés (type « hidden »). #}
+                {{ form_rest(form) }}
+
+                {# Fermeture de la balise <form> du formulaire HTML #}
+                {{ form_end(form) }}
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="bloc bloc-inline-edition">
+                  <h2 class="bloc__title">Tâches prédéfinies</h2>
+                  <p>Impossible d'ajouter des tâches pour le moment. Veuillez enregistrer le canevas de projet.</p>
+            </div>
+        </div>
+    </div>
+    
+
+{% endblock %}

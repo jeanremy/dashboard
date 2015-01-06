@@ -1,0 +1,26 @@
+{% extends 'FlydDashboardBundle::layout.html.twig' %}
+
+{% block title %}
+    <title>{{entity.name}}</title>
+{% endblock %}
+
+{% block body %}
+    
+    <a href="{{ path('projectcanvas_delete', { 'id': entity.id }) }}" class="btn--delete">Delete</a>
+    <a href="{{ path('projectcanvas_edit', { 'id': entity.id }) }}" class="btn--edit">Edit</a>
+
+    <h1 class="lvl1">{{entity.name}}</h1>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="bloc bloc-inline-edition">
+                <h2 class="bloc__title">Tâches prédéfinies</h2>
+            </div>      
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+     <script type="text/javascript" src="{{ asset('bundles/flyddashboard/js/additems.js') }}"></script>   
+{% endblock %}

@@ -12,10 +12,20 @@ $(document).ready(function() {
 	$(document).on('submit', '#flyd_dashboardbundle_address, #flyd_dashboardbundle_contact, #flyd_dashboardbundle_need', function(e){
 		e.preventDefault();
 		var $this = $(this);
-			loadItem($this);
+			loadItem($this, true);
 	});
 
-	function loadItem($this) {
+	$(document).on('submit', '#add_supplier, #add_user', function(e){
+		e.preventDefault();
+		var $this = $(this);
+			loadItem($this, false);
+	});
+
+	/*
+     *
+     * @param: object, bool(true if form has to be empty at the end)
+     */
+	function loadItem($this, empty) {
 		var $parentBloc = $this.parent().parent().parent();
 
 		$.ajax({
@@ -26,12 +36,17 @@ $(document).ready(function() {
 			console.log('beforsend');
 		  },
 		  success: function(data) {
-			if(data['code'] == 200) {
-				$parentBloc.find('.bloc > h2 + .row').append(data['response']);
+			if(data.code == 200) {
+				$parentBloc.find('.bloc > h2 + .row').append(data.response);
+				if(empty == true)
 				$parentBloc.find('.bloc input, .bloc select, .bloc textarea').val('');
 			}
 			else {
-			  $parentBloc.parent().find('.bloc > h2 + .row').prepend('erreur');
+			  if(empty == false) {
+			  	alert('Erreur');
+			  } else {
+			  	$parentBloc.parent().find('.bloc > h2 + .row').prepend('erreur');
+			  }
 			}
 		  },
 		  error: function(jqXHR, textStatus, errorThrown) {
@@ -56,6 +71,7 @@ $(document).ready(function() {
 		  console.log('beforsend');
 		},
 		success: function(data) {
+		console.log(data);
 		  if(data['code'] == 200) {
 			$parentBloc.fadeOut(400).remove();
 		  }

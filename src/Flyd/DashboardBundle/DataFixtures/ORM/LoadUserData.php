@@ -26,13 +26,13 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
 
     // Create our user and set details
     $user = $em->createUser();
-    $user->setUsername('username');
-    $user->setEmail('email@domain.com');
-    $user->setPlainPassword('password');
+    $user->setUsername('pf');
+    $user->setEmail('pf@flydesigners.com');
+    $user->setPlainPassword('pf');
     //$user->setPassword('3NCRYPT3D-V3R51ON');
     $user->setEnabled(true);
     $user->setRoles(array('ROLE_ADMIN'));
-    $user->setJob('jongleur');
+    $user->setJob('Directeur');
     $this->setReference('user', $user);
 
     // Update the user
@@ -41,8 +41,8 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
     // Create our user and set details
     $user2 = $em->createUser();
     $user2->setUsername('Anaïs');
-    $user2->setEmail('test@domain.com');
-    $user2->setPlainPassword('pouet');
+    $user2->setEmail('anais@flydesigners.com');
+    $user2->setPlainPassword('anais');
     //$user2->setPassword('3NCRYPT3D-V3R51ON');
     $user2->setEnabled(true);
     $user2->setRoles(array('ROLE_ADMIN'));
@@ -50,6 +50,58 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
 
     // Update the user
     $em->updateUser($user2, true);
+
+    // Create our user and set details
+    $user3 = $em->createUser();
+    $user3->setUsername('Jo');
+    $user3->setEmail('jonathan@flydesigners.com');
+    $user3->setPlainPassword('jonathan');
+    //$user3->setPassword('3NCRYPT3D-V3R51ON');
+    $user3->setEnabled(true);
+    $user3->setRoles(array('ROLE_ADMIN'));
+    $user3->setJob('Directeur Artistique');
+
+    // Update the user
+    $em->updateUser($user3, true);
+
+    // Create our user and set details
+    $user4 = $em->createUser();
+    $user4->setUsername('Sarah');
+    $user4->setEmail('sarah@flydesigners.com');
+    $user4->setPlainPassword('sarah');
+    //$user4->setPassword('3NCRYPT3D-V3R51ON');
+    $user4->setEnabled(true);
+    $user4->setRoles(array('ROLE_ADMIN'));
+    $user4->setJob('chargée de projet');
+
+    // Update the user
+    $em->updateUser($user4, true);
+
+    // Create our user and set details
+    $user5 = $em->createUser();
+    $user5->setUsername('Romain');
+    $user5->setEmail('romain@flydesigners.com');
+    $user5->setPlainPassword('romain');
+    //$user5->setPassword('3NCRYPT3D-V3R51ON');
+    $user5->setEnabled(true);
+    $user5->setRoles(array('ROLE_ADMIN'));
+    $user5->setJob('motion designer');
+
+    // Update the user
+    $em->updateUser($user5, true);
+
+    // Create our user and set details
+    $user6 = $em->createUser();
+    $user6->setUsername('JR');
+    $user6->setEmail('jeanremy@flydesigners.com');
+    $user6->setPlainPassword('jr');
+    //$user6->setPassword('3NCRYPT3D-V3R51ON');
+    $user6->setEnabled(true);
+    $user6->setRoles(array('ROLE_ADMIN'));
+    $user6->setJob('developpeur');
+
+    // Update the user
+    $em->updateUser($user6, true);
   }
  
   public function getOrder()

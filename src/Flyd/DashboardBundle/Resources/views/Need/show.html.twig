@@ -11,7 +11,7 @@
     <a href="{{ path('need_edit', { 'id': entity.id }) }}" class="btn btn--edit">Edit</a>
     <h1 class="lvl1">{{entity.title}}</h1>
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-8">
             <div class="bloc bloc--general bloc-inline-edition">
                 <h2 class="bloc__title">Informations générales</h2>
 
@@ -66,6 +66,23 @@
                 </div>
             </div>
         </div>
+
+        <!-- Projects -->
+        <div class="col-sm-4">
+            <div class="bloc">
+                <h2 class="bloc__title">Projets</h2>
+                <p>
+                    <ul class="need__projects">
+                {% for project in entity.projects %}
+                    <li>
+                        <a href="{{path('project_show', {'id': project.id}) }}">{{project.title}}</a>
+                    </li>       
+                {% endfor %}
+                </ul>
+                </p>
+            </div>
+        </div>
     </div>
+
 
 {% endblock %}

@@ -800,18 +800,18 @@ select {
 	color: #8f979e;
 }
 
-.team .user {
+.project__team .user {
 	text-align: center;
 }
 
-.team .user__name {
+.project__team .user__name {
 	font-size: 16px;
 	font-size: 1rem;
 	font-family: "montserrat", sans-serif;
 	color: #2b303e;
 }
 
-.team .user__job {
+.project__team .user__job {
 	font-size: 15px;
 	font-size: 0.9375rem;
 	font-family: "varela", sans-serif;
@@ -867,6 +867,27 @@ p.contact__title {
 .need .need__project {
 	list-style: disc;
 	font-family: "varela", sans-serif;
+}
+
+.need__projects {
+	font-family: "varela", sans-serif;
+	text-transform: none;
+	margin-left: 20px;
+	list-style-type: disc;
+}
+
+.user {
+	margin-bottom: 15px;
+}
+
+.user:nth-child(2n+1) {
+	clear: left;
+}
+
+.user .line--remove {
+	display: block;
+	textalign: center;
+	margin: 0 auto;
 }
 
 /*  GLOBAL
@@ -969,7 +990,7 @@ p {
 	left: 0;
 	top: 0;
 	bottom: 0;
-	width: 320px;
+	width: 300px;
 	padding: 15px;
 	-webkit-transform: translate3d(-100%, 0, 0);
 	        transform: translate3d(-100%, 0, 0);
@@ -1039,8 +1060,8 @@ p {
 }
 
 .deploy .main {
-	-webkit-transform: translate3d(320px, 0, 0);
-	        transform: translate3d(320px, 0, 0);
+	-webkit-transform: translate3d(300px, 0, 0);
+	        transform: translate3d(300px, 0, 0);
 }
 
 .main .content {

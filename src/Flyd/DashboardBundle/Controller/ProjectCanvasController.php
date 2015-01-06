@@ -7,24 +7,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Flyd\DashboardBundle\Entity\Project;
-use Flyd\DashboardBundle\Entity\Supplier;
-use Flyd\DashboardBundle\Entity\User;
-use Flyd\DashboardBundle\Form\ProjectType;
+use Flyd\DashboardBundle\Entity\ProjectCanvas;
+use Flyd\DashboardBundle\Entity\Task;
+use Flyd\DashboardBundle\Form\ProjectCanvasType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
- * Project controller.
+ * ProjectCanvas controller.
  *
  * @Route("/project")
  */
-class ProjectController extends Controller
+class ProjectCanvasController extends Controller
 {
 
     /**
-     * Lists all Project entities.
+     * Lists all ProjectCanvas entities.
      *
-     * @Route("/", name="project_list")
+     * @Route("/", name="projectcanvas_list")
      * @Method("GET")
      * @Template()
      */
@@ -32,7 +31,7 @@ class ProjectController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('FlydDashboardBundle:Project')->findAll();
+        $entities = $em->getRepository('FlydDashboardBundle:ProjectCanvas')->findAll();
 
         return array(
             'entities' => $entities,
@@ -40,44 +39,32 @@ class ProjectController extends Controller
     }
 
     /**
-     * Creates a new Project entity.
+     * Creates a new ProjectCanvas entity.
      *
      * @Route("/", name="project_add")
      * @Method("POST")
-     * @Template("FlydDashboardBundle:Project:add.html.twig")
+     * @Template("FlydDashboardBundle:ProjectCanvas:add.html.twig")
      */
-    public function addAction(Request $request, $id)
+    public function addAction(Request $request)
     {
-        $project = new Project();
+        $projectcanvas = new ProjectCanvas();
         $em = $this->getDoctrine()->getManager();
-        $need = $em->getRepository('FlydDashboardBundle:Need')->find($id);
 
-        $project->setStartDate(new \DateTime() );
-        $project->setDeadline(new \DateTime('+1 month') );
-        $project->setEndDate(new \DateTime('+1 month') );
-
-        // Default values (besoin)
-        $project->setNeed($need);
-
-        //Get all users of a project
-
-
-
-        $form = $this->get('form.factory')->create(new ProjectType(), $project);
+        $form = $this->get('form.factory')->create(new ProjectCanvasType(), $projectcanvas);
 
         if ($form->handleRequest($request)->isValid()) {
           $em = $this->getDoctrine()->getManager();
-          $em->persist($project);
+          $em->persist($projectcanvas);
           $em->flush();
 
-          $request->getSession()->getFlashBag()->add('notice', 'Projet bien enregistré.');
+          $request->getSession()->getFlashBag()->add('notice', 'Canevas de projet bien enregistré.');
 
-          return $this->redirect($this->generateUrl('project_show', array('id' => $project->getId())));
+          return $this->redirect($this->generateUrl('projectcanvas_show', array('id' => $projectcanvas->getId())));
         }
 
-        return $this->render('FlydDashboardBundle:Project:add.html.twig', array(
+        return $this->render('FlydDashboardBundle:ProjectCanvas:add.html.twig', array(
           'form' => $form->createView(),
-          'entity' => $project
+          'entity' => $projectcanvas
         ));
     }
 
@@ -85,7 +72,7 @@ class ProjectController extends Controller
 
 
     /**
-     * Finds and displays a Project entity.
+     * Finds and displays a ProjectCanvas entity.
      *
      * @Route("/{id}", name="project_show")
      * @Method("GET")
@@ -95,21 +82,21 @@ class ProjectController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('FlydDashboardBundle:Project')->find($id);
+        $entity = $em->getRepository('FlydDashboardBundle:ProjectCanvas')->find($id);
 
         //Get all users of a project
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Project entity.');
+            throw $this->createNotFoundException('Unable to find ProjectCanvas entity.');
         }
 
-        return $this->render('FlydDashboardBundle:Project:show.html.twig', array(
+        return $this->render('FlydDashboardBundle:ProjectCanvas:show.html.twig', array(
           'entity' => $entity
         ));
     }
 
     /**
-     * Displays a form to edit an existing Project entity.
+     * Displays a form to edit an existing ProjectCanvas entity.
      *
      * @Route("/{id}/edit", name="project_edit")
      * @Method("GET")
@@ -119,23 +106,23 @@ class ProjectController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $project = $em->getRepository('FlydDashboardBundle:Project')->find($id);
+        $projectcanvas = $em->getRepository('FlydDashboardBundle:ProjectCanvas')->find($id);
 
 
-        $form = $this->get('form.factory')->create(new ProjectType(), $project);
+        $form = $this->get('form.factory')->create(new ProjectCanvasType(), $projectcanvas);
 
         if ($form->handleRequest($request)->isValid()) {
           $em = $this->getDoctrine()->getManager();
-          $em->persist($project);
+          $em->persist($projectcanvas);
           $em->flush();
 
-          $request->getSession()->getFlashBag()->add('notice', 'Project bien enregistré.');
+          $request->getSession()->getFlashBag()->add('notice', 'Canevas de projet bien enregistré.');
 
-          return $this->redirect($this->generateUrl('project_show', array('id' => $project->getId())));
+          return $this->redirect($this->generateUrl('projectcanvas_show', array('id' => $projectcanvas->getId())));
         }
 
-        return $this->render('FlydDashboardBundle:Project:edit.html.twig', array(
-          'entity' => $project,
+        return $this->render('FlydDashboardBundle:ProjectCanvas:edit.html.twig', array(
+          'entity' => $projectcanvas,
           'form' => $form->createView()
         ));
     }
@@ -144,7 +131,7 @@ class ProjectController extends Controller
     public function deleteAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('FlydDashboardBundle:Project')->find($id);
+        $entity = $em->getRepository('FlydDashboardBundle:ProjectCanvas')->find($id);
 
 
         if (null === $entity) {
@@ -159,13 +146,13 @@ class ProjectController extends Controller
             $em->remove($entity);
             $em->flush();
 
-            $request->getSession()->getFlashBag()->add('info', "Le projet a bien été supprimé.");
+            $request->getSession()->getFlashBag()->add('info', "Le canevas de projet a bien été supprimé.");
 
-            return $this->redirect($this->generateUrl('client_list'));
+            return $this->redirect($this->generateUrl('projectcanvas_list'));
         }
 
         // Si la requête est en GET, on affiche une page de confirmation avant de supprimer
-        return $this->render('FlydDashboardBundle:Project:delete.html.twig', array(
+        return $this->render('FlydDashboardBundle:ProjectCanvas:delete.html.twig', array(
               'entity' => $entity,
               'form'   => $form->createView()
             ));
@@ -178,7 +165,7 @@ class ProjectController extends Controller
         $params = $this->getRequest()->request->all();
         $response = new JsonResponse();
         $em = $this->getDoctrine()->getManager();
-        $project = $em->getRepository('FlydDashboardBundle:Project')->find($id);
+        $project = $em->getRepository('FlydDashboardBundle:ProjectCanvas')->find($id);
 
         if($request->isXmlHttpRequest())
         {
@@ -232,7 +219,7 @@ class ProjectController extends Controller
         $params = $this->getRequest()->request->all();
         $response = new JsonResponse();
         $em = $this->getDoctrine()->getManager();
-        $project = $em->getRepository('FlydDashboardBundle:Project')->find($id);
+        $project = $em->getRepository('FlydDashboardBundle:ProjectCanvas')->find($id);
 
         if($request->isXmlHttpRequest())
         {
@@ -282,7 +269,7 @@ class ProjectController extends Controller
         $params = $this->getRequest()->request->all();
         $response = new JsonResponse();
         $em = $this->getDoctrine()->getManager();
-        $project = $em->getRepository('FlydDashboardBundle:Project')->find($id);
+        $project = $em->getRepository('FlydDashboardBundle:ProjectCanvas')->find($id);
  
 
         if($request->isXmlHttpRequest())
@@ -337,7 +324,7 @@ class ProjectController extends Controller
         $params = $this->getRequest()->request->all();
         $response = new JsonResponse();
         $em = $this->getDoctrine()->getManager();
-        $project = $em->getRepository('FlydDashboardBundle:Project')->find($id);
+        $project = $em->getRepository('FlydDashboardBundle:ProjectCanvas')->find($id);
 
         if($request->isXmlHttpRequest())
         {
@@ -345,7 +332,7 @@ class ProjectController extends Controller
             {
                 try {
                     $user = $em->getRepository('FlydDashboardBundle:User')->find($params['element_id']);
-                    $user->removeProject($project);
+                    $user->removeProjectCanvas($project);
                     $em->persist($user);
                     $em->flush();
                     $response->setData(array(

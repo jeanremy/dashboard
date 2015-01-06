@@ -392,18 +392,6 @@ class Project
         return $this->updatedAt;
     }
 
-    /**
-     * Set project_task_users
-     *
-     * @param \Flyd\DashboardBundle\Entity\ProjectTaskUser $projectTaskUsers
-     * @return Project
-     */
-    public function setProjectTaskUsers(\Flyd\DashboardBundle\Entity\ProjectTaskUser $projectTaskUsers = null)
-    {
-        $this->project_task_users = $projectTaskUsers;
-
-        return $this;
-    }
 
     
 }

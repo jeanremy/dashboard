@@ -12,4 +12,6 @@ use Doctrine\ORM\EntityRepository;
  */
 class ClientRepository extends EntityRepository
 {
+	// TODO: créer methode qui cherche les clients selon l'id du user current
+	// ou faire un findBy(user)
 }

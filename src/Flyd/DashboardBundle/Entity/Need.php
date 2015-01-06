@@ -98,22 +98,7 @@ class Need
         return $this->id;
     }
 
-    /**
-     * Set Company
-     *
-     * @return Company 
-     */
-    public function setCompany(Company $company)
-    {
-        $this->company = $company;
 
-        return $this;
-    }
-
-    public function getCompany()
-    {
-        return $this->company;
-    }
 
     /**
      * @param Project $project
@@ -123,7 +108,7 @@ class Need
     {
         $this->projects[] = $project;
 
-        $project->setCompany($this);
+        $project->setNeed($this);
 
         return $this;
     }

@@ -54,30 +54,28 @@
 
 
             </div>
-            <div class="bloc">
+            <div class="bloc project__suppliers">
                 <h2 class="bloc__title">Fournisseurs</h2>
-                {% for supplier in entity.suppliers %}
-                    {% include "FlydDashboardBundle:Supplier:mini.html.twig" %}
-                {% endfor %}
+                <div class="row">
+                    {% for supplier in entity.suppliers %}
+                        {% include "FlydDashboardBundle:Supplier:mini.html.twig" %}
+                    {% endfor %}
+                </div>
                 <button class="btn--add">+</button>
                 {{ render(controller('FlydDashboardBundle:Supplier:getForm', {'id': entity.id}) ) }}
                 
             </div>
         </div>
         <div class="col-sm-4">
-            <div class="bloc team">
+            <div class="bloc project__team">
                 <h2 class="bloc__title">équipe</h2>
                 <div class="row">                    
                 {% for user in entity.users %}
-                    <div class="user col-sm-6">                        
-                        {% if user.image %}
-                            <img src="{{ user.image.webPath | apply_filter('demi') }}" class="profil__pic" />
-                        {% endif %}
-                        <p class="user__name"><a href="{{ path('user_show', { 'id': user.id }) }}">{{user.username|capitalize}}</a></p>
-                        <p class="user__job">{{user.job|capitalize}}</p>
-                    </div>
+                    {% include "FlydDashboardBundle:User:mini.html.twig" %}                    
                 {% endfor %}
                 </div>                
+                <button class="btn--add">+</button>
+                {{ render(controller('FlydDashboardBundle:User:getForm', {'id': entity.id}) ) }}                
             </div>
         </div>
     </div>
@@ -85,41 +83,5 @@
 {% endblock %}
 
 {% block js %}
-    
-    <script>
-    $(document).ready(function() {
-
-        $(document).on('submit', '#add_supplier, #add_user', function(e){
-            e.preventDefault();
-            var $this = $(this);
-                loadItem($this);
-        });
-
-        function loadItem($this) {
-            var $parentBloc = $this.parent().parent().parent();
-
-            $.ajax({
-              url:            $this.attr('action'),
-              type:           $this.attr('method'),
-              data: $this.serialize(),
-              beforeSend: function(data) {
-                console.log('before');
-              },
-              success: function(data) {
-                if(data['code'] == 200) {
-                    $parentBloc.find('.bloc > h2 + .row').append(data['response']);
-                    $parentBloc.find('.bloc input, .bloc select, .bloc textarea').val('');
-                }
-                else {
-                  $parentBloc.parent().find('.bloc > h2 + .row').prepend('erreur');
-                }
-              },
-              error: function(jqXHR, textStatus, errorThrown) {
-                console.log(errorThrown);
-              }
-            });
-
-        }
-    });
-    </script>
+     <script type="text/javascript" src="{{ asset('bundles/flyddashboard/js/additems.js') }}"></script>   
 {% endblock %}

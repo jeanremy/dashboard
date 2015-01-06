@@ -1,87 +1,90 @@
 {% extends 'FlydDashboardBundle::layout.html.twig' %}
 
 {% block title %}
-    <title>{{entity.name}} - Edit </title>
+    <title>{{entity.title}} - Edit</title>
 {% endblock %}
 
 {% block body %}
     
-    <h1 class="lvl1">{{entity.name}}</h1>
+    <p class="breadcrumb">
+       <a href="{{ path('client_show', { 'id': entity.need.client.id }) }}">{{entity.need.client}} ></a>
+       <a href="{{ path('need_show', { 'id': entity.need.id }) }}">{{entity.need}}</a>
+    </p>
+    <h1 class="lvl1">{{entity.title}} - Edit</h1>
 
     {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 
-	{% if form_errors(form) %}
-	<div class="row">
-		<div class="col-sm-12">
-			<div class="bloc">
-    			{{ form_errors(form) }}
-			</div>
-		</div>
-	</div>
-	{% endif %}
-
+    {% if form_errors(form) %}
     <div class="row">
         <div class="col-sm-12">
-            <div class="bloc bloc--general bloc-inline-edition edit">
+            <div class="bloc">
+                {{ form_errors(form) }}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="bloc bloc-inline-edition">
                 <h2 class="bloc__title">Informations générales</h2>
 
                 <div class="form-group">
-                	{{ form_label(form.name, "Nom", {'label_attr': {'class': 'control-label'}}) }}
+                    {{ form_label(form.title, "Titre du projet", {'label_attr': {'class': 'control-label'}}) }}
 
-                  {{ form_errors(form.name) }}
-
-                  <div class="data">
-                  	{# Génération de l'input. #}
-                  	{{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
-                  </div>
-                </div>
-
-                <div class="form-group">
-                	{{ form_label(form.entrance, "Date d'entrée", {'label_attr': {'class': 'control-label'}}) }}
-
-        					{{ form_errors(form.entrance) }}
-
-        					<div class="data">
-        						{# Génération de l'input. #}
-        						{{ form_widget(form.entrance, {'attr': {'class': 'form-control'}}) }}
-        					</div>
-                </div>
-
-                <div class="form-group">
-                  {{ form_label(form.origin, "Origine", {'label_attr': {'class': 'control-label'}}) }}
-
-                  {{ form_errors(form.origin) }}
+                    {{ form_errors(form.title) }}
 
                   <div class="data">
                     {# Génération de l'input. #}
-                    {{ form_widget(form.origin, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
                   </div>
                 </div>
 
                 <div class="form-group">
-                	{{ form_label(form.reminder, "Date de relance", {'label_attr': {'class': 'control-label'}}) }}
+                    {{ form_label(form.category, "Catégorie", {'label_attr': {'class': 'control-label'}}) }}
 
-        					{{ form_errors(form.reminder) }}
+                    {{ form_errors(form.category) }}
 
-        					<div class="data">
-        						{# Génération de l'input. #}
-        						{{ form_widget(form.reminder, {'attr': {'class': 'form-control'}}) }}
-        					</div>
+                    <div class="data">
+                        {# Génération de l'input. #}
+                        {{ form_widget(form.category, {'attr': {'class': 'form-control'}}) }}
+                    </div>
                 </div>
 
                 <div class="form-group">
-                	{{ form_label(form.type, "Type de client", {'label_attr': {'class': 'control-label'}}) }}
+                    {{ form_label(form.startDate, "Date de début", {'label_attr': {'class': 'control-label'}}) }}
 
-        					{{ form_errors(form.type) }}
+                    {{ form_errors(form.startDate) }}
 
-        					<div class="data">
-        						{# Génération de l'input. #}
-        						{{ form_widget(form.type, {'attr': {'class': 'form-control'}}) }}
-        					</div>
+                    <div class="data">
+                        {# Génération de l'input. #}
+                        {{ form_widget(form.startDate, {'attr': {'class': 'form-control'}}) }}
+                    </div>
                 </div>
-                {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
-                <a href="{{ path('client_delete', { 'id': entity.id }) }}" class="btn--delete--reverse">Delete</a>
 
+                <div class="form-group">
+                    {{ form_label(form.deadline, "Deadline", {'label_attr': {'class': 'control-label'}}) }}
+
+                    {{ form_errors(form.deadline) }}
+
+                    <div class="data">
+                        {# Génération de l'input. #}
+                        {{ form_widget(form.deadline, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.endDate, "Date de fin", {'label_attr': {'class': 'control-label'}}) }}
+
+                    {{ form_errors(form.endDate) }}
+
+                    <div class="data">
+                        {# Génération de l'input. #}
+                        {{ form_widget(form.endDate, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+                
+                {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
                 {{ form_widget(form.save) }}
 
 
@@ -93,47 +96,34 @@
                 {# Fermeture de la balise <form> du formulaire HTML #}
                 {{ form_end(form) }}
             </div>
-        </div>
-    </div>
-
-    <!-- Adresse -->
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="bloc">
-                <h2 class="bloc__title">Adresses</h2>
-                <div class="row" id="addresses">
-                    {% for address in entity.addresses %}
-                      {% include "FlydDashboardBundle:Address:show.html.twig" %}                    
+            <div class="bloc project__suppliers">
+                <h2 class="bloc__title">Fournisseurs</h2>
+                <div class="row">
+                    {% for supplier in entity.suppliers %}
+                        {% include "FlydDashboardBundle:Supplier:mini.html.twig" %}
                     {% endfor %}
-                </div> 
-                <a href="{{ path('address_ajax_getform') }}" class="pull-right btn btn--add">+</a> 
-                {{ render(controller('FlydDashboardBundle:Address:getForm', {'id': entity.id})) }}                
+                </div>
+                <button class="btn--add">+</button>
+                {{ render(controller('FlydDashboardBundle:Supplier:getForm', {'id': entity.id}) ) }}
+                
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="bloc project__team">
+                <h2 class="bloc__title">équipe</h2>
+                <div class="row">                    
+                {% for user in entity.users %}
+                    {% include "FlydDashboardBundle:User:mini.html.twig" %}                    
+                {% endfor %}
+                </div>                
+                <button class="btn--add">+</button>
+                {{ render(controller('FlydDashboardBundle:User:getForm', {'id': entity.id}) ) }}                
             </div>
         </div>
     </div>
-
-    <!-- Contacts -->
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="bloc">
-                <h2 class="bloc__title">Contacts</h2>
-                <div class="row" id="contacts">
-                    {% for contact in entity.contacts %}
-                      {% include "FlydDashboardBundle:Contact:show.html.twig" %}                    
-                    {% endfor %}
-                </div> 
-                <a href="{{ path('contact_ajax_delete') }}" class="pull-right btn btn--add">+</a> 
-                {{ render(controller('FlydDashboardBundle:Contact:getForm', {'id': entity.id})) }}
-            </div>
-        </div>
-    </div>
-
-
-
-	
 
 {% endblock %}
 
 {% block js %}
-    <script type="text/javascript" src="{{ asset('bundles/flyddashboard/js/additems.js') }}"></script>
+     <script type="text/javascript" src="{{ asset('bundles/flyddashboard/js/additems.js') }}"></script>   
 {% endblock %}

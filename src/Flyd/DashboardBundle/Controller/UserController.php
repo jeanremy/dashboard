@@ -167,12 +167,15 @@ class UserController extends Controller
      * @Route("/user/getform", name="user_ajax_form")
      * @Method("POST")
      */
-    public function getFormAction()
+    public function getFormAction($id)
     {
+        $em = $this->getDoctrine()->getManager();
+        $project = $em->getRepository('FlydDashboardBundle:Project')->find($id);
         $entities = $this->getDoctrine()->getManager()->getRepository('FlydDashboardBundle:User')->findAll();
 
         return $this->render('FlydDashboardBundle:User:select.html.twig', array(
-            'entities' => $entities
+            'entities' => $entities,
+            'entity' => $project
         ));
     }  
 

@@ -171,6 +171,7 @@ class SupplierController extends Controller
     public function getFormAction($id)
     {
         $em = $this->getDoctrine()->getManager();
+        // faire une requete custom avec title et id serait moins gourmand
         $entities = $em->getRepository('FlydDashboardBundle:Supplier')->findAll();
         $project = $em->getRepository('FlydDashboardBundle:Project')->find($id);
 

@@ -186,4 +186,46 @@ project_delete:
 project_ajax_add_supplier:
     path:     /project/{id}/ajaxaddsupplier
     defaults: { _controller: FlydDashboardBundle:Project:ajaxaddsupplier }
-    
+    requirements:
+        _method: POST
+
+project_ajax_remove_supplier:
+    path:     /project/{id}/remove/supplier
+    defaults: { _controller: FlydDashboardBundle:Project:ajaxremovesupplier }
+    requirements:
+        _method: POST
+
+project_ajax_add_user:
+    path:     /project/{id}/ajaxadduser
+    defaults: { _controller: FlydDashboardBundle:Project:ajaxadduser }
+    requirements:
+        _method: POST
+
+project_ajax_remove_user:
+    path:     /project/{id}/remove/user
+    defaults: { _controller: FlydDashboardBundle:Project:ajaxremoveuser }
+    requirements:
+        _method: POST
+
+
+#   PROJECTS CANVAS
+
+projectcanvas_list:
+    path:     /projectcanvas
+    defaults: { _controller: FlydDashboardBundle:ProjectCanvas:index }
+
+projectcanvas_add:
+    path:     /projectcanvas/add
+    defaults: { _controller: FlydDashboardBundle:ProjectCanvas:add }
+
+projectcanvas_show:
+    path:     /projectcanvas/{id}
+    defaults: { _controller: FlydDashboardBundle:ProjectCanvas:show }
+
+projectcanvas_edit:
+    path:     /projectcanvas/{id}/edit
+    defaults: { _controller: FlydDashboardBundle:ProjectCanvas:edit }
+
+projectcanvas_delete:
+    path:     /projectcanvas/{id}/delete
+    defaults: { _controller: FlydDashboardBundle:ProjectCanvas:delete }
