@@ -818,6 +818,21 @@ select {
 	color: #8f979e;
 }
 
+.taskcontainer {
+	width: 100%;
+}
+
+.taskcontainer .thead {
+	font-family: "montserratbold", sans-serif;
+	text-transform: uppercase;
+	color: #8f979e;
+}
+
+.taskcontainer .tbody {
+	font-family: "varela", sans-serif;
+	color: #2b303e;
+}
+
 .item {
 	border-right: 1px solid #d6d7d8;
 	margin-bottom: 15px;

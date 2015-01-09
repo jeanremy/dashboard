@@ -39,4 +39,13 @@ class UserRepository extends EntityRepository
 
 		return $query->getResult();
 	}
+
+	public function getUserList() {
+		return $this
+		    ->createQueryBuilder('a')
+	        ->addSelect(array('a.id','a.username', 'a.job'))
+		    ->getQuery()
+		    ->getResult()
+		  ;
+	}
 }

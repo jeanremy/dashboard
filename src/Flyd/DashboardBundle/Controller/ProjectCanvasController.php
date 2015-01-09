@@ -8,8 +8,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Flyd\DashboardBundle\Entity\ProjectCanvas;
-use Flyd\DashboardBundle\Entity\Task;
 use Flyd\DashboardBundle\Form\ProjectCanvasType;
+use Flyd\DashboardBundle\Entity\ProjectCanvasTask;
+use Flyd\DashboardBundle\Form\ProjectCanvasTaskType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
@@ -51,7 +52,6 @@ class ProjectCanvasController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $form = $this->get('form.factory')->create(new ProjectCanvasType(), $projectcanvas);
-
         if ($form->handleRequest($request)->isValid()) {
           $em = $this->getDoctrine()->getManager();
           $em->persist($projectcanvas);
@@ -81,8 +81,11 @@ class ProjectCanvasController extends Controller
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
+        $pct = new ProjectCanvasTask();
 
+        $pctform = $this->get('form.factory')->create(new ProjectCanvasTaskType(), $pct);
         $entity = $em->getRepository('FlydDashboardBundle:ProjectCanvas')->find($id);
+        $minitasks = $em->getRepository('FlydDashboardBundle:Task')->getTaskIdentifiers();
 
         //Get all users of a project
 
@@ -91,7 +94,9 @@ class ProjectCanvasController extends Controller
         }
 
         return $this->render('FlydDashboardBundle:ProjectCanvas:show.html.twig', array(
-          'entity' => $entity
+          'entity' => $entity,          
+          'pctform' => $pctform->createView(),
+          'minitasks' => $minitasks
         ));
     }
 

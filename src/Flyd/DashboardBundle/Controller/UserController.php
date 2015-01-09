@@ -8,6 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Flyd\DashboardBundle\Entity\User;
+use Flyd\DashboardBundle\Entity\Image;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Flyd\DashboardBundle\Form\UserType;
 
 /**
@@ -42,13 +44,15 @@ class UserController extends Controller
     /**
      * Displays a form to create a new User entity.
      *
-     * @Route("/add", name="client_add")
+     * @Route("/user/add", name="user_add")
      * @Method("GET")
      * @Template("FlydDashboardBundle:User:add.html.twig")
      */
     public function addAction(Request $request)
     {
         $user = new User();
+        $em = $this->getDoctrine()->getManager();
+
 
         $form = $this->get('form.factory')->create(new UserType(), $user);
 
@@ -171,7 +175,7 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $project = $em->getRepository('FlydDashboardBundle:Project')->find($id);
-        $entities = $this->getDoctrine()->getManager()->getRepository('FlydDashboardBundle:User')->findAll();
+        $entities = $this->getDoctrine()->getManager()->getRepository('FlydDashboardBundle:User')->getUserList();
 
         return $this->render('FlydDashboardBundle:User:select.html.twig', array(
             'entities' => $entities,

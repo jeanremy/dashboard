@@ -19,11 +19,12 @@ class LoadTaskData extends AbstractFixture implements OrderedFixtureInterface
       'Facturation'
     );
 
-    foreach ($names as $name) {
+     for ($i = 0; $i < count($names); $i++) {
       // On crée la catégorie
       $task = new Task();
-      $task->setName($name);
+      $task->setName($names[$i]);
       $task->setStep(Task::ADMINISTRATIF);
+      $this->setReference('task '.$i, $task);
 
       // On la persiste
       $em->persist($task);

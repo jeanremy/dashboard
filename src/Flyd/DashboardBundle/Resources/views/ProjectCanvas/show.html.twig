@@ -15,6 +15,45 @@
         <div class="col-sm-12">
             <div class="bloc bloc-inline-edition">
                 <h2 class="bloc__title">Tâches prédéfinies</h2>
+                {% if entity.projectcanvastasks %}
+                <!-- Trier par position avant d'afficher, mettre des inputs, puis faire un draggable-moveable-->
+                <table class="taskcontainer">
+                    <thead class="thead">
+                        <tr>
+                            <th>Êtapes</th>
+                            <th>Tâche</th>
+                            <th>Suppr</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody">
+                    {% for pct in entity.projectcanvastasks %}
+                        <tr class="task-{{pct.task.id}}">
+                            <td>{{pct.task.step|capitalize}}</td>
+                            <td>{{pct.task.name|capitalize}}</td>
+                            <td><a href="" class="line--remove">Retirer</a></td>
+                        </tr>
+                    {% endfor %}                        
+                    </tbody>
+                </table>
+                {% endif %}
+                </ul>
+                <!-- Faire un autocomplete avec la liste des tâches définies plus bas dans le js -->
+               
+                <!-- Form pour créer pct avec task imbriquée -->
+                {{form_start(pctform, {'attr': {'class': 'form-horizontal'}})}}
+                    <h2 class="bloc__subtitle">Ajouter une tâche</h2>
+                    <div class="newtask">  
+                        {{ form_widget(pctform.position) }}                      
+                        {{ form_label(pctform.task.name, "Nom de la tâche", {'label_attr': {'class': 'control-label'}}) }}
+                        {{ form_widget(pctform.task.name, {'attr': {'class': 'form-control'}}) }}
+
+                        {{ form_label(pctform.task.step, "Etape", {'label_attr': {'class': 'control-label'}}) }}
+                        {{ form_widget(pctform.task.step, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+
+
+                {{ form_rest(pctform) }}
+                {{ form_end(pctform) }}
             </div>      
         </div>
     </div>
@@ -22,5 +61,13 @@
 {% endblock %}
 
 {% block js %}
+    <script>
+    // To do
+        var tasks = {
+            {% for mini in minitasks %}
+            { {{mini.id }}, '{{mini.name}}' }
+            {% endfor %}
+        };
+    </script>
      <script type="text/javascript" src="{{ asset('bundles/flyddashboard/js/additems.js') }}"></script>   
 {% endblock %}

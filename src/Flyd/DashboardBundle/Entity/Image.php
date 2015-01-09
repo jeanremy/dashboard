@@ -4,6 +4,7 @@ namespace Flyd\DashboardBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Image
@@ -22,9 +23,9 @@ class Image
     private $id;
 
     /**
-    * @ORM\Column(name="url", type="string", length=255)
+    * @ORM\Column(name="extension", type="string", length=255)
     */
-    private $url;
+    private $extension;
 
     /**
     * @ORM\Column(name="alt", type="string", length=255, nullable=true)
@@ -49,26 +50,26 @@ class Image
     }
 
     /**
-     * Set url
+     * Set extension
      *
-     * @param string $url
+     * @param string $extension
      * @return Image
      */
-    public function setUrl($url)
+    public function setExtension($extension)
     {
-        $this->url = $url;
+        $this->extension = $extension;
 
         return $this;
     }
 
     /**
-     * Get url
+     * Get extension
      *
      * @return string 
      */
-    public function getUrl()
+    public function getExtension()
     {
-        return $this->url;
+        return $this->extension;
     }
 
     /**
@@ -101,14 +102,14 @@ class Image
         $this->file = $file;
 
         // On vérifie si on avait déjà un fichier pour cette entité
-        if (null !== $this->url) {
+        if (null !== $this->extension) {
         // On sauvegarde l'extension du fichier pour le supprimer plus tard
-          $this->tempFilename = $this->url;
+          $this->tempFilename = $this->extension;
 
-        // On réinitialise les valeurs des attributs url et alt
-          $this->url = null;
+        // On réinitialise les valeurs des attributs extension et alt
+          $this->extension = null;
           $this->alt = null;
-      }
+        }
     }
 
 
@@ -129,11 +130,11 @@ class Image
         }
 
         // Le nom du fichier est son id, on doit juste stocker également son extension
-        // Pour faire propre, on devrait renommer cet attribut en « extension », plutôt que « url »
-        $this->url = $this->file->guessExtension();
+        $this->extension = $this->file->guessExtension();
 
         // Et on génère l'attribut alt de la balise <img>, à la valeur du nom du fichier sur le PC de l'internaute
         $this->alt = $this->file->getClientOriginalName();
+
     }
 
     /**
@@ -158,8 +159,9 @@ class Image
         // On déplace le fichier envoyé dans le répertoire de notre choix
         $this->file->move(
           $this->getUploadRootDir(), // Le répertoire de destination
-          $this->id.'.'.$this->url   // Le nom du fichier à créer, ici « id.extension »
-          );
+          $this->id.'.'.$this->extension   // Le nom du fichier à créer, ici « id.extension »
+        );
+
     }
 
     /**
@@ -168,7 +170,7 @@ class Image
     public function preRemoveUpload()
     {
         // On sauvegarde temporairement le nom du fichier, car il dépend de l'id
-        $this->tempFilename = $this->getUploadRootDir().'/'.$this->id.'.'.$this->url;
+        $this->tempFilename = $this->getUploadRootDir().'/'.$this->id.'.'.$this->extension;
     }
 
     /**
@@ -180,7 +182,7 @@ class Image
         if (file_exists($this->tempFilename)) {
           // On supprime le fichier
           unlink($this->tempFilename);
-      }
+        }
     }
 
     public function getUploadDir()
@@ -197,8 +199,9 @@ class Image
 
     public function getWebPath()
     {
-        return $this->getUploadDir().'/'.$this->getId().'.'.$this->getUrl();
+        return $this->getUploadDir().'/'.$this->getId().'.'.$this->getExtension();
     }
+
 
 
 

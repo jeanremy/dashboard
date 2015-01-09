@@ -33,9 +33,8 @@ $(document).ready(function() {
 		  type:           $this.attr('method'),
 		  data: $this.serialize(),
 		  beforeSend: function(data) {
-			console.log('beforsend');
 		  },
-		  success: function(data) {
+		  success: function(data) {	
 			if(data.code == 200) {
 				$parentBloc.find('.bloc > h2 + .row').append(data.response);
 				if(empty == true)

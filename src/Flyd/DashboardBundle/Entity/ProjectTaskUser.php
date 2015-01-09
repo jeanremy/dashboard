@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * ProjectTaskUser
  *
- * @ORM\Table()
+ * @ORM\Table(name="project_task_user")
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks()
  */
@@ -51,6 +51,27 @@ class ProjectTaskUser
      * @ORM\Column(name="status", type="string")
      */
     private $status;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_important", type="boolean")
+     */
+    private $isImportant;
+
+    /**
+     * @var time
+     *
+     * @ORM\Column(name="estimated_time", type="time")
+     */
+    private $estimatedTime;
+
+    /**
+     * @var time
+     *
+     * @ORM\Column(name="real_time", type="time")
+     */
+    private $realTime;
 
 
     /**
@@ -167,5 +188,74 @@ class ProjectTaskUser
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * Set isImportant
+     *
+     * @param boolean $isImportant
+     * @return ProjectTaskUser
+     */
+    public function setIsImportant($isImportant)
+    {
+        $this->isImportant = $isImportant;
+
+        return $this;
+    }
+
+    /**
+     * Get isImportant
+     *
+     * @return boolean 
+     */
+    public function getIsImportant()
+    {
+        return $this->isImportant;
+    }
+
+    /**
+     * Set estimatedTime
+     *
+     * @param \DateTime $estimatedTime
+     * @return ProjectTaskUser
+     */
+    public function setEstimatedTime($estimatedTime)
+    {
+        $this->estimatedTime = $estimatedTime;
+
+        return $this;
+    }
+
+    /**
+     * Get estimatedTime
+     *
+     * @return \DateTime 
+     */
+    public function getEstimatedTime()
+    {
+        return $this->estimatedTime;
+    }
+
+    /**
+     * Set realTime
+     *
+     * @param \DateTime $realTime
+     * @return ProjectTaskUser
+     */
+    public function setRealTime($realTime)
+    {
+        $this->realTime = $realTime;
+
+        return $this;
+    }
+
+    /**
+     * Get realTime
+     *
+     * @return \DateTime 
+     */
+    public function getRealTime()
+    {
+        return $this->realTime;
     }
 }

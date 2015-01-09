@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Task
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Flyd\DashboardBundle\Entity\TaskRepository")
  */
 class Task
 {
@@ -29,6 +29,11 @@ class Task
     * @ORM\OneToMany(targetEntity="Flyd\DashboardBundle\Entity\ProjectTaskUser", mappedBy="task")
     */
     private $project_task_users;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Flyd\DashboardBundle\Entity\ProjectCanvasTask", mappedBy="task")
+     */
+    private $project_canvas_tasks;
 
     /**
      * @var string
@@ -132,7 +137,11 @@ class Task
      */
     public function getStep()
     {
-        return $this->step;
+        if($this->step == 1){
+            return 'studio'; 
+        } else {
+            return 'administratif';
+        }
     }
 
     /**

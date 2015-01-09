@@ -28,6 +28,11 @@ class ProjectCanvas
      */
     private $name;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Flyd\DashboardBundle\Entity\ProjectCanvasTask", mappedBy="project_canvas")
+     */
+    private $project_canvas_tasks;
+
 
     /**
      * Get id
@@ -60,5 +65,45 @@ class ProjectCanvas
     public function getName()
     {
         return $this->name;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->project_canvas_tasks = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add project_canvas_tasks
+     *
+     * @param \Flyd\DashboardBundle\Entity\ProjectCanvas $projectCanvasTasks
+     * @return ProjectCanvas
+     */
+    public function addProjectCanvasTask(\Flyd\DashboardBundle\Entity\ProjectCanvas $projectCanvasTasks)
+    {
+        $this->project_canvas_tasks[] = $projectCanvasTasks;
+
+        return $this;
+    }
+
+    /**
+     * Remove project_canvas_tasks
+     *
+     * @param \Flyd\DashboardBundle\Entity\ProjectCanvas $projectCanvasTasks
+     */
+    public function removeProjectCanvasTask(\Flyd\DashboardBundle\Entity\ProjectCanvas $projectCanvasTasks)
+    {
+        $this->project_canvas_tasks->removeElement($projectCanvasTasks);
+    }
+
+    /**
+     * Get project_canvas_tasks
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProjectCanvasTasks()
+    {
+        return $this->project_canvas_tasks;
     }
 }

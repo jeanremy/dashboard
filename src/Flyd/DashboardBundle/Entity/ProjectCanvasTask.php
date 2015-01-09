@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ProjectCanvasTask
  *
- * @ORM\Table()
+ * @ORM\Table(name="projectcanvas_task")
  * @ORM\Entity
  */
 class ProjectCanvasTask
@@ -29,16 +29,19 @@ class ProjectCanvasTask
     private $position;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\ProjectCanvas", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\ProjectCanvas", inversedBy="project_canvas_tasks")
      */
-    private $ProjectCanvas;
+    private $project_canvas;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\Task", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\Task", inversedBy="project_canvas_tasks")
      */
-    private $Task;
+    private $task;
+
+    public function __construct()
+    {
+        $this->project_canvas = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
 
     /**

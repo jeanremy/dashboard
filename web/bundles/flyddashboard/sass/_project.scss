@@ -15,3 +15,16 @@
 		color: $darkgrey;
 	}
 }
+
+.taskcontainer {
+	width: 100%;
+	.thead {
+		font-family: $montserratbold;
+		text-transform: uppercase;
+		color: $darkgrey;
+	}
+	.tbody {
+		font-family: $varela;
+		color: $primary;
+	}
+}

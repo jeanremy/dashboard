@@ -22,8 +22,6 @@ class LoadNeedData extends AbstractFixture implements OrderedFixtureInterface
       $this->setReference('besoin '.$i, $need);
       $em->persist($need);
 
-      // On la persiste
-      $em->persist($need);
     }
 
     // On déclenche l'enregistrement de toutes les catégories
@@ -32,7 +30,7 @@ class LoadNeedData extends AbstractFixture implements OrderedFixtureInterface
  
   public function getOrder()
   {
-    return 5; // the order in which fixtures will be loaded
+    return 6; // the order in which fixtures will be loaded
   }
 }
 

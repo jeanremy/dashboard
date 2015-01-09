@@ -186,8 +186,8 @@ project_delete:
 project_ajax_add_supplier:
     path:     /project/{id}/ajaxaddsupplier
     defaults: { _controller: FlydDashboardBundle:Project:ajaxaddsupplier }
-    requirements:
-        _method: POST
+    # requirements:
+    #     _method: POST
 
 project_ajax_remove_supplier:
     path:     /project/{id}/remove/supplier

@@ -174,6 +174,7 @@ class ProjectController extends Controller
 
     public function ajaxAddSupplierAction($id)
     {
+        // A FAIRE > protection CSFR...
         $request = $this->container->get('request');
         $params = $this->getRequest()->request->all();
         $response = new JsonResponse();
@@ -185,6 +186,7 @@ class ProjectController extends Controller
             if($params)
             {
                 try {
+                    // TAF Faire une requete plsu légère
                     $supplier = $em->getRepository('FlydDashboardBundle:Supplier')->find($params['supplier_id']);
                     $project->addSupplier($supplier);
                     $em->persist($project);

@@ -8,6 +8,8 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Flyd\DashboardBundle\Entity\Image;
 
 class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
@@ -106,7 +108,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
  
   public function getOrder()
   {
-    return 4; // the order in which fixtures will be loaded
+    return 5; // the order in which fixtures will be loaded
   }
 }
 

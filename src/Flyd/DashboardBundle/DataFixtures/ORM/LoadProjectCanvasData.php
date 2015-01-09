@@ -15,13 +15,15 @@ class LoadProjectCanvasData extends AbstractFixture implements OrderedFixtureInt
       'Projet Web',
       'Motion',
       'Plaquette',
-      'Soirées Queen'
+      'Soirées Queen',
+      'Soirées raclettes'
     );
 
-    foreach ($names as $name) {
+    for ($i = 0; $i < count($names); $i++) {
       // On crée la catégorie
       $project_canvas = new ProjectCanvas();
-      $project_canvas->setName($name);
+      $project_canvas->setName($names[$i]);
+      $this->setReference('projectcanvas '.$i, $project_canvas);
 
       // On la persiste
       $em->persist($project_canvas);
@@ -33,7 +35,7 @@ class LoadProjectCanvasData extends AbstractFixture implements OrderedFixtureInt
  
   public function getOrder()
   {
-    return 2; // the order in which fixtures will be loaded
+    return 10; // the order in which fixtures will be loaded
   }
 }
 
