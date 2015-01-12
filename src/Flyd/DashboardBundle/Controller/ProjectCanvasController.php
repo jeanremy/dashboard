@@ -8,9 +8,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Flyd\DashboardBundle\Entity\ProjectCanvas;
+use Flyd\DashboardBundle\Form\ProjectCanvasTaskType;
+use Flyd\DashboardBundle\Form\TaskType;
 use Flyd\DashboardBundle\Form\ProjectCanvasType;
 use Flyd\DashboardBundle\Entity\ProjectCanvasTask;
-use Flyd\DashboardBundle\Form\ProjectCanvasTaskType;
+use Flyd\DashboardBundle\Entity\Task;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
@@ -81,13 +83,14 @@ class ProjectCanvasController extends Controller
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('FlydDashboardBundle:ProjectCanvas')->find($id);
+        $pctlength = $entity->getProjectCanvasTasks();
         $pct = new ProjectCanvasTask();
+        $pct->setPosition(count($pctlength) +1);
 
         $pctform = $this->get('form.factory')->create(new ProjectCanvasTaskType(), $pct);
-        $entity = $em->getRepository('FlydDashboardBundle:ProjectCanvas')->find($id);
         $minitasks = $em->getRepository('FlydDashboardBundle:Task')->getTaskIdentifiers();
 
-        //Get all users of a project
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find ProjectCanvas entity.');
@@ -164,212 +167,165 @@ class ProjectCanvasController extends Controller
 
     }
 
-    public function ajaxAddSupplierAction($id)
+    /**
+     * Add a task entity.
+     *
+     * @Method("POST")
+     */
+    public function ajaxAddTaskAction(Request $request, $id)
     {
+        $response = new JsonResponse();
+        
+        if(!$request->isXmlHttpRequest()) {
+            return $response->setData(array(
+                'code' => 500,
+                'response' => 'not an ajax request'
+            ));
+        }
+
+        $em = $this->getDoctrine()->getManager();        
+        $projectcanvas = $em->getRepository('FlydDashboardBundle:ProjectCanvas')->find($id);
+        $pct = new ProjectCanvasTask();
+        $pct->setProjectCanvas($projectcanvas);
         $request = $this->container->get('request');
         $params = $this->getRequest()->request->all();
-        $response = new JsonResponse();
-        $em = $this->getDoctrine()->getManager();
-        $project = $em->getRepository('FlydDashboardBundle:ProjectCanvas')->find($id);
 
-        if($request->isXmlHttpRequest())
-        {
-            if($params)
-            {
-                try {
-                    $supplier = $em->getRepository('FlydDashboardBundle:Supplier')->find($params['supplier_id']);
-                    $project->addSupplier($supplier);
-                    $em->persist($project);
-                    $em->flush();
-                    $response->setData(array(
-                        'code' => 200,
-                        'response' => $this->renderView('FlydDashboardBundle:Supplier:mini.html.twig', array(
-                          'supplier' => $supplier,
-                          'entity' => $project
+        // Si tache existante
+        if($params['task_id']) {
+            $task = $em->getRepository('FlydDashboardBundle:Task')->find($params['task_id']);
+            $pct->setTask($task);
+        }else {
+            $task = new Task();
+        }
+
+        $form = $this->get('form.factory')->create(new ProjectCanvasTaskType(), $pct);
+
+        if ($form->handleRequest($request)->isValid()) {
+            try {                
+                $em->persist($pct);
+                $projectcanvas->addProjectCanvasTask($pct);
+                $em->persist($projectcanvas);
+                $em->flush();
+
+                $response->setData(array(
+                    'code' => 200,
+                    'response' => $this->renderView('FlydDashboardBundle:ProjectCanvasTask:mini.html.twig', array(
+                          'pct' => $pct
                         ))
-                    ));
-                } catch(\Doctrine\ORM\ORMException $e) {
-                    $response->setData(array(
-                        'code' => 500,
-                        'response' => $e->getMessage()
-                    ));
-                }
-                catch(\Exception $e){
-                    $response->setData(array(
-                        'code' => 500,
-                        'response' => $e->getMessage()
-                    ));
-                }
-            }
-            else {
+                ));
+            } catch(\Doctrine\ORM\ORMException $e) {
                 $response->setData(array(
                     'code' => 500,
-                    'response' => 'Supplier missing'
+                    'response' => $e->getMessage()
                 ));
             }
-
+            catch(\Exception $e){
+                $response->setData(array(
+                    'code' => 500,
+                    'response' => $e->getMessage()
+                ));
+            }
         } else {
             $response->setData(array(
-                'code' => 500,
-                'response' => 'Not an ajax request'
-            ));            
+                    'code' => 500,
+                    'response' => $form->getErrors(true)
+                ));
         }
         return $response;
+        die();
     }
 
-
-    public function ajaxRemoveSupplierAction($id)
+    /**
+     * Delete a task entity.
+     *
+     * @Method("POST")
+     */
+    public function ajaxDeleteTaskAction(Request $request, $id)
     {
+        $em = $this->getDoctrine()->getManager();
+        $response = new JsonResponse();
         $request = $this->container->get('request');
         $params = $this->getRequest()->request->all();
-        $response = new JsonResponse();
-        $em = $this->getDoctrine()->getManager();
-        $project = $em->getRepository('FlydDashboardBundle:ProjectCanvas')->find($id);
+        if(!$request->isXmlHttpRequest() || !$params['pct_id']) {
+            return $response->setData(array(
+                'code' => 500,
+                'response' => 'not an ajax request'
+            ));
+        }
+        try {            
+            $pct = $em->getRepository('FlydDashboardBundle:ProjectCanvasTask')->find($params['pct_id']);
+            $em->remove($pct);
+            $em->flush();
 
-        if($request->isXmlHttpRequest())
-        {
-            if($params)
-            {
-                try {
-                    $supplier = $em->getRepository('FlydDashboardBundle:Supplier')->find($params['element_id']);
-                    $project->removeSupplier($supplier);
-                    $em->persist($project);
-                    $em->flush();
-                    $response->setData(array(
-                        'code' => 200,
-                        'response' => 'Fournisseur bien retiré.'
-                    ));
-                } catch(\Doctrine\ORM\ORMException $e) {
-                    $response->setData(array(
-                        'code' => 500,
-                        'response' => $e->getMessage()
-                    ));
-                }
-                catch(\Exception $e){
-                    $response->setData(array(
-                        'code' => 500,
-                        'response' => $e->getMessage()
-                    ));
-                }
-            }
-            else {
-                $response->setData(array(
-                    'code' => 500,
-                    'response' => 'Fournisseur manquant.'
-                ));
-            }
-
-        } else {
+            $response->setData(array(
+                'code' => 200,
+                'response' => $pct->getId()
+            ));
+        } catch(\Doctrine\ORM\ORMException $e) {
             $response->setData(array(
                 'code' => 500,
-                'response' => 'Not an ajax request'
-            ));            
+                'response' => $e->getMessage()
+            ));
         }
+        catch(\Exception $e){
+            $response->setData(array(
+                'code' => 500,
+                'response' => $e->getMessage()
+            ));
+        }
+       
         return $response;
+        die();
     }
 
-    public function ajaxAddUserAction($id)
+    /**
+     * Reorder tasks.
+     *
+     * @Method("POST")
+     */
+    public function ajaxReorderTasksAction(Request $request, $id)
     {
+        $response = new JsonResponse();
+        $em = $this->getDoctrine()->getManager();        
+        $projectcanvas = $em->getRepository('FlydDashboardBundle:ProjectCanvas')->find($id);
+
         $request = $this->container->get('request');
         $params = $this->getRequest()->request->all();
-        $response = new JsonResponse();
-        $em = $this->getDoctrine()->getManager();
-        $project = $em->getRepository('FlydDashboardBundle:ProjectCanvas')->find($id);
- 
 
-        if($request->isXmlHttpRequest())
-        {
-            if($params)
-            {
-                try {
-                    $user = $em->getRepository('FlydDashboardBundle:User')->find($params['user_id']);
-                    $project->addUser($user);
-                    $em->persist($project);
-                    $em->flush();
-                    $response->setData(array(
-                        'code' => 200,
-                        'response' => $this->renderView('FlydDashboardBundle:User:mini.html.twig', array(
-                          'user' => $user,
-                          'entity' => $project
-                        ))
-                    ));
-                } catch(\Doctrine\ORM\ORMException $e) {
-                    $response->setData(array(
-                        'code' => 500,
-                        'response' => $e->getMessage()
-                    ));
-                }
-                catch(\Exception $e){
-                    $response->setData(array(
-                        'code' => 500,
-                        'response' => $e->getMessage()
-                    ));
-                }
-            }
-            else {
-                $response->setData(array(
-                    'code' => 500,
-                    'response' => 'User missing'
-                ));
-            }
+        if(!$request->isXmlHttpRequest() || !$params['pct']) {
+            return $response->setData(array(
+                'code' => 500,
+                'response' => 'not an ajax request'
+            ));
+        }
+        try {      
+            $i = 1;
+            foreach ($params['pct'] as $pctid) {
+                $pct = $em->getRepository('FlydDashboardBundle:ProjectCanvasTask')->find($pctid);
+                $pct->setPosition($i);
+                $em->persist($pct);
+                $i++;
+            }    
+            $em->flush();
 
-        } else {
+            $response->setData(array(
+                'code' => 200,
+                'response' => $params['pct']
+            ));
+        } catch(\Doctrine\ORM\ORMException $e) {
             $response->setData(array(
                 'code' => 500,
-                'response' => 'Not an ajax request'
-            ));            
+                'response' => $e->getMessage()
+            ));
         }
-        return $response;
-    }
-
-
-    public function ajaxRemoveUserAction($id)
-    {
-        $request = $this->container->get('request');
-        $params = $this->getRequest()->request->all();
-        $response = new JsonResponse();
-        $em = $this->getDoctrine()->getManager();
-        $project = $em->getRepository('FlydDashboardBundle:ProjectCanvas')->find($id);
-
-        if($request->isXmlHttpRequest())
-        {
-            if($params)
-            {
-                try {
-                    $user = $em->getRepository('FlydDashboardBundle:User')->find($params['element_id']);
-                    $user->removeProjectCanvas($project);
-                    $em->persist($user);
-                    $em->flush();
-                    $response->setData(array(
-                        'code' => 200,
-                        'response' => 'Utilisateur bien retiré.'
-                    ));
-                } catch(\Doctrine\ORM\ORMException $e) {
-                    $response->setData(array(
-                        'code' => 500,
-                        'response' => $e->getMessage()
-                    ));
-                }
-                catch(\Exception $e){
-                    $response->setData(array(
-                        'code' => 500,
-                        'response' => $e->getMessage()
-                    ));
-                }
-            }
-            else {
-                $response->setData(array(
-                    'code' => 500,
-                    'response' => 'Fournisseur manquant.'
-                ));
-            }
-
-        } else {
+        catch(\Exception $e){
             $response->setData(array(
                 'code' => 500,
-                'response' => 'Not an ajax request'
-            ));            
+                'response' => $e->getMessage()
+            ));
         }
+       
         return $response;
+        die();
     }
 }

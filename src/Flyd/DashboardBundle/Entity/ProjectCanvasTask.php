@@ -34,14 +34,10 @@ class ProjectCanvasTask
     private $project_canvas;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\Task", inversedBy="project_canvas_tasks")
+     * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\Task", inversedBy="project_canvas_tasks", cascade="persist")
      */
     private $task;
 
-    public function __construct()
-    {
-        $this->project_canvas = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
 
     /**

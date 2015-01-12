@@ -22,9 +22,38 @@
 		font-family: $montserratbold;
 		text-transform: uppercase;
 		color: $darkgrey;
+		border-bottom: 1px solid $grey;
+		th {
+			padding: 10px 0;
+		} 
 	}
 	.tbody {
 		font-family: $varela;
 		color: $primary;
+		.sortable {cursor: move;}
+		.ui-sortable-placeholder {border: 1px dashed $darkgrey;}
 	}
+	.task {
+		border-bottom: 1px solid $grey;
+		> td {
+			padding: 10px 0;
+		} 
+	}
+}
+.ui-autocomplete {
+	background: white;
+	border-left: 1px solid $grey;
+	border-right: 1px solid $grey;
+	border-bottom: 1px solid $grey;
+	font-family: $varela;
+	padding: 5px;
+	width: auto;
+}
+.ui-menu-item:hover {
+	background: $darkgrey;
+	color: #fff;
+}
+.ui-helper-hidden-accessible {display:none;}
+.ui-sortable-disabled td {
+	color: $darkgrey!important;
 }

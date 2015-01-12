@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * ProjectCanvas
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Flyd\DashboardBundle\Entity\ProjectCanvasRepository")
  */
 class ProjectCanvas
 {
@@ -30,6 +30,7 @@ class ProjectCanvas
 
     /**
      * @ORM\OneToMany(targetEntity="Flyd\DashboardBundle\Entity\ProjectCanvasTask", mappedBy="project_canvas")
+     * @ORM\OrderBy({"position" = "ASC"})
      */
     private $project_canvas_tasks;
 
@@ -80,7 +81,7 @@ class ProjectCanvas
      * @param \Flyd\DashboardBundle\Entity\ProjectCanvas $projectCanvasTasks
      * @return ProjectCanvas
      */
-    public function addProjectCanvasTask(\Flyd\DashboardBundle\Entity\ProjectCanvas $projectCanvasTasks)
+    public function addProjectCanvasTask(\Flyd\DashboardBundle\Entity\ProjectCanvasTask $projectCanvasTasks)
     {
         $this->project_canvas_tasks[] = $projectCanvasTasks;
 
@@ -92,7 +93,7 @@ class ProjectCanvas
      *
      * @param \Flyd\DashboardBundle\Entity\ProjectCanvas $projectCanvasTasks
      */
-    public function removeProjectCanvasTask(\Flyd\DashboardBundle\Entity\ProjectCanvas $projectCanvasTasks)
+    public function removeProjectCanvasTask(\Flyd\DashboardBundle\Entity\ProjectCanvasTask $projectCanvasTasks)
     {
         $this->project_canvas_tasks->removeElement($projectCanvasTasks);
     }
@@ -105,5 +106,10 @@ class ProjectCanvas
     public function getProjectCanvasTasks()
     {
         return $this->project_canvas_tasks;
+    }
+
+    public function clearProjectCanvasTasks()
+    {
+        $this->getProjectCanvasTasks()->clear();
     }
 }

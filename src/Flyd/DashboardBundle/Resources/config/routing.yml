@@ -218,6 +218,12 @@ projectcanvas_add:
     path:     /projectcanvas/add
     defaults: { _controller: FlydDashboardBundle:ProjectCanvas:add }
 
+projectcanvas_ajax_add_task:
+    path:     /projectcanvas/{id}/addtask
+    defaults: { _controller: FlydDashboardBundle:ProjectCanvas:ajaxaddtask }
+    requirements:
+        _method: POST
+
 projectcanvas_show:
     path:     /projectcanvas/{id}
     defaults: { _controller: FlydDashboardBundle:ProjectCanvas:show }
@@ -229,3 +235,15 @@ projectcanvas_edit:
 projectcanvas_delete:
     path:     /projectcanvas/{id}/delete
     defaults: { _controller: FlydDashboardBundle:ProjectCanvas:delete }
+
+projectcanvas_ajax_delete_task:
+    path:     /projectcanvas/{id}/deletetask
+    defaults: { _controller: FlydDashboardBundle:ProjectCanvas:ajaxdeletetask }
+    requirements:
+        _method: POST
+
+projectcanvas_ajax_reorder_tasks:
+    path:     /projectcanvas/{id}/reordertasks
+    defaults: { _controller: FlydDashboardBundle:ProjectCanvas:ajaxreordertasks }
+    requirements:
+        _method: POST

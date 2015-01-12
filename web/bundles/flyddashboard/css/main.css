@@ -826,11 +826,55 @@ select {
 	font-family: "montserratbold", sans-serif;
 	text-transform: uppercase;
 	color: #8f979e;
+	border-bottom: 1px solid #d6d7d8;
+}
+
+.taskcontainer .thead th {
+	padding: 10px 0;
 }
 
 .taskcontainer .tbody {
 	font-family: "varela", sans-serif;
 	color: #2b303e;
+}
+
+.taskcontainer .tbody .sortable {
+	cursor: move;
+}
+
+.taskcontainer .tbody .ui-sortable-placeholder {
+	border: 1px dashed #8f979e;
+}
+
+.taskcontainer .task {
+	border-bottom: 1px solid #d6d7d8;
+}
+
+.taskcontainer .task > td {
+	padding: 10px 0;
+}
+
+.ui-autocomplete {
+	background: white;
+	border-left: 1px solid #d6d7d8;
+	border-right: 1px solid #d6d7d8;
+	border-bottom: 1px solid #d6d7d8;
+	font-family: "varela", sans-serif;
+	padding: 5px;
+	width: auto;
+}
+
+.ui-menu-item:hover {
+	background: #8f979e;
+	color: #fff;
+}
+
+.ui-helper-hidden-accessible {
+	display: none;
+}
+
+.ui-sortable-disabled td {
+	color: #8f979e !important;
 }
 
 .item {

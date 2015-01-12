@@ -15,7 +15,7 @@ class TaskRepository extends EntityRepository
 	public function getTaskIdentifiers() {
 		return $this
 		    ->createQueryBuilder('a')
-            ->addSelect(array('a.id','a.name'))
+            ->addSelect(array('a.id','a.name','a.step'))
 		    ->getQuery()
 		    ->getResult()
 		  ;
