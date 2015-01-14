@@ -52,15 +52,70 @@
             </div>
            
         </div>
+
         <div class="col-sm-12">
             <div class="bloc bloc-inline-edition">
-                  <h2 class="bloc__title">Tâches prédéfinies</h2>
-            </div>
+                <h2 class="bloc__title">Tâches prédéfinies</h2>
+                {% if entity.projectcanvastasks %}
+                <table class="taskcontainer">
+                    <thead class="thead">
+                        <tr>
+                            <th>Êtapes</th>
+                            <th>Tâche</th>
+                            <th>Suppr</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody">
+                    {% for pct in entity.projectcanvastasks %}
+                        <tr id="{{pct.id}}" class="task sortable" data-position="{{pct.position}}">
+                            <td>{{pct.task.step|capitalize}}</td>
+                            <td>{{pct.task.name|capitalize}}</td>
+                            <td><a href="" class="line--remove remove-task">Retirer</a></td>
+                        </tr>
+                    {% endfor %}                        
+                    </tbody>
+                </table>
+                {% endif %}
+               
+                <!-- Form pour créer pct avec task imbriquée -->
+                {{form_start(pctform, 
+                    {'attr': {
+                        'class': 'form-horizontal',
+                        'id' : 'flyd_dashboardbundle_projectcanvastask'
+                    }, 
+                     'action': path('projectcanvas_ajax_add_task', {'id': entity.id})}
+                )}}
+                    <h2 class="bloc__subtitle">Ajouter une tâche</h2>
+                    <div class="newtask">  
+                        <input type="hidden" name="task_id" id="task_id" />
+                        {{ form_widget(pctform.position) }}                      
+                        {{ form_label(pctform.task.name, "Nom de la tâche", {'label_attr': {'class': 'control-label'}}) }}
+                        {{ form_widget(pctform.task.name, {'attr': {'class': 'form-control'}}) }}
+
+                        {{ form_label(pctform.task.step, "Etape", {'label_attr': {'class': 'control-label'}}) }}
+                        {{ form_widget(pctform.task.step, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                {{ form_rest(pctform) }}
+                {{ form_end(pctform) }}
+            </div>    
         </div>
     </div>
 
 {% endblock %}
 
 {% block js %}
-     <script type="text/javascript" src="{{ asset('bundles/flyddashboard/js/additems.js') }}"></script>   
+    <script type="text/javascript" src="{{ asset('bundles/flyddashboard/js/vendor/jquery-ui/jquery-ui.min.js') }}"></script>
+    <link href="{{ asset('bundles/flyddashboard/js/vendor/jquery-ui/jquery-ui.min.css') }}"></link>
+    <script>
+    
+        var tasks = [
+            {% for mini in minitasks %}
+            { label: "{{mini.name}}", value: "{{mini.name}}", id: "{{mini.id}}", step: "{{mini.step}}" },
+            {% endfor %}
+        ];
+        var updateOrderUrl = "{{path('projectcanvas_ajax_reorder_tasks', {'id': entity.id})}}";
+        var removeUrl = "{{path('projectcanvas_ajax_delete_task', {'id': entity.id})}}";
+        
+    </script>
+    <script type="text/javascript" src="{{ asset('bundles/flyddashboard/js/taskshandler.js') }}"></script>
 {% endblock %}

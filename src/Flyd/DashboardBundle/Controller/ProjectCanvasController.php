@@ -115,9 +115,16 @@ class ProjectCanvasController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $projectcanvas = $em->getRepository('FlydDashboardBundle:ProjectCanvas')->find($id);
-
+        $pctlength = $projectcanvas->getProjectCanvasTasks();
+        
+        $pct = new ProjectCanvasTask();
+        $pct->setPosition(count($pctlength) +1);
 
         $form = $this->get('form.factory')->create(new ProjectCanvasType(), $projectcanvas);
+        $pctform = $this->get('form.factory')->create(new ProjectCanvasTaskType(), $pct);
+        $minitasks = $em->getRepository('FlydDashboardBundle:Task')->getTaskIdentifiers();
+
+
 
         if ($form->handleRequest($request)->isValid()) {
           $em = $this->getDoctrine()->getManager();
@@ -131,7 +138,9 @@ class ProjectCanvasController extends Controller
 
         return $this->render('FlydDashboardBundle:ProjectCanvas:edit.html.twig', array(
           'entity' => $projectcanvas,
-          'form' => $form->createView()
+          'form' => $form->createView(),
+          'pctform' => $pctform->createView(),
+          'minitasks' => $minitasks
         ));
     }
 

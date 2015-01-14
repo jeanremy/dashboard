@@ -35,7 +35,7 @@ $(document).on('click', '.remove-task', function(e) {
     e.preventDefault();
     var $this = $(this);
     $.ajax({
-      url:            "{{path('projectcanvas_ajax_delete_task', {'id': entity.id})}}",
+      url:            removeUrl,
       type:           'POST',
       data: {
         pct_id: $this.parent().parent().attr('id')
@@ -72,7 +72,7 @@ $sort = $('.tbody').sortable({
 function sendTasksOrder() {
     $sort.sortable("disable");
     $.ajax({
-      url:            "{{path('projectcanvas_ajax_reorder_tasks', {'id': entity.id})}}",
+      url:            updateOrderUrl,
       type:           'POST',
       data: {
         pct: $sort.sortable('toArray')

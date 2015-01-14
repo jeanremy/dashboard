@@ -35,7 +35,6 @@
                     </tbody>
                 </table>
                 {% endif %}
-                </ul>
                
                 <!-- Form pour créer pct avec task imbriquée -->
                 {{form_start(pctform, 
@@ -75,7 +74,10 @@
             { label: "{{mini.name}}", value: "{{mini.name}}", id: "{{mini.id}}", step: "{{mini.step}}" },
             {% endfor %}
         ];
+
+        var updateOrderUrl = "{{path('projectcanvas_ajax_reorder_tasks', {'id': entity.id})}}";
+        var removeUrl = "{{path('projectcanvas_ajax_delete_task', {'id': entity.id})}}";
+        
     </script>
     <script type="text/javascript" src="{{ asset('bundles/flyddashboard/js/taskhandler.js') }}"></script>
-     <script type="text/javascript" src="{{ asset('bundles/flyddashboard/js/additems.js') }}"></script>   
 {% endblock %}
