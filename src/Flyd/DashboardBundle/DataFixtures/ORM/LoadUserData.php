@@ -8,8 +8,6 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Flyd\DashboardBundle\Entity\Image;
 
 class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
@@ -24,10 +22,10 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
   public function load(ObjectManager $em)
   {
     // Get our userManager, you must implement `ContainerAwareInterface`
-    $em = $this->container->get('fos_user.user_manager');
+    $usermanager = $this->container->get('fos_user.user_manager');
 
     // Create our user and set details
-    $user = $em->createUser();
+    $user = $usermanager->createUser();
     $user->setUsername('pf');
     $user->setEmail('pf@flydesigners.com');
     $user->setPlainPassword('pf');
@@ -35,13 +33,14 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
     $user->setEnabled(true);
     $user->setRoles(array('ROLE_ADMIN'));
     $user->setJob('Directeur');
+    $user->setImage($this->getReference('placeholder'));
     $this->setReference('user', $user);
 
     // Update the user
-    $em->updateUser($user, true);
+    $usermanager->updateUser($user, true);
 
     // Create our user and set details
-    $user2 = $em->createUser();
+    $user2 = $usermanager->createUser();
     $user2->setUsername('Anaïs');
     $user2->setEmail('anais@flydesigners.com');
     $user2->setPlainPassword('anais');
@@ -49,12 +48,13 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
     $user2->setEnabled(true);
     $user2->setRoles(array('ROLE_ADMIN'));
     $user2->setJob('chargée de projet');
+    $user->setImage($this->getReference('placeholder'));
 
     // Update the user
-    $em->updateUser($user2, true);
+    $usermanager->updateUser($user2, true);
 
     // Create our user and set details
-    $user3 = $em->createUser();
+    $user3 = $usermanager->createUser();
     $user3->setUsername('Jo');
     $user3->setEmail('jonathan@flydesigners.com');
     $user3->setPlainPassword('jonathan');
@@ -62,12 +62,13 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
     $user3->setEnabled(true);
     $user3->setRoles(array('ROLE_ADMIN'));
     $user3->setJob('Directeur Artistique');
+    $user->setImage($this->getReference('placeholder'));
 
     // Update the user
-    $em->updateUser($user3, true);
+    $usermanager->updateUser($user3, true);
 
     // Create our user and set details
-    $user4 = $em->createUser();
+    $user4 = $usermanager->createUser();
     $user4->setUsername('Sarah');
     $user4->setEmail('sarah@flydesigners.com');
     $user4->setPlainPassword('sarah');
@@ -75,12 +76,13 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
     $user4->setEnabled(true);
     $user4->setRoles(array('ROLE_ADMIN'));
     $user4->setJob('chargée de projet');
+    $user->setImage($this->getReference('placeholder'));
 
     // Update the user
-    $em->updateUser($user4, true);
+    $usermanager->updateUser($user4, true);
 
     // Create our user and set details
-    $user5 = $em->createUser();
+    $user5 = $usermanager->createUser();
     $user5->setUsername('Romain');
     $user5->setEmail('romain@flydesigners.com');
     $user5->setPlainPassword('romain');
@@ -88,12 +90,13 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
     $user5->setEnabled(true);
     $user5->setRoles(array('ROLE_ADMIN'));
     $user5->setJob('motion designer');
+    $user->setImage($this->getReference('placeholder'));
 
     // Update the user
-    $em->updateUser($user5, true);
+    $usermanager->updateUser($user5, true);
 
     // Create our user and set details
-    $user6 = $em->createUser();
+    $user6 = $usermanager->createUser();
     $user6->setUsername('JR');
     $user6->setEmail('jeanremy@flydesigners.com');
     $user6->setPlainPassword('jr');
@@ -101,14 +104,15 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
     $user6->setEnabled(true);
     $user6->setRoles(array('ROLE_ADMIN'));
     $user6->setJob('developpeur');
+    $user->setImage($this->getReference('placeholder'));
 
     // Update the user
-    $em->updateUser($user6, true);
+    $usermanager->updateUser($user6, true);
   }
  
   public function getOrder()
   {
-    return 5; // the order in which fixtures will be loaded
+    return 6; // the order in which fixtures will be loaded
   }
 }
 

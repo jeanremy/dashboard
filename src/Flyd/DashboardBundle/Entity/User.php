@@ -35,8 +35,7 @@ class User extends BaseUser
     private $projects;
 
     /**
-    * @ORM\OneToOne(targetEntity="Flyd\DashboardBundle\Entity\Image", cascade={"persist", "remove"})
-    * @ORM\JoinColumn(nullable=true)
+    * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\Image", cascade={"persist", "remove"})
     */
     private $image;
 
