@@ -96,6 +96,7 @@ p {
 	bottom: 0;
 	width: 280px;
 	padding: 15px;
+	z-index: 100;
 	.deploy & {
 		display: none;
 	}
@@ -130,10 +131,6 @@ p {
 	color: $darkgrey;
 	font-family: $montserratbold;
 	text-transform: uppercase;
-<<<<<<< HEAD
-	padding: 2px 0;
-	cursor: pointer;
-=======
 	padding: 10px 0;
 	position: relative;
 	cursor: pointer;
@@ -151,7 +148,6 @@ p {
 	&.show.subs:after{
 		transform: rotate(180deg);
 	}
->>>>>>> fe1644c324858897bf5ebcb755842ee3b5c703d5
 }
 .submenu {display:none;}
 .submenu > li {
