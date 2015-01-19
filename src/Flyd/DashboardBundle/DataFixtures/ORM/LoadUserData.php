@@ -48,7 +48,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
     $user2->setEnabled(true);
     $user2->setRoles(array('ROLE_ADMIN'));
     $user2->setJob('chargée de projet');
-    $user->setImage($this->getReference('placeholder'));
+    $user2->setImage($this->getReference('placeholder'));
 
     // Update the user
     $usermanager->updateUser($user2, true);
@@ -62,7 +62,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
     $user3->setEnabled(true);
     $user3->setRoles(array('ROLE_ADMIN'));
     $user3->setJob('Directeur Artistique');
-    $user->setImage($this->getReference('placeholder'));
+    $user3->setImage($this->getReference('placeholder'));
 
     // Update the user
     $usermanager->updateUser($user3, true);
@@ -76,7 +76,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
     $user4->setEnabled(true);
     $user4->setRoles(array('ROLE_ADMIN'));
     $user4->setJob('chargée de projet');
-    $user->setImage($this->getReference('placeholder'));
+    $user4->setImage($this->getReference('placeholder'));
 
     // Update the user
     $usermanager->updateUser($user4, true);
@@ -90,7 +90,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
     $user5->setEnabled(true);
     $user5->setRoles(array('ROLE_ADMIN'));
     $user5->setJob('motion designer');
-    $user->setImage($this->getReference('placeholder'));
+    $user5->setImage($this->getReference('placeholder'));
 
     // Update the user
     $usermanager->updateUser($user5, true);
@@ -104,7 +104,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
     $user6->setEnabled(true);
     $user6->setRoles(array('ROLE_ADMIN'));
     $user6->setJob('developpeur');
-    $user->setImage($this->getReference('placeholder'));
+    $user6->setImage($this->getReference('placeholder'));
 
     // Update the user
     $usermanager->updateUser($user6, true);
