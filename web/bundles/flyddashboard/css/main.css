@@ -18,7 +18,8 @@
 	clear: both;
 }
 
-.bloc:after {
+.bloc:after,
+.title__container:after {
 	content: "";
 	display: table;
 	clear: both;
@@ -703,7 +704,7 @@ body {
 	font-family: "varela", sans-serif;
 	font-size: 40px;
 	font-size: 2.5rem;
-	margin-bottom: 30px;
+	display: inline-block;
 }
 
 .lvl1 .profil__pic {
@@ -952,6 +953,12 @@ p.contact__title {
 	margin: 0 auto;
 }
 
+.profil__pic {
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 15px;
+}
+
 /*  GLOBAL
 	======  */
 
@@ -1141,6 +1148,10 @@ p {
 .breadcrumb a:hover,
 .breadcrumb a:focus {
 	color: #2B303E;
+}
+
+.title__container {
+	margin-bottom: 30px;
 }
 
 form .btn--save,

@@ -39,7 +39,7 @@
 		});
 
 		/* User menu */
-		$('.user__name').on('click', function(e) {
+		$('.header .user__name').on('click', function(e) {
 			e.preventDefault();
 			$('.user__menu').toggleClass('deploy');
 		});

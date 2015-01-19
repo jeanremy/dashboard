@@ -176,6 +176,11 @@ p {
 	}
 }
 
+.title__container {
+	margin-bottom: 30px;
+	@extend %clearfix;
+}
+
 form .btn--save,
 form .btn--remove {
 	margin-left: 15px;

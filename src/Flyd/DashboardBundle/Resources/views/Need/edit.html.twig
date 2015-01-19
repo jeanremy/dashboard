@@ -5,9 +5,12 @@
 {% endblock %}
 
 {% block body %}
+
+    <div class="title__container">
+        <p class="breadcrumb"><a href="{{ path('client_show', { 'id': entity.client.id }) }}">{{entity.client}}</a></p>
+        <h1 class="lvl1">{{entity.title}}</h1>
+    </div>
     
-    <p class="breadcrumb"><a href="{{ path('client_show', { 'id': entity.client.id }) }}">{{entity.client}}</a></p>
-    <h1 class="lvl1">{{entity.title}}</h1>
 
     <div class="row">
 

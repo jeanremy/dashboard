@@ -6,14 +6,16 @@
 
 {% block body %}
     
-    <a href="{{ path('project_delete', { 'id': entity.id }) }}" class="btn--delete">Delete</a>
-    <a href="{{ path('project_edit', { 'id': entity.id }) }}" class="btn--edit">Edit</a>
+    <div class="title__container">
+        <a href="{{ path('project_delete', { 'id': entity.id }) }}" class="btn--delete">Delete</a>
+        <a href="{{ path('project_edit', { 'id': entity.id }) }}" class="btn--edit">Edit</a>
 
-    <p class="breadcrumb">
-       <a href="{{ path('client_show', { 'id': entity.need.client.id }) }}">{{entity.need.client}} ></a>
-       <a href="{{ path('need_show', { 'id': entity.need.id }) }}">{{entity.need}}</a>
-    </p>
-    <h1 class="lvl1">{{entity.title}}</h1>
+        <p class="breadcrumb">
+           <a href="{{ path('client_show', { 'id': entity.need.client.id }) }}">{{entity.need.client}} ></a>
+           <a href="{{ path('need_show', { 'id': entity.need.id }) }}">{{entity.need}}</a>
+        </p>
+        <h1 class="lvl1">{{entity.title}}</h1>
+    </div>
 
     <div class="row">
         <div class="col-sm-8">
