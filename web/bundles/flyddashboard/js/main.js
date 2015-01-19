@@ -25,11 +25,26 @@
 			$('body').toggleClass('deploy');
 		});
 
+		/* Menu lis */
+		var $menulis = $('.menu > .subs'),
+			$submenus = $('.submenu');
+		$submenus.hide();
+
+		$menulis.on('click', function() {
+			console.log('click');
+			$(this).siblings().removeClass('show');
+			$(this).siblings().find('.submenu').slideUp();
+			$(this).toggleClass('show');
+			$('.submenu', this).slideToggle();
+		});
+
 		/* User menu */
 		$('.user__name').on('click', function(e) {
 			e.preventDefault();
 			$('.user__menu').toggleClass('deploy');
 		});
+
+
 
 	});
 

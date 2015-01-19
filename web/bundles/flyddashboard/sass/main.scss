@@ -22,9 +22,7 @@
 body {
 	color: $primary;
 	background-color: $greybg;
-	&.deploy {
-		overflow: hidden;
-	}
+	
 }
 
 p {
@@ -92,18 +90,14 @@ p {
 	background-color: $primary;
 	height: 100%;
 	color: #fff;
-	position: absolute;
-	left: 0;
+	position: fixed;
+	height: 100%;
 	top: 0;
 	bottom: 0;
-	width: 300px;
+	width: 280px;
 	padding: 15px;
-	transform: translate3d(-100%, 0, 0);
-	transform-origin: 100% 50%;
-    transform-style: preserve-3d;
-	transition: all 200ms ease;
 	.deploy & {
-		transform: translate3d(0, 0, 0);
+		display: none;
 	}
 }
 	
@@ -131,10 +125,26 @@ p {
 }
 
 .menu > li {
-	color: $greybg;
+	color: $darkgrey;
 	font-family: $montserratbold;
 	text-transform: uppercase;
-	padding: 2px 0;
+	padding: 10px 0;
+	position: relative;
+	cursor: pointer;
+	&.subs:after {
+		content: "";
+		height: 10px;
+		width: 17px;
+		display: block;
+		position: absolute;
+		right: 0;
+		top: 3px;
+		@extend .sprite;
+		transition: transform 200ms ease;
+	}
+	&.show.subs:after{
+		transform: rotate(180deg);
+	}
 }
 .submenu > li {
 	font-family: $varela;
@@ -147,9 +157,9 @@ p {
 /*  MAIN
 	====   */
 .main {
-	transition: all 200ms ease;
+	margin-left: 280px;
 	.deploy & {
-		transform: translate3d(300px, 0, 0);
+		margin-left: 0;
 	}
 
 }
