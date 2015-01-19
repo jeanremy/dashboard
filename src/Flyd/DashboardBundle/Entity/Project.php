@@ -49,7 +49,8 @@ class Project
     private $project_canvas;
 
     /**
-    * @ORM\OneToMany(targetEntity="Flyd\DashboardBundle\Entity\ProjectTaskUser", mappedBy="project")
+    * @ORM\OneToMany(targetEntity="Flyd\DashboardBundle\Entity\ProjectTaskUser", mappedBy="project", cascade={"persist", "remove"})
+    * @ORM\OrderBy({"position" = "ASC"})
     */
     private $project_task_users;
 
@@ -200,7 +201,7 @@ class Project
     {
         $this->project_task_users[] = $project_task_user;
 
-        $project_task_user->setCompany($this);
+        $project_task_user->setProject($this);
 
         return $this;
     }

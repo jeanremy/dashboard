@@ -32,7 +32,6 @@ class ProjectTaskUser
     private $task;
 
     /**
-     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\User", inversedBy="project_task_users")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
@@ -48,28 +47,28 @@ class ProjectTaskUser
     /**
      * @var string
      *
-     * @ORM\Column(name="status", type="string")
+     * @ORM\Column(name="status", type="string", nullable=true)
      */
     private $status;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="is_important", type="boolean")
+     * @ORM\Column(name="is_important", type="boolean", nullable=true)
      */
     private $isImportant;
 
     /**
      * @var time
      *
-     * @ORM\Column(name="estimated_time", type="time")
+     * @ORM\Column(name="estimated_time", type="time", nullable=true)
      */
     private $estimatedTime;
 
     /**
      * @var time
      *
-     * @ORM\Column(name="real_time", type="time")
+     * @ORM\Column(name="real_time", type="time", nullable=true)
      */
     private $realTime;
 

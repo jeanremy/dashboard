@@ -8,9 +8,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Flyd\DashboardBundle\Entity\Project;
+use Flyd\DashboardBundle\Entity\ProjectTaskUser;
+use Flyd\DashboardBundle\Entity\ProjectCanvas;
 use Flyd\DashboardBundle\Entity\Supplier;
 use Flyd\DashboardBundle\Entity\User;
 use Flyd\DashboardBundle\Form\ProjectType;
+use Flyd\DashboardBundle\Form\ProjectEditType;
+use Flyd\DashboardBundle\Form\ProjectTaskUserType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
@@ -66,13 +70,28 @@ class ProjectController extends Controller
         $form = $this->get('form.factory')->create(new ProjectType(), $project);
 
         if ($form->handleRequest($request)->isValid()) {
-          $em = $this->getDoctrine()->getManager();
-          $em->persist($project);
-          $em->flush();
 
-          $request->getSession()->getFlashBag()->add('notice', 'Projet bien enregistré.');
+            // Persist pour ajouter ensuite des ptu
+            $em->persist($project);
+            $em->flush();
 
-          return $this->redirect($this->generateUrl('project_show', array('id' => $project->getId())));
+            $projectcanvas = $project->getProjectCanvas();
+            $pcts = $projectcanvas->getProjectCanvasTasks();
+            foreach ($pcts as $pct) {
+                $ptu = new ProjectTaskUser();
+                $ptu->setProject($project);
+                $ptu->setPosition($pct->getPosition());
+                $ptu->setTask($pct->getTask());
+                $em->persist($ptu);
+                $project->addProjectTaskUser($ptu);
+            }
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($project);
+            $em->flush();
+
+            $request->getSession()->getFlashBag()->add('notice', 'Projet bien enregistré.');
+
+            return $this->redirect($this->generateUrl('project_show', array('id' => $project->getId())));
         }
 
         return $this->render('FlydDashboardBundle:Project:add.html.twig', array(
@@ -96,6 +115,13 @@ class ProjectController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('FlydDashboardBundle:Project')->find($id);
+        $ptus = $entity->getProjectTaskUsers();
+        $forms = array();
+
+        foreach ($ptus as $ptu) {
+            $form = $this->get('form.factory')->create(new ProjectTaskUserType(), $ptu);
+            array_push($forms, $form->createView() );
+        }
 
         //Get all users of a project
 
@@ -104,7 +130,8 @@ class ProjectController extends Controller
         }
 
         return $this->render('FlydDashboardBundle:Project:show.html.twig', array(
-          'entity' => $entity
+          'entity' => $entity,
+          'forms' => $forms
         ));
     }
 
@@ -122,7 +149,7 @@ class ProjectController extends Controller
         $project = $em->getRepository('FlydDashboardBundle:Project')->find($id);
 
 
-        $form = $this->get('form.factory')->create(new ProjectType(), $project);
+        $form = $this->get('form.factory')->create(new ProjectEditType(), $project);
 
         if ($form->handleRequest($request)->isValid()) {
           $em = $this->getDoctrine()->getManager();

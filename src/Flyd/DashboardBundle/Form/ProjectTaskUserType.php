@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ProjectType extends AbstractType
+class ProjectTaskUserType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,31 +15,25 @@ class ProjectType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
-            ->add('category', 'choice', array(
-                'choices'   => array(
-                    '0'     => 'Design',
-                    '1'     => 'Motion',
-                    '2'     => 'Web'
-                )
+            ->add('position', 'hidden')
+            ->add('task', new TaskType(), array(
+                'required' => false
             ))
-            ->add('startDate', 'date', array(
+            
+            ->add('estimatedtime', 'time', array(
                 'widget' => 'single_text'
             ))
-            ->add('deadline', 'date', array(
+            ->add('realtime', 'time', array(
                 'widget' => 'single_text'
             ))
-            ->add('endDate', 'date', array(
-                'widget' => 'single_text'
-            ))
-            ->add('project_canvas', 'entity', array(
-                'class' => 'FlydDashboardBundle:ProjectCanvas',
-                'property' => 'name',
+            ->add('status')
+            ->add('user', 'entity', array(
+                'class' => 'FlydDashboardBundle:User',
+                'property' => 'username',
                 'empty_value' => 'Choisissez une option'
             ))
-            ->add('save','submit', array(
-                'attr' => array('class' => 'btn--save--reverse'),
-                'label' => 'Enregistrer',
+            ->add('isimportant', 'checkbox', array(
+                'required'  => false
             ));
         ;
     }
@@ -50,7 +44,7 @@ class ProjectType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Flyd\DashboardBundle\Entity\Project'
+            'data_class' => 'Flyd\DashboardBundle\Entity\ProjectTaskUser'
         ));
     }
 
@@ -59,6 +53,6 @@ class ProjectType extends AbstractType
      */
     public function getName()
     {
-        return 'flyd_dashboardbundle_project';
+        return 'flyd_dashboardbundle_projecttaskuser';
     }
 }

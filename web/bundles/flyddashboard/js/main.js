@@ -22,13 +22,23 @@
 		/* Menu Toggler */
 		$('#menu--toggle').on('click', function(e) {
 			e.preventDefault();
+			e.stopPropagation();
 			$('body').toggleClass('deploy');
 		});
 
 		/* User menu */
 		$('.user__name').on('click', function(e) {
 			e.preventDefault();
+			e.stopPropagation();
 			$('.user__menu').toggleClass('deploy');
+		});
+		$(document).on('click', function() {
+			$('.user__menu').removeClass('deploy');
+		});
+
+		$('.menu > li').on('click', function(e) {
+			$(this).siblings().find('.submenu').slideUp();
+			$('.submenu', this).slideToggle();
 		});
 
 	});
