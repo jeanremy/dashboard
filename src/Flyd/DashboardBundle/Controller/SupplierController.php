@@ -171,8 +171,9 @@ class SupplierController extends Controller
     public function getFormAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $entities = $em->getRepository('FlydDashboardBundle:Supplier')->getSupplierList();
         $project = $em->getRepository('FlydDashboardBundle:Project')->find($id);
+        $existingsuppliers = $project->getSuppliers();
+        $entities = $em->getRepository('FlydDashboardBundle:Supplier')->getSuppliersWithout($existingsuppliers);
 
         return $this->render('FlydDashboardBundle:Supplier:select.html.twig', array(
             'entities' => $entities,

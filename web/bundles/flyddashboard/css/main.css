@@ -1108,7 +1108,7 @@ p {
 	display: block;
 	position: absolute;
 	right: 0;
-	top: 3px;
+	top: 13px;
 	-webkit-transition: -webkit-transform 200ms ease;
 	        transition: transform 200ms ease;
 }
