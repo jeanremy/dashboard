@@ -6,9 +6,12 @@
 
 {% block body %}
         
-    <a href="{{ path('client_delete', { 'id': entity.id }) }}" class="btn--delete">Delete</a>
-    <a href="{{ path('client_edit', { 'id': entity.id }) }}" class="btn--edit">Edit</a>
-    <h1 class="lvl1">{{entity.name}}</h1>
+    <div class="title__container">
+        <a href="{{ path('client_delete', { 'id': entity.id }) }}" class="btn--delete">Delete</a>
+        <a href="{{ path('client_edit', { 'id': entity.id }) }}" class="btn--edit">Edit</a>
+        <h1 class="lvl1">{{entity.name}}</h1>
+    </div>
+    
     <div class="row">
         <div class="col-sm-12">
             <div class="bloc bloc--general bloc-inline-edition">

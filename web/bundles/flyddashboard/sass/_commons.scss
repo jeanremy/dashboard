@@ -107,9 +107,10 @@
 
 /* Sprite */
 .sprite {
-	background: url(../img/sprite.svg);/* IE 9+ & Android 3+ */
+	background-image: url(../img/sprite.svg);/* IE 9+ & Android 3+ */
+	background-repeat: no-repeat;
 	.no-svg & {
-		background: url(../img/sprite.png);
+		background-image: url(../img/sprite.png);
 	}
 }
 

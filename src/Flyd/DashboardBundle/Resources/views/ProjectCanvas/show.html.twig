@@ -5,11 +5,13 @@
 {% endblock %}
 
 {% block body %}
-    
-    <a href="{{ path('projectcanvas_delete', { 'id': entity.id }) }}" class="btn--delete">Delete</a>
-    <a href="{{ path('projectcanvas_edit', { 'id': entity.id }) }}" class="btn--edit">Edit</a>
+    <div class="title__container">
+        <a href="{{ path('projectcanvas_delete', { 'id': entity.id }) }}" class="btn--delete">Delete</a>
+        <a href="{{ path('projectcanvas_edit', { 'id': entity.id }) }}" class="btn--edit">Edit</a>
 
-    <h1 class="lvl1">{{entity.name}}</h1>
+        <h1 class="lvl1">{{entity.name}}</h1>
+    </div>
+    
 
     <div class="row">
         <div class="col-sm-12">

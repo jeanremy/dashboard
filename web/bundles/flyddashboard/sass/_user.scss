@@ -3,3 +3,9 @@
 	&:nth-child(2n+1) {clear: left;}
 	.line--remove {display: block; textalign: center; margin: 0 auto;}
 }
+
+.profil__pic {
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 15px;
+}

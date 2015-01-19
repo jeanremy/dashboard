@@ -175,7 +175,9 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $project = $em->getRepository('FlydDashboardBundle:Project')->find($id);
-        $entities = $this->getDoctrine()->getManager()->getRepository('FlydDashboardBundle:User')->getUserList();
+        $existingusers = $project->getUsers();
+
+        $entities = $this->getDoctrine()->getManager()->getRepository('FlydDashboardBundle:User')->getUsersWithout($existingusers);
 
         return $this->render('FlydDashboardBundle:User:select.html.twig', array(
             'entities' => $entities,

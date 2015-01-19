@@ -6,7 +6,9 @@
 
 {% block body %}
     
-    <h1 class="lvl1">{{entity.name}}</h1>
+    <div class="title__container">
+        <h1 class="lvl1">{{entity.name}}</h1>
+    </div>
 
     {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 

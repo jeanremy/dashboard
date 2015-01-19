@@ -5,15 +5,18 @@
 {% endblock %}
 
 {% block body %}
+
+    <div class="title__container">
+        {% if app.user.id == entity.id %}
+            <a href="{{ path('user_delete', { 'id': entity.id }) }}" class="btn btn--delete">Supprimer</a>
+            <a href="{{ path('user_edit', { 'id': entity.id }) }}" class="btn btn--edit">Edit</a>
+        {% endif %}
+        {% if entity.image %}
+            <img src="{{ entity.image.webPath | apply_filter('miniature') }}" class="profil__pic" />
+        {% endif %}
+        <h1 class="lvl1">{{entity.username}}</h1>
+    </div>
         
-    {% if app.user.id == entity.id %}
-        <a href="{{ path('user_delete', { 'id': entity.id }) }}" class="btn btn--delete">Supprimer</a>
-        <a href="{{ path('user_edit', { 'id': entity.id }) }}" class="btn btn--edit">Edit</a>
-    {% endif %}
-    {% if entity.image %}
-        <img src="{{ entity.image.webPath | apply_filter('miniature') }}" class="profil__pic" />
-    {% endif %}
-    <h1 class="lvl1">{{entity.username}}</h1>
 
 
     <div class="row">
@@ -41,16 +44,6 @@
                     
                 </div>
 
-
-                <div class="form-group">
-                    <label class="control-label">Profil</label>
-                    <div class="data">
-                        {% if entity.image %}
-                            <img src="{{ entity.image.webPath | apply_filter('miniature') }}" />
-                        {% endif %}
-                    </div>
-                    
-                </div>
 
                 <div class="form-group">
                     <label class="control-label">test projet</label>

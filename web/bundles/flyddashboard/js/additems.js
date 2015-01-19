@@ -39,6 +39,7 @@ $(document).ready(function() {
 				$parentBloc.find('.bloc > h2 + .row').append(data.response);
 				if(empty == true)
 				$parentBloc.find('.bloc input, .bloc select, .bloc textarea').val('');
+				$this.find(':selected').remove();
 			}
 			else {
 			  if(empty == false) {
