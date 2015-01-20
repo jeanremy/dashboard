@@ -26,7 +26,11 @@ class ProjectTaskUserType extends AbstractType
             ->add('realtime', 'time', array(
                 'widget' => 'single_text'
             ))
-            ->add('status')
+            ->add('status', 'entity', array(
+                'class' => 'FlydDashboardBundle:Status',
+                'property' => 'name',
+                'empty_value' => 'Choisissez une option'
+            ))
             ->add('user', 'entity', array(
                 'class' => 'FlydDashboardBundle:User',
                 'property' => 'username',

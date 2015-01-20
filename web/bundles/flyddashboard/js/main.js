@@ -1,7 +1,5 @@
 (function() {
 
-	if(!localStorage.getItem('menu')) {localStorage.setItem('menu', 'on');}
-
 	jQuery(document).ready(function($) {
 
 		/****************************
@@ -27,7 +25,13 @@
 			e.stopPropagation();
 			$('body').toggleClass('deploy');
 
-			localStorage['menu'] == 'off' ? localStorage['menu'] = 'on': localStorage['menu'] = 'off';
+			var menu = localStorage.getItem('menu');
+			if(menu === null) {
+				localStorage.setItem('menu', 'on');
+			} 
+			else {
+				localStorage['menu'] == 'off' ? localStorage['menu'] = 'on': localStorage['menu'] = 'off';
+			}
 		});
 
 		if(localStorage['menu'] == 'off') {

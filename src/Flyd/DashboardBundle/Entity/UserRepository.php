@@ -16,6 +16,7 @@ class UserRepository extends EntityRepository
 
 
 	public function getUsersWithout($existingusers) {
+		$tab = array();
 
 		foreach ($existingusers as $value) {
 			$tab[] = $value->getId();

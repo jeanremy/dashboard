@@ -13,7 +13,7 @@ use Doctrine\ORM\EntityRepository;
 class SupplierRepository extends EntityRepository
 {
 	public function getSuppliersWithout($existingsuppliers) {
-
+		$tab = array();
 		foreach ($existingsuppliers as $value) {
 			$tab[] = $value->getId();
 		}

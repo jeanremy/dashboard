@@ -63,10 +63,6 @@ class ProjectController extends Controller
         // Default values (besoin)
         $project->setNeed($need);
 
-        //Get all users of a project
-
-
-
         $form = $this->get('form.factory')->create(new ProjectType(), $project);
 
         if ($form->handleRequest($request)->isValid()) {

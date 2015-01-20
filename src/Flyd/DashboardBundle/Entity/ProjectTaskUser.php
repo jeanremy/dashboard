@@ -38,18 +38,18 @@ class ProjectTaskUser
     private $user;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\Status", inversedBy="project_task_users")
+     * @ORM\JoinColumn(name="status_id", referencedColumnName="id")
+     */
+    private $status;
+
+    /**
      * @var integer
      * @ORM\Id
      * @ORM\Column(name="position", type="integer")
      */
     private $position;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="status", type="string", nullable=true)
-     */
-    private $status;
 
     /**
      * @var boolean
@@ -108,6 +108,11 @@ class ProjectTaskUser
         return $this->project_canvas;
     }
 
+    /**
+     * Tasks
+     *
+     */
+
     public function setTask(Task $task)
     {
         $this->task = $task;
@@ -118,6 +123,23 @@ class ProjectTaskUser
     public function getTask()
     {
         return $this->task;
+    }
+
+    /**
+     * Status
+     *
+     */
+
+    public function setStatus(Status $status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    public function getStatus()
+    {
+        return $this->status;
     }
 
     /**
@@ -166,28 +188,6 @@ class ProjectTaskUser
         return $this->user;
     }
 
-    /**
-     * Set status
-     *
-     * @param string $status
-     * @return ProjectTaskUser
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * Get status
-     *
-     * @return string 
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
 
     /**
      * Set isImportant
