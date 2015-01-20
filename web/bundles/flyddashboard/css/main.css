@@ -180,7 +180,7 @@ summary {
 *::before,
 *::after {
 	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 a {
@@ -521,7 +521,7 @@ a {
 	cursor: pointer;
 	border: 1px solid transparent;
 	-webkit-transition: all 200ms ease;
-	        transition: all 200ms ease;
+	transition: all 200ms ease;
 }
 
 .btn:hover,
@@ -648,7 +648,7 @@ a {
 	padding: 30px;
 	margin-bottom: 30px;
 	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-	        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
 .alert {
@@ -791,7 +791,7 @@ select {
 
 .form-control {
 	-webkit-box-shadow: none;
-	        box-shadow: none;
+	box-shadow: none;
 	border: none;
 	font-family: "varela", sans-serif;
 	font-size: 14px;
@@ -1007,7 +1007,7 @@ p {
 	border-color: #2B303E transparent transparent transparent;
 	margin-right: 7px;
 	-webkit-transition: all 200ms ease;
-	        transition: all 200ms ease;
+	transition: all 200ms ease;
 }
 
 .header .user .user__name .profil__pic {
@@ -1027,13 +1027,13 @@ p {
 	background-color: #fff;
 	padding: 25px;
 	-webkit-transition: all 200ms ease;
-	        transition: all 200ms ease;
+	transition: all 200ms ease;
 	-webkit-transform: scale(1, 0);
-	    -ms-transform: scale(1, 0);
-	        transform: scale(1, 0);
+	-ms-transform: scale(1, 0);
+	transform: scale(1, 0);
 	-webkit-transform-origin: 0 0;
-	    -ms-transform-origin: 0 0;
-	        transform-origin: 0 0;
+	-ms-transform-origin: 0 0;
+	transform-origin: 0 0;
 	border-left: 1px solid #8F979E;
 	border-bottom: 1px solid #8F979E;
 	z-index: 100;
@@ -1041,8 +1041,8 @@ p {
 
 .header .user .user__menu.deploy {
 	-webkit-transform: scale(1, 1);
-	    -ms-transform: scale(1, 1);
-	        transform: scale(1, 1);
+	-ms-transform: scale(1, 1);
+	transform: scale(1, 1);
 }
 
 /*  ASIDE
@@ -1085,13 +1085,13 @@ p {
 	border-color: transparent #2B303E transparent transparent;
 	margin-right: 7px;
 	-webkit-transition: all 200ms ease;
-	        transition: all 200ms ease;
+	transition: all 200ms ease;
 }
 
 .deploy #menu--toggle::before {
 	-webkit-transform: rotate(180deg);
-	    -ms-transform: rotate(180deg);
-	        transform: rotate(180deg);
+	-ms-transform: rotate(180deg);
+	transform: rotate(180deg);
 }
 
 .menu > li {
@@ -1112,13 +1112,13 @@ p {
 	right: 0;
 	top: 13px;
 	-webkit-transition: -webkit-transform 200ms ease;
-	        transition: transform 200ms ease;
+	transition: transform 200ms ease;
 }
 
 .menu > li.show.subs:after {
 	-webkit-transform: rotate(180deg);
-	    -ms-transform: rotate(180deg);
-	        transform: rotate(180deg);
+	-ms-transform: rotate(180deg);
+	transform: rotate(180deg);
 }
 
 .submenu {
