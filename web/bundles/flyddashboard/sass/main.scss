@@ -134,6 +134,21 @@ p {
 	padding: 10px 0;
 	position: relative;
 	cursor: pointer;
+	&.dashicons:before {
+		font-family: "dashicons";
+		display: inline-block;
+		margin-right: 15px;
+	    font-size: 20px;
+	    line-height: inherit;
+	    text-decoration: inherit;
+	    font-weight: normal;
+	    font-style: normal;
+	    vertical-align: middle;
+	    -webkit-transition: color .1s ease-in 0;
+	    transition: color .1s ease-in 0;
+	    -webkit-font-smoothing: antialiased;
+	    -moz-osx-font-smoothing: grayscale;
+	}
 	&.subs:after {
 		content: "";
 		height: 10px;
@@ -141,7 +156,7 @@ p {
 		display: block;
 		position: absolute;
 		right: 0;
-		top: 13px;
+		top: 20px;
 		@extend .sprite;
 		transition: transform 200ms ease;
 	}
@@ -153,7 +168,7 @@ p {
 .submenu > li {
 	font-family: $varela;
 	text-transform: none;
-	margin-left: 20px;
+	margin-left: 35px;
 	color: $grey;
 }
 
