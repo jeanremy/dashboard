@@ -12,9 +12,11 @@ use Flyd\DashboardBundle\Entity\ProjectTaskUser;
 use Flyd\DashboardBundle\Entity\ProjectCanvas;
 use Flyd\DashboardBundle\Entity\Supplier;
 use Flyd\DashboardBundle\Entity\User;
+use Flyd\DashboardBundle\Entity\Task;
 use Flyd\DashboardBundle\Form\ProjectType;
 use Flyd\DashboardBundle\Form\ProjectEditType;
 use Flyd\DashboardBundle\Form\ProjectTaskUserType;
+use Flyd\DashboardBundle\Form\ProjectTaskUserMiniType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
@@ -119,6 +121,15 @@ class ProjectController extends Controller
             array_push($forms, $form->createView() );
         }
 
+        // For new ptu form
+        $ptulength = $entity->getProjectTaskUsers();
+        $ptu = new ProjectTaskUser();
+        $ptu->setPosition(count($ptulength) +1);
+        $ptuform = $this->get('form.factory')->create(new ProjectTaskUserMiniType(), $ptu);
+
+        $minitasks = $em->getRepository('FlydDashboardBundle:Task')->getTaskIdentifiers();
+
+
         //Get all users of a project
 
         if (!$entity) {
@@ -127,7 +138,9 @@ class ProjectController extends Controller
 
         return $this->render('FlydDashboardBundle:Project:show.html.twig', array(
           'entity' => $entity,
-          'forms' => $forms
+          'forms' => $forms,
+          'ptuform' => $ptuform->createView(),
+          'minitasks' => $minitasks
         ));
     }
 
@@ -405,4 +418,187 @@ class ProjectController extends Controller
         }
         return $response;
     }
+
+
+    /**
+     * Add a ptu entity.
+     *
+     * @Method("POST")
+     */
+    public function ajaxAddPtuAction(Request $request, $id)
+    {
+        $response = new JsonResponse();
+
+        
+        if(!$request->isXmlHttpRequest()) {
+            return $response->setData(array(
+                'code' => 500,
+                'response' => 'not an ajax request'
+            ));
+        }
+
+        $em = $this->getDoctrine()->getManager();        
+        $project = $em->getRepository('FlydDashboardBundle:Project')->find($id);
+        $ptu = new ProjectTaskUser();
+        $ptu->setProject($project);
+        $request = $this->container->get('request');
+        $params = $this->getRequest()->request->all();
+
+        // Si tache existante
+        if($params['task_id']) {
+            $task = $em->getRepository('FlydDashboardBundle:Task')->find($params['task_id']);
+            $ptu->setTask($task);
+        }
+        else {
+            $task = new Task();
+            $task->setName($params['flyd_dashboardbundle_projecttaskuser_mini']['task']['name']);
+            $task->setStep($params['flyd_dashboardbundle_projecttaskuser_mini']['task']['step']);
+            $ptu->setTask($task);
+        }
+
+        
+
+        $form = $this->get('form.factory')->create(new ProjectTaskUserMiniType(), $ptu);
+
+        if ($form->handleRequest($request)->isValid()) {
+            try {       
+                // d'abord la tâche         
+                $em->persist($task);
+                $em->flush(); // obligatoire pour id qui sert de clé étrangère du ptu
+                //Ensuite la ptu
+                $em->persist($ptu);
+                $project->addProjectTaskUser($ptu);
+                $em->persist($project);
+                $em->flush();
+
+                // Prepare form for view
+                $ptuform = $this->get('form.factory')->create(new ProjectTaskUserType(), $ptu);
+
+                $response->setData(array(
+                    'code' => 200,
+                    'response' => $this->renderView('FlydDashboardBundle:ProjectTaskUser:mini.html.twig', array(
+                          'form' => $ptuform->createView()
+                        ))
+                ));
+            } catch(\Doctrine\ORM\ORMException $e) {
+                $response->setData(array(
+                    'code' => 500,
+                    'response' => $e->getMessage()
+                ));
+            }
+            catch(\Exception $e){
+                $response->setData(array(
+                    'code' => 500,
+                    'response' => $e->getMessage()
+                ));
+            }
+        } else {
+            $response->setData(array(
+                    'code' => 500,
+                    'response' => $form->getErrors(true)
+                ));
+        }
+        return $response;
+        die();
+    }
+
+    /**
+     * Reorder tasks.
+     *
+     * @Method("POST")
+     */
+    public function ajaxReorderPtusAction(Request $request, $id)
+    {
+        $response = new JsonResponse();
+        $em = $this->getDoctrine()->getManager();        
+        $project = $em->getRepository('FlydDashboardBundle:Project')->find($id);
+
+        $request = $this->container->get('request');
+        $params = $this->getRequest()->request->all();
+
+            return $response->setData(array(
+                    'code' => 400,
+                    'response' => $params
+                ));
+
+        if(!$request->isXmlHttpRequest() || !$params['ptu']) {
+            return $response->setData(array(
+                'code' => 500,
+                'response' => 'not an ajax request'
+            ));
+        }
+        try {      
+            $i = 1;
+            foreach ($params['ptu'] as $ptuid) {
+                $ptu = $em->getRepository('FlydDashboardBundle:ProjectCanvasTask')->find($ptuid);
+                $ptu->setPosition($i);
+                $em->persist($ptu);
+                $i++;
+            }    
+            $em->flush();
+
+            $response->setData(array(
+                'code' => 200,
+                'response' => $params['ptu']
+            ));
+        } catch(\Doctrine\ORM\ORMException $e) {
+            $response->setData(array(
+                'code' => 500,
+                'response' => $e->getMessage()
+            ));
+        }
+        catch(\Exception $e){
+            $response->setData(array(
+                'code' => 500,
+                'response' => $e->getMessage()
+            ));
+        }
+       
+        return $response;
+        die();
+    }
+
+    /**
+     * Delete a ptu entity.
+     *
+     * @Method("POST")
+     */
+    public function ajaxDeletePtuAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $response = new JsonResponse();
+        $request = $this->container->get('request');
+        $params = $this->getRequest()->request->all();
+        if(!$request->isXmlHttpRequest() || !$params['pct_id']) {
+            return $response->setData(array(
+                'code' => 500,
+                'response' => 'not an ajax request'
+            ));
+        }
+        try {            
+            $pct = $em->getRepository('FlydDashboardBundle:ProjectTaskUser')->find($params['ptu_id']);
+            $em->remove($pct);
+            $em->flush();
+
+            $response->setData(array(
+                'code' => 200,
+                'response' => $pct->getId()
+            ));
+        } catch(\Doctrine\ORM\ORMException $e) {
+            $response->setData(array(
+                'code' => 500,
+                'response' => $e->getMessage()
+            ));
+        }
+        catch(\Exception $e){
+            $response->setData(array(
+                'code' => 500,
+                'response' => $e->getMessage()
+            ));
+        }
+       
+        return $response;
+        die();
+    }
+
 }

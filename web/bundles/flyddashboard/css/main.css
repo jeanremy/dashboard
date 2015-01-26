@@ -545,6 +545,17 @@ a {
 	background-color: transparent;
 }
 
+.btn:before,
+.btn--edit:before,
+.btn--delete:before,
+.btn--delete--reverse:before,
+.btn--add:before,
+.btn--new:before,
+.btn--save:before,
+.btn--save--reverse:before {
+	font-family: "dashicons";
+}
+
 .btn--edit {
 	display: block;
 	height: 40px;
@@ -1723,25 +1734,11 @@ select {
 	border-bottom: 1px dashed #8f979e;
 }
 
+.taskcontainer .form-control {
+	border-bottom: none;
+}
+
 .supplier--mini span {
-	color: #8f979e;
-}
-
-.project__team .user {
-	text-align: center;
-}
-
-.project__team .user__name {
-	font-size: 16px;
-	font-size: 1rem;
-	font-family: "montserrat", sans-serif;
-	color: #2b303e;
-}
-
-.project__team .user__job {
-	font-size: 15px;
-	font-size: 0.9375rem;
-	font-family: "varela", sans-serif;
 	color: #8f979e;
 }
 
@@ -1863,18 +1860,33 @@ p.contact__title {
 	list-style-type: disc;
 }
 
-.user {
+.user--mini {
 	margin-bottom: 15px;
+	text-align: center;
 }
 
-.user:nth-child(2n+1) {
+.user--mini:nth-child(2n+1) {
 	clear: left;
 }
 
-.user .line--remove {
+.user--mini .line--remove {
 	display: block;
 	textalign: center;
 	margin: 0 auto;
+}
+
+.user--mini .user__name {
+	font-size: 16px;
+	font-size: 1rem;
+	font-family: "montserrat", sans-serif;
+	color: #2b303e;
+}
+
+.user--mini .user__job {
+	font-size: 15px;
+	font-size: 0.9375rem;
+	font-family: "varela", sans-serif;
+	color: #8f979e;
 }
 
 .profil__pic {
@@ -1979,7 +1991,7 @@ p {
 	height: 100%;
 	top: 0;
 	bottom: 0;
-	width: 280px;
+	width: 220px;
 	padding: 15px;
 	z-index: 100;
 }
@@ -2076,7 +2088,7 @@ p {
 	====   */
 
 .main {
-	margin-left: 280px;
+	margin-left: 220px;
 }
 
 .deploy .main {
@@ -2130,7 +2142,7 @@ form .btn--remove {
 /*  PRINT
 	=====  */
 
-@media (min-width: 768px) {
+@media (min-width: 988px) {
 
 .container {
 	width: 750px;
@@ -2357,7 +2369,7 @@ form .btn--remove {
 
 }
 
-@media (min-width: 992px) {
+@media (min-width: 1212px) {
 
 .container {
 	width: 970px;
@@ -2584,7 +2596,7 @@ form .btn--remove {
 
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1420px) {
 
 .container {
 	width: 1170px;

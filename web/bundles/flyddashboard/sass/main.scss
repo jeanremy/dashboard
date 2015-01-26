@@ -94,7 +94,7 @@ p {
 	height: 100%;
 	top: 0;
 	bottom: 0;
-	width: 280px;
+	width: 220px;
 	padding: 15px;
 	z-index: 100;
 	.deploy & {
@@ -178,7 +178,7 @@ p {
 /*  MAIN
 	====   */
 .main {
-	margin-left: 280px;
+	margin-left: 220px;
 	.deploy & {
 		margin-left: 0;
 	}

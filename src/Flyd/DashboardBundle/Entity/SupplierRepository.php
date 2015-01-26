@@ -13,17 +13,21 @@ use Doctrine\ORM\EntityRepository;
 class SupplierRepository extends EntityRepository
 {
 	public function getSuppliersWithout($existingsuppliers) {
-		$tab = array();
-		foreach ($existingsuppliers as $value) {
-			$tab[] = $value->getId();
-		}
 
 		$query = $this->createQueryBuilder('a')
                       ->select(array('a.id', 'a.name', 'a.job'));
-        $query = $query->add('where', $query->expr()->notIn('a', ':c'))
-                      ->setParameter('c', $tab)
-                      ->getQuery()
+
+		if(count($existingsuppliers) != 0) {
+			$tab = array();
+			foreach ($existingsuppliers as $value) {
+				$tab[] = $value->getId();
+			}
+
+	        $query = $query->add('where', $query->expr()->notIn('a', ':c'))
+	                      ->setParameter('c', $tab);
+	    }
+        return $query->getQuery()
                       ->getResult();
-        return $query;
+        
 	}
 }

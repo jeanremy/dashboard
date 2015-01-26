@@ -6,8 +6,8 @@
         {% else %}...
         {% endif %}
     </p>
-    <a href="{{ path('need_delete', { 'id': need.id }) }}" data-id="{{ need.id }}" class="pull-right btn--delete">+</a>
-    <a href="{{ path('need_edit', { 'id': need.id }) }}" class="pull-right btn--edit">+</a>
+    <a href="{{ path('need_delete', { 'id': need.id }) }}" data-id="{{ need.id }}" class="pull-right btn--delete dashicons dashicons-trash"></a>
+    <a href="{{ path('need_edit', { 'id': need.id }) }}" class="pull-right btn--edit dashicons dashicons-edit"></a>
 
     <p class="need__title"><a href="{{ path('need_show', { 'id': need.id }) }}">{{need.title}}</a></p>
     <p class="need__description">{{need.description}}</p>

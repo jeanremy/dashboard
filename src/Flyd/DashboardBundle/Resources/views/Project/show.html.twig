@@ -85,7 +85,7 @@
                 <h2 class="bloc__title">Tâches prédéfinies</h2>
                 {% if entity.projecttaskusers %}
                 <table class="taskcontainer">
-                    <thead class="thead">
+                    <!-- <thead class="thead">
                         <tr>
                             <th>Êtapes</th>
                             <th>Tâche</th>
@@ -96,44 +96,39 @@
                             <th>Important</th>
                             <th>Suppr</th>
                         </tr>
-                    </thead>
+                    </thead> -->
 
                     <tbody class="tbody">
                     {% for form in forms %}
-                        
-                        <tr class="task sortable">
-                            {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
-                                <td>
-                                    {{ form_widget(form.task.step, {'attr': {'class': 'form-control'}}) }}   
-                                    {{ form_widget(form.position, {'attr': {'class': 'form-control'}}) }}                              
-                                </td>
-                                <td>
-                                    {{ form_widget(form.task.name, {'attr': {'class': 'form-control'}}) }}                                    
-                                </td>
-                                <td>
-                                    {{ form_widget(form.estimatedtime, {'attr': {'class': 'form-control'}}) }}                                     
-                                </td>
-                                <td>
-                                    {{ form_widget(form.realtime, {'attr': {'class': 'form-control'}}) }}  
-                                </td>
-                                <td>
-                                    {{ form_widget(form.status, {'attr': {'class': 'form-control'}}) }}                                  
-                                </td>
-                                <td>
-                                    {{ form_widget(form.user, {'attr': {'class': 'form-control'}}) }} 
-                                </td>
-                                <td>
-                                    {{ form_widget(form.isimportant, {'attr': {'class': 'form-control'}}) }} 
-                                </td>
-                                <td><a href="" class="line--remove remove-task">Retirer</a></td>
-                                {{ form_rest(form) }}
-                                {{ form_end(form) }}
-                            </form>
-                        </tr>
+                        {% include "FlydDashboardBundle:ProjectTaskUser:mini.html.twig" %}
                     {% endfor %}                        
                     </tbody>
                 </table>
                 {% endif %}
+                <!-- Form pour créer ptu avec task imbriquée -->
+                {{form_start(ptuform, 
+                    {'attr': {
+                        'class': 'form-horizontal',
+                        'id' : 'flyd_dashboardbundle_projecttaskuser'
+                    }, 
+                     'action': path('project_ajax_add_ptu', {'id': entity.id})}
+                )}}
+                    <h2 class="bloc__subtitle">Ajouter une tâche</h2>
+                    <div class="newtask">  
+                        <input type="hidden" name="task_id" id="task_id" />
+                        {{ form_widget(ptuform.position) }}                      
+                        {{ form_label(ptuform.task.step, "Etape", {'label_attr': {'class': 'control-label'}}) }}
+                        {{ form_widget(ptuform.task.step, {'attr': {'class': 'form-control'}}) }}
+
+                        {{ form_label(ptuform.task.name, "Nom de la tâche", {'label_attr': {'class': 'control-label'}}) }}
+                        {{ form_widget(ptuform.task.name, {'attr': {'class': 'form-control'}}) }}
+
+                       
+                    </div>
+
+
+                {{ form_rest(ptuform) }}
+                {{ form_end(ptuform) }}
             </div>
         </div>
     </div>
@@ -141,5 +136,20 @@
 {% endblock %}
 
 {% block js %}
+    <script type="text/javascript" src="{{ asset('bundles/flyddashboard/js/vendor/jquery-ui/jquery-ui.min.js') }}"></script>
+    <link href="{{ asset('bundles/flyddashboard/js/vendor/jquery-ui/jquery-ui.min.css') }}"></link>
+    <script>
+    
+        var tasks = [
+            {% for mini in minitasks %}
+            { label: "{{mini.name}}", value: "{{mini.name}}", id: "{{mini.id}}", step: "{{mini.step}}" },
+            {% endfor %}
+        ];
+
+        var updateOrderUrl = "{{path('project_ajax_reorder_ptus', {'id': entity.id})}}";
+        var removeUrl = "{{path('project_ajax_remove_ptu', {'id': entity.id})}}";
+
+    </script>
+    <script type="text/javascript" src="{{ asset('bundles/flyddashboard/js/projecttaskshandler.js') }}"></script>
      <script type="text/javascript" src="{{ asset('bundles/flyddashboard/js/additems.js') }}"></script>   
 {% endblock %}

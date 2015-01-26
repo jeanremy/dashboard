@@ -16,18 +16,21 @@ class UserRepository extends EntityRepository
 
 
 	public function getUsersWithout($existingusers) {
-		$tab = array();
-
-		foreach ($existingusers as $value) {
-			$tab[] = $value->getId();
-		}
-
 		$query = $this->createQueryBuilder('a')
                       ->select(array('a.id', 'a.username', 'a.job'));
-        $query = $query->add('where', $query->expr()->notIn('a', ':c'))
-                      ->setParameter('c', $tab)
-                      ->getQuery()
+
+		if(count($existingusers) != 0) {
+			$tab = array();
+			foreach ($existingusers as $value) {
+				$tab[] = $value->getId();
+			}
+
+	        $query = $query->add('where', $query->expr()->notIn('a', ':c'))
+	                      ->setParameter('c', $tab);		
+		}
+
+		return $query->getQuery()
                       ->getResult();
-        return $query;
+        
 	}
 }

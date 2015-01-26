@@ -1,8 +1,10 @@
-<div class="user col-sm-6">                        
+<div class="user--mini col-sm-6">                        
     {% if user.image %}
         <img src="{{ user.image.webPath | apply_filter('demi') }}" class="profil__pic" />
     {% endif %}
     <p class="user__name"><a href="{{ path('user_show', { 'id': user.id }) }}">{{user.username|capitalize}}</a></p>
     <p class="user__job">{{user.job|capitalize}}</p>
+    {% if entity is defined %}
     <a class="line--remove remove" data-id="{{ user.id }}" href="{{ path('project_ajax_remove_user', {'id': entity.id}) }}">Retirer</a>
+	{% endif %}
 </div>

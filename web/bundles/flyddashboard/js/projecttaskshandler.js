@@ -1,16 +1,17 @@
-// Autocomplete on Project Canvas
-$('#flyd_dashboardbundle_projectcanvastask_task_name').autocomplete({
+// Autocomplete 
+$('#flyd_dashboardbundle_projecttaskuser_mini_task_name').autocomplete({
     source : tasks,
     select: function( event, ui ) {
         $('#task_id').val(ui.item.id);
-        $('#flyd_dashboardbundle_projectcanvastask_task_step').val(ui.item.step).prop('disabled', true);
+        $('#flyd_dashboardbundle_projecttaskuser_mini_task_step').val(ui.item.step).prop('disabled', true);
     }
     // voir quand on vide le champ à remettre le select en enbale, et a vider l'id task
+
 });
 
 
-// Ajout auto on ProjectCanvas
-$('#flyd_dashboardbundle_projectcanvastask').on('submit', function(e) {
+// Ajout auto 
+$('#flyd_dashboardbundle_projecttaskuser').on('submit', function(e) {
     e.preventDefault();
     $.ajax({
       url:            $(this).attr('action'),
@@ -21,7 +22,11 @@ $('#flyd_dashboardbundle_projectcanvastask').on('submit', function(e) {
       success: function(data) { 
         if(data.code == 200) {
             $('.tbody').append(data.response);
-            $('#flyd_dashboardbundle_projectcanvastask_position').val(parseInt($('#flyd_dashboardbundle_projectcanvastask_position').val()) + 1);
+            $('#flyd_dashboardbundle_projecttaskuser_mini_position').val(parseInt($('#flyd_dashboardbundle_projecttaskuser_mini_position').val()) + 1);
+        } 
+        else {
+          console.log(data.response);
+
         }
       },
       error: function(jqXHR, textStatus, errorThrown) {
@@ -31,7 +36,7 @@ $('#flyd_dashboardbundle_projectcanvastask').on('submit', function(e) {
     return false;
 });
 
-// remove on Project Canvas
+// remove
 $(document).on('click', '.remove-task', function(e) {
     e.preventDefault();
     var $this = $(this);
@@ -49,7 +54,6 @@ $(document).on('click', '.remove-task', function(e) {
             $('#flyd_dashboardbundle_projectcanvastask_position').val(parseInt($('#flyd_dashboardbundle_projectcanvastask_position').val()) - 1);
         } else {
         }
-
       },
       error: function(jqXHR, textStatus, errorThrown) {
         console.log(errorThrown);
@@ -62,22 +66,20 @@ $(document).on('click', '.remove-task', function(e) {
 // Sortable
 $sort = $('.tbody').sortable({
     update: function( event, ui ) {
-        // faire un disable
-        // ouis envoie en ajax
-        sendTasksOrder();
-        console.log('updated');
+        sendTasksOrder(ui.item);
     },
     placeholder: "ui-sortable-placeholder",
     axis: "y"
 });
 
-function sendTasksOrder() {
+function sendTasksOrder(item) {
     $sort.sortable("disable");
+    $forms = $('.tbody').find('form');
     $.ajax({
       url:            updateOrderUrl,
       type:           'POST',
       data: {
-        pct: $sort.sortable('toArray')
+        ptu: $forms
       },
       beforeSend: function(data) {
       },
@@ -87,6 +89,7 @@ function sendTasksOrder() {
         } else {
             console.log(data.response);
             $sort.sortable("enable");
+
         }
       },
       error: function(jqXHR, textStatus, errorThrown) {

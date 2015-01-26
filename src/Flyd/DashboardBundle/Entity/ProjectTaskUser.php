@@ -26,7 +26,7 @@ class ProjectTaskUser
 
     /**
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\Task", inversedBy="project_task_users")
+     * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\Task", inversedBy="project_task_users", cascade="persist")
      * @ORM\JoinColumn(name="task_id", referencedColumnName="id")
      */
     private $task;
@@ -38,7 +38,7 @@ class ProjectTaskUser
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\Status", inversedBy="project_task_users")
+     * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\Status")
      * @ORM\JoinColumn(name="status_id", referencedColumnName="id")
      */
     private $status;

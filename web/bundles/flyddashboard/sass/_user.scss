@@ -1,7 +1,19 @@
-.user {
+.user--mini {
 	margin-bottom: 15px;
+	text-align: center;
 	&:nth-child(2n+1) {clear: left;}
 	.line--remove {display: block; textalign: center; margin: 0 auto;}
+
+	.user__name{
+		font-size: 16px;
+		font-family: $montserrat;
+		color: $primary;
+	}
+	.user__job {
+		font-size: 15px;
+		font-family: $varela;
+		color: $darkgrey;
+	}
 }
 
 .profil__pic {
