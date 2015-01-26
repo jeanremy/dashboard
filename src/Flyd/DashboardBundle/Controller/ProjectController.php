@@ -10,9 +10,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Flyd\DashboardBundle\Entity\Project;
 use Flyd\DashboardBundle\Entity\ProjectTaskUser;
 use Flyd\DashboardBundle\Entity\ProjectCanvas;
+use Flyd\DashboardBundle\Entity\Status;
 use Flyd\DashboardBundle\Entity\Supplier;
-use Flyd\DashboardBundle\Entity\User;
 use Flyd\DashboardBundle\Entity\Task;
+use Flyd\DashboardBundle\Entity\User;
 use Flyd\DashboardBundle\Form\ProjectType;
 use Flyd\DashboardBundle\Form\ProjectEditType;
 use Flyd\DashboardBundle\Form\ProjectTaskUserType;
@@ -75,8 +76,11 @@ class ProjectController extends Controller
 
             $projectcanvas = $project->getProjectCanvas();
             $pcts = $projectcanvas->getProjectCanvasTasks();
+            $status = $em->getRepository('FlydDashboardBundle:Status')->findOneByName('A venir');
+            //exit(\Doctrine\Common\Util\Debug::dump($status));
             foreach ($pcts as $pct) {
                 $ptu = new ProjectTaskUser();
+                $ptu->setStatus($status);
                 $ptu->setProject($project);
                 $ptu->setPosition($pct->getPosition());
                 $ptu->setTask($pct->getTask());
