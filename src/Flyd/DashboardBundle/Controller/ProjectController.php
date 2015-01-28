@@ -520,10 +520,6 @@ class ProjectController extends Controller
         $request = $this->container->get('request');
         $params = $this->getRequest()->request->all();
 
-            return $response->setData(array(
-                    'code' => 400,
-                    'response' => $params
-                ));
 
         if(!$request->isXmlHttpRequest() || !$params['ptu']) {
             return $response->setData(array(
@@ -531,31 +527,44 @@ class ProjectController extends Controller
                 'response' => 'not an ajax request'
             ));
         }
-        try {      
-            $i = 1;
-            foreach ($params['ptu'] as $ptuid) {
-                $ptu = $em->getRepository('FlydDashboardBundle:ProjectCanvasTask')->find($ptuid);
-                $ptu->setPosition($i);
-                $em->persist($ptu);
-                $i++;
-            }    
-            $em->flush();
-
-            $response->setData(array(
-                'code' => 200,
-                'response' => $params['ptu']
-            ));
-        } catch(\Doctrine\ORM\ORMException $e) {
-            $response->setData(array(
-                'code' => 500,
-                'response' => $e->getMessage()
-            ));
-        }
-        catch(\Exception $e){
-            $response->setData(array(
-                'code' => 500,
-                'response' => $e->getMessage()
-            ));
+        $i = 0;
+        foreach ($params['ptu'] as $ptu) {
+            $id = $ptu[0]['value'];
+            $ptu = $em->getRepository('FlydDashboardBundle:ProjectTaskUser')->find($id);
+            $form = $this->get('form.factory')->create(new ProjectTaskUserType(), $ptu);
+            /*return $response->setData(array(
+                    'code' => 400,
+                    'response' => $form->handleRequest($request)->isValid()
+                ));*/
+            if ($form->handleRequest($request)->isValid()) {
+                try { 
+                    $ptu->setPosition($i);
+                    $em->persist($ptu);
+                    $em->flush();
+                    $response->setData(array(
+                        'code' => 200,
+                        'response' => 'ok'
+                    ));
+                } 
+                catch(\Doctrine\ORM\ORMException $e) {
+                    $response->setData(array(
+                        'code' => 500,
+                        'response' => $e->getMessage()
+                    ));
+                }
+                catch(\Exception $e){
+                    $response->setData(array(
+                        'code' => 500,
+                        'response' => $e->getMessage()
+                    ));
+                }
+            } else {
+                $response->setData(array(
+                    'code' => 500,
+                    'response' => $form->getErrors(true)
+                ));
+            }
+        $i++;
         }
        
         return $response;

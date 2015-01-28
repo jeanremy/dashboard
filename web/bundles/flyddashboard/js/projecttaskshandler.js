@@ -66,20 +66,25 @@ $(document).on('click', '.remove-task', function(e) {
 // Sortable
 $sort = $('.tbody').sortable({
     update: function( event, ui ) {
-        sendTasksOrder(ui.item);
+        sendTasksOrder();
     },
     placeholder: "ui-sortable-placeholder",
     axis: "y"
 });
 
-function sendTasksOrder(item) {
+function sendTasksOrder() {
     $sort.sortable("disable");
-    $forms = $('.tbody').find('form');
+    var $forms = $('.tbody').find('form');
+    var $data = [];
+    for (var i = 0, l = $forms.length; i<l; i++) {
+      console.log($forms[i]);
+      $data.push($($forms[i]).serializeArray());
+    };
     $.ajax({
       url:            updateOrderUrl,
       type:           'POST',
       data: {
-        ptu: $forms
+        ptu: $data
       },
       beforeSend: function(data) {
       },
@@ -89,7 +94,6 @@ function sendTasksOrder(item) {
         } else {
             console.log(data.response);
             $sort.sortable("enable");
-
         }
       },
       error: function(jqXHR, textStatus, errorThrown) {

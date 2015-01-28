@@ -1,16 +1,17 @@
-<tr class="task sortable">
-    <td>
+<tr class="task">
+    <td class="sortable">
         {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
-        {{ form_widget(form.position, {'attr': {'class': 'form-control'}}) }}
-        {{ form_widget(form.task.step, {'attr': {'class': 'form-control'}}) }}       
-        {{ form_widget(form.task.name, {'attr': {'class': 'form-control'}}) }}
-        {{ form_widget(form.estimatedtime, {'attr': {'class': 'form-control'}}) }}
-        {{ form_widget(form.realtime, {'attr': {'class': 'form-control'}}) }}      
-        {{ form_widget(form.status, {'attr': {'class': 'form-control'}}) }}
-        {{ form_widget(form.user, {'attr': {'class': 'form-control'}}) }}     
-        {{ form_widget(form.isimportant, {'attr': {'class': 'form-control'}}) }} 
-        <a href="" class="line--remove remove-task">Retirer</a></td>
-        {{ form_rest(form) }}
+            {{ form_widget(form.id, {'attr': {'class': 'form-control'}}) }}
+            {{ form_widget(form.position, {'attr': {'class': 'form-control'}}) }}
+            {{ form_widget(form.task.step, {'attr': {'class': 'form-control'}}) }}       
+            {{ form_widget(form.task.name, {'attr': {'class': 'form-control'}}) }}
+            {{ form_widget(form.estimatedtime, {'attr': {'class': 'form-control'}}) }}
+            {{ form_widget(form.realtime, {'attr': {'class': 'form-control'}}) }}      
+            {{ form_widget(form.status, {'attr': {'class': 'form-control'}}) }}
+            {{ form_widget(form.user, {'attr': {'class': 'form-control'}}) }}     
+            {{ form_widget(form.isimportant, {'attr': {'class': 'form-control'}}) }} 
+            <a href="" class="line--remove remove-task">Retirer</a></td>
+            {{ form_rest(form) }}
         {{ form_end(form) }}
     </td>
 </tr>
