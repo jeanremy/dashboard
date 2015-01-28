@@ -431,9 +431,8 @@ class ProjectController extends Controller
      */
     public function ajaxAddPtuAction(Request $request, $id)
     {
-        $response = new JsonResponse();
 
-        
+        $response = new JsonResponse();
         if(!$request->isXmlHttpRequest()) {
             return $response->setData(array(
                 'code' => 500,
@@ -531,39 +530,29 @@ class ProjectController extends Controller
         foreach ($params['ptu'] as $ptu) {
             $id = $ptu[0]['value'];
             $ptu = $em->getRepository('FlydDashboardBundle:ProjectTaskUser')->find($id);
-            $form = $this->get('form.factory')->create(new ProjectTaskUserType(), $ptu);
-            /*return $response->setData(array(
-                    'code' => 400,
-                    'response' => $form->handleRequest($request)->isValid()
-                ));*/
-            if ($form->handleRequest($request)->isValid()) {
-                try { 
-                    $ptu->setPosition($i);
-                    $em->persist($ptu);
-                    $em->flush();
-                    $response->setData(array(
-                        'code' => 200,
-                        'response' => 'ok'
-                    ));
-                } 
-                catch(\Doctrine\ORM\ORMException $e) {
-                    $response->setData(array(
-                        'code' => 500,
-                        'response' => $e->getMessage()
-                    ));
-                }
-                catch(\Exception $e){
-                    $response->setData(array(
-                        'code' => 500,
-                        'response' => $e->getMessage()
-                    ));
-                }
-            } else {
+
+            try { 
+                $ptu->setPosition($i);
+                $em->persist($ptu);
+                $em->flush();
+                $response->setData(array(
+                    'code' => 200,
+                    'response' => 'ok'
+                ));
+            } 
+            catch(\Doctrine\ORM\ORMException $e) {
                 $response->setData(array(
                     'code' => 500,
-                    'response' => $form->getErrors(true)
+                    'response' => $e->getMessage()
                 ));
             }
+            catch(\Exception $e){
+                $response->setData(array(
+                    'code' => 500,
+                    'response' => $e->getMessage()
+                ));
+            }
+            
         $i++;
         }
        
@@ -576,13 +565,13 @@ class ProjectController extends Controller
      *
      * @Method("POST")
      */
-    public function ajaxDeletePtuAction(Request $request, $id)
+    public function ajaxRemovePtuAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
         $response = new JsonResponse();
         $request = $this->container->get('request');
         $params = $this->getRequest()->request->all();
-        if(!$request->isXmlHttpRequest() || !$params['pct_id']) {
+        if(!$request->isXmlHttpRequest() || !$params['ptu_id']) {
             return $response->setData(array(
                 'code' => 500,
                 'response' => 'not an ajax request'

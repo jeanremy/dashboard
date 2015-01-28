@@ -44,7 +44,7 @@ $(document).on('click', '.remove-task', function(e) {
       url:            removeUrl,
       type:           'POST',
       data: {
-        pct_id: $this.parent().parent().attr('id')
+        ptu_id: $this.parent().find('#flyd_dashboardbundle_projecttaskuser_id').val()
       },
       beforeSend: function(data) {
       },
@@ -90,6 +90,7 @@ function sendTasksOrder() {
       },
       success: function(data) { 
         if(data.code == 200) {
+            console.log(data.response);
             $sort.sortable("enable");
         } else {
             console.log(data.response);
