@@ -99,8 +99,14 @@
                     </thead> -->
 
                     <tbody class="tbody">
-                    {% for form in forms %}
-                        {% include "FlydDashboardBundle:ProjectTaskUser:mini.html.twig" %}
+                    {% for ptu in entity.projecttaskusers %}
+                        <tr class="task" id="{{ ptu.id }}">
+                            <td class="sortable">
+                                {{ render(controller('FlydDashboardBundle:ProjectTaskUser:getForm', {'id': ptu.id}) ) }}        
+                                <a href="{{path('project_ajax_remove_ptu', {'id': ptu.id})}}" class="line--remove remove-task" data-id="{{ ptu.id }}">Retirer</a></td>
+
+                            </td>
+                        </tr>
                     {% endfor %}                        
                     </tbody>
                 </table>

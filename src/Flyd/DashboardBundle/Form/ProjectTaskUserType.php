@@ -15,7 +15,6 @@ class ProjectTaskUserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('id', 'hidden')
             ->add('position', 'hidden')
             ->add('task', new TaskType(), array(
                 'required' => true

@@ -5,7 +5,7 @@ $('#flyd_dashboardbundle_projecttaskuser_mini_task_name').autocomplete({
         $('#task_id').val(ui.item.id);
         $('#flyd_dashboardbundle_projecttaskuser_mini_task_step').val(ui.item.step).prop('disabled', true);
     }
-    // voir quand on vide le champ à remettre le select en enbale, et a vider l'id task
+    // faire un submit direct, puis remis à zéro
 
 });
 
@@ -35,6 +35,39 @@ $('#flyd_dashboardbundle_projecttaskuser').on('submit', function(e) {
     });
     return false;
 });
+
+// Update
+$('.task input, .task select, .task checkbox').on('change', function(e) {
+    e.preventDefault();
+    var form = $(this).parent();
+    //console.log(form.serialize());
+    $sort.sortable("disable");
+
+    $.ajax({
+      url:            form.attr('action'),
+      type:           form.attr('method'),
+      data: form.serialize(),
+      beforeSend: function(data) {
+      },
+      success: function(data) { 
+        $sort.sortable("enable");
+
+        if(data.code == 200) {
+          console.log(data.response);
+
+        } 
+        else {
+          console.log(data.response);
+
+        }
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.log(errorThrown);
+      }
+    });
+    return false;
+});
+
 
 // remove
 $(document).on('click', '.remove-task', function(e) {
@@ -77,9 +110,11 @@ function sendTasksOrder() {
     var $forms = $('.tbody').find('form');
     var $data = [];
     for (var i = 0, l = $forms.length; i<l; i++) {
-      console.log($forms[i]);
-      $data.push($($forms[i]).serializeArray());
-    };
+      $($forms[i]).parent().parent().attr('id');
+      $data.push($($forms[i]).parent().parent().attr('id'));
+      // utiliser update ptu
+
+    }
     $.ajax({
       url:            updateOrderUrl,
       type:           'POST',

@@ -520,6 +520,7 @@ class ProjectController extends Controller
         $params = $this->getRequest()->request->all();
 
 
+           
         if(!$request->isXmlHttpRequest() || !$params['ptu']) {
             return $response->setData(array(
                 'code' => 500,
@@ -528,9 +529,9 @@ class ProjectController extends Controller
         }
         $i = 0;
         foreach ($params['ptu'] as $ptu) {
-            $id = $ptu[0]['value'];
-            $ptu = $em->getRepository('FlydDashboardBundle:ProjectTaskUser')->find($id);
+            $ptuid = $ptu;
 
+            $ptu = $em->getRepository('FlydDashboardBundle:ProjectTaskUser')->find($ptuid);
             try { 
                 $ptu->setPosition($i);
                 $em->persist($ptu);

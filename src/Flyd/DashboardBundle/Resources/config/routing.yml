@@ -265,3 +265,10 @@ projectcanvas_ajax_reorder_tasks:
     defaults: { _controller: FlydDashboardBundle:ProjectCanvas:ajaxreordertasks }
     requirements:
         _method: POST
+
+
+#   PROJECT TASK USER
+
+projecttaskuser_ajax_edit_ptu:
+    path:     /projecttaskuser/{id}/edit
+    defaults: { _controller: FlydDashboardBundle:ProjectTaskUser:edit }

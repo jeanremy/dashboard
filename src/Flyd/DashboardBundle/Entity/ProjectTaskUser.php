@@ -77,6 +77,7 @@ class ProjectTaskUser
      */
     private $realTime;
 
+
      /**
      * Get id
      *
