@@ -20,22 +20,22 @@
 	<nav class="nav">
 		<ul class="menu">
 			<li>
-				<a href="{{path('flyd_dashboard_homepage')}}" class="dashicons dashicons-dashboard{% if menu == 'dashboard' %} active{% endif %}">Dashboard</a>
+				<a href="{{path('flyd_dashboard_homepage')}}" class="dashicons dashicons-dashboard{% if menu is defined and menu == 'dashboard' %} active{% endif %}">Dashboard</a>
 			</li>
 			<li>
-				<a href="{{path('client_list')}}" class="dashicons dashicons-businessman{% if menu == 'client' %} active{% endif %}">Clients</a>
+				<a href="{{path('client_list')}}" class="dashicons dashicons-businessman{% if menu is defined and menu == 'client' %} active{% endif %}">Clients</a>
 			</li>
 			<li>
-				<a href="{{path('user_list')}}" class="dashicons dashicons-admin-users{% if menu == 'user' %} active{% endif %}">Utilisateurs</a>
+				<a href="{{path('user_list')}}" class="dashicons dashicons-admin-users{% if menu is defined and menu == 'user' %} active{% endif %}">Utilisateurs</a>
 			</li>
 			<li>
-				<a href="{{path('supplier_list')}}" class="dashicons dashicons-groups{% if menu == 'supplier' %} active{% endif %}">Fournisseurs</a>
+				<a href="{{path('supplier_list')}}" class="dashicons dashicons-groups{% if menu is defined and menu == 'supplier' %} active{% endif %}">Fournisseurs</a>
 			</li>
 			<li>
-				<a href="{{path('flyd_dashboard_homepage')}}" class="dashicons dashicons-clipboard{% if menu == 'project' %} active{% endif %}">Projet</a>
+				<a href="{{path('project_list')}}" class="dashicons dashicons-clipboard{% if menu is defined and menu == 'project' %} active{% endif %}">Projet</a>
 			</li>
 			<li>
-				<a href="{{path('flyd_dashboard_homepage')}}" class="dashicons dashicons-admin-generic{% if menu == 'settings' %} active{% endif %}">Réglages</a>
+				<a href="{{path('flyd_dashboard_homepage')}}" class="dashicons dashicons-admin-generic{% if menu is defined and menu == 'settings' %} active{% endif %}">Réglages</a>
 			</li>
 		</ul>
 	</nav>

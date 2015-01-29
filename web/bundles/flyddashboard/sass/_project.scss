@@ -44,3 +44,17 @@
 .ui-sortable-disabled td {
 	color: $darkgrey!important;
 }
+
+.project__title {
+	background-color: $primary;
+	color: #fff;
+	padding: 30px;
+	font-family: $varela;
+	font-size: 25px;
+}
+.project__title__infos {
+	color: $darkgrey;
+	text-transform: none;
+	font-size: 14px;
+	display: block;
+}
