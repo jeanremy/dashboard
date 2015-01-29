@@ -34,7 +34,8 @@ class ClientController extends Controller
 		$entities = $em->getRepository('FlydDashboardBundle:Client')->findAll();
 
 		return $this->render('FlydDashboardBundle:Client:index.html.twig', array(
-			'entities' => $entities
+			'entities' => $entities,
+			'menu' => 'dashboard'
 		));
 	}
 
@@ -65,6 +66,7 @@ class ClientController extends Controller
 
 		return $this->render('FlydDashboardBundle:Client:add.html.twig', array(
 		  'form' => $form->createView(),
+		  'menu' => 'client'
 		));
 	}
 
@@ -86,7 +88,8 @@ class ClientController extends Controller
 		}
 
 		return $this->render('FlydDashboardBundle:Client:show.html.twig', array(
-			'entity' => $entity
+			'entity' => $entity,
+		  	'menu' => 'client'
 		));
 	}
 
@@ -118,7 +121,8 @@ class ClientController extends Controller
 
 		return $this->render('FlydDashboardBundle:Client:edit.html.twig', array(
 		  'entity' => $client,
-		  'form' => $form->createView()
+		  'form' => $form->createView(),		  
+		  'menu' => 'client'
 		));
 	}
 
@@ -157,7 +161,8 @@ class ClientController extends Controller
 		// Si la requête est en GET, on affiche une page de confirmation avant de supprimer
 		return $this->render('FlydDashboardBundle:Client:delete.html.twig', array(
 			  'entity' => $entity,
-			  'form'   => $form->createView()
+			  'form'   => $form->createView(),
+		  		'menu' => 'client'
 			));
 
     }

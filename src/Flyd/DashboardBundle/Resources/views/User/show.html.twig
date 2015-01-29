@@ -4,6 +4,13 @@
     <title>{{entity.username}}</title>
 {% endblock %}
 
+{% block top %}
+    <p>
+        <span class="prev"><a href="{{ path('user_list') }}">Utilisateurs</a></span>
+        {{ entity.username }}
+    </p>
+{% endblock %}
+
 {% block body %}
 
     <div class="title__container">

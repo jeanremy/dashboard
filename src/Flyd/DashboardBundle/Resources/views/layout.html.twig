@@ -18,7 +18,13 @@
 	<div class="main">
 
 		<!-- Top Bar -->
-		{% include "FlydDashboardBundle::top.html.twig" %}
+		<header class="header">			
+			<div class="breadcrumb">
+				{% block top %}
+
+				{% endblock %}
+			</div>
+		</header>
 
 		<div class="content">
 

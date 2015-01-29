@@ -43,6 +43,7 @@ class ProjectController extends Controller
 
         return array(
             'entities' => $entities,
+            'menu' => 'dashboard'
         );
     }
 
@@ -97,8 +98,9 @@ class ProjectController extends Controller
         }
 
         return $this->render('FlydDashboardBundle:Project:add.html.twig', array(
-          'form' => $form->createView(),
-          'entity' => $project
+            'form' => $form->createView(),
+            'entity' => $project,
+            'menu' => 'project'
         ));
     }
 
@@ -141,10 +143,11 @@ class ProjectController extends Controller
         }
 
         return $this->render('FlydDashboardBundle:Project:show.html.twig', array(
-          'entity' => $entity,
-          'forms' => $forms,
-          'ptuform' => $ptuform->createView(),
-          'minitasks' => $minitasks
+            'entity' => $entity,
+            'forms' => $forms,
+            'ptuform' => $ptuform->createView(),
+            'minitasks' => $minitasks,
+            'menu' => 'project'
         ));
     }
 
@@ -175,8 +178,9 @@ class ProjectController extends Controller
         }
 
         return $this->render('FlydDashboardBundle:Project:edit.html.twig', array(
-          'entity' => $project,
-          'form' => $form->createView()
+            'entity' => $project,
+            'form' => $form->createView(),
+            'menu' => 'project'
         ));
     }
 
@@ -206,9 +210,10 @@ class ProjectController extends Controller
 
         // Si la requête est en GET, on affiche une page de confirmation avant de supprimer
         return $this->render('FlydDashboardBundle:Project:delete.html.twig', array(
-              'entity' => $entity,
-              'form'   => $form->createView()
-            ));
+            'entity' => $entity,
+            'form'   => $form->createView(),
+            'menu' => 'project'
+        ));
 
     }
 

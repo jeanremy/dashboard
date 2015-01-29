@@ -2,38 +2,41 @@
 
 
 <aside class="aside" id="aside">
+	<div class="user">
+		{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+			{% if app.user.image %}
+			<a href="{{ path('user_show', { 'id': app.user.id }) }}"><img src="{{ app.user.image.webPath | apply_filter('demi') }}" / class="profil__pic"></a>
+			{% endif %}
+			<p class="user__name">
+				<a href="{{ path('user_show', { 'id': app.user.id }) }}">{{ app.user.username }}</a>
+			</p>
+			<p class="user__logout">
+				<a href="{{ path('fos_user_security_logout') }}">{{ 'Déconnexion' }}</a>
+			</p>
+        {% else %}
+            <p class="user__login"><a href="{{ path('fos_user_security_login') }}">Log in</a></p>
+        {% endif %}
+	</div>
 	<nav class="nav">
 		<ul class="menu">
-			<li class="dashicons dashicons-dashboard"><a href="{{path('flyd_dashboard_homepage')}}">Dashboard</a></li>
-			<li class="subs dashicons dashicons-businessman">Clients
-				<ul class="submenu">
-					<li><a href="{{path('client_add')}}">Ajouter un client</a></li>
-					<li><a href="">Mes clients</a></li>
-					<li><a href="{{path('client_list')}}">Tous les clients</a></li>
-				</ul>
+			<li>
+				<a href="{{path('flyd_dashboard_homepage')}}" class="dashicons dashicons-dashboard{% if menu == 'dashboard' %} active{% endif %}">Dashboard</a>
 			</li>
-			<li class="subs dashicons dashicons-admin-users">Utilisateurs
-				<ul class="submenu">
-					<li><a href="{{path('user_add')}}">Ajouter un utilisateur</a></li>
-					<li><a href="{{path('fos_user_profile_show')}}">Mon compte</a></li>
-					<li><a href="{{path('user_list')}}">Tous les utilisateurs</a></li>
-				</ul>
+			<li>
+				<a href="{{path('client_list')}}" class="dashicons dashicons-businessman{% if menu == 'client' %} active{% endif %}">Clients</a>
 			</li>
-			<li class="subs dashicons dashicons-groups">Fournisseurs</a>
-				<ul class="submenu">
-					<li><a href="{{path('supplier_add')}}">Ajouter un fournisseur</a></li>
-					<li><a href="">Mes fournisseurs</a></li>
-					<li><a href="{{path('supplier_list')}}">Tous les fournisseurs</a></li>
-				</ul>
+			<li>
+				<a href="{{path('user_list')}}" class="dashicons dashicons-admin-users{% if menu == 'user' %} active{% endif %}">Utilisateurs</a>
 			</li>
-			<li class="subs dashicons dashicons-clipboard">Projet</a>
-				<ul class="submenu">
-					<li>Mes projets</li>
-					<li><a href="{{path('projectcanvas_add')}}">Créer un canevas de projet</a></li>
-					<li><a href="{{path('projectcanvas_list')}}">Tous les canevas de projet</a></li>
-				</ul>
+			<li>
+				<a href="{{path('supplier_list')}}" class="dashicons dashicons-groups{% if menu == 'supplier' %} active{% endif %}">Fournisseurs</a>
 			</li>
-			<li class="dashicons dashicons-admin-generic">Réglages</li>
+			<li>
+				<a href="{{path('flyd_dashboard_homepage')}}" class="dashicons dashicons-clipboard{% if menu == 'project' %} active{% endif %}">Projet</a>
+			</li>
+			<li>
+				<a href="{{path('flyd_dashboard_homepage')}}" class="dashicons dashicons-admin-generic{% if menu == 'settings' %} active{% endif %}">Réglages</a>
+			</li>
 		</ul>
 	</nav>
 </aside>

@@ -4,6 +4,15 @@
     <title>{{entity.name}} - Edit </title>
 {% endblock %}
 
+{% block top %}
+    <p>
+        <span class="prev"><a href="{{ path('supplier_list') }}">Fournisseurs</a></span>
+        <span class="prev"><a href="{{ path('supplier_show', { 'id': entity.id }) }}">{{ entity.name }}</a></span>
+        Edit
+    </p>
+{% endblock %}
+
+
 {% block body %}
 
     <div class="title__container">

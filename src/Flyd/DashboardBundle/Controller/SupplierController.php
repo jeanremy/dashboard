@@ -34,7 +34,8 @@ class SupplierController extends Controller
         $entities = $em->getRepository('FlydDashboardBundle:Supplier')->findAll();
 
         return $this->render('FlydDashboardBundle:Supplier:index.html.twig', array(
-            'entities' => $entities
+            'entities' => $entities,
+            'menu' => 'supplier'
         ));
     }
 
@@ -64,7 +65,8 @@ class SupplierController extends Controller
         }
 
         return $this->render('FlydDashboardBundle:Supplier:add.html.twig', array(
-          'form' => $form->createView(),
+            'form' => $form->createView(),
+            'menu' => 'supplier'
         ));
     }
 
@@ -86,7 +88,8 @@ class SupplierController extends Controller
         }
 
         return $this->render('FlydDashboardBundle:Supplier:show.html.twig', array(
-            'entity' => $entity
+            'entity' => $entity,
+            'menu' => 'supplier'
         ));
     }
 
@@ -118,8 +121,9 @@ class SupplierController extends Controller
         }
 
         return $this->render('FlydDashboardBundle:Supplier:edit.html.twig', array(
-          'entity' => $supplier,
-          'form' => $form->createView()
+            'entity' => $supplier,
+            'form' => $form->createView(),
+            'menu' => 'supplier'
         ));
     }
 
@@ -156,9 +160,10 @@ class SupplierController extends Controller
 
         // Si la requête est en GET, on affiche une page de confirmation avant de supprimer
         return $this->render('FlydDashboardBundle:Supplier:delete.html.twig', array(
-              'entity' => $entity,
-              'form'   => $form->createView()
-            ));
+            'entity' => $entity,
+            'form'   => $form->createView(),
+            'menu' => 'supplier'
+        ));
 
     }
 

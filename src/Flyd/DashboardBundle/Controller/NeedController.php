@@ -37,7 +37,8 @@ class NeedController extends Controller
 
 		return $this->render('FlydDashboardBundle:Need:add.html.twig', array(
 		  'form' => $form->createView(),
-		  'entity' => $need
+		  'entity' => $need,
+		  'menu' => 'client'
 		));
 	}
 
@@ -89,7 +90,8 @@ class NeedController extends Controller
 		}
 
 		return $this->render('FlydDashboardBundle:Need:show.html.twig', array(
-			'entity' => $entity
+			'entity' => $entity,
+		  	'menu' => 'client'
 		));
 	}
 
@@ -114,7 +116,8 @@ class NeedController extends Controller
 
 		return $this->render('FlydDashboardBundle:Need:edit.html.twig', array(
 		  'entity' => $need,
-		  'form' => $form->createView()
+		  'form' => $form->createView(),
+		  'menu' => 'client'
 		));
 	}
 
@@ -145,7 +148,8 @@ class NeedController extends Controller
 		// Si la requête est en GET, on affiche une page de confirmation avant de supprimer
 		return $this->render('FlydDashboardBundle:Need:delete.html.twig', array(
 			  'entity' => $entity,
-			  'form'   => $form->createView()
+			  'form'   => $form->createView(),
+		  		'menu' => 'client'
 			));
 
     }
