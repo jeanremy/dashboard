@@ -15,41 +15,46 @@ use Doctrine\Common\Collections\ArrayCollection;
 class ProjectTaskUser
 {
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
 
     /**
      * @var \Flyd\DashboardBundle\Entity\Project
-     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\Project", inversedBy="project_task_users")
      * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
      */
     private $project;
 
     /**
-     * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\Task", inversedBy="project_task_users")
+     * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\Task", inversedBy="project_task_users", cascade="persist")
      * @ORM\JoinColumn(name="task_id", referencedColumnName="id")
      */
     private $task;
 
     /**
      * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\User", inversedBy="project_task_users")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
      */
     private $user;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\Status")
+     * @ORM\JoinColumn(name="status_id", referencedColumnName="id")
+     */
+    private $status;
+
+    /**
      * @var integer
-     * @ORM\Id
      * @ORM\Column(name="position", type="integer")
      */
     private $position;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="status", type="string", nullable=true)
-     */
-    private $status;
 
     /**
      * @var boolean
@@ -71,6 +76,17 @@ class ProjectTaskUser
      * @ORM\Column(name="real_time", type="time", nullable=true)
      */
     private $realTime;
+
+
+     /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
 
     /**
@@ -108,6 +124,11 @@ class ProjectTaskUser
         return $this->project_canvas;
     }
 
+    /**
+     * Tasks
+     *
+     */
+
     public function setTask(Task $task)
     {
         $this->task = $task;
@@ -118,6 +139,23 @@ class ProjectTaskUser
     public function getTask()
     {
         return $this->task;
+    }
+
+    /**
+     * Status
+     *
+     */
+
+    public function setStatus(Status $status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    public function getStatus()
+    {
+        return $this->status;
     }
 
     /**
@@ -166,28 +204,6 @@ class ProjectTaskUser
         return $this->user;
     }
 
-    /**
-     * Set status
-     *
-     * @param string $status
-     * @return ProjectTaskUser
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * Get status
-     *
-     * @return string 
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
 
     /**
      * Set isImportant

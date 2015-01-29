@@ -4,6 +4,15 @@
     <title>{{entity.title}} - Supprimer </title>
 {% endblock %}
 
+{% block top %}
+    <p>
+        <span class="prev"><a href="{{ path('client_list') }}">Clients</a></span>
+        <span class="prev"><a href="{{ path('client_show', { 'id': entity.client.id }) }}">{{entity.client}}</a></span>
+        <span class="prev"><a href="{{ path('need_show', { 'id': entity.id }) }}">{{entity.title}}</a></span>
+        Delete
+    </p>
+{% endblock %}
+
 {% block body %}
     
     <div class="title__container">

@@ -44,4 +44,5 @@ select {
 	font-size: 14px;
 	color: $primary;
 	border-bottom: 1px dashed $darkgrey;
+	.taskcontainer & {border-bottom: none;}
 }

@@ -207,6 +207,24 @@ project_ajax_remove_user:
     requirements:
         _method: POST
 
+project_ajax_add_ptu:
+    path:     /project/{id}/ajaxaddptu
+    defaults: { _controller: FlydDashboardBundle:Project:ajaxaddptu }
+    requirements:
+        _method: POST
+
+project_ajax_remove_ptu:
+    path:     /project/{id}/remove/ptu
+    defaults: { _controller: FlydDashboardBundle:Project:ajaxremoveptu }
+    requirements:
+        _method: POST
+
+project_ajax_reorder_ptus:
+    path:     /project/{id}/reorderptus
+    defaults: { _controller: FlydDashboardBundle:Project:ajaxreorderptus }
+    requirements:
+        _method: POST
+
 
 #   PROJECTS CANVAS
 
@@ -247,3 +265,10 @@ projectcanvas_ajax_reorder_tasks:
     defaults: { _controller: FlydDashboardBundle:ProjectCanvas:ajaxreordertasks }
     requirements:
         _method: POST
+
+
+#   PROJECT TASK USER
+
+projecttaskuser_ajax_edit_ptu:
+    path:     /projecttaskuser/{id}/edit
+    defaults: { _controller: FlydDashboardBundle:ProjectTaskUser:edit }

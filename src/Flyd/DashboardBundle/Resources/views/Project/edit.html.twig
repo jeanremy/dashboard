@@ -4,13 +4,19 @@
     <title>{{entity.title}} - Edit</title>
 {% endblock %}
 
+{% block top %}
+    <p>
+        <span class="prev"><a href="{{ path('client_list') }}">Clients</a></span>
+        <span class="prev"><a href="{{ path('client_show', { 'id': entity.need.client.id }) }}">{{entity.need.client}}</a></span>
+        <span class="prev"><a href="{{ path('need_show', { 'id': entity.need.id }) }}">{{entity.need}}</a></span>
+        <span class="prev"><a href="{{ path('project_show', { 'id': entity.id }) }}">{{entity.title}}</a></span>
+        Edit
+    </p>
+{% endblock %}
+
 {% block body %}
 
     <div class="title__container">
-        <p class="breadcrumb">
-           <a href="{{ path('client_show', { 'id': entity.need.client.id }) }}">{{entity.need.client}} ></a>
-           <a href="{{ path('need_show', { 'id': entity.need.id }) }}">{{entity.need}}</a>
-        </p>
         <h1 class="lvl1">{{entity.title}} - Edit</h1>
     </div>    
 

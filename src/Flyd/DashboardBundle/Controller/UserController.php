@@ -35,7 +35,8 @@ class UserController extends Controller
         $entities = $em->getRepository('FlydDashboardBundle:User')->findAll();
 
         return $this->render('FlydDashboardBundle:User:index.html.twig', array(
-            'entities' => $entities
+            'entities' => $entities,
+            'menu' => 'user'
         ));
     }
 
@@ -67,7 +68,8 @@ class UserController extends Controller
         }
 
         return $this->render('FlydDashboardBundle:User:add.html.twig', array(
-          'form' => $form->createView(),
+            'form' => $form->createView(),
+            'menu' => 'user'
         ));
     }
 
@@ -89,7 +91,8 @@ class UserController extends Controller
         }
 
         return $this->render('FlydDashboardBundle:User:show.html.twig', array(
-            'entity' => $entity
+            'entity' => $entity,
+            'menu' => 'user'
         ));
     }
 
@@ -130,7 +133,8 @@ class UserController extends Controller
         } else {
             $this->get('session')->getFlashBag()->add('notice', 'Bien essayé, mais vous n\'avez pas le droit de changer les informations des autres.');
             $response = $this->redirect($this->generateUrl('user_show', array(
-                'id' => $id
+                'id' => $id,
+                'menu' => 'user'
             )));
             return $response;
 
@@ -178,7 +182,6 @@ class UserController extends Controller
         $existingusers = $project->getUsers();
 
         $entities = $this->getDoctrine()->getManager()->getRepository('FlydDashboardBundle:User')->getUsersWithout($existingusers);
-
         return $this->render('FlydDashboardBundle:User:select.html.twig', array(
             'entities' => $entities,
             'entity' => $project

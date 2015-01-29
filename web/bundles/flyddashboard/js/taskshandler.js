@@ -1,14 +1,15 @@
-// Autocomplete
+// Autocomplete on Project Canvas
 $('#flyd_dashboardbundle_projectcanvastask_task_name').autocomplete({
     source : tasks,
     select: function( event, ui ) {
         $('#task_id').val(ui.item.id);
-        $('#flyd_dashboardbundle_projectcanvastask_task_step').val(ui.item.step);
+        $('#flyd_dashboardbundle_projectcanvastask_task_step').val(ui.item.step).prop('disabled', true);
     }
+    // voir quand on vide le champ à remettre le select en enbale, et a vider l'id task
 });
 
 
-// Ajout auto
+// Ajout auto on ProjectCanvas
 $('#flyd_dashboardbundle_projectcanvastask').on('submit', function(e) {
     e.preventDefault();
     $.ajax({
@@ -30,7 +31,7 @@ $('#flyd_dashboardbundle_projectcanvastask').on('submit', function(e) {
     return false;
 });
 
-// remove
+// remove on Project Canvas
 $(document).on('click', '.remove-task', function(e) {
     e.preventDefault();
     var $this = $(this);
@@ -48,6 +49,7 @@ $(document).on('click', '.remove-task', function(e) {
             $('#flyd_dashboardbundle_projectcanvastask_position').val(parseInt($('#flyd_dashboardbundle_projectcanvastask_position').val()) - 1);
         } else {
         }
+
       },
       error: function(jqXHR, textStatus, errorThrown) {
         console.log(errorThrown);
@@ -84,6 +86,7 @@ function sendTasksOrder() {
             $sort.sortable("enable");
         } else {
             console.log(data.response);
+            $sort.sortable("enable");
         }
       },
       error: function(jqXHR, textStatus, errorThrown) {

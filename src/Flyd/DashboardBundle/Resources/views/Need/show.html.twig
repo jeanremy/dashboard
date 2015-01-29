@@ -4,10 +4,17 @@
     <title>{{entity.client}} >  {{entity.title}}</title>
 {% endblock %}
 
+{% block top %}
+    <p>
+        <span class="prev"><a href="{{ path('client_list') }}">Clients</a></span>
+        <span class="prev"><a href="{{ path('client_show', { 'id': entity.client.id }) }}">{{entity.client}}</a></span>
+        {{ entity.title }}
+    </p>
+{% endblock %}
+
 {% block body %}
 
     <div class="title__container">
-        <p class="breadcrumb"><a href="{{ path('client_show', { 'id': entity.client.id }) }}">{{entity.client}}</a></p>
         <a href="{{ path('need_delete', { 'id': entity.id }) }}" class="btn btn--delete">Delete</a>
         <a href="{{ path('need_edit', { 'id': entity.id }) }}" class="btn btn--edit">Edit</a>
         <h1 class="lvl1">{{entity.title}}</h1>

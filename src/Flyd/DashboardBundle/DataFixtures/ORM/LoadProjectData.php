@@ -24,7 +24,7 @@ class LoadProjectData extends AbstractFixture implements OrderedFixtureInterface
       $project->addSupplier($this->getReference('supplier '.$i));
       $project->setNeed($this->getReference('besoin '.$i));
       //$project->setNeed;
-      //$project->setProjectCanvas;
+      $project->setProjectCanvas($this->getReference('projectcanvas ' . mt_rand(1,4)));
 
       // On la persiste
       $em->persist($project);
@@ -35,7 +35,7 @@ class LoadProjectData extends AbstractFixture implements OrderedFixtureInterface
  
   public function getOrder()
   {
-    return 7; // the order in which fixtures will be loaded
+    return 13; // the order in which fixtures will be loaded
   }
 }
 

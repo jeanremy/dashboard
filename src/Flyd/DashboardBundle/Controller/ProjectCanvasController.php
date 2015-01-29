@@ -55,7 +55,6 @@ class ProjectCanvasController extends Controller
 
         $form = $this->get('form.factory')->create(new ProjectCanvasType(), $projectcanvas);
         if ($form->handleRequest($request)->isValid()) {
-          $em = $this->getDoctrine()->getManager();
           $em->persist($projectcanvas);
           $em->flush();
 

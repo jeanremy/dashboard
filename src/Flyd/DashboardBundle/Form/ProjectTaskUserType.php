@@ -17,16 +17,19 @@ class ProjectTaskUserType extends AbstractType
         $builder
             ->add('position', 'hidden')
             ->add('task', new TaskType(), array(
-                'required' => false
-            ))
-            
+                'required' => true
+            ))            
             ->add('estimatedtime', 'time', array(
                 'widget' => 'single_text'
             ))
             ->add('realtime', 'time', array(
                 'widget' => 'single_text'
             ))
-            ->add('status')
+            ->add('status', 'entity', array(
+                'class' => 'FlydDashboardBundle:Status',
+                'property' => 'name',
+                'empty_value' => 'Choisissez une option'
+            ))
             ->add('user', 'entity', array(
                 'class' => 'FlydDashboardBundle:User',
                 'property' => 'username',
@@ -34,7 +37,7 @@ class ProjectTaskUserType extends AbstractType
             ))
             ->add('isimportant', 'checkbox', array(
                 'required'  => false
-            ));
+            ))
         ;
     }
     
