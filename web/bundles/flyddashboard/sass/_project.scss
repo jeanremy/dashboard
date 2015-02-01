@@ -45,12 +45,18 @@
 	color: $darkgrey!important;
 }
 
+.project {
+	margin-bottom: 30px;
+	.bloc {margin:0;}
+}
+
 .project__title {
 	background-color: $primary;
 	color: #fff;
 	padding: 30px;
 	font-family: $varela;
 	font-size: 25px;
+	cursor: pointer;
 }
 .project__title__infos {
 	color: $darkgrey;
