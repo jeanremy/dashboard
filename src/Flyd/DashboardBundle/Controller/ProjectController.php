@@ -485,7 +485,8 @@ class ProjectController extends Controller
                 $response->setData(array(
                     'code' => 200,
                     'response' => $this->renderView('FlydDashboardBundle:ProjectTaskUser:mini.html.twig', array(
-                          'form' => $ptuform->createView()
+                          'form' => $ptuform->createView(),
+                          'ptu' => $ptu
                         ))
                 ));
             } catch(\Doctrine\ORM\ORMException $e) {

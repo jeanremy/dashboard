@@ -11,6 +11,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Table(name="project_task_user")
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks()
+ * @ORM\Entity(repositoryClass="Flyd\DashboardBundle\Entity\ProjectTaskUserRepository")
  */
 class ProjectTaskUser
 {

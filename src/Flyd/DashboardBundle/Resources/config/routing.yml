@@ -2,7 +2,7 @@
 
 flyd_dashboard_homepage:
     path:     /
-    defaults: { _controller: FlydDashboardBundle:Client:index }
+    defaults: { _controller: FlydDashboardBundle:Project:index }
 
 
 #   CLIENTS

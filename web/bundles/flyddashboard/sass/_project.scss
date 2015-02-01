@@ -41,7 +41,7 @@
 	color: #fff;
 }
 .ui-helper-hidden-accessible {display:none;}
-.ui-sortable-disabled td {
+.ui-sortable-disabled * {
 	color: $darkgrey!important;
 }
 
@@ -57,4 +57,44 @@
 	text-transform: none;
 	font-size: 14px;
 	display: block;
+}
+
+.pending {color: $pending;}
+.coming {color: $alert;}
+
+/* Index*/
+.project__title .status {
+	float: right;
+	height: 20px;
+	width: 20px;
+	border: 2px solid;
+	border-radius: 50%;
+	position: relative;
+	&.coming {		
+		border-color: $alert;
+		background-color: $alert;
+	}
+	&.pending {		
+		border-color: $pending;
+		&:after {
+			content: "";
+			height: 8px;
+
+			border-radius: 0  0 50% 50%;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			background-color: $pending;
+		}
+	}
+	&.pending--validation {		
+		border-color: $pending;
+		background-color: $pending;
+	}
+	&.closed {
+		border-color: $success;
+		background-color: $success;
+	}
+
 }

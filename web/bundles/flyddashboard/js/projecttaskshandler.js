@@ -77,7 +77,7 @@ $(document).on('click', '.remove-task', function(e) {
       url:            removeUrl,
       type:           'POST',
       data: {
-        ptu_id: $this.parent().find('#flyd_dashboardbundle_projecttaskuser_id').val()
+        ptu_id: $this.parent().parent().attr('id')
       },
       beforeSend: function(data) {
       },

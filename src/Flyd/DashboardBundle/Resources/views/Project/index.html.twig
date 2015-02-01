@@ -29,6 +29,8 @@
                             <option value="null">Statut des projets</option>                        
                         </select>
                     </p>
+                    <a href="#" class="btn--save--reverse">Appliquer</a>
+
                 </form>
             </div>
         </div>
@@ -40,19 +42,7 @@
     <div class="row">
         <div class="col-sm-12 project">
             <div class="project__title">
-                {% for ptu in entity.projecttaskusers %}
-                    {% if ptu.status.name is defined %}
-                        {% if ptu.status.name == 'En cours' %}
-                            <div class="pending"></div>
-                        {% elseif ptu.status.name == 'En cours de validation' %}
-                            <div class="pending--validation"></div>
-                        {% elseif ptu.status.name == 'A venir' %}
-                            <div class="coming"></div>
-                        {% elseif ptu.status.name == 'Terminé' %}
-                            <div class="closed"></div>
-                        {% endif %}
-                    {% endif %}
-                {% endfor %}
+                {{ render(controller('FlydDashboardBundle:ProjectTaskUser:getCurrentStatus', {'id': entity.id}) ) }}
                 <h2>
                     <span class="project__title__infos">{{ entity.need.client.name }} > {{ entity.need.title }}</span>
                     <a href="{{ path('project_show', { 'id': entity.id }) }}">{{ entity.title }}</a>
@@ -74,15 +64,7 @@
                     <label class="control-label">En cours</label>
 
                     <div class="data">
-                        {% for ptu in entity.projecttaskusers %}
-                            {% if ptu.status.name is defined %}
-                                <ul>
-                                {% if ptu.status.name == 'En cours' %}
-                                    <li>{{ ptu.task.step }} > {{ ptu.task.name }}</li>
-                                {% endif %}
-                                </ul>
-                            {% endif %}
-                        {% endfor %}
+                        {{ render(controller('FlydDashboardBundle:ProjectTaskUser:getFirstPendingTask', {'id': entity.id}) ) }}
                     </div>
 
                 </div>
@@ -92,15 +74,7 @@
                     <label class="control-label">A venir</label>
 
                     <div class="data">
-                        {% for ptu in entity.projecttaskusers %}
-                            {% if  ptu.status.name is defined %}
-                                <ul>
-                                {% if ptu.status.name == 'A venir' %}
-                                    <li>{{ ptu.task.step }} > {{ ptu.task.name }}</li>
-                                {% endif %}
-                                </ul>
-                            {% endif %}
-                        {% endfor %}
+                            {{ render(controller('FlydDashboardBundle:ProjectTaskUser:getFirstComingTask', {'id': entity.id}) ) }}                        
                     </div>
 
                 </div>
