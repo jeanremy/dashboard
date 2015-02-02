@@ -46,3 +46,8 @@ select {
 	border-bottom: 1px dashed $darkgrey;
 	.taskcontainer & {border-bottom: none;}
 }
+
+select:disabled,
+input:disabled {
+	background: none;
+}

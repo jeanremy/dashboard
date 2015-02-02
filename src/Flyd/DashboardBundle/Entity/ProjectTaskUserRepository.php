@@ -54,4 +54,6 @@ class ProjectTaskUserRepository extends EntityRepository
 
 	    return $query->getOneOrNullResult();
 	}
+
+
 }

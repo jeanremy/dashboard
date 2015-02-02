@@ -32,7 +32,7 @@
                     <label class="control-label">Catégorie</label>
 
                     <div class="data">
-                        <p>{{entity.category}}</p>
+                        <p>{{entity.category.name}}</p>
                     </div>
                 </div>
 
@@ -88,10 +88,10 @@
         </div>
         <div class="col-sm-12">
             <div class="bloc">
-                <h2 class="bloc__title">Tâches prédéfinies</h2>
+                <h2 class="bloc__title">Tâches</h2>
                 {% if entity.projecttaskusers %}
                 <table class="taskcontainer">
-                    <!-- <thead class="thead">
+                    <thead class="thead">
                         <tr>
                             <th>Êtapes</th>
                             <th>Tâche</th>
@@ -102,18 +102,12 @@
                             <th>Important</th>
                             <th>Suppr</th>
                         </tr>
-                    </thead> -->
+                    </thead>
 
                     <tbody class="tbody">
                     {% if entity.projecttaskusers %}
                         {% for ptu in entity.projecttaskusers %}
-                            <tr class="task" id="{{ ptu.id }}">
-                                <td class="sortable">
-                                    {{ render(controller('FlydDashboardBundle:ProjectTaskUser:getForm', {'id': ptu.id}) ) }}        
-                                    <a href="{{path('project_ajax_remove_ptu', {'id': ptu.id})}}" class="line--remove remove-task" data-id="{{ ptu.id }}">Retirer</a></td>
-
-                                </td>
-                            </tr>
+                           {{ render(controller('FlydDashboardBundle:ProjectTaskUser:getForm', {'id': ptu.id}) ) }}                                   
                         {% endfor %}  
                     {% endif %}                      
                     </tbody>

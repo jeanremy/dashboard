@@ -16,12 +16,10 @@ class ProjectType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('category', 'choice', array(
-                'choices'   => array(
-                    '0'     => 'Design',
-                    '1'     => 'Motion',
-                    '2'     => 'Web'
-                )
+            ->add('category', 'entity', array(
+                'class' => 'FlydDashboardBundle:Category',
+                'property' => 'name',
+                'empty_value' => 'Choisissez une categorie'
             ))
             ->add('startDate', 'date', array(
                 'widget' => 'single_text'

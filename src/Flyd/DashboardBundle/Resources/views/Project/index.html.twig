@@ -19,14 +19,23 @@
             <div class="bloc bloc--general">
                 <form action="" id="sort-projects">
                     <p>Filtrer par:
-                        <select name="" id="">
+                        <select name="" id="" class="form-control">
                             <option value="null">Utilisateurs</option>
+                            {% for user in users %}
+                            <option value="{{user.id}}">{{user.username}}</option>
+                            {% endfor %}
                         </select>
-                        <select name="" id="">
-                            <option value="null">Type de projet</option>                        
+                        <select name="" id="" class="form-control">
+                            <option value="null">Type de projet</option>     
+                            <option value="0">Design</option>     
+                            <option value="1">Motion</option>     
+                            <option value="2">Web</option>     
                         </select>
-                        <select name="" id="">
-                            <option value="null">Statut des projets</option>                        
+                        <select name="" id="" class="form-control">
+                            <option value="null">Statut des projets</option>   
+                            {% for status in statuses %}
+                            <option value="{{status.id}}">{{status.name}}</option>
+                            {% endfor %}                     
                         </select>
                     </p>
                     <a href="#" class="btn--save--reverse">Appliquer</a>
@@ -52,7 +61,7 @@
                 <div class="form-group">                    
                     <label class="control-label">Catégorie</label>
                     <div class="data">
-                        {{ entity.category }}
+                        {{ entity.category.name }}
                     </div>
                 </div>
 
@@ -73,9 +82,11 @@
                 <div class="form-group">                    
                     <label class="control-label">Equipe</label>
                     <div class="data">
+                        <ul>
                         {% for user in entity.users %}
-                            {{ user.username }}
+                            <li>{{ user.username }}</li>
                         {% endfor %}
+                        </ul>
                     </div>
                 </div>
 

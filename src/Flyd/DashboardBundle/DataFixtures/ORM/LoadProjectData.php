@@ -16,7 +16,7 @@ class LoadProjectData extends AbstractFixture implements OrderedFixtureInterface
 
       $project = new Project();
       $project->setTitle('Site Internet');
-      $project->setCategory(Project::DESIGN);
+      $project->setCategory($this->getReference('category'));
       $project->setStartDate(new \DateTime());
       $project->setDeadline(new \DateTime());
       $project->setEndDate(new \DateTime());

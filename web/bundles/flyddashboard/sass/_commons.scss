@@ -126,6 +126,22 @@
 }
 
 .alert {color: $alert;}
+.notice {
+	padding: 10px;
+	background: $primary;
+	> p {color: #fff;}
+	.close {
+		float: right;
+		color: #fff;
+		background: none;
+		border: 1px solid #fff;
+		border-radius: 2px;
+		height: 20px;
+		width: 20px;
+		display: block;
+		cursor: pointer;
+	}
+}
 
 .profil__pic {
 	display: inline-block;

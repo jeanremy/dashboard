@@ -1,9 +1,6 @@
 {% for flashMessage in app.session.flashbag.get('notice') %}
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="bloc">
-            <p class="alert">{{ flashMessage }}</p>
-        </div>
-      </div>
+    <div class="notice success">
+            <button class="close">&times;</button>
+            <p>{{ flashMessage }}</p>
     </div>
 {% endfor %}  

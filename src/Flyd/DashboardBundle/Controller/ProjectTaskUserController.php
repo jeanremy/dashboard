@@ -31,7 +31,6 @@ class ProjectTaskUserController extends Controller
             ));
         }
 
-
 	    $response = new JsonResponse();
 	    $em = $this->getDoctrine()->getManager();
 	    $ptu = $em->getRepository('FlydDashboardBundle:ProjectTaskUser')->find($id);
@@ -74,8 +73,6 @@ class ProjectTaskUserController extends Controller
 
     public function getFormAction($id)
     {
-
-
     	$em = $this->getDoctrine()->getManager();
 	    $ptu = $em->getRepository('FlydDashboardBundle:ProjectTaskUser')->find($id);
 	    $form = $this->get('form.factory')->create(new ProjectTaskUserType(), $ptu);
@@ -117,7 +114,10 @@ class ProjectTaskUserController extends Controller
         $ptus = $project->getProjectTaskUsers();
         $statuses = array();
         foreach ($ptus as $ptu) {
-            $statuses[] = $ptu->getStatus()->getName();
+            $s = $ptu->getStatus();
+            if($s) {
+                $statuses[] =$s->getName();
+            }
         }
 
         if(in_array('En cours', $statuses) || in_array('En cours de validation', $statuses)) {
@@ -128,5 +128,7 @@ class ProjectTaskUserController extends Controller
         return new Response('<div class="status '.$status.'"></div>');
         
     }
+
+    
 
 }

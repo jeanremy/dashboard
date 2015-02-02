@@ -17,6 +17,7 @@
 	<!-- Main -->
 	<div class="main">
 
+		{% include "FlydDashboardBundle::flash.html.twig" %}
 		<!-- Top Bar -->
 		<header class="header">			
 			<div class="breadcrumb">
@@ -29,7 +30,6 @@
 		<div class="content">
 
 			<div class="container">
-				{% include "FlydDashboardBundle::flash.html.twig" %}
 				{% block body %}
 
 			  	{% endblock %}

@@ -19,6 +19,12 @@
 			setSize();
 		})();
 
+		$('.notice .close').on('click', function(e) {
+			e.preventDefault();
+			console.log('click');
+			$(this).parent().fadeIn(200).remove();
+		});
+
 
 
 

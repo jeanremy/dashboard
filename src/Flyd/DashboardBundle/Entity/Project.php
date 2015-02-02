@@ -14,10 +14,6 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Project
 {
-    /**/
-    const DESIGN    = 0;
-    const MOTION    = 1;
-    const WEB       = 2;
 
     /**
      * @var integer
@@ -49,6 +45,11 @@ class Project
     private $project_canvas;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\Category")
+     */
+    private $category;
+
+    /**
     * @ORM\OneToMany(targetEntity="Flyd\DashboardBundle\Entity\ProjectTaskUser", mappedBy="project", cascade={"persist", "remove"})
     * @ORM\OrderBy({"position" = "ASC"})
     */
@@ -62,12 +63,6 @@ class Project
      */
     private $title;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="category", type="integer")
-     */
-    private $category;
 
     /**
      * @var \DateTime
@@ -265,7 +260,7 @@ class Project
      * @param string $category
      * @return Project
      */
-    public function setCategory($category)
+    public function setCategory(Category $category)
     {
         $this->category = $category;
 
@@ -279,18 +274,7 @@ class Project
      */
     public function getCategory()
     {
-        switch($this->category) {
-            case 0:
-                return 'Design';
-            break;
-            case 1:
-                return 'Motion';
-            break;
-            case 2:
-                return 'Web';
-            break;
-
-        } 
+        return $this->category;
     }
 
     /**

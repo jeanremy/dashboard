@@ -1,16 +1,28 @@
-{{ form_start(form, 
-    {
-        'attr': {'class': 'form-horizontal'}, 
-        'action': path('projecttaskuser_ajax_edit_ptu', {'id': ptu.id})
-    })
-}}
-    {{ form_widget(form.position, {'attr': {'class': 'form-control'}}) }}
-    {{ form_widget(form.task.step, {'attr': {'class': 'form-control'}}) }}       
-    {{ form_widget(form.task.name, {'attr': {'class': 'form-control'}}) }}
-    {{ form_widget(form.estimatedtime, {'attr': {'class': 'form-control'}}) }}
-    {{ form_widget(form.realtime, {'attr': {'class': 'form-control'}}) }}      
-    {{ form_widget(form.status, {'attr': {'class': 'form-control'}}) }}
-    {{ form_widget(form.user, {'attr': {'class': 'form-control'}}) }}     
-    {{ form_widget(form.isimportant, {'attr': {'class': 'form-control'}}) }} 
-    {{ form_rest(form) }}
-{{ form_end(form) }}
+ <tr class="task" id="{{ ptu.id }}">
+    <td class="sortable">
+        {{ form_start(form, 
+            {
+                'attr': {'class': 'form-horizontal'}, 
+                'action': path('projecttaskuser_ajax_edit_ptu', {'id': ptu.id})
+            })
+        }}
+        <table>
+            <tr>
+                <td>
+                {{ form_widget(form.position, {'attr': {'class': 'form-control'}}) }}
+                {{ form_widget(form.task.step, {'attr': {'class': 'form-control'}, 'disabled': true}) }}
+                </td>
+                <td>{{ form_widget(form.task.name, {'attr': {'class': 'form-control'}, 'disabled': true}) }}</td>
+                <td>{{ form_widget(form.estimatedtime, {'attr': {'class': 'form-control'}}) }}</td>
+                <td>{{ form_widget(form.realtime, {'attr': {'class': 'form-control'}}) }}</td>
+                <td>{{ form_widget(form.status, {'attr': {'class': 'form-control'}}) }}</td>
+                <td>{{ form_widget(form.user, {'attr': {'class': 'form-control'}}) }} </td>
+                <td>{{ form_widget(form.isimportant, {'attr': {'class': 'form-control'}}) }}</td>
+                <td><a href="{{path('project_ajax_remove_ptu', {'id': ptu.id})}}" class="line--remove remove-task" data-id="{{ ptu.id }}">Retirer</a></td>
+            </tr>
+        </table>
+            {{ form_rest(form) }}
+        {{ form_end(form) }}
+        
+    </td>
+</tr>

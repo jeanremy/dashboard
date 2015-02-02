@@ -38,6 +38,7 @@ class ProjectCanvasController extends Controller
 
         return array(
             'entities' => $entities,
+            'menu' => 'project'
         );
     }
 
@@ -64,8 +65,9 @@ class ProjectCanvasController extends Controller
         }
 
         return $this->render('FlydDashboardBundle:ProjectCanvas:add.html.twig', array(
-          'form' => $form->createView(),
-          'entity' => $projectcanvas
+            'form' => $form->createView(),
+            'entity' => $projectcanvas,
+            'menu' => 'project'
         ));
     }
 
@@ -96,9 +98,10 @@ class ProjectCanvasController extends Controller
         }
 
         return $this->render('FlydDashboardBundle:ProjectCanvas:show.html.twig', array(
-          'entity' => $entity,          
-          'pctform' => $pctform->createView(),
-          'minitasks' => $minitasks
+            'entity' => $entity,          
+            'pctform' => $pctform->createView(),
+            'minitasks' => $minitasks,          
+            'menu' => 'project'
         ));
     }
 
@@ -136,10 +139,11 @@ class ProjectCanvasController extends Controller
         }
 
         return $this->render('FlydDashboardBundle:ProjectCanvas:edit.html.twig', array(
-          'entity' => $projectcanvas,
-          'form' => $form->createView(),
-          'pctform' => $pctform->createView(),
-          'minitasks' => $minitasks
+            'entity' => $projectcanvas,
+            'form' => $form->createView(),
+            'pctform' => $pctform->createView(),
+            'minitasks' => $minitasks,
+            'menu' => 'project'
         ));
     }
 
@@ -170,7 +174,8 @@ class ProjectCanvasController extends Controller
         // Si la requête est en GET, on affiche une page de confirmation avant de supprimer
         return $this->render('FlydDashboardBundle:ProjectCanvas:delete.html.twig', array(
               'entity' => $entity,
-              'form'   => $form->createView()
+              'form'   => $form->createView(),
+              'menu' => 'project'
             ));
 
     }

@@ -40,9 +40,13 @@ class ProjectController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('FlydDashboardBundle:Project')->findAll();
+        $users = $em->getRepository('FlydDashboardBundle:User')->findAll();
+        $statuses = $em->getRepository('FlydDashboardBundle:Status')->findAll();
 
         return array(
             'entities' => $entities,
+            'users' => $users,
+            'statuses' => $statuses,
             'menu' => 'dashboard'
         );
     }
@@ -231,7 +235,6 @@ class ProjectController extends Controller
             if($params)
             {
                 try {
-                    // TAF Faire une requete plsu légère
                     $supplier = $em->getRepository('FlydDashboardBundle:Supplier')->find($params['supplier_id']);
                     $project->addSupplier($supplier);
                     $em->persist($project);

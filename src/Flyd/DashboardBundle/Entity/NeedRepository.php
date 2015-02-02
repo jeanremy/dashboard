@@ -12,4 +12,20 @@ use Doctrine\ORM\EntityRepository;
  */
 class NeedRepository extends EntityRepository
 {
+	public function getDates($id) 
+	{
+		$query = $this->createQueryBuilder('ptu')
+    					->where('s.name = :status')
+    					->andwhere('p.id = :project')
+    					->setParameter('status', 'A venir')
+    					->setParameter('project', $projectid)
+						->leftJoin('ptu.project', 'p')
+						->leftJoin('ptu.status', 's')
+					    ->orderBy('ptu.position', 'ASC')
+					    ->setMaxResults(1)
+					    ->getQuery();
+
+
+	    return $query->getOneOrNullResult();
+	}
 }
