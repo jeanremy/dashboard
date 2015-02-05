@@ -12,5 +12,26 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProjectRepository extends EntityRepository
 {
-	
+	public function findPreciselyBy($category = null, $status = null, $user = null) 
+	{
+		$query = $this->createQueryBuilder('p');
+
+		if($category) {
+			$query->leftJoin('p.category', 's')
+					->add('where','s.id LIKE :category')
+	                ->setParameter('category', $category);
+	    }
+	    elseif($user) {
+	        $query = $query->add('andwhere', $query->expr()->In('p', ':u'))
+	                      ->setParameter('u', $user);
+	    }
+	    elseif($status) {
+			$query->leftJoin('p.status', 's')
+					->add('where','s.id LIKE :category')
+	                ->setParameter('category', $category);
+	    }
+
+        return $query->getQuery()
+                      ->getResult();
+	}
 }

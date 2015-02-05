@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table()
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks()
  */
 class Status
 {
@@ -27,6 +28,13 @@ class Status
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="slug", type="string", length=255)
+     */
+    private $slug;
 
 
     /**
@@ -61,4 +69,43 @@ class Status
     {
         return $this->name;
     }
+
+    public function __toString() {
+        return $this->name;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Status
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+
+     /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+    * @ORM\PrePersist()
+    */
+    public function updateSlug()
+    {
+        $slug = strtolower(trim(preg_replace('/\W+/', '-', $this->name), '-'));
+        $this->setSlug($slug);
+    }
+
+
 }

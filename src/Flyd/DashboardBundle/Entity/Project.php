@@ -55,6 +55,12 @@ class Project
     */
     private $project_task_users;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\Status")
+     * @ORM\JoinColumn(name="status_id", referencedColumnName="id")
+     */
+    private $status;
+
 
     /**
      * @var string
@@ -217,6 +223,22 @@ class Project
         return $this->project_task_users;
     }
 
+    /**
+     * Status
+     *
+     */
+
+    public function setStatus(Status $status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    public function getStatus()
+    {
+        return $this->status;
+    }
 
 
     public function setProjectCanvas(ProjectCanvas $project_canvas)

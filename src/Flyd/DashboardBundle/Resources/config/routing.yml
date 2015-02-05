@@ -225,6 +225,12 @@ project_ajax_reorder_ptus:
     requirements:
         _method: POST
 
+project_ajax_update_status:
+    path:     /project/{id}/updatestatus
+    defaults: { _controller: FlydDashboardBundle:Project:ajaxupdatestatus }
+    requirements:
+        _method: POST
+
 
 #   PROJECTS CANVAS
 

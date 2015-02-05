@@ -39,8 +39,8 @@ $('#flyd_dashboardbundle_projecttaskuser').on('submit', function(e) {
 // Update
 $('.task input, .task select, .task checkbox').on('change', function(e) {
     e.preventDefault();
-    var form = $(this).parent();
-    //console.log(form.serialize());
+    var form = $(this).parents('form');
+    console.log(form.serialize());
     $sort.sortable("disable");
 
     $.ajax({
@@ -51,7 +51,7 @@ $('.task input, .task select, .task checkbox').on('change', function(e) {
       },
       success: function(data) { 
         $sort.sortable("enable");
-
+        updateProjectStatus();
         if(data.code == 200) {
           console.log(data.response);
 
@@ -107,7 +107,7 @@ $sort = $('.tbody').sortable({
 
 function sendTasksOrder() {
     $sort.sortable("disable");
-    var $forms = $('.tbody').find('form');
+    var $forms = $('.taskcontainer').find('form');
     var $data = [];
     for (var i = 0, l = $forms.length; i<l; i++) {
       $($forms[i]).parent().parent().attr('id');
@@ -131,6 +131,25 @@ function sendTasksOrder() {
             console.log(data.response);
             $sort.sortable("enable");
         }
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.log(errorThrown);
+      }
+    });
+}
+
+
+function updateProjectStatus() {
+  $.ajax({
+      url:            updateStatusUrl,
+      type:           'POST',
+      data: {
+      },
+      beforeSend: function(data) {
+      },
+      success: function(data) { 
+        // on edit page, status__name will be diffrent
+        statusCont.html(data.response.name);
       },
       error: function(jqXHR, textStatus, errorThrown) {
         console.log(errorThrown);

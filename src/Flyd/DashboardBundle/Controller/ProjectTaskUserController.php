@@ -67,7 +67,6 @@ class ProjectTaskUserController extends Controller
 			));
         } 
         return $response;
-        die();
     }
 
 
@@ -82,7 +81,6 @@ class ProjectTaskUserController extends Controller
           'ptu' => $ptu
         ));
 
-        die();
     }
 
     public function getFirstPendingTaskAction($id)
@@ -107,27 +105,6 @@ class ProjectTaskUserController extends Controller
         }
     }
 
-    public function getCurrentStatusAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $project= $em->getRepository('FlydDashboardBundle:Project')->find($id);
-        $ptus = $project->getProjectTaskUsers();
-        $statuses = array();
-        foreach ($ptus as $ptu) {
-            $s = $ptu->getStatus();
-            if($s) {
-                $statuses[] =$s->getName();
-            }
-        }
-
-        if(in_array('En cours', $statuses) || in_array('En cours de validation', $statuses)) {
-            $status = in_array('En cours', $statuses) ? "pending":"pending--validation";
-        } else {
-            $status = in_array('A venir', $statuses) ? "coming":"closed";
-        }
-        return new Response('<div class="status '.$status.'"></div>');
-        
-    }
 
     
 

@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Flyd\DashboardBundle\Entity\ProjectCanvas;
 use Flyd\DashboardBundle\Form\ProjectCanvasTaskType;
 use Flyd\DashboardBundle\Form\TaskType;
@@ -245,7 +246,6 @@ class ProjectCanvasController extends Controller
                 ));
         }
         return $response;
-        die();
     }
 
     /**
@@ -288,7 +288,6 @@ class ProjectCanvasController extends Controller
         }
        
         return $response;
-        die();
     }
 
     /**
@@ -339,6 +338,5 @@ class ProjectCanvasController extends Controller
         }
        
         return $response;
-        die();
     }
 }

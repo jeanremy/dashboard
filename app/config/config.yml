@@ -34,7 +34,7 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ ]
+    bundles:        [FlydDashboardBundle]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -103,6 +103,8 @@ avalanche_imagine:
             type:    thumbnail
             options: {size: [46, 46], mode: outbound}
 
-
+rules:
+    symfony.web.web_bundle_folder_present_in_repository:
+        enabled: true
 
 

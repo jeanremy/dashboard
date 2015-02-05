@@ -1766,6 +1766,15 @@ input:disabled {
 	color: #8f979e;
 }
 
+.bloc--search label {
+	font-family: "montserratbold", sans-serif;
+	text-transform: uppercase;
+}
+
+.bloc--search select {
+	margin: 0 10px;
+}
+
 .taskcontainer {
 	width: 100%;
 	margin-bottom: 15px;
@@ -1773,13 +1782,14 @@ input:disabled {
 
 .taskcontainer .thead {
 	font-family: "montserratbold", sans-serif;
+	font-size: 13px;
+	font-size: 0.8125rem;
 	text-transform: uppercase;
 	color: #8f979e;
 	border-bottom: 1px solid #d6d7d8;
 }
 
-.taskcontainer .thead th,
-.taskcontainer .thead td {
+.taskcontainer .thead > div {
 	padding: 10px 0;
 }
 
@@ -1800,8 +1810,20 @@ input:disabled {
 	border-bottom: 1px solid #d6d7d8;
 }
 
-.taskcontainer .task > td {
+.taskcontainer .task > .taskcell {
 	padding: 10px 0;
+}
+
+.tasktable {
+	display: table;
+}
+
+.taskrow {
+	display: table-row;
+}
+
+.taskcell {
+	display: table-cell;
 }
 
 .ui-autocomplete {
@@ -1872,16 +1894,16 @@ input:disabled {
 	position: relative;
 }
 
-.project__title .status.coming {
+.project__title .status.a-venir {
 	border-color: #d14232;
 	background-color: #d14232;
 }
 
-.project__title .status.pending {
+.project__title .status.en-cours {
 	border-color: #ffa305;
 }
 
-.project__title .status.pending:after {
+.project__title .status.en-cours:after {
 	content: "";
 	height: 8px;
 	border-radius: 0  0 50% 50%;
@@ -1892,12 +1914,12 @@ input:disabled {
 	background-color: #ffa305;
 }
 
-.project__title .status.pending--validation {
+.project__title .status.en-cours-de-validation {
 	border-color: #ffa305;
 	background-color: #ffa305;
 }
 
-.project__title .status.closed {
+.project__title .status.termin {
 	border-color: #38914d;
 	background-color: #38914d;
 }

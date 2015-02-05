@@ -16,31 +16,15 @@
 
     <div class="row">
         <div class="col-sm-12">
-            <div class="bloc bloc--general">
-                <form action="" id="sort-projects">
-                    <p>Filtrer par:
-                        <select name="" id="" class="form-control">
-                            <option value="null">Utilisateurs</option>
-                            {% for user in users %}
-                            <option value="{{user.id}}">{{user.username}}</option>
-                            {% endfor %}
-                        </select>
-                        <select name="" id="" class="form-control">
-                            <option value="null">Type de projet</option>     
-                            <option value="0">Design</option>     
-                            <option value="1">Motion</option>     
-                            <option value="2">Web</option>     
-                        </select>
-                        <select name="" id="" class="form-control">
-                            <option value="null">Statut des projets</option>   
-                            {% for status in statuses %}
-                            <option value="{{status.id}}">{{status.name}}</option>
-                            {% endfor %}                     
-                        </select>
-                    </p>
-                    <a href="#" class="btn--save--reverse">Appliquer</a>
-
-                </form>
+            <div class="bloc bloc--general bloc--search">
+                {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+                    <label>Filtrer par: </label>
+                    {{ form_widget(form.categories, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_widget(form.status, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_widget(form.users, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_widget(form.save) }}
+                    {{ form_rest(form) }}
+                    {{ form_end(form) }}
             </div>
         </div>
     </div>
@@ -51,7 +35,9 @@
     <div class="row">
         <div class="col-sm-12 project">
             <div class="project__title">
-                {{ render(controller('FlydDashboardBundle:ProjectTaskUser:getCurrentStatus', {'id': entity.id}) ) }}
+                {% if entity.status %}
+                    <div class="status {{ entity.status.slug }}"></div>
+                {% endif %}
                 <h2>
                     <span class="project__title__infos">{{ entity.need.client.name }} > {{ entity.need.title }}</span>
                     <a href="{{ path('project_show', { 'id': entity.id }) }}">{{ entity.title }}</a>

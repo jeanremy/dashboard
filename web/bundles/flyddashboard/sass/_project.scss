@@ -1,16 +1,24 @@
 .supplier--mini span {color: $darkgrey;}
 
 
+.bloc--search {
+	label {
+		font-family: $montserratbold;
+		text-transform: uppercase;
+	}
+	select {margin: 0 10px;}
+}
 
 .taskcontainer {
 	width: 100%;
 	margin-bottom: 15px;
 	.thead {
 		font-family: $montserratbold;
+		font-size: 13px;
 		text-transform: uppercase;
 		color: $darkgrey;
 		border-bottom: 1px solid $grey;
-		th, td {
+		> div {
 			padding: 10px 0;
 		} 
 	}
@@ -22,11 +30,16 @@
 	}
 	.task {
 		border-bottom: 1px solid $grey;
-		> td {
+		> .taskcell {
 			padding: 10px 0;
 		} 
 	}
 }
+
+.tasktable {display: table;}
+.taskrow {display: table-row;}
+.taskcell {display: table-cell;}
+
 .ui-autocomplete {
 	background: white;
 	border-left: 1px solid $grey;
@@ -76,11 +89,11 @@
 	border: 2px solid;
 	border-radius: 50%;
 	position: relative;
-	&.coming {		
+	&.a-venir {		
 		border-color: $alert;
 		background-color: $alert;
 	}
-	&.pending {		
+	&.en-cours {		
 		border-color: $pending;
 		&:after {
 			content: "";
@@ -94,11 +107,11 @@
 			background-color: $pending;
 		}
 	}
-	&.pending--validation {		
+	&.en-cours-de-validation {		
 		border-color: $pending;
 		background-color: $pending;
 	}
-	&.closed {
+	&.termin {
 		border-color: $success;
 		background-color: $success;
 	}

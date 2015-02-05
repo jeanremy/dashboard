@@ -35,6 +35,16 @@
                         <p>{{entity.category.name}}</p>
                     </div>
                 </div>
+                
+                {% if entity.status %}
+                <div class="form-group">
+                    <label class="control-label">Statut</label>
+
+                    <div class="data">
+                        <p id="status__name">{{entity.status.name}}</p>
+                    </div>
+                </div>
+                {% endif %}
 
                 <div class="form-group">
                     <label class="control-label">Date de début</label>
@@ -90,28 +100,24 @@
             <div class="bloc">
                 <h2 class="bloc__title">Tâches</h2>
                 {% if entity.projecttaskusers %}
-                <table class="taskcontainer">
-                    <thead class="thead">
-                        <tr>
-                            <th>Êtapes</th>
-                            <th>Tâche</th>
-                            <th>Temps estimé</th>
-                            <th>Temps réel</th>
-                            <th>Statut</th>
-                            <th>Personne</th>
-                            <th>Important</th>
-                            <th>Suppr</th>
-                        </tr>
-                    </thead>
+                <div class="tasktable taskcontainer">
 
-                    <tbody class="tbody">
+                    <div class="thead taskrow">
+                        <div class="taskcell">Êtapes</div>
+                        <div class="taskcell">Tâche</div>
+                        <div class="taskcell">Temps estimé</div>
+                        <div class="taskcell">Temps réel</div>
+                        <div class="taskcell">Statut</div>
+                        <div class="taskcell">Personne</div>
+                        <div class="taskcell">Important</div>
+                        <div class="taskcell">Suppr</div>
+                    </div class="taskrow">
                     {% if entity.projecttaskusers %}
                         {% for ptu in entity.projecttaskusers %}
                            {{ render(controller('FlydDashboardBundle:ProjectTaskUser:getForm', {'id': ptu.id}) ) }}                                   
                         {% endfor %}  
-                    {% endif %}                      
-                    </tbody>
-                </table>
+                    {% endif %}   
+                </div>
                 {% endif %}
                 <!-- Form pour créer ptu avec task imbriquée -->
                 {{form_start(ptuform, 
@@ -156,6 +162,8 @@
 
         var updateOrderUrl = "{{path('project_ajax_reorder_ptus', {'id': entity.id})}}";
         var removeUrl = "{{path('project_ajax_remove_ptu', {'id': entity.id})}}";
+        var updateStatusUrl = "{{path('project_ajax_update_status', {'id': entity.id})}}";
+        var statusCont = $("#status__name");
 
     </script>
     <script type="text/javascript" src="{{ asset('bundles/flyddashboard/js/projecttaskshandler.js') }}"></script>

@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Flyd\DashboardBundle\Entity\Project;
 use Flyd\DashboardBundle\Entity\ProjectTaskUser;
 use Flyd\DashboardBundle\Entity\ProjectCanvas;
@@ -35,20 +36,57 @@ class ProjectController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('FlydDashboardBundle:Project')->findAll();
-        $users = $em->getRepository('FlydDashboardBundle:User')->findAll();
-        $statuses = $em->getRepository('FlydDashboardBundle:Status')->findAll();
+        
+        $form = $this->createFormBuilder()
+            ->add('users', 'entity', array(
+                'class' => 'FlydDashboardBundle:User',
+                'expanded'=>false,
+                'empty_value' => 'Choisissez un utilisateur',
+                'required' => false,
+                'multiple'=>false)
+            )
+            ->add('categories', 'entity', array(
+                'class' => 'FlydDashboardBundle:Category',
+                'expanded'=>false,
+                'empty_value' => 'Choisissez une categorie',
+                'required' => false,
+                'multiple'=>false)
+            )
+            ->add('status', 'entity', array(
+                'class' => 'FlydDashboardBundle:Status',
+                'expanded'=>false,
+                'empty_value' => 'Choisissez un statut',
+                'required' => false,
+                'multiple'=>false)
+            )
+            ->add('save','submit', array(
+                    'attr' => array('class' => 'btn--save--reverse'),
+                    'label' => 'Enregistrer',
+                ))
+            ->getForm();
+    if ($request->getMethod() == "POST") {
+        $form->submit($request);
+        if ($form->isValid()) {
+            //Custom method 
+            $params = $this->getRequest()->request->all();
+            $entities = $em->getRepository('FlydDashboardBundle:Project')->findPreciselyBy($params['form']['categories'], $params['form']['status'], $params['form']['users']);
+        }
+        else {
+            // faire appel à cette méthode, avec user par défaut
+            $entities = $em->getRepository('FlydDashboardBundle:Project')->findAll();
+        }
+    }
 
-        return array(
+        return $this->render('FlydDashboardBundle:Project:index.html.twig', array(
             'entities' => $entities,
-            'users' => $users,
-            'statuses' => $statuses,
+            'form' => $form->createView(),
             'menu' => 'dashboard'
-        );
+        ));
     }
 
     /**
@@ -511,7 +549,6 @@ class ProjectController extends Controller
                 ));
         }
         return $response;
-        die();
     }
 
     /**
@@ -541,6 +578,8 @@ class ProjectController extends Controller
             $ptuid = $ptu;
 
             $ptu = $em->getRepository('FlydDashboardBundle:ProjectTaskUser')->find($ptuid);
+            $status = $ptu->getStatus();
+            $statuses[] = $status? $status->getName() : null;
             try { 
                 $ptu->setPosition($i);
                 $em->persist($ptu);
@@ -567,7 +606,6 @@ class ProjectController extends Controller
         }
        
         return $response;
-        die();
     }
 
     /**
@@ -610,7 +648,55 @@ class ProjectController extends Controller
         }
        
         return $response;
-        die();
     }
 
+    /**
+     * Update project status depending on ptus
+     *
+     */
+    public function ajaxUpdateStatusAction($id) {
+        $response = new JsonResponse();        
+        $em = $this->getDoctrine()->getManager();
+        $project = $em->getRepository('FlydDashboardBundle:Project')->find($id);
+        $ptus = $project->getProjectTaskUsers();
+        $statuses = array();
+        foreach ($ptus as $ptu) {
+            $status = $ptu->getStatus();
+            $statuses[] = $status? $status->getName(): null;
+        }
+        if(in_array('En cours', $statuses) || in_array('En cours de validation', $statuses)) {
+            $status = in_array('En cours', $statuses) ? "En cours":"En cours de validation";
+        } else {
+            $status = in_array('A venir', $statuses) ? "A venir":"Terminé";
+        }
+        try {            
+            $newStatus = $em->getRepository('FlydDashboardBundle:Status')->findOneByName($status);
+            $project->setStatus($newStatus);
+            $em->persist($project);
+            $em->flush();
+
+            $response->setData(array(
+                'code' => 200,
+                'response' => array(
+                    'id' => $newStatus->getId(),
+                    'name' => $newStatus->getName()
+                    )
+            ));
+        } catch(\Doctrine\ORM\ORMException $e) {
+            $response->setData(array(
+                'code' => 500,
+                'response' => $e->getMessage()
+            ));
+        }
+        catch(\Exception $e){
+            $response->setData(array(
+                'code' => 500,
+                'response' => $e->getMessage()
+            ));
+        }
+       
+        return $response;
+      
+
+    }
 }
