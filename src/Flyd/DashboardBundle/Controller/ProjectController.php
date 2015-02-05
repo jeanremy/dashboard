@@ -583,7 +583,7 @@ class ProjectController extends Controller
             try { 
                 $ptu->setPosition($i);
                 $em->persist($ptu);
-                $em->flush();
+                $em->flush($ptu);
                 $response->setData(array(
                     'code' => 200,
                     'response' => 'ok'
