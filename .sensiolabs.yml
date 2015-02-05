@@ -1,0 +1,3 @@
+rules:
+    symfony.web.web_bundle_folder_present_in_repository:
+        enabled: true
