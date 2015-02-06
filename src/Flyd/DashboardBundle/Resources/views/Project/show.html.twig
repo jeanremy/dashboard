@@ -99,50 +99,45 @@
         <div class="col-sm-12">
             <div class="bloc">
                 <h2 class="bloc__title">Tâches</h2>
-                {% if entity.projecttaskusers %}
-                <div class="tasktable taskcontainer">
-
-                    <div class="thead taskrow">
-                        <div class="taskcell">Êtapes</div>
-                        <div class="taskcell">Tâche</div>
-                        <div class="taskcell">Temps estimé</div>
-                        <div class="taskcell">Temps réel</div>
-                        <div class="taskcell">Statut</div>
-                        <div class="taskcell">Personne</div>
-                        <div class="taskcell">Important</div>
-                        <div class="taskcell">Suppr</div>
-                    </div class="taskrow">
-                    {% if entity.projecttaskusers %}
-                        {% for ptu in entity.projecttaskusers %}
-                           {{ render(controller('FlydDashboardBundle:ProjectTaskUser:getForm', {'id': ptu.id}) ) }}                                   
-                        {% endfor %}  
-                    {% endif %}   
-                </div>
-                {% endif %}
-                <!-- Form pour créer ptu avec task imbriquée -->
-                {{form_start(ptuform, 
-                    {'attr': {
-                        'class': 'form-horizontal',
-                        'id' : 'flyd_dashboardbundle_projecttaskuser'
-                    }, 
-                     'action': path('project_ajax_add_ptu', {'id': entity.id})}
-                )}}
-                    <h2 class="bloc__subtitle">Ajouter une tâche</h2>
-                    <div class="newtask">  
-                        <input type="hidden" name="task_id" id="task_id" />
-                        {{ form_widget(ptuform.position) }}                      
-                        {{ form_label(ptuform.task.step, "Etape", {'label_attr': {'class': 'control-label'}}) }}
-                        {{ form_widget(ptuform.task.step, {'attr': {'class': 'form-control'}}) }}
-
-                        {{ form_label(ptuform.task.name, "Nom de la tâche", {'label_attr': {'class': 'control-label'}}) }}
-                        {{ form_widget(ptuform.task.name, {'attr': {'class': 'form-control'}}) }}
-
-                       
+                <div class="row">
+                    <div class="col-sm-12 tasks">                          
+                        {% if entity.projecttaskusers %}
+                            {% for ptu in entity.projecttaskusers %}
+                               {{ render(controller('FlydDashboardBundle:ProjectTaskUser:getForm', {'id': ptu.id}) ) }}                                   
+                            {% endfor %}  
+                        {% endif %}  
                     </div>
+                </div>
+                <button class="btn--add">+</button>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <!-- Form pour créer ptu avec task imbriquée -->
+                        {{form_start(ptuform, 
+                            {'attr': {
+                                'class': 'form-horizontal',
+                                'id' : 'flyd_dashboardbundle_projecttaskuser'
+                            }, 
+                             'action': path('project_ajax_add_ptu', {'id': entity.id})}
+                        )}}
+                            <h2 class="bloc__subtitle">Ajouter une tâche</h2>
+                            <div class="newtask">  
+                                <input type="hidden" name="task_id" id="task_id" />
+                                {{ form_widget(ptuform.position) }}                      
+                                {{ form_label(ptuform.task.step, "Etape", {'label_attr': {'class': 'control-label'}}) }}
+                                {{ form_widget(ptuform.task.step, {'attr': {'class': 'form-control'}}) }}
+
+                                {{ form_label(ptuform.task.name, "Nom de la tâche", {'label_attr': {'class': 'control-label'}}) }}
+                                {{ form_widget(ptuform.task.name, {'attr': {'class': 'form-control'}}) }}
+
+                               
+                            </div>
 
 
-                {{ form_rest(ptuform) }}
-                {{ form_end(ptuform) }}
+                        {{ form_rest(ptuform) }}
+                        {{ form_end(ptuform) }}
+                    </div>
+                </div>
+                
             </div>
         </div>
     </div>

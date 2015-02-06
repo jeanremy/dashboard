@@ -16,9 +16,7 @@ class ProjectTaskUserType extends AbstractType
     {
         $builder
             ->add('position', 'hidden')
-            ->add('task', new TaskType(), array(
-                'required' => true
-            ))            
+                        
             ->add('estimatedtime', 'time', array(
                 'widget' => 'single_text'
             ))

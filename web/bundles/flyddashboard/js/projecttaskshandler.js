@@ -21,7 +21,7 @@ $('#flyd_dashboardbundle_projecttaskuser').on('submit', function(e) {
       },
       success: function(data) { 
         if(data.code == 200) {
-            $('.tbody').append(data.response);
+            $('.tasks').append(data.response);
             $('#flyd_dashboardbundle_projecttaskuser_mini_position').val(parseInt($('#flyd_dashboardbundle_projecttaskuser_mini_position').val()) + 1);
         } 
         else {
@@ -37,10 +37,12 @@ $('#flyd_dashboardbundle_projecttaskuser').on('submit', function(e) {
 });
 
 // Update
-$('.task input, .task select, .task checkbox').on('change', function(e) {
+$(document).on('change', '.task input, .task select, .task checkbox',function(e) {
     e.preventDefault();
-    var form = $(this).parents('form');
-    console.log(form.serialize());
+    var form = $(this).parents('form'),
+        statusRaw = $('#flyd_dashboardbundle_projecttaskuser_status option:selected').text(),
+        status = statusRaw.trim().toLowerCase().replace(/ /g,'-').replace(/[^\w-]+/g,'');
+        console.log(statusRaw, status);
     $sort.sortable("disable");
 
     $.ajax({
@@ -54,7 +56,7 @@ $('.task input, .task select, .task checkbox').on('change', function(e) {
         updateProjectStatus();
         if(data.code == 200) {
           console.log(data.response);
-
+          form.parent().attr('data-status', status);
         } 
         else {
           console.log(data.response);
@@ -72,19 +74,20 @@ $('.task input, .task select, .task checkbox').on('change', function(e) {
 // remove
 $(document).on('click', '.remove-task', function(e) {
     e.preventDefault();
-    var $this = $(this);
+    var $this = $(this),
+        parentTask = $this.parents('.task');
     $.ajax({
       url:            removeUrl,
       type:           'POST',
       data: {
-        ptu_id: $this.parent().parent().attr('id')
+        ptu_id: parentTask.attr('id')
       },
       beforeSend: function(data) {
       },
       success: function(data) { 
         if(data.code == 200) {
-            $this.parent().parent().fadeIn(400).remove();
-            $('#flyd_dashboardbundle_projectcanvastask_position').val(parseInt($('#flyd_dashboardbundle_projectcanvastask_position').val()) - 1);
+           parentTask.fadeIn(400).remove();
+          parentTask.find('#flyd_dashboardbundle_projectcanvastask_position').val(parseInt(parentTask.find('#flyd_dashboardbundle_projectcanvastask_position').val()) - 1);
         } else {
         }
       },
@@ -97,7 +100,7 @@ $(document).on('click', '.remove-task', function(e) {
 
 
 // Sortable
-$sort = $('.tbody').sortable({
+$sort = $('.tasks').sortable({
     update: function( event, ui ) {
         sendTasksOrder();
     },
@@ -107,11 +110,11 @@ $sort = $('.tbody').sortable({
 
 function sendTasksOrder() {
     $sort.sortable("disable");
-    var $forms = $('.taskcontainer').find('form');
+    var $forms = $('.tasks').find('form');
     var $data = [];
     for (var i = 0, l = $forms.length; i<l; i++) {
-      $($forms[i]).parent().parent().attr('id');
-      $data.push($($forms[i]).parent().parent().attr('id'));
+      $($forms[i]).parent().attr('id');
+      $data.push($($forms[i]).parent().attr('id'));
       // utiliser update ptu
 
     }

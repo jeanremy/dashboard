@@ -16,9 +16,12 @@ class ProjectTaskUserMiniType extends AbstractType
         ->remove('status')
         ->remove('user')
         ->remove('isimportant')
+        ->add('task', new TaskType(), array(
+                'required' => true
+            ))
         ->add('save','submit', array(
         'attr' => array('class' => 'btn--save--reverse'),
-        'label' => 'Enregistrer',
+        'label' => 'Ajouter',
     ));
   }
 

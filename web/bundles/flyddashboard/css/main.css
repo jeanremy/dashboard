@@ -1775,6 +1775,104 @@ input:disabled {
 	margin: 0 10px;
 }
 
+.task__main,
+.task__isimportant {
+	float: left;
+}
+
+.task__infos,
+.task__remove {
+	float: right;
+}
+
+.tasks {
+	margin-bottom: 30px;
+}
+
+.task {
+	border-bottom: 1px solid #d6d7d8;
+	padding: 20px 0;
+}
+
+.task:first-of-type {
+	border-top: 1px solid #d6d7d8;
+}
+
+.task .task__isimportant {
+	margin-right: 20px;
+}
+
+.task .task__isimportant > input {
+	display: none;
+}
+
+.task .task__isimportant > label {
+	display: block;
+	overflow: hidden;
+	text-indent: -9999px;
+	height: 23px;
+	width: 20px;
+	background-position: -120px 0;
+	cursor: pointer;
+}
+
+.task .task__isimportant > input:checked + label {
+	background-position: -120px -23px;
+}
+
+.task input:disabled,
+.task select:disabled {
+	border-bottom: none;
+}
+
+.task .task__name {
+	font-size: 18px;
+	font-size: 1.125rem;
+	font-family: "varela", sans-serif;
+}
+
+.task .task__name .task__step {
+	font-size: 14px;
+	font-size: 0.875rem;
+	color: #8f979e;
+}
+
+.task .task__infos .info {
+	display: inline-block;
+	vertical-align: top;
+	text-align: center;
+}
+
+.task .task__infos .info label {
+	display: block;
+	font-size: 12px;
+	font-size: 0.75rem;
+	color: #2b303e;
+}
+
+.task .task__infos .info select,
+.task .task__infos .info input {
+	height: 30px;
+}
+
+.task[data-status="termin"] .task__name {
+	color: #d6d7d8;
+}
+
+.task[data-status="termin"] .task__name .task__step {
+	color: #d6d7d8;
+}
+
+.task[data-status="termin"] input,
+.task[data-status="termin"] select,
+.task[data-status="termin"] .task__infos .info input,
+.task[data-status="termin"] .task__infos .info label,
+.task[data-status="termin"] .line--remove {
+	color: #d6d7d8;
+}
+
+/* Project Canvas */
+
 .taskcontainer {
 	width: 100%;
 	margin-bottom: 15px;
@@ -1798,32 +1896,23 @@ input:disabled {
 	color: #2b303e;
 }
 
-.taskcontainer .tbody .sortable {
-	cursor: move;
-}
-
-.taskcontainer .tbody .ui-sortable-placeholder {
-	border: 1px dashed #8f979e;
-}
-
 .taskcontainer .task {
 	border-bottom: 1px solid #d6d7d8;
 }
 
-.taskcontainer .task > .taskcell {
+.taskcontainer .task > td {
 	padding: 10px 0;
 }
 
-.tasktable {
-	display: table;
+/* Common for jquery ui sort */
+
+.sortable {
+	cursor: move;
 }
 
-.taskrow {
-	display: table-row;
-}
-
-.taskcell {
-	display: table-cell;
+.ui-sortable-placeholder {
+	border: 1px dashed #8f979e;
+	height: 100px;
 }
 
 .ui-autocomplete {
@@ -1849,6 +1938,8 @@ input:disabled {
 	color: #8f979e !important;
 }
 
+/* Index*/
+
 .project {
 	margin-bottom: 30px;
 }
@@ -1858,13 +1949,77 @@ input:disabled {
 }
 
 .project__title {
-	background-color: #2b303e;
-	color: #fff;
+	background-color: #fff;
+	color: #2b303e;
 	padding: 30px;
 	font-family: "varela", sans-serif;
 	font-size: 25px;
 	font-size: 1.5625rem;
 	cursor: pointer;
+	position: relative;
+}
+
+.project__title > h2 {
+	position: relative;
+	z-index: 1;
+}
+
+.project__title::before {
+	content: "";
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width: 4px;
+	background: #2b303e;
+	position: absolute;
+	-webkit-transition: all 200ms ease;
+	        transition: all 200ms ease;
+}
+
+.project__title .category {
+	height: 40px;
+	width: 40px;
+	float: left;
+	margin-right: 30px;
+	position: relative;
+}
+
+.project__title .category.motion {
+	background-position: -80px 0;
+}
+
+.project__title .category.web {
+	background-position: -40px 0;
+}
+
+.project__title:hover > h2,
+.project__title:focus > h2,
+.active .project__title > h2 {
+	color: #fff;
+}
+
+.project__title:hover::before,
+.project__title:focus::before,
+.active .project__title::before {
+	width: 100%;
+}
+
+.project__title:hover .category.print,
+.project__title:focus .category.print,
+.active .project__title .category.print {
+	background-position: 0 -40px;
+}
+
+.project__title:hover .category.motion,
+.project__title:focus .category.motion,
+.active .project__title .category.motion {
+	background-position: -80px -40px;
+}
+
+.project__title:hover .category.web,
+.project__title:focus .category.web,
+.active .project__title .category.web {
+	background-position: -40px -40px;
 }
 
 .project__title__infos {
@@ -1873,17 +2028,9 @@ input:disabled {
 	font-size: 14px;
 	font-size: 0.875rem;
 	display: block;
+	position: relative;
+	z-index: 10;
 }
-
-.pending {
-	color: #ffa305;
-}
-
-.coming {
-	color: #d14232;
-}
-
-/* Index*/
 
 .project__title .status {
 	float: right;

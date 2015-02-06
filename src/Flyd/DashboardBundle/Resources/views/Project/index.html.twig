@@ -31,12 +31,15 @@
 
     {% include "FlydDashboardBundle::flash.html.twig" %}
 
-    {% for entity in entities %}
     <div class="row">
+    {% for entity in entities %}
         <div class="col-sm-12 project">
             <div class="project__title">
                 {% if entity.status %}
                     <div class="status {{ entity.status.slug }}"></div>
+                {% endif %}
+                {% if entity.category %}
+                    <div class="category sprite {{ entity.category.name|lower }}"></div>
                 {% endif %}
                 <h2>
                     <span class="project__title__infos">{{ entity.need.client.name }} > {{ entity.need.title }}</span>
@@ -89,8 +92,8 @@
 
             </div>
         </div>
-    </div>
     {% endfor %}
+    </div>
 {% endblock %}
 
 {% block js %}
@@ -98,9 +101,11 @@
     
         $('.project__title').on('click', function(e) {
             e.preventDefault();
+            $(this).parent().addClass('active');
+            $(this).parent().siblings().removeClass('active').find('.bloc').slideUp(400);
+
             $(this).siblings().slideToggle();
         });
-
         $('.project .bloc').hide();
 
     </script>

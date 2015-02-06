@@ -1,25 +1,39 @@
-
-
+<div class="task sortable clearfix" id="{{ ptu.id }}" data-status="{{ ptu.status.slug }}">
     {{ form_start(form, 
         {
-            'attr': {'class': 'form-horizontal'}, 
+            'attr': {
+                'class': 'form-horizontal',
+            }, 
             'action': path('projecttaskuser_ajax_edit_ptu', {'id': ptu.id})
         })
     }}
-    <div class="task sortable" id="{{ ptu.id }}">
-        <div class="taskcell">
-        {{ form_widget(form.position, {'atdiv': {'class': 'form-control'}}) }}
-        {{ form_widget(form.task.step, {'attr': {'class': 'form-control'}, 'disabled': true}) }}
+        <div class="task__isimportant">
+            {{ form_widget(form.isimportant, { 'id':'task-'~ ptu.id, 'attr': {
+            'class': 'form-control'}}) }}
+             <label for="task-{{ptu.id}}" class="sprite"></label>
         </div>
-        <div class="taskcell">{{ form_widget(form.task.name, {'attr': {'class': 'form-control'}, 'disabled': true}) }}</div>
-        <div class="taskcell">{{ form_widget(form.estimatedtime, {'attr': {'class': 'form-control'}}) }}</div>
-        <div class="taskcell">{{ form_widget(form.realtime, {'attr': {'class': 'form-control'}}) }}</div>
-        <div class="taskcell">{{ form_widget(form.status, {'attr': {'class': 'form-control'}}) }}</div>
-        <div class="taskcell">{{ form_widget(form.user, {'attr': {'class': 'form-control'}}) }} </div>
-        <div class="taskcell">{{ form_widget(form.isimportant, {'attr': {'class': 'form-control'}}) }}</div>
-        <div class="taskcell">
+        <div class="task__main">            
+            <p class="task__name">{{ptu.task.name|capitalize}}<span class="task__step"> / {{ ptu.task.step|capitalize}}</span></p>
+            <p class="task__status">{{ form_widget(form.status, {'attr': {'class': 'form-control'}}) }}</p>
+        </div>
+        <div class="task__remove">
             <a href="{{path('project_ajax_remove_ptu', {'id': ptu.id})}}" class="line--remove remove-task" data-id="{{ ptu.id }}">Retirer</a>
         </div>
-    </div>
-    {{ form_rest(form) }}
-{{ form_end(form) }}
+        <div class="task__infos">
+            <div class="info">
+                {{ form_label(form.estimatedtime, "Temps estimé", {'label_attr': {'class': 'control-label'}}) }}
+                {{ form_widget(form.estimatedtime, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="info">
+                {{ form_label(form.realtime, "Temps réel", {'label_attr': {'class': 'control-label'}}) }}
+                {{ form_widget(form.realtime, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="info">
+                {{ form_label(form.user, "Personne", {'label_attr': {'class': 'control-label'}}) }}
+                {{ form_widget(form.user, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        {{ form_widget(form.position, {'attr': {'class': 'form-control'}}) }}
+        {{ form_rest(form) }}
+    {{ form_end(form) }}
+</div>
