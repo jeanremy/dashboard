@@ -59,7 +59,6 @@ gulp.task('postprocess', function() {
     .pipe(rename({suffix: '.min'}))    
     .pipe(gulp.dest('web/css'))
 
-
 });
 
 // Scripts
