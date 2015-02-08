@@ -15,19 +15,19 @@
     </div>
 
     <div class="row">
+        {% for entity in entities %}
         <div class="col-sm-12">
             <div class="bloc bloc--general bloc--search">
                 <div class="row">
-                {% for entity in entities %}
                     <div class="col-sm-12">
                         <h2 class="bloc__title">
                             <a href="{{ path('projectcanvas_show', { 'id': entity.id }) }}">{{entity.name }}</a>
                         </h2>
                     </div>
-                {% endfor %}
                 </div>
             </div>
         </div>
+        {% endfor %}
     </div>
 
 
