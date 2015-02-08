@@ -14,21 +14,23 @@ class ProjectRepository extends EntityRepository
 {
 	public function findPreciselyBy($category = null, $status = null, $user = null) 
 	{
-		$query = $this->createQueryBuilder('p');
+		$query = $this->createQueryBuilder('p')
+						->add('where','p.id > 0');
 
 		if($category) {
-			$query->leftJoin('p.category', 's')
-					->add('where','s.id LIKE :category')
+			$query->leftJoin('p.category', 'c')
+					->andWhere('c.id = :category')
 	                ->setParameter('category', $category);
 	    }
-	    elseif($user) {
-	        $query = $query->add('andwhere', $query->expr()->In('p', ':u'))
-	                      ->setParameter('u', $user);
+	    if($user) {
+	        $query->leftJoin('p.users', 'u')
+	        		->andWhere($query->expr()->in('u', ':user'))
+	                ->setParameter('user', $user);
 	    }
-	    elseif($status) {
+	    if($status) {
 			$query->leftJoin('p.status', 's')
-					->add('where','s.id LIKE :category')
-	                ->setParameter('category', $category);
+					->andWhere('s.id = :status')
+	                ->setParameter('status', $status);
 	    }
 
         return $query->getQuery()
