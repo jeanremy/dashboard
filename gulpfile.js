@@ -26,8 +26,8 @@ gulp.task('copyfonts', function() {
 });
 
 gulp.task('copyimg', function() {
-    return gulp.src('src/Flyd/DashboardBundle/Resources/public/img/*')      
-      .pipe(copy('web/img/', {prefix: 7}))
+    return gulp.src('src/Flyd/DashboardBundle/Resources/public/img/**')      
+      .pipe(copy('web/img/', {prefix: 6}))
 });
 
 
