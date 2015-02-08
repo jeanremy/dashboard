@@ -35,7 +35,21 @@ class ProjectTaskUserController extends Controller
 	    $em = $this->getDoctrine()->getManager();
 	    $ptu = $em->getRepository('FlydDashboardBundle:ProjectTaskUser')->find($id);
 	    $form = $this->get('form.factory')->create(new ProjectTaskUserType(), $ptu);
-    	$form->handleRequest($request);
+
+        try {
+            $form->handleRequest($request);
+        } catch(\Doctrine\ORM\ORMException $e) {
+            return $response->setData(array(
+                'code' => 500,
+                'response' => $e->getMessage()
+            ));
+        }
+        catch(\Exception $e){
+            return $response->setData(array(
+                'code' => 500,
+                'response' => $e->getMessage()
+            ));
+        }
 
     	if ($form->isValid()) {
           	try {

@@ -18,47 +18,53 @@
         <h1 class="lvl1">{{entity.name}} - Edit</h1>
     </div>
 
-    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
-
-    {% if form_errors(form) %}
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="bloc">
-                {{ form_errors(form) }}
-            </div>
-        </div>
-    </div>
-    {% endif %}
 
     <div class="row">
         <div class="col-sm-12">
             <div class="bloc bloc-inline-edition">
                 <h2 class="bloc__title">Informations générales</h2>
+                <div class="row">
+                    <div class="col-sm-12">
 
-                <div class="form-group">
-                    {{ form_label(form.name, "Titre du projet", {'label_attr': {'class': 'control-label'}}) }}
+                        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 
-                    {{ form_errors(form.name) }}
+                        {% if form_errors(form) %}
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="bloc">
+                                    {{ form_errors(form) }}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        <div class="form-group">
+                            {{ form_label(form.name, "Titre du projet", {'label_attr': {'class': 'control-label'}}) }}
 
-                  <div class="data">
-                    {# Génération de l'input. #}
-                    {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
-                  </div>
+                            {{ form_errors(form.name) }}
+
+                          <div class="data">
+                            {# Génération de l'input. #}
+                            {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                          </div>
+                        </div>
+
+                       
+
+                        {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
+                        {{ form_widget(form.save) }}
+
+
+                        {# Génération automatique des champs pas encore écrits.
+                        Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
+                        et tous les champs cachés (type « hidden »). #}
+                        {{ form_rest(form) }}
+
+                        {# Fermeture de la balise <form> du formulaire HTML #}
+                        {{ form_end(form) }}
+                    </div>
                 </div>
 
-               
-
-                {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
-                {{ form_widget(form.save) }}
-
-
-                {# Génération automatique des champs pas encore écrits.
-                Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
-                et tous les champs cachés (type « hidden »). #}
-                {{ form_rest(form) }}
-
-                {# Fermeture de la balise <form> du formulaire HTML #}
-                {{ form_end(form) }}
             </div>
            
         </div>
@@ -66,47 +72,56 @@
         <div class="col-sm-12">
             <div class="bloc bloc-inline-edition">
                 <h2 class="bloc__title">Tâches prédéfinies</h2>
-                {% if entity.projectcanvastasks %}
-                <table class="taskcontainer">
-                    <thead class="thead">
-                        <tr>
-                            <th>Êtapes</th>
-                            <th>Tâche</th>
-                            <th>Suppr</th>
-                        </tr>
-                    </thead>
-                    <tbody class="tbody">
-                    {% for pct in entity.projectcanvastasks %}
-                        <tr id="{{pct.id}}" class="task sortable" data-position="{{pct.position}}">
-                            <td>{{pct.task.step|capitalize}}</td>
-                            <td>{{pct.task.name|capitalize}}</td>
-                            <td><a href="" class="line--remove remove-task">Retirer</a></td>
-                        </tr>
-                    {% endfor %}                        
-                    </tbody>
-                </table>
-                {% endif %}
-               
-                <!-- Form pour créer pct avec task imbriquée -->
-                {{form_start(pctform, 
-                    {'attr': {
-                        'class': 'form-horizontal',
-                        'id' : 'flyd_dashboardbundle_projectcanvastask'
-                    }, 
-                     'action': path('projectcanvas_ajax_add_task', {'id': entity.id})}
-                )}}
-                    <h2 class="bloc__subtitle">Ajouter une tâche</h2>
-                    <div class="newtask">  
-                        <input type="hidden" name="task_id" id="task_id" />
-                        {{ form_widget(pctform.position) }}                      
-                        {{ form_label(pctform.task.name, "Nom de la tâche", {'label_attr': {'class': 'control-label'}}) }}
-                        {{ form_widget(pctform.task.name, {'attr': {'class': 'form-control'}}) }}
-
-                        {{ form_label(pctform.task.step, "Etape", {'label_attr': {'class': 'control-label'}}) }}
-                        {{ form_widget(pctform.task.step, {'attr': {'class': 'form-control'}}) }}
+                <div class="row">
+                    <div class="col-sm-12">
+                        {% if entity.projectcanvastasks %}
+                        <table class="taskcontainer">
+                            <thead class="thead">
+                                <tr>
+                                    <th>Êtapes</th>
+                                    <th>Tâche</th>
+                                    <th>Suppr</th>
+                                </tr>
+                            </thead>
+                            <tbody class="tbody">
+                            {% for pct in entity.projectcanvastasks %}
+                                <tr id="{{pct.id}}" class="task sortable" data-position="{{pct.position}}">
+                                    <td>{{pct.task.step|capitalize}}</td>
+                                    <td>{{pct.task.name|capitalize}}</td>
+                                    <td><a href="" class="line--remove remove-task">Retirer</a></td>
+                                </tr>
+                            {% endfor %}                        
+                            </tbody>
+                        </table>
+                        {% endif %}
                     </div>
-                {{ form_rest(pctform) }}
-                {{ form_end(pctform) }}
+                </div>
+                <button class="btn--add">+</button>
+                <div class="row">
+                    <div class="col-sm-12">  
+               
+                        <!-- Form pour créer pct avec task imbriquée -->
+                        {{form_start(pctform, 
+                            {'attr': {
+                                'class': 'form-horizontal',
+                                'id' : 'flyd_dashboardbundle_projectcanvastask'
+                            }, 
+                             'action': path('projectcanvas_ajax_add_task', {'id': entity.id})}
+                        )}}
+                            <h2 class="bloc__subtitle">Ajouter une tâche</h2>
+                            <div class="newtask">  
+                                <input type="hidden" name="task_id" id="task_id" />
+                                {{ form_widget(pctform.position) }}                      
+                                {{ form_label(pctform.task.name, "Nom de la tâche", {'label_attr': {'class': 'control-label'}}) }}
+                                {{ form_widget(pctform.task.name, {'attr': {'class': 'form-control'}}) }}
+
+                                {{ form_label(pctform.task.step, "Etape", {'label_attr': {'class': 'control-label'}}) }}
+                                {{ form_widget(pctform.task.step, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        {{ form_rest(pctform) }}
+                        {{ form_end(pctform) }}
+                    </div>
+                </div>
             </div>    
         </div>
     </div>

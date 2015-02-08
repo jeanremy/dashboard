@@ -42,7 +42,6 @@ $(document).on('change', '.task input, .task select, .task checkbox',function(e)
     var form = $(this).parents('form'),
         statusRaw = $('#flyd_dashboardbundle_projecttaskuser_status option:selected').text(),
         status = statusRaw.trim().toLowerCase().replace(/ /g,'-').replace(/[^\w-]+/g,'');
-        console.log(statusRaw, status);
     $sort.sortable("disable");
 
     $.ajax({

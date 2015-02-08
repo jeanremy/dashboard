@@ -1,13 +1,7 @@
 $(document).ready(function() {
 
 
-	// more buttons
-	$('.btn--add').next().hide();
-	$('.btn--add').on('click', function(e){
-		e.preventDefault();
-		var $this = $(this);
-		$this.next().fadeToggle();
-	});
+
 
 	$(document).on('submit', '#flyd_dashboardbundle_address, #flyd_dashboardbundle_contact, #flyd_dashboardbundle_need', function(e){
 		e.preventDefault();

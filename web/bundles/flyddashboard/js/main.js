@@ -25,6 +25,14 @@
 			$(this).parent().fadeIn(200).remove();
 		});
 
+		// more buttons
+		$('.btn--add').next().hide();
+		$('.btn--add').on('click', function(e){
+			e.preventDefault();
+			var $this = $(this);
+			$this.next().fadeToggle();
+		});
+
 
 
 

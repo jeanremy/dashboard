@@ -5,48 +5,30 @@
 {% endblock %}
 
 {% block top %}
-    <p>Canvas de projet</p>
+    <p>Canevas de projet</p>
 {% endblock %}
 
 {% block body %}
-
-    <div class="title__container">
-        <h1>Project Canevas</h1>
+     <div class="title__container">
+        <a href="{{ path('projectcanvas_add') }}" class="btn btn--edit">Nouveau canevas</a>
+        <h1 class="lvl1">Canevas de projet</h1>
     </div>
 
-    <table class="records_list">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('projectcanvas_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.name }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('projectcanvas_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('projectcanvas_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="bloc bloc--general bloc--search">
+                <div class="row">
+                {% for entity in entities %}
+                    <div class="col-sm-12">
+                        <h2 class="bloc__title">
+                            <a href="{{ path('projectcanvas_show', { 'id': entity.id }) }}">{{entity.name }}</a>
+                        </h2>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <ul>
-        <li>
-            <a href="{{ path('projectcanvas_add') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
-    {% endblock %}
+
+{% endblock %}
