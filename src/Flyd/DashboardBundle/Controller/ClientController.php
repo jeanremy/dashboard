@@ -24,8 +24,9 @@ class ClientController extends Controller
 	/**
 	 * Lists all Client entities.
 	 *
-	 * @Route("/", name="client_list")
+	 * @Route("/clients", name="client_list")
 	 * @Method("GET")
+	 * @Template()
 	 */
 	public function indexAction()
 	{
@@ -34,10 +35,10 @@ class ClientController extends Controller
 
 		$entities = $em->getRepository('FlydDashboardBundle:Client')->findAll();
 
-		return $this->render('FlydDashboardBundle:Client:index.html.twig', array(
+		return array(
 			'entities' => $entities,
 			'menu' => 'dashboard'
-		));
+		);
 	}
 
 
@@ -46,7 +47,6 @@ class ClientController extends Controller
 	 * Displays a form to create a new Client entity.
 	 *
 	 * @Route("/client/add", name="client_add")
-	 * @Method("GET")
 	 * @Template("FlydDashboardBundle:Client:add.html.twig")
 	 */
 	public function addAction(Request $request)
@@ -65,10 +65,10 @@ class ClientController extends Controller
 		  return $this->redirect($this->generateUrl('client_show', array('id' => $client->getId())));
 		}
 
-		return $this->render('FlydDashboardBundle:Client:add.html.twig', array(
+		return array(
 		  'form' => $form->createView(),
 		  'menu' => 'client'
-		));
+		);
 	}
 
 	/**
@@ -88,17 +88,16 @@ class ClientController extends Controller
 			throw $this->createNotFoundException('Unable to find Client entity.');
 		}
 
-		return $this->render('FlydDashboardBundle:Client:show.html.twig', array(
+		return array(
 			'entity' => $entity,
 		  	'menu' => 'client'
-		));
+		);
 	}
 
 	/**
 	 * Displays a form to edit an existing Client entity.
 	 *
 	 * @Route("/client/{id}/edit", name="client_edit")
-	 * @Method("GET")
 	 * @Template()
 	 */
 	public function editAction(Request $request, $id)
@@ -120,11 +119,11 @@ class ClientController extends Controller
 		  return $this->redirect($this->generateUrl('client_show', array('id' => $client->getId())));
 		}
 
-		return $this->render('FlydDashboardBundle:Client:edit.html.twig', array(
+		return array(
 		  'entity' => $client,
 		  'form' => $form->createView(),		  
 		  'menu' => 'client'
-		));
+		);
 	}
 
 
@@ -135,6 +134,7 @@ class ClientController extends Controller
 	 *
 	 * @Route("client/{id}/delete", name="client_delete")
 	 * @Method("DELETE")
+	 * @Template()
 	 */
 	public function deleteAction(Request $request, $id)
 	{
@@ -143,7 +143,7 @@ class ClientController extends Controller
 
 
 		if (null === $entity) {
-		throw new NotFoundHttpException("Le client d'id ".$id." n'existe pas.");
+			throw new NotFoundHttpException("Le client d'id ".$id." n'existe pas.");
 		}
 
 		// On crée un formulaire vide, qui ne contiendra que le champ CSRF
@@ -160,11 +160,11 @@ class ClientController extends Controller
 		}
 
 		// Si la requête est en GET, on affiche une page de confirmation avant de supprimer
-		return $this->render('FlydDashboardBundle:Client:delete.html.twig', array(
-			  'entity' => $entity,
-			  'form'   => $form->createView(),
-		  		'menu' => 'client'
-			));
+		return array(
+		  'entity' => $entity,
+		  'form'   => $form->createView(),
+	  		'menu' => 'client'
+		);
 
     }
 
