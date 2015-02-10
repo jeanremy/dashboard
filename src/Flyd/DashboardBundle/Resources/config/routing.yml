@@ -183,51 +183,54 @@ project_delete:
     path:     /project/{id}/delete
     defaults: { _controller: FlydDashboardBundle:Project:delete }
 
+
+#   PROJECTS AJAX ACTIONS 
+
 project_ajax_add_supplier:
-    path:     /project/{id}/ajaxaddsupplier
-    defaults: { _controller: FlydDashboardBundle:Project:ajaxaddsupplier }
-    # requirements:
-    #     _method: POST
+    path:     /project/{id}/addsupplier
+    defaults: { _controller: FlydDashboardBundle:ProjectAjax:addsupplier }
+    requirements:
+        _method: POST
 
 project_ajax_remove_supplier:
     path:     /project/{id}/remove/supplier
-    defaults: { _controller: FlydDashboardBundle:Project:ajaxremovesupplier }
+    defaults: { _controller: FlydDashboardBundle:ProjectAjax:removesupplier }
     requirements:
         _method: POST
 
 project_ajax_add_user:
     path:     /project/{id}/ajaxadduser
-    defaults: { _controller: FlydDashboardBundle:Project:ajaxadduser }
+    defaults: { _controller: FlydDashboardBundle:ProjectAjax:adduser }
     requirements:
         _method: POST
 
 project_ajax_remove_user:
     path:     /project/{id}/remove/user
-    defaults: { _controller: FlydDashboardBundle:Project:ajaxremoveuser }
+    defaults: { _controller: FlydDashboardBundle:ProjectAjax:removeuser }
     requirements:
         _method: POST
 
 project_ajax_add_ptu:
     path:     /project/{id}/ajaxaddptu
-    defaults: { _controller: FlydDashboardBundle:Project:ajaxaddptu }
+    defaults: { _controller: FlydDashboardBundle:ProjectAjax:addptu }
     requirements:
         _method: POST
 
 project_ajax_remove_ptu:
     path:     /project/{id}/remove/ptu
-    defaults: { _controller: FlydDashboardBundle:Project:ajaxremoveptu }
+    defaults: { _controller: FlydDashboardBundle:ProjectAjax:removeptu }
     requirements:
         _method: POST
 
 project_ajax_reorder_ptus:
     path:     /project/{id}/reorderptus
-    defaults: { _controller: FlydDashboardBundle:Project:ajaxreorderptus }
+    defaults: { _controller: FlydDashboardBundle:ProjectAjax:reorderptus }
     requirements:
         _method: POST
 
 project_ajax_update_status:
     path:     /project/{id}/updatestatus
-    defaults: { _controller: FlydDashboardBundle:Project:ajaxupdatestatus }
+    defaults: { _controller: FlydDashboardBundle:ProjectAjax:updatestatus }
     requirements:
         _method: POST
 

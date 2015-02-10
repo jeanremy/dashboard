@@ -32,7 +32,7 @@ class ProjectController extends Controller
     /**
      * Lists all Project entities.
      *
-     * @Route("/", name="project_list")
+     * @Route("/projects", name="project_list")
      * @Method("GET")
      * @Template()
      */
@@ -82,18 +82,17 @@ class ProjectController extends Controller
         }
     }
 
-        return $this->render('FlydDashboardBundle:Project:index.html.twig', array(
+        return array(
             'entities' => $entities,
             'form' => $form->createView(),
             'menu' => 'dashboard'
-        ));
+        );
     }
 
     /**
      * Creates a new Project entity.
      *
-     * @Route("/", name="project_add")
-     * @Method("POST")
+     * @Route("need/{id}/project/add", name="project_add")
      * @Template("FlydDashboardBundle:Project:add.html.twig")
      */
     public function addAction(Request $request, $id)
@@ -139,11 +138,11 @@ class ProjectController extends Controller
             return $this->redirect($this->generateUrl('project_show', array('id' => $project->getId())));
         }
 
-        return $this->render('FlydDashboardBundle:Project:add.html.twig', array(
+        return array(
             'form' => $form->createView(),
             'entity' => $project,
             'menu' => 'project'
-        ));
+        );
     }
 
     
@@ -152,7 +151,7 @@ class ProjectController extends Controller
     /**
      * Finds and displays a Project entity.
      *
-     * @Route("/{id}", name="project_show")
+     * @Route("/project/{id}", name="project_show")
      * @Method("GET")
      * @Template()
      */
@@ -184,20 +183,19 @@ class ProjectController extends Controller
             throw $this->createNotFoundException('Unable to find Project entity.');
         }
 
-        return $this->render('FlydDashboardBundle:Project:show.html.twig', array(
+        return array(
             'entity' => $entity,
             'forms' => $forms,
             'ptuform' => $ptuform->createView(),
             'minitasks' => $minitasks,
             'menu' => 'project'
-        ));
+        );
     }
 
     /**
      * Displays a form to edit an existing Project entity.
      *
-     * @Route("/{id}/edit", name="project_edit")
-     * @Method("GET")
+     * @Route("/project/{id}/edit", name="project_edit")
      * @Template()
      */
     public function editAction(Request $request, $id)
@@ -219,14 +217,19 @@ class ProjectController extends Controller
           return $this->redirect($this->generateUrl('project_show', array('id' => $project->getId())));
         }
 
-        return $this->render('FlydDashboardBundle:Project:edit.html.twig', array(
+        return array(
             'entity' => $project,
             'form' => $form->createView(),
             'menu' => 'project'
-        ));
+        );
     }
 
-   
+    /**
+     * Delete a Project entity.
+     *
+     * @Route("/project/{id}/delete", name="project_delete")
+     * @Template()
+     */
     public function deleteAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -237,8 +240,6 @@ class ProjectController extends Controller
             throw new NotFoundHttpException("Le projet d'id ".$id." n'existe pas.");
         }
 
-        // On crée un formulaire vide, qui ne contiendra que le champ CSRF
-        // Cela permet de protéger la suppression d'annonce contre cette faille
         $form = $this->createFormBuilder()->getForm();
 
         if ($form->handleRequest($request)->isValid()) {
@@ -251,454 +252,12 @@ class ProjectController extends Controller
         }
 
         // Si la requête est en GET, on affiche une page de confirmation avant de supprimer
-        return $this->render('FlydDashboardBundle:Project:delete.html.twig', array(
+        return array(
             'entity' => $entity,
             'form'   => $form->createView(),
             'menu' => 'project'
-        ));
+        );
 
     }
 
-    public function ajaxAddSupplierAction($id)
-    {
-        // A FAIRE > protection CSFR...
-        $request = $this->container->get('request');
-        $params = $this->getRequest()->request->all();
-        $response = new JsonResponse();
-        $em = $this->getDoctrine()->getManager();
-        $project = $em->getRepository('FlydDashboardBundle:Project')->find($id);
-
-        if($request->isXmlHttpRequest())
-        {
-            if($params)
-            {
-                try {
-                    $supplier = $em->getRepository('FlydDashboardBundle:Supplier')->find($params['supplier_id']);
-                    $project->addSupplier($supplier);
-                    $em->persist($project);
-                    $em->flush();
-                    $response->setData(array(
-                        'code' => 200,
-                        'response' => $this->renderView('FlydDashboardBundle:Supplier:mini.html.twig', array(
-                          'supplier' => $supplier,
-                          'entity' => $project
-                        ))
-                    ));
-                } catch(\Doctrine\ORM\ORMException $e) {
-                    $response->setData(array(
-                        'code' => 500,
-                        'response' => $e->getMessage()
-                    ));
-                }
-                catch(\Exception $e){
-                    $response->setData(array(
-                        'code' => 500,
-                        'response' => $e->getMessage()
-                    ));
-                }
-            }
-            else {
-                $response->setData(array(
-                    'code' => 500,
-                    'response' => 'Supplier missing'
-                ));
-            }
-
-        } else {
-            $response->setData(array(
-                'code' => 500,
-                'response' => 'Not an ajax request'
-            ));            
-        }
-        return $response;
-    }
-
-
-    public function ajaxRemoveSupplierAction($id)
-    {
-        $request = $this->container->get('request');
-        $params = $this->getRequest()->request->all();
-        $response = new JsonResponse();
-        $em = $this->getDoctrine()->getManager();
-        $project = $em->getRepository('FlydDashboardBundle:Project')->find($id);
-
-        if($request->isXmlHttpRequest())
-        {
-            if($params)
-            {
-                try {
-                    $supplier = $em->getRepository('FlydDashboardBundle:Supplier')->find($params['element_id']);
-                    $project->removeSupplier($supplier);
-                    $em->persist($project);
-                    $em->flush();
-                    $response->setData(array(
-                        'code' => 200,
-                        'response' => 'Fournisseur bien retiré.'
-                    ));
-                } catch(\Doctrine\ORM\ORMException $e) {
-                    $response->setData(array(
-                        'code' => 500,
-                        'response' => $e->getMessage()
-                    ));
-                }
-                catch(\Exception $e){
-                    $response->setData(array(
-                        'code' => 500,
-                        'response' => $e->getMessage()
-                    ));
-                }
-            }
-            else {
-                $response->setData(array(
-                    'code' => 500,
-                    'response' => 'Fournisseur manquant.'
-                ));
-            }
-
-        } else {
-            $response->setData(array(
-                'code' => 500,
-                'response' => 'Not an ajax request'
-            ));            
-        }
-        return $response;
-    }
-
-    public function ajaxAddUserAction($id)
-    {
-        $request = $this->container->get('request');
-        $params = $this->getRequest()->request->all();
-        $response = new JsonResponse();
-        $em = $this->getDoctrine()->getManager();
-        $project = $em->getRepository('FlydDashboardBundle:Project')->find($id);
- 
-
-        if($request->isXmlHttpRequest())
-        {
-            if($params)
-            {
-                try {
-                    $user = $em->getRepository('FlydDashboardBundle:User')->find($params['user_id']);
-                    $project->addUser($user);
-                    $em->persist($project);
-                    $em->flush();
-                    $response->setData(array(
-                        'code' => 200,
-                        'response' => $this->renderView('FlydDashboardBundle:User:mini.html.twig', array(
-                          'user' => $user,
-                          'entity' => $project
-                        ))
-                    ));
-                } catch(\Doctrine\ORM\ORMException $e) {
-                    $response->setData(array(
-                        'code' => 500,
-                        'response' => $e->getMessage()
-                    ));
-                }
-                catch(\Exception $e){
-                    $response->setData(array(
-                        'code' => 500,
-                        'response' => $e->getMessage()
-                    ));
-                }
-            }
-            else {
-                $response->setData(array(
-                    'code' => 500,
-                    'response' => 'User missing'
-                ));
-            }
-
-        } else {
-            $response->setData(array(
-                'code' => 500,
-                'response' => 'Not an ajax request'
-            ));            
-        }
-        return $response;
-    }
-
-
-    public function ajaxRemoveUserAction($id)
-    {
-        $request = $this->container->get('request');
-        $params = $this->getRequest()->request->all();
-        $response = new JsonResponse();
-        $em = $this->getDoctrine()->getManager();
-        $project = $em->getRepository('FlydDashboardBundle:Project')->find($id);
-
-        if($request->isXmlHttpRequest())
-        {
-            if($params)
-            {
-                try {
-                    $user = $em->getRepository('FlydDashboardBundle:User')->find($params['element_id']);
-                    $user->removeProject($project);
-                    $em->persist($user);
-                    $em->flush();
-                    $response->setData(array(
-                        'code' => 200,
-                        'response' => 'Utilisateur bien retiré.'
-                    ));
-                } catch(\Doctrine\ORM\ORMException $e) {
-                    $response->setData(array(
-                        'code' => 500,
-                        'response' => $e->getMessage()
-                    ));
-                }
-                catch(\Exception $e){
-                    $response->setData(array(
-                        'code' => 500,
-                        'response' => $e->getMessage()
-                    ));
-                }
-            }
-            else {
-                $response->setData(array(
-                    'code' => 500,
-                    'response' => 'Fournisseur manquant.'
-                ));
-            }
-
-        } else {
-            $response->setData(array(
-                'code' => 500,
-                'response' => 'Not an ajax request'
-            ));            
-        }
-        return $response;
-    }
-
-
-    /**
-     * Add a ptu entity.
-     *
-     * @Method("POST")
-     */
-    public function ajaxAddPtuAction(Request $request, $id)
-    {
-
-        $response = new JsonResponse();
-        if(!$request->isXmlHttpRequest()) {
-            return $response->setData(array(
-                'code' => 500,
-                'response' => 'not an ajax request'
-            ));
-        }
-
-        $em = $this->getDoctrine()->getManager();        
-        $project = $em->getRepository('FlydDashboardBundle:Project')->find($id);
-        $status = $em->getRepository('FlydDashboardBundle:Status')->findOneByName('A venir');
-        $ptu = new ProjectTaskUser();
-        $ptu->setProject($project);
-        $ptu->setStatus($status);
-        $request = $this->container->get('request');
-        $params = $this->getRequest()->request->all();
-
-        // Si tache existante
-        if($params['task_id']) {
-            $task = $em->getRepository('FlydDashboardBundle:Task')->find($params['task_id']);
-            $ptu->setTask($task);
-        }
-        else {
-            $task = new Task();
-            $task->setName($params['flyd_dashboardbundle_projecttaskuser_mini']['task']['name']);
-            $task->setStep($params['flyd_dashboardbundle_projecttaskuser_mini']['task']['step']);
-            $ptu->setTask($task);
-        }
-
-        
-
-        $form = $this->get('form.factory')->create(new ProjectTaskUserMiniType(), $ptu);
-
-        if ($form->handleRequest($request)->isValid()) {
-            try {       
-                // d'abord la tâche         
-                $em->persist($task);
-                $em->flush(); // obligatoire pour id qui sert de clé étrangère du ptu
-                //Ensuite la ptu
-                $em->persist($ptu);
-                $project->addProjectTaskUser($ptu);
-                $em->persist($project);
-                $em->flush();
-
-                // Prepare form for view
-                $ptuform = $this->get('form.factory')->create(new ProjectTaskUserType(), $ptu);
-
-                $response->setData(array(
-                    'code' => 200,
-                    'response' => $this->renderView('FlydDashboardBundle:ProjectTaskUser:mini.html.twig', array(
-                          'form' => $ptuform->createView(),
-                          'ptu' => $ptu
-                        ))
-                ));
-            } catch(\Doctrine\ORM\ORMException $e) {
-                $response->setData(array(
-                    'code' => 500,
-                    'response' => $e->getMessage()
-                ));
-            }
-            catch(\Exception $e){
-                $response->setData(array(
-                    'code' => 500,
-                    'response' => $e->getMessage()
-                ));
-            }
-        } else {
-            $response->setData(array(
-                    'code' => 500,
-                    'response' => $form->getErrors(true)
-                ));
-        }
-        return $response;
-    }
-
-    /**
-     * Reorder tasks.
-     *
-     * @Method("POST")
-     */
-    public function ajaxReorderPtusAction(Request $request, $id)
-    {
-        $response = new JsonResponse();
-        $em = $this->getDoctrine()->getManager();        
-        $project = $em->getRepository('FlydDashboardBundle:Project')->find($id);
-
-        $request = $this->container->get('request');
-        $params = $this->getRequest()->request->all();
-
-
-           
-        if(!$request->isXmlHttpRequest() || !$params['ptu']) {
-            return $response->setData(array(
-                'code' => 500,
-                'response' => 'not an ajax request'
-            ));
-        }
-        $i = 0;
-        foreach ($params['ptu'] as $ptu) {
-            $ptuid = $ptu;
-
-            $ptu = $em->getRepository('FlydDashboardBundle:ProjectTaskUser')->find($ptuid);
-            $status = $ptu->getStatus();
-            $statuses[] = $status? $status->getName() : null;
-            try { 
-                $ptu->setPosition($i);
-                $em->persist($ptu);
-                $em->flush($ptu);
-                $response->setData(array(
-                    'code' => 200,
-                    'response' => 'ok'
-                ));
-            } 
-            catch(\Doctrine\ORM\ORMException $e) {
-                $response->setData(array(
-                    'code' => 500,
-                    'response' => $e->getMessage()
-                ));
-            }
-            catch(\Exception $e){
-                $response->setData(array(
-                    'code' => 500,
-                    'response' => $e->getMessage()
-                ));
-            }
-            
-        $i++;
-        }
-       
-        return $response;
-    }
-
-    /**
-     * Delete a ptu entity.
-     *
-     * @Method("POST")
-     */
-    public function ajaxRemovePtuAction(Request $request, $id)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $response = new JsonResponse();
-        $request = $this->container->get('request');
-        $params = $this->getRequest()->request->all();
-        if(!$request->isXmlHttpRequest() || !$params['ptu_id']) {
-            return $response->setData(array(
-                'code' => 500,
-                'response' => 'not an ajax request'
-            ));
-        }
-        try {            
-            $pct = $em->getRepository('FlydDashboardBundle:ProjectTaskUser')->find($params['ptu_id']);
-            $em->remove($pct);
-            $em->flush();
-
-            $response->setData(array(
-                'code' => 200,
-                'response' => $pct->getId()
-            ));
-        } catch(\Doctrine\ORM\ORMException $e) {
-            $response->setData(array(
-                'code' => 500,
-                'response' => $e->getMessage()
-            ));
-        }
-        catch(\Exception $e){
-            $response->setData(array(
-                'code' => 500,
-                'response' => $e->getMessage()
-            ));
-        }
-       
-        return $response;
-    }
-
-    /**
-     * Update project status depending on ptus
-     *
-     */
-    public function ajaxUpdateStatusAction($id) {
-        $response = new JsonResponse();        
-        $em = $this->getDoctrine()->getManager();
-        $project = $em->getRepository('FlydDashboardBundle:Project')->find($id);
-        $ptus = $project->getProjectTaskUsers();
-        $statuses = array();
-        foreach ($ptus as $ptu) {
-            $status = $ptu->getStatus();
-            $statuses[] = $status? $status->getName(): null;
-        }
-        if(in_array('En cours', $statuses) || in_array('En cours de validation', $statuses)) {
-            $status = in_array('En cours', $statuses) ? "En cours":"En cours de validation";
-        } else {
-            $status = in_array('A venir', $statuses) ? "A venir":"Terminé";
-        }
-        try {            
-            $newStatus = $em->getRepository('FlydDashboardBundle:Status')->findOneByName($status);
-            $project->setStatus($newStatus);
-            $em->persist($project);
-            $em->flush();
-
-            $response->setData(array(
-                'code' => 200,
-                'response' => array(
-                    'id' => $newStatus->getId(),
-                    'name' => $newStatus->getName()
-                    )
-            ));
-        } catch(\Doctrine\ORM\ORMException $e) {
-            $response->setData(array(
-                'code' => 500,
-                'response' => $e->getMessage()
-            ));
-        }
-        catch(\Exception $e){
-            $response->setData(array(
-                'code' => 500,
-                'response' => $e->getMessage()
-            ));
-        }
-       
-        return $response;
-      
-
-    }
 }
