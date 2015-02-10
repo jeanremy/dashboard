@@ -3,6 +3,7 @@
 namespace Flyd\DashboardBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -14,6 +15,14 @@ use Flyd\DashboardBundle\Form\NeedType;
 
 class NeedController extends Controller
 {
+
+	/**
+	 * Lists all needs of a client
+	 *
+	 * @Route("/needs", name="need_list")
+	 * @Method("GET")
+	 * @Template()
+	 */
 	public function addAction(Request $request, $id)
 	{
 		$need = new Need();
@@ -27,22 +36,28 @@ class NeedController extends Controller
 		$form = $this->get('form.factory')->create(new NeedType(), $need);
 
 		if ($form->handleRequest($request)->isValid()) {
-		  $em = $this->getDoctrine()->getManager();
-		  $em->persist($need);
-		  $em->flush();
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($need);
+			$em->flush();
 
-		  $request->getSession()->getFlashBag()->add('notice', 'Besoin bien enregistré.');
+			$request->getSession()->getFlashBag()->add('notice', 'Besoin bien enregistré.');
 
-		  return $this->redirect($this->generateUrl('need_show', array('id' => $need->getId())));
+			return $this->redirect($this->generateUrl('need_show', array('id' => $need->getId())));
 		}
 
-		return $this->render('FlydDashboardBundle:Need:add.html.twig', array(
+		return array(
 		  'form' => $form->createView(),
 		  'entity' => $need,
 		  'menu' => 'client'
-		));
+		);
 	}
 
+	/**
+	 * Add in ajax.
+	 *
+	 * @Route("/need/ajaxadd", name="need_ajax_add")
+	 * @Method("POST")
+	 */
 	public function ajaxAddAction()
 	{
 		$request = $this->container->get('request');
@@ -80,6 +95,14 @@ class NeedController extends Controller
 		}
 	}
 
+
+	/**
+	 * Show a need
+	 *
+	 * @Route("/need/{id}", name="need_show")
+	 * @Method("GET")
+	 * @Template()
+	 */
 	public function showAction($id)
 	{
 		$em = $this->getDoctrine()->getManager();
@@ -90,13 +113,20 @@ class NeedController extends Controller
 			throw $this->createNotFoundException('Unable to find Need entity.');
 		}
 
-		return $this->render('FlydDashboardBundle:Need:show.html.twig', array(
+		return array(
 			'entity' => $entity,
 		  	'menu' => 'client'
-		));
+		);
 	}
 
-	 public function editAction(Request $request, $id)
+
+	/**
+	 * Edit a need
+	 *
+	 * @Route("/need/{id}/edit", name="need_edit")
+	 * @Template()
+	 */
+	public function editAction(Request $request, $id)
 	{
 		$em = $this->getDoctrine()->getManager();
 
@@ -115,14 +145,19 @@ class NeedController extends Controller
 		  return $this->redirect($this->generateUrl('need_show', array('id' => $id)));
 		}
 
-		return $this->render('FlydDashboardBundle:Need:edit.html.twig', array(
+		return array(
 		  'entity' => $need,
 		  'form' => $form->createView(),
 		  'menu' => 'client'
-		));
+		);
 	}
 
-  
+  	/**
+	 * Delete a need
+	 *
+	 * @Route("/need/{id}", name="need_show")
+	 * @Template()
+	 */
 	public function deleteAction(Request $request, $id)
 	{
         $em = $this->getDoctrine()->getManager();
@@ -147,11 +182,11 @@ class NeedController extends Controller
 		}
 
 		// Si la requête est en GET, on affiche une page de confirmation avant de supprimer
-		return $this->render('FlydDashboardBundle:Need:delete.html.twig', array(
-			  'entity' => $entity,
-			  'form'   => $form->createView(),
-		  		'menu' => 'client'
-			));
+		return array(
+		  'entity' => $entity,
+		  'form'   => $form->createView(),
+	  		'menu' => 'client'
+		);
 
     }
 
