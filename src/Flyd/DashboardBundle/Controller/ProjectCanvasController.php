@@ -27,7 +27,7 @@ class ProjectCanvasController extends Controller
     /**
      * Lists all ProjectCanvas entities.
      *
-     * @Route("/", name="projectcanvas_list")
+     * @Route("/projectcanvas", name="projectcanvas_list")
      * @Method("GET")
      * @Template()
      */
@@ -46,9 +46,8 @@ class ProjectCanvasController extends Controller
     /**
      * Creates a new ProjectCanvas entity.
      *
-     * @Route("/", name="project_add")
-     * @Method("POST")
-     * @Template("FlydDashboardBundle:ProjectCanvas:add.html.twig")
+     * @Route("/projectcanvas/add", name="projectcanvas_add")
+     * @Template()
      */
     public function addAction(Request $request)
     {
@@ -65,11 +64,11 @@ class ProjectCanvasController extends Controller
           return $this->redirect($this->generateUrl('projectcanvas_show', array('id' => $projectcanvas->getId())));
         }
 
-        return $this->render('FlydDashboardBundle:ProjectCanvas:add.html.twig', array(
+        return array(
             'form' => $form->createView(),
             'entity' => $projectcanvas,
             'menu' => 'project'
-        ));
+        );
     }
 
     
@@ -78,7 +77,7 @@ class ProjectCanvasController extends Controller
     /**
      * Finds and displays a ProjectCanvas entity.
      *
-     * @Route("/{id}", name="project_show")
+     * @Route("/projectcanvas/{id}", name="projectcanvas_show")
      * @Method("GET")
      * @Template()
      */
@@ -98,19 +97,18 @@ class ProjectCanvasController extends Controller
             throw $this->createNotFoundException('Unable to find ProjectCanvas entity.');
         }
 
-        return $this->render('FlydDashboardBundle:ProjectCanvas:show.html.twig', array(
+        return array(
             'entity' => $entity,          
             'pctform' => $pctform->createView(),
             'minitasks' => $minitasks,          
             'menu' => 'project'
-        ));
+        );
     }
 
     /**
      * Displays a form to edit an existing ProjectCanvas entity.
      *
-     * @Route("/{id}/edit", name="project_edit")
-     * @Method("GET")
+     * @Route("projectcanvas/{id}/edit", name="projectcanvas_edit")
      * @Template()
      */
     public function editAction(Request $request, $id)
@@ -139,16 +137,21 @@ class ProjectCanvasController extends Controller
           return $this->redirect($this->generateUrl('projectcanvas_show', array('id' => $projectcanvas->getId())));
         }
 
-        return $this->render('FlydDashboardBundle:ProjectCanvas:edit.html.twig', array(
+        return array(
             'entity' => $projectcanvas,
             'form' => $form->createView(),
             'pctform' => $pctform->createView(),
             'minitasks' => $minitasks,
             'menu' => 'project'
-        ));
+        );
     }
 
-   
+    /**
+     * Delete a ProjectCanvas entity.
+     *
+     * @Route("projectcanvas/{id}/delete", name="projectcanvas_delete")
+     * @Template()
+     */
     public function deleteAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -173,11 +176,11 @@ class ProjectCanvasController extends Controller
         }
 
         // Si la requête est en GET, on affiche une page de confirmation avant de supprimer
-        return $this->render('FlydDashboardBundle:ProjectCanvas:delete.html.twig', array(
-              'entity' => $entity,
-              'form'   => $form->createView(),
-              'menu' => 'project'
-            ));
+        return array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+            'menu' => 'project'
+        );
 
     }
 
