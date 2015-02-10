@@ -33,9 +33,9 @@ class ContactController extends Controller
         $contact->setCompany($client);
         $form = $this->get('form.factory')->create(new ContactType(), $contact);
 
-		return $this->render('FlydDashboardBundle:Contact:add.html.twig', array(
+		return array(
 			'form'=> $form->createView()
-		));
+		);
 	}	
 
 
@@ -44,7 +44,6 @@ class ContactController extends Controller
      *
      * @Route("/contact/add", name="contact_ajax_add")
      * @Method("POST")
-     * @Template("FlydDashboardBundle:Contact:add.html.twig")
      */
 	public function addAction()
 	{               
@@ -89,7 +88,6 @@ class ContactController extends Controller
      *
      * @Route("/contact/delete", name="contact_ajax_delete")
      * @Method("POST")
-     * @Template()
      */
 	public function deleteAction()
 	{               
