@@ -8,8 +8,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Flyd\DashboardBundle\Entity\User;
-use Flyd\DashboardBundle\Entity\Image;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Flyd\DashboardBundle\Form\UserType;
 
 /**

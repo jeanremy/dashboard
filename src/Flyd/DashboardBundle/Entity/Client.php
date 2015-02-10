@@ -5,7 +5,6 @@ namespace Flyd\DashboardBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Flyd\DashboardBundle\Entity\Company;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /** @ORM\Entity */
 class Client extends Company

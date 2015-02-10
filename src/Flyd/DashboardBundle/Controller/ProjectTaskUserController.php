@@ -4,14 +4,10 @@ namespace Flyd\DashboardBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Flyd\DashboardBundle\Entity\Project;
-use Flyd\DashboardBundle\Entity\ProjectTaskUser;
 use Flyd\DashboardBundle\Form\ProjectTaskUserType;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Doctrine\ORM\ORMException;
 
 class ProjectTaskUserController extends Controller

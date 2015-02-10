@@ -10,7 +10,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Flyd\DashboardBundle\Entity\Need;
-use Flyd\DashboardBundle\Entity\Client;
 use Flyd\DashboardBundle\Form\NeedType;
 
 class NeedController extends Controller

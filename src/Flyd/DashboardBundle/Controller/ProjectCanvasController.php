@@ -10,7 +10,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Flyd\DashboardBundle\Entity\ProjectCanvas;
 use Flyd\DashboardBundle\Form\ProjectCanvasTaskType;
-use Flyd\DashboardBundle\Form\TaskType;
 use Flyd\DashboardBundle\Form\ProjectCanvasType;
 use Flyd\DashboardBundle\Entity\ProjectCanvasTask;
 use Flyd\DashboardBundle\Entity\Task;

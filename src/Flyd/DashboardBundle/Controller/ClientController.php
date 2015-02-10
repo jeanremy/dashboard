@@ -9,9 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Flyd\DashboardBundle\Entity\Client;
-use Flyd\DashboardBundle\Entity\Contact;
 use Flyd\DashboardBundle\Form\ClientType;
-use Flyd\DashboardBundle\Form\EditClientType;
 
 /**
  * Client controller.
