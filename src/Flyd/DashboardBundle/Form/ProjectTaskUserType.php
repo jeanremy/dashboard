@@ -32,7 +32,7 @@ class ProjectTaskUserType extends AbstractType
                 'property' => 'username',
                 'empty_value' => 'Choisissez une option'
             ))
-            ->add('isimportant', 'checkbox', array(
+            ->add('important', 'checkbox', array(
                 'required'  => false
             ))
         ;

@@ -60,9 +60,9 @@ class ProjectTaskUser
     /**
      * @var boolean
      *
-     * @ORM\Column(name="is_important", type="boolean", nullable=true)
+     * @ORM\Column(name="important", type="boolean", nullable=true)
      */
-    private $isImportant;
+    private $important;
 
     /**
      * @var time
@@ -207,26 +207,26 @@ class ProjectTaskUser
 
 
     /**
-     * Set isImportant
+     * Set important
      *
-     * @param boolean $isImportant
+     * @param boolean $important
      * @return ProjectTaskUser
      */
-    public function setIsImportant($isImportant)
+    public function setImportant($important)
     {
-        $this->isImportant = $isImportant;
+        $this->important = $important;
 
         return $this;
     }
 
     /**
-     * Get isImportant
+     * Get important
      *
      * @return boolean 
      */
-    public function getIsImportant()
+    public function getImportant()
     {
-        return $this->isImportant;
+        return $this->important;
     }
 
     /**

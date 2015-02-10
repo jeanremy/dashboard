@@ -8,7 +8,7 @@
         })
     }}
         <div class="task__isimportant">
-            {{ form_widget(form.isimportant, { 'id':'task-'~ ptu.id, 'attr': {
+            {{ form_widget(form.important, { 'id':'task-'~ ptu.id, 'attr': {
             'class': 'form-control'}}) }}
              <label for="task-{{ptu.id}}" class="sprite"></label>
         </div>
