@@ -29,7 +29,6 @@ class ProjectAjaxController extends Controller
     public function addSupplierAction($id)
     {
         // A FAIRE > protection CSFR...
-        $request = $this->container->get('request');
         $params = $this->getRequest()->request->all();
         $response = new JsonResponse();
         $em = $this->getDoctrine()->getManager();
@@ -80,7 +79,6 @@ class ProjectAjaxController extends Controller
      */
     public function removeSupplierAction($id)
     {
-        $request = $this->container->get('request');
         $params = $this->getRequest()->request->all();
         $response = new JsonResponse();
         $em = $this->getDoctrine()->getManager();
@@ -128,7 +126,6 @@ class ProjectAjaxController extends Controller
      */
     public function addUserAction($id)
     {
-        $request = $this->container->get('request');
         $params = $this->getRequest()->request->all();
         $response = new JsonResponse();
         $em = $this->getDoctrine()->getManager();
@@ -180,7 +177,6 @@ class ProjectAjaxController extends Controller
 
     public function removeUserAction($id)
     {
-        $request = $this->container->get('request');
         $params = $this->getRequest()->request->all();
         $response = new JsonResponse();
         $em = $this->getDoctrine()->getManager();
@@ -305,9 +301,7 @@ class ProjectAjaxController extends Controller
     {
         $response = new JsonResponse();
         $em = $this->getDoctrine()->getManager();        
-        $project = $em->getRepository('FlydDashboardBundle:Project')->find($id);
 
-        $request = $this->container->get('request');
         $params = $this->getRequest()->request->all();
 
         $i = 0;
@@ -315,8 +309,6 @@ class ProjectAjaxController extends Controller
             $ptuid = $ptu;
 
             $ptu = $em->getRepository('FlydDashboardBundle:ProjectTaskUser')->find($ptuid);
-            $status = $ptu->getStatus();
-            $statuses[] = $status? $status->getName() : null;
             try { 
                 $ptu->setPosition($i);
                 $em->persist($ptu);
@@ -355,7 +347,6 @@ class ProjectAjaxController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $response = new JsonResponse();
-        $request = $this->container->get('request');
         $params = $this->getRequest()->request->all();
 
         try {            

@@ -21,8 +21,6 @@ class AddressController extends Controller
      */
 	public function getFormAction($id)
 	{
-        $request = $this->container->get('request');
-	    $response = new JsonResponse();
 	    $address = new Address();
 	    $em = $this->getDoctrine()->getManager();
         $client = $em->getRepository('FlydDashboardBundle:Company')->find($id);
@@ -43,7 +41,6 @@ class AddressController extends Controller
 	public function addAction()
 	{               
 		$request = $this->container->get('request');
-		$params = $this->getRequest()->request->all();
 	    $response = new JsonResponse();
 	    $address = new Address();
 	    $em = $this->getDoctrine()->getManager();
@@ -83,7 +80,6 @@ class AddressController extends Controller
      *
      * @Route("/address/delete", name="address_ajax_delete")
      * @Method("POST")
-     * @Template()
      */
 	public function deleteAction()
 	{               
@@ -104,8 +100,7 @@ class AddressController extends Controller
 	                  ->where("a.id LIKE :element_id")
 	                  ->setParameter('element_id', '%'.$params['element_id'].'%');
 
-	               $query = $qb->getQuery();               
-	               $results = $query->getResult();
+	               $query = $qb->getQuery();           
 	        }
 	        else {
 	            return $response->setData(array(

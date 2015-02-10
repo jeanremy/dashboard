@@ -18,7 +18,6 @@ class ProjectTaskUserController extends Controller
     public function editAction(Request $request, $id)
     {
     	$request = $this->container->get('request');
-		$params = $this->getRequest()->request->all();
 
 	    if(!$request->isXmlHttpRequest()) {
             $response->setData(array(

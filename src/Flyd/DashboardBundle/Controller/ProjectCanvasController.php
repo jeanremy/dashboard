@@ -301,7 +301,6 @@ class ProjectCanvasController extends Controller
     {
         $response = new JsonResponse();
         $em = $this->getDoctrine()->getManager();        
-        $projectcanvas = $em->getRepository('FlydDashboardBundle:ProjectCanvas')->find($id);
 
         $request = $this->container->get('request');
         $params = $this->getRequest()->request->all();

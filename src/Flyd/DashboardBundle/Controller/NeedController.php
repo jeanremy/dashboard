@@ -60,7 +60,6 @@ class NeedController extends Controller
 	public function ajaxAddAction()
 	{
 		$request = $this->container->get('request');
-		$params = $this->getRequest()->request->all();
 	    $response = new JsonResponse();
 	    $need = new Need();
 	    $em = $this->getDoctrine()->getManager();
@@ -193,8 +192,6 @@ class NeedController extends Controller
 
 	public function getFormAction($id)
 	{
-        $request = $this->container->get('request');
-	    $response = new JsonResponse();
 	    $need = new Need();
 	    $need->setStartDate(new \DateTime() );
 		$need->setDeadline(new \DateTime('+1 month') );
