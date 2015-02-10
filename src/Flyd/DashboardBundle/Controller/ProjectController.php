@@ -488,8 +488,10 @@ class ProjectController extends Controller
 
         $em = $this->getDoctrine()->getManager();        
         $project = $em->getRepository('FlydDashboardBundle:Project')->find($id);
+        $status = $em->getRepository('FlydDashboardBundle:Status')->findOneByName('A venir');
         $ptu = new ProjectTaskUser();
         $ptu->setProject($project);
+        $ptu->setStatus($status);
         $request = $this->container->get('request');
         $params = $this->getRequest()->request->all();
 
