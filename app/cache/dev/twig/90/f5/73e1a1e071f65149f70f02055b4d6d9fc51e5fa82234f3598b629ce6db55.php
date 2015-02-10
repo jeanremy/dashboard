@@ -20,14 +20,14 @@ class __TwigTemplate_90f573e1a1e071f65149f70f02055b4d6d9fc51e5fa82234f3598b629ce
     <p class=\"need__dates\">
         ";
         // line 3
-        echo twig_escape_filter($this->env, twig_localized_date_filter($this->env, $this->getAttribute((isset($context["need"]) ? $context["need"] : $this->getContext($context, "need")), "startDate", array()), "full", "none", "fr"), "html", null, true);
+        echo twig_escape_filter($this->env, twig_localized_date_filter($this->env, $this->getAttribute($this->getContext($context, "need"), "startDate", array()), "full", "none", "fr"), "html", null, true);
         echo " > 
         ";
         // line 4
-        if ($this->getAttribute((isset($context["need"]) ? $context["need"] : $this->getContext($context, "need")), "endDate", array())) {
+        if ($this->getAttribute($this->getContext($context, "need"), "endDate", array())) {
             // line 5
             echo "        ";
-            echo twig_escape_filter($this->env, twig_localized_date_filter($this->env, $this->getAttribute((isset($context["need"]) ? $context["need"] : $this->getContext($context, "need")), "endDate", array()), "full", "none", "fr"), "html", null, true);
+            echo twig_escape_filter($this->env, twig_localized_date_filter($this->env, $this->getAttribute($this->getContext($context, "need"), "endDate", array()), "full", "none", "fr"), "html", null, true);
             echo "
         ";
         } else {
@@ -39,35 +39,35 @@ class __TwigTemplate_90f573e1a1e071f65149f70f02055b4d6d9fc51e5fa82234f3598b629ce
         echo "    </p>
     <a href=\"";
         // line 9
-        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("need_delete", array("id" => $this->getAttribute((isset($context["need"]) ? $context["need"] : $this->getContext($context, "need")), "id", array()))), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("need_delete", array("id" => $this->getAttribute($this->getContext($context, "need"), "id", array()))), "html", null, true);
         echo "\" data-id=\"";
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["need"]) ? $context["need"] : $this->getContext($context, "need")), "id", array()), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "need"), "id", array()), "html", null, true);
         echo "\" class=\"pull-right btn--delete dashicons dashicons-trash\"></a>
     <a href=\"";
         // line 10
-        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("need_edit", array("id" => $this->getAttribute((isset($context["need"]) ? $context["need"] : $this->getContext($context, "need")), "id", array()))), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("need_edit", array("id" => $this->getAttribute($this->getContext($context, "need"), "id", array()))), "html", null, true);
         echo "\" class=\"pull-right btn--edit dashicons dashicons-edit\"></a>
 
     <p class=\"need__title\"><a href=\"";
         // line 12
-        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("need_show", array("id" => $this->getAttribute((isset($context["need"]) ? $context["need"] : $this->getContext($context, "need")), "id", array()))), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("need_show", array("id" => $this->getAttribute($this->getContext($context, "need"), "id", array()))), "html", null, true);
         echo "\">";
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["need"]) ? $context["need"] : $this->getContext($context, "need")), "title", array()), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "need"), "title", array()), "html", null, true);
         echo "</a></p>
     <p class=\"need__description\">";
         // line 13
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["need"]) ? $context["need"] : $this->getContext($context, "need")), "description", array()), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "need"), "description", array()), "html", null, true);
         echo "</p>
     ";
         // line 14
-        if ($this->getAttribute((isset($context["need"]) ? $context["need"] : $this->getContext($context, "need")), "projects", array())) {
+        if ($this->getAttribute($this->getContext($context, "need"), "projects", array())) {
             // line 15
             echo "        <h3 class=\"bloc__subtitle\">Projets</h3>
         <ul class=\"need__projects\">                                
         ";
             // line 17
             $context['_parent'] = (array) $context;
-            $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["need"]) ? $context["need"] : $this->getContext($context, "need")), "projects", array()));
+            $context['_seq'] = twig_ensure_traversable($this->getAttribute($this->getContext($context, "need"), "projects", array()));
             foreach ($context['_seq'] as $context["_key"] => $context["project"]) {
                 // line 18
                 echo "            <li class=\"need__project\"><a href=\"";
@@ -86,7 +86,7 @@ class __TwigTemplate_90f573e1a1e071f65149f70f02055b4d6d9fc51e5fa82234f3598b629ce
         }
         // line 22
         echo "    <a href=\"";
-        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("project_add", array("id" => $this->getAttribute((isset($context["need"]) ? $context["need"] : $this->getContext($context, "need")), "id", array()))), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("project_add", array("id" => $this->getAttribute($this->getContext($context, "need"), "id", array()))), "html", null, true);
         echo "\" class=\"pull-right btn--save--reverse\">Ajouter un projet</a>
 </div>";
     }

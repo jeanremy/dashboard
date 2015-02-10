@@ -40,7 +40,7 @@ class __TwigTemplate_89e187d054b472fe297d9ba19d10ab17d16b6fbcb561a02f6cdc6de7f94
     {
         // line 4
         echo "    <title>";
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "title", array()), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "title", array()), "html", null, true);
         echo "</title>
 ";
     }
@@ -56,19 +56,19 @@ class __TwigTemplate_89e187d054b472fe297d9ba19d10ab17d16b6fbcb561a02f6cdc6de7f94
         echo "\">Clients</a></span>
         <span class=\"prev\"><a href=\"";
         // line 10
-        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("client_show", array("id" => $this->getAttribute($this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "need", array()), "client", array()), "id", array()))), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("client_show", array("id" => $this->getAttribute($this->getAttribute($this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "need", array()), "client", array()), "id", array()))), "html", null, true);
         echo "\">";
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "need", array()), "client", array()), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "need", array()), "client", array()), "html", null, true);
         echo "</a></span>
         <span class=\"prev\"><a href=\"";
         // line 11
-        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("need_show", array("id" => $this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "need", array()), "id", array()))), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("need_show", array("id" => $this->getAttribute($this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "need", array()), "id", array()))), "html", null, true);
         echo "\">";
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "need", array()), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "need", array()), "html", null, true);
         echo "</a></span>
         ";
         // line 12
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "title", array()), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "title", array()), "html", null, true);
         echo "
     </p>
 ";
@@ -82,16 +82,16 @@ class __TwigTemplate_89e187d054b472fe297d9ba19d10ab17d16b6fbcb561a02f6cdc6de7f94
     <div class=\"title__container\">
         <a href=\"";
         // line 19
-        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("project_delete", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id", array()))), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("project_delete", array("id" => $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "id", array()))), "html", null, true);
         echo "\" class=\"btn--delete\">Delete</a>
         <a href=\"";
         // line 20
-        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("project_edit", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id", array()))), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("project_edit", array("id" => $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "id", array()))), "html", null, true);
         echo "\" class=\"btn--edit\">Edit</a>
 
         <h1 class=\"lvl1\">";
         // line 22
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "title", array()), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "title", array()), "html", null, true);
         echo "</h1>
     </div>
 
@@ -107,14 +107,14 @@ class __TwigTemplate_89e187d054b472fe297d9ba19d10ab17d16b6fbcb561a02f6cdc6de7f94
                     <div class=\"data\">
                         <p>";
         // line 35
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "category", array()), "name", array()), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "category", array()), "name", array()), "html", null, true);
         echo "</p>
                     </div>
                 </div>
                 
                 ";
         // line 39
-        if ($this->getAttribute($this->getContext($context, "entity"), "status", array())) {
+        if ($this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "status", array())) {
             // line 40
             echo "                <div class=\"form-group\">
                     <label class=\"control-label\">Statut</label>
@@ -122,7 +122,7 @@ class __TwigTemplate_89e187d054b472fe297d9ba19d10ab17d16b6fbcb561a02f6cdc6de7f94
                     <div class=\"data\">
                         <p id=\"status__name\">";
             // line 44
-            echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "entity"), "status", array()), "name", array()), "html", null, true);
+            echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "status", array()), "name", array()), "html", null, true);
             echo "</p>
                     </div>
                 </div>
@@ -136,7 +136,7 @@ class __TwigTemplate_89e187d054b472fe297d9ba19d10ab17d16b6fbcb561a02f6cdc6de7f94
                     <div class=\"data\">
                         ";
         // line 53
-        echo twig_escape_filter($this->env, twig_localized_date_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "startDate", array()), "full", "none", "fr"), "html", null, true);
+        echo twig_escape_filter($this->env, twig_localized_date_filter($this->env, $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "startDate", array()), "full", "none", "fr"), "html", null, true);
         echo "
                     </div>
                 </div>
@@ -147,7 +147,7 @@ class __TwigTemplate_89e187d054b472fe297d9ba19d10ab17d16b6fbcb561a02f6cdc6de7f94
                     <div class=\"data\">
                         ";
         // line 61
-        echo twig_escape_filter($this->env, twig_localized_date_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "deadline", array()), "full", "none", "fr"), "html", null, true);
+        echo twig_escape_filter($this->env, twig_localized_date_filter($this->env, $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "deadline", array()), "full", "none", "fr"), "html", null, true);
         echo "
                     </div>
                 </div>
@@ -158,7 +158,7 @@ class __TwigTemplate_89e187d054b472fe297d9ba19d10ab17d16b6fbcb561a02f6cdc6de7f94
                     <div class=\"data\">
                         ";
         // line 69
-        echo twig_escape_filter($this->env, twig_localized_date_filter($this->env, $this->getAttribute($this->getContext($context, "entity"), "endDate", array()), "full", "none", "fr"), "html", null, true);
+        echo twig_escape_filter($this->env, twig_localized_date_filter($this->env, $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "endDate", array()), "full", "none", "fr"), "html", null, true);
         echo "
                     </div>
                 </div>
@@ -171,7 +171,7 @@ class __TwigTemplate_89e187d054b472fe297d9ba19d10ab17d16b6fbcb561a02f6cdc6de7f94
                     ";
         // line 78
         $context['_parent'] = (array) $context;
-        $context['_seq'] = twig_ensure_traversable($this->getAttribute($this->getContext($context, "entity"), "suppliers", array()));
+        $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "suppliers", array()));
         $context['loop'] = array(
           'parent' => $context['_parent'],
           'index0' => 0,
@@ -208,7 +208,7 @@ class __TwigTemplate_89e187d054b472fe297d9ba19d10ab17d16b6fbcb561a02f6cdc6de7f94
                 <button class=\"btn--add\">+</button>
                 ";
         // line 83
-        echo $this->env->getExtension('http_kernel')->renderFragment($this->env->getExtension('http_kernel')->controller("FlydDashboardBundle:Supplier:getForm", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id", array()))));
+        echo $this->env->getExtension('http_kernel')->renderFragment($this->env->getExtension('http_kernel')->controller("FlydDashboardBundle:Supplier:getForm", array("id" => $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "id", array()))));
         echo "
                 
             </div>
@@ -220,7 +220,7 @@ class __TwigTemplate_89e187d054b472fe297d9ba19d10ab17d16b6fbcb561a02f6cdc6de7f94
                 ";
         // line 91
         $context['_parent'] = (array) $context;
-        $context['_seq'] = twig_ensure_traversable($this->getAttribute($this->getContext($context, "entity"), "users", array()));
+        $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "users", array()));
         $context['loop'] = array(
           'parent' => $context['_parent'],
           'index0' => 0,
@@ -257,7 +257,7 @@ class __TwigTemplate_89e187d054b472fe297d9ba19d10ab17d16b6fbcb561a02f6cdc6de7f94
                 <button class=\"btn--add\">+</button>
                 ";
         // line 96
-        echo $this->env->getExtension('http_kernel')->renderFragment($this->env->getExtension('http_kernel')->controller("FlydDashboardBundle:User:getForm", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id", array()))));
+        echo $this->env->getExtension('http_kernel')->renderFragment($this->env->getExtension('http_kernel')->controller("FlydDashboardBundle:User:getForm", array("id" => $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "id", array()))));
         echo "                
             </div>
         </div>
@@ -268,11 +268,11 @@ class __TwigTemplate_89e187d054b472fe297d9ba19d10ab17d16b6fbcb561a02f6cdc6de7f94
                     <div class=\"col-sm-12 tasks\">                          
                         ";
         // line 104
-        if ($this->getAttribute($this->getContext($context, "entity"), "projecttaskusers", array())) {
+        if ($this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "projecttaskusers", array())) {
             // line 105
             echo "                            ";
             $context['_parent'] = (array) $context;
-            $context['_seq'] = twig_ensure_traversable($this->getAttribute($this->getContext($context, "entity"), "projecttaskusers", array()));
+            $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "projecttaskusers", array()));
             foreach ($context['_seq'] as $context["_key"] => $context["ptu"]) {
                 // line 106
                 echo "                               ";
@@ -297,7 +297,7 @@ class __TwigTemplate_89e187d054b472fe297d9ba19d10ab17d16b6fbcb561a02f6cdc6de7f94
                         <!-- Form pour créer ptu avec task imbriquée -->
                         ";
         // line 115
-        echo         $this->env->getExtension('form')->renderer->renderBlock($this->getContext($context, "ptuform"), 'form_start', array("attr" => array("class" => "form-horizontal", "id" => "flyd_dashboardbundle_projecttaskuser"), "action" => $this->env->getExtension('routing')->getPath("project_ajax_add_ptu", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id", array())))));
+        echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["ptuform"]) ? $context["ptuform"] : $this->getContext($context, "ptuform")), 'form_start', array("attr" => array("class" => "form-horizontal", "id" => "flyd_dashboardbundle_projecttaskuser"), "action" => $this->env->getExtension('routing')->getPath("project_ajax_add_ptu", array("id" => $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "id", array())))));
         // line 121
         echo "
                             <h2 class=\"bloc__subtitle\">Ajouter une tâche</h2>
@@ -305,24 +305,24 @@ class __TwigTemplate_89e187d054b472fe297d9ba19d10ab17d16b6fbcb561a02f6cdc6de7f94
                                 <input type=\"hidden\" name=\"task_id\" id=\"task_id\" />
                                 ";
         // line 125
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getContext($context, "ptuform"), "position", array()), 'widget');
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["ptuform"]) ? $context["ptuform"] : $this->getContext($context, "ptuform")), "position", array()), 'widget');
         echo "                      
                                 ";
         // line 126
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute($this->getContext($context, "ptuform"), "task", array()), "step", array()), 'label', array("label_attr" => array("class" => "control-label"), "label" => "Etape"));
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute((isset($context["ptuform"]) ? $context["ptuform"] : $this->getContext($context, "ptuform")), "task", array()), "step", array()), 'label', array("label_attr" => array("class" => "control-label"), "label" => "Etape"));
         echo "
                                 ";
         // line 127
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute($this->getContext($context, "ptuform"), "task", array()), "step", array()), 'widget', array("attr" => array("class" => "form-control")));
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute((isset($context["ptuform"]) ? $context["ptuform"] : $this->getContext($context, "ptuform")), "task", array()), "step", array()), 'widget', array("attr" => array("class" => "form-control")));
         echo "
 
                                 ";
         // line 129
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute($this->getContext($context, "ptuform"), "task", array()), "name", array()), 'label', array("label_attr" => array("class" => "control-label"), "label" => "Nom de la tâche"));
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute((isset($context["ptuform"]) ? $context["ptuform"] : $this->getContext($context, "ptuform")), "task", array()), "name", array()), 'label', array("label_attr" => array("class" => "control-label"), "label" => "Nom de la tâche"));
         echo "
                                 ";
         // line 130
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute($this->getContext($context, "ptuform"), "task", array()), "name", array()), 'widget', array("attr" => array("class" => "form-control")));
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute((isset($context["ptuform"]) ? $context["ptuform"] : $this->getContext($context, "ptuform")), "task", array()), "name", array()), 'widget', array("attr" => array("class" => "form-control")));
         echo "
 
                                
@@ -331,11 +331,11 @@ class __TwigTemplate_89e187d054b472fe297d9ba19d10ab17d16b6fbcb561a02f6cdc6de7f94
 
                         ";
         // line 136
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getContext($context, "ptuform"), 'rest');
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock((isset($context["ptuform"]) ? $context["ptuform"] : $this->getContext($context, "ptuform")), 'rest');
         echo "
                         ";
         // line 137
-        echo         $this->env->getExtension('form')->renderer->renderBlock($this->getContext($context, "ptuform"), 'form_end');
+        echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["ptuform"]) ? $context["ptuform"] : $this->getContext($context, "ptuform")), 'form_end');
         echo "
                     </div>
                 </div>
@@ -364,7 +364,7 @@ class __TwigTemplate_89e187d054b472fe297d9ba19d10ab17d16b6fbcb561a02f6cdc6de7f94
             ";
         // line 153
         $context['_parent'] = (array) $context;
-        $context['_seq'] = twig_ensure_traversable($this->getContext($context, "minitasks"));
+        $context['_seq'] = twig_ensure_traversable((isset($context["minitasks"]) ? $context["minitasks"] : $this->getContext($context, "minitasks")));
         foreach ($context['_seq'] as $context["_key"] => $context["mini"]) {
             // line 154
             echo "            { label: \"";
@@ -386,15 +386,15 @@ class __TwigTemplate_89e187d054b472fe297d9ba19d10ab17d16b6fbcb561a02f6cdc6de7f94
 
         var updateOrderUrl = \"";
         // line 158
-        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("project_ajax_reorder_ptus", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id", array()))), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("project_ajax_reorder_ptus", array("id" => $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "id", array()))), "html", null, true);
         echo "\";
         var removeUrl = \"";
         // line 159
-        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("project_ajax_remove_ptu", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id", array()))), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("project_ajax_remove_ptu", array("id" => $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "id", array()))), "html", null, true);
         echo "\";
         var updateStatusUrl = \"";
         // line 160
-        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("project_ajax_update_status", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id", array()))), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("project_ajax_update_status", array("id" => $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "id", array()))), "html", null, true);
         echo "\";
         var statusCont = \$(\"#status__name\");
 

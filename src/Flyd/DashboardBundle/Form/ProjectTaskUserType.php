@@ -25,8 +25,7 @@ class ProjectTaskUserType extends AbstractType
             ))
             ->add('status', 'entity', array(
                 'class' => 'FlydDashboardBundle:Status',
-                'property' => 'name',
-                'empty_value' => 'Choisissez une option'
+                'property' => 'name'
             ))
             ->add('user', 'entity', array(
                 'class' => 'FlydDashboardBundle:User',

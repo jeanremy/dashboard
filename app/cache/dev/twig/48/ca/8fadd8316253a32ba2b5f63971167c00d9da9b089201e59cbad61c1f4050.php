@@ -19,29 +19,29 @@ class __TwigTemplate_48ca8fadd8316253a32ba2b5f63971167c00d9da9b089201e59cbad61c1
         echo "<div class=\"col-sm-3 contact item\">
     <p class=\"contact__title\">";
         // line 2
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["contact"]) ? $context["contact"] : $this->getContext($context, "contact")), "firstname", array()), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "contact"), "firstname", array()), "html", null, true);
         echo " ";
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["contact"]) ? $context["contact"] : $this->getContext($context, "contact")), "lastname", array()), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "contact"), "lastname", array()), "html", null, true);
         echo "</p>
     <p class=\"contact__job\">";
         // line 3
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["contact"]) ? $context["contact"] : $this->getContext($context, "contact")), "job", array()), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "contact"), "job", array()), "html", null, true);
         echo "</p>
     <p class=\"contact__email\">";
         // line 4
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["contact"]) ? $context["contact"] : $this->getContext($context, "contact")), "email", array()), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "contact"), "email", array()), "html", null, true);
         echo "</p>
     <p class=\"contact__phone\">";
         // line 5
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["contact"]) ? $context["contact"] : $this->getContext($context, "contact")), "phone", array()), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "contact"), "phone", array()), "html", null, true);
         echo "</p>
     <p class=\"contact__mobile\">";
         // line 6
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["contact"]) ? $context["contact"] : $this->getContext($context, "contact")), "mobile", array()), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "contact"), "mobile", array()), "html", null, true);
         echo "</p>
     <a class=\"line--remove remove\" data-id=\"";
         // line 7
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["contact"]) ? $context["contact"] : $this->getContext($context, "contact")), "id", array()), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "contact"), "id", array()), "html", null, true);
         echo "\" href=\"";
         echo $this->env->getExtension('routing')->getPath("contact_ajax_delete");
         echo "\">Retirer</a>

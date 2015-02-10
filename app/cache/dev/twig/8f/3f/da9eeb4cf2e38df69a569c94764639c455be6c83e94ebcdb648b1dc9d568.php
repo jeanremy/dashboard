@@ -19,7 +19,7 @@ class __TwigTemplate_8f3fda9eeb4cf2e38df69a569c94764639c455be6c83e94ebcdb648b1dc
         echo "<div class=\"row\" id=\"newsupplier\">
 \t<form  id=\"add_supplier\" action=\"";
         // line 2
-        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("project_ajax_add_supplier", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id", array()))), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("project_ajax_add_supplier", array("id" => $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "id", array()))), "html", null, true);
         echo "\" method=\"post\">
 \t\t<div class=\"col-sm-12 bloc-inline-edition\">
 \t\t\t<h2 class=\"bloc__title\">Ajouter un fournisseur <span>- <a href=\"";
@@ -30,7 +30,7 @@ class __TwigTemplate_8f3fda9eeb4cf2e38df69a569c94764639c455be6c83e94ebcdb648b1dc
 \t\t\t";
         // line 6
         $context['_parent'] = (array) $context;
-        $context['_seq'] = twig_ensure_traversable($this->getContext($context, "entities"));
+        $context['_seq'] = twig_ensure_traversable((isset($context["entities"]) ? $context["entities"] : $this->getContext($context, "entities")));
         foreach ($context['_seq'] as $context["_key"] => $context["entity"]) {
             // line 7
             echo "\t\t\t\t<option value=\"";

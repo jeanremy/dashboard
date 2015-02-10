@@ -67,7 +67,7 @@ class __TwigTemplate_73da91bd06c5c8a58bbc26268b7e87adeb424ddb80448832b4768d22d29
         ";
         // line 19
         $context['_parent'] = (array) $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["entities"]) ? $context["entities"] : $this->getContext($context, "entities")));
+        $context['_seq'] = twig_ensure_traversable($this->getContext($context, "entities"));
         foreach ($context['_seq'] as $context["_key"] => $context["entity"]) {
             // line 20
             echo "        <div class=\"col-sm-12\">

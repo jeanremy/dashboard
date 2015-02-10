@@ -19,15 +19,15 @@ class __TwigTemplate_744fe507a283ceacfd112de8555a0d86da4703430d519339a3015a1eb8d
         echo "<p class=\"supplier--mini col-sm-12\">
 \t<a href=\"";
         // line 2
-        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("supplier_show", array("id" => $this->getAttribute($this->getContext($context, "supplier"), "id", array()))), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("supplier_show", array("id" => $this->getAttribute((isset($context["supplier"]) ? $context["supplier"] : $this->getContext($context, "supplier")), "id", array()))), "html", null, true);
         echo "\">";
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "supplier"), "name", array()), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["supplier"]) ? $context["supplier"] : $this->getContext($context, "supplier")), "name", array()), "html", null, true);
         echo " - <span>";
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "supplier"), "job", array()), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["supplier"]) ? $context["supplier"] : $this->getContext($context, "supplier")), "job", array()), "html", null, true);
         echo "</span></a> <a class=\"line--remove remove\" data-id=\"";
-        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "supplier"), "id", array()), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["supplier"]) ? $context["supplier"] : $this->getContext($context, "supplier")), "id", array()), "html", null, true);
         echo "\" href=\"";
-        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("project_ajax_remove_supplier", array("id" => $this->getAttribute($this->getContext($context, "entity"), "id", array()))), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("project_ajax_remove_supplier", array("id" => $this->getAttribute((isset($context["entity"]) ? $context["entity"] : $this->getContext($context, "entity")), "id", array()))), "html", null, true);
         echo "\">Retirer</a>
 </p>";
     }
