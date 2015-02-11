@@ -100,7 +100,7 @@ class AddressController extends Controller
 	                  ->where("a.id LIKE :element_id")
 	                  ->setParameter('element_id', '%'.$params['element_id'].'%');
 
-	               $query = $qb->getQuery();           
+	               $query = $qb->getQuery()->getResult();           
 	        }
 	        else {
 	            return $response->setData(array(
