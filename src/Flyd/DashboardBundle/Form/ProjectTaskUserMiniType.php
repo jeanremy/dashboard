@@ -14,7 +14,7 @@ class ProjectTaskUserMiniType extends AbstractType
         ->remove('realtime')
         ->remove('status')
         ->remove('user')
-        ->remove('isimportant')
+        ->remove('important')
         ->add('task', new TaskType(), array(
                 'required' => true
             ))
