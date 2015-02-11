@@ -32,7 +32,7 @@ class LoadClientData extends AbstractFixture implements OrderedFixtureInterface
       $address->setZipcode('4402'.$i);
       $address->setCity('Nantes');
       $address->setCityComp('Cedex '.$i);
-      $address->setType(Address::FACTURATION);
+      $address->setType($this->getReference('Globale'));
 
 
       $client = new Client();
@@ -41,7 +41,8 @@ class LoadClientData extends AbstractFixture implements OrderedFixtureInterface
       $client->setCodes("Codes ovh: id: mich mdp: 5555");
       $client->setEntrance(new \DateTime());
       $client->setType(Client::ACTUAL);
-      $client->setJob('Imprimeur');
+      $client->setJob('Imprimeur');      
+      $client->setOrigin($this->getReference('Copinage'));
       $client->addContact($contact );
       $client->addAddress($address);
       $em->persist($client);

@@ -20,12 +20,8 @@ class AddressType extends AbstractType
             ->add('zipcode')
             ->add('city')
             ->add('cityComp')
-            ->add('type', 'choice', array(
-                'choices'   => array(
-                    '0'   => 'Globale',
-                    '1' => 'Facturation',
-                    '2' => 'Expedition'
-                )
+            ->add('type', 'entity', array(
+                'class' => 'FlydDashboardBundle:Type'
             ))
             ->add('company', 'entity', array(
                 'class' => 'FlydDashboardBundle:Company'

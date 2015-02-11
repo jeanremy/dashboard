@@ -1,5 +1,5 @@
 <div class="col-sm-3 address item">
-    <p class="address_type">{{address.type}}</p>
+    <p class="address_type">{{address.type.name}}</p>
     <p class="address__street">{{ address.street }} {{ address.streetComp }}</p>
     <p class="address__city">{{ address.zipcode }} {{ address.city }} {{ address.cityComp }}</p>
     <a class="line--remove remove" data-id="{{ address.id }}" href="{{ path('address_ajax_delete') }}">Retirer</a>

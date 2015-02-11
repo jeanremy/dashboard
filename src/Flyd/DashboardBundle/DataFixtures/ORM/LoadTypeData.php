@@ -1,32 +1,32 @@
 <?php
-// src/Flyd/DashboardBundle/DataFixtures/ORM/LoadOriginData.php
+// src/Flyd/DashboardBundle/DataFixtures/ORM/LoadTypeData.php
 namespace Flyd\DashboardBundle\DataFixtures\ORM;
  
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
-use Flyd\DashboardBundle\Entity\Origin;
+use Flyd\DashboardBundle\Entity\Type;
  
-class LoadOriginData extends AbstractFixture implements OrderedFixtureInterface
+class LoadTypeData extends AbstractFixture implements OrderedFixtureInterface
 {
   public function load(ObjectManager $em)
   {
     $names = array(
-      'Démarchage Téléphonique',
-      'Copinage'
+      'Globale',
+      'Facturation',
+      'Expédition'
     );
 
     foreach ($names as $name) {
       // On crée la catégorie
-      $origin = new Origin();
-      $origin->setName($name);
+      $type = new Type();
+      $type->setName($name);
 
       // On la persiste
-      $em->persist($origin);
+      $em->persist($type);
+      $this->setReference($name, $type);
 
-      $this->setReference($name, $origin);
     }
-
     // On déclenche l'enregistrement de toutes les catégories
     $em->flush();
   }

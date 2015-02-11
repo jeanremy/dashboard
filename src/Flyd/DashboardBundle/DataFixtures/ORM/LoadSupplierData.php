@@ -22,7 +22,7 @@ class LoadSupplierData extends AbstractFixture implements OrderedFixtureInterfac
         $address->setZipcode('4402'.$i);
         $address->setCity('Nantes');
         $address->setCityComp('Cedex '.$i);
-        $address->setType(Address::FACTURATION);
+        $address->setType($this->getReference('Globale'));
 
         $contact = new Contact();
         $contact->setLastname('Dupont');
@@ -41,6 +41,7 @@ class LoadSupplierData extends AbstractFixture implements OrderedFixtureInterfac
         $supplier->addAddress($address);
         $supplier->addContact($contact);
         $supplier->setEntrance(new \DateTime());
+        $supplier->setOrigin($this->getReference('Copinage'));
         $this->setReference('supplier '.$i, $supplier);
      
         $em->persist($supplier);

@@ -14,13 +14,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Address
 {
 
-    /* Const for type attribute */
-    const GLOBALE = 0;
-    const FACTURATION = 1;
-    const EXPEDITION = 2;
-
-
-
     /**
      * @var integer
      *
@@ -34,6 +27,11 @@ class Address
     * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\Company", inversedBy="addresses")
     */
     private $company;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\Type")
+     */
+    protected $type;
 
     /**
      * @var string
@@ -71,12 +69,6 @@ class Address
      */
     private $cityComp;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="type", type="smallint")
-     */
-    private $type;
 
 
 
@@ -105,6 +97,29 @@ class Address
     public function getCompany()
     {
         return $this->company;
+    }
+
+    /**
+     * Set type
+     *
+     * @param \Flyd\DashboardBundle\Entity\Type $type
+     * @return Company
+     */
+    public function setType(\Flyd\DashboardBundle\Entity\Type $type = null)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return \Flyd\DashboardBundle\Entity\Type 
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 
     /**
@@ -222,39 +237,7 @@ class Address
         return $this->cityComp;
     }
 
-    /**
-     * Set type
-     *
-     * @param integer $type
-     * @return Address
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return integer 
-     */
-    public function getType()
-    {
-        switch ($this->type) {
-            case 0:
-                return 'globale';
-                break;
-            case 1:
-                return 'facturation';
-                break;
-            case 2:
-                return 'expédition';
-                break;
-        }
-        
-    }
+   
 
     public function __toString() {
         return $this->city;

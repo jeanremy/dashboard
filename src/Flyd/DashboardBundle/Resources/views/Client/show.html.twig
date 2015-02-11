@@ -79,26 +79,22 @@
                     </div>
                     
                 </div>
+            </div>
+        </div>
+    </div>
 
-                {%for address in entity.addresses %}
-
-                <div class="form-group">
-                    {% if address.type == 0 %}
-                        <label class="control-label">Adresse</label>
-                    {% elseif address.type == 1 %}
-                        <label class="control-label">Adresse de facturation</label>
-                    {% elseif address.type == 2 %}
-                        <label class="control-label">Adresse d'expédition</label>
-                    {% endif %}
-                    <div class="data">
-                        <p>{{ address.street }}</p>
-                        <p>{{ address.streetComp }}</p>
-                        <p>{{ address.zipcode }} {{ address.city }} {{ address.cityComp }}</p>
-                    </div>
-                    
-                </div>
-
-                {% endfor %}
+    <!-- Adresse -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="bloc">
+                <h2 class="bloc__title">Adresses</h2>
+                <div class="row" id="addresses">
+                    {% for address in entity.addresses %}
+                      {% include "FlydDashboardBundle:Address:show.html.twig" %}                    
+                    {% endfor %}
+                </div> 
+                <a href="{{ path('address_ajax_getform') }}" class="pull-right btn btn--add">+</a> 
+                {{ render(controller('FlydDashboardBundle:Address:getForm', {'id': entity.id})) }}                
             </div>
         </div>
     </div>
