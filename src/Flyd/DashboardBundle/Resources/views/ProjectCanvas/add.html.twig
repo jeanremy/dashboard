@@ -1,12 +1,12 @@
 {% extends 'FlydDashboardBundle::layout.html.twig' %}
 
 {% block title %}
-    <title>Nouveau canevas de projet</title>
+    <title>Nouveau modèle de projet</title>
 {% endblock %}
 
 {% block top %}
     <p>
-        <span class="prev"><a href="{{ path('projectcanvas_list') }}">Canevas de projet</a></span>
+        <span class="prev"><a href="{{ path('projectcanvas_list') }}">Modèle de projet</a></span>
         Ajouter
     </p>
 {% endblock %}
@@ -14,7 +14,7 @@
 {% block body %}
     
     <div class="title__container">
-        <h1 class="lvl1">Nouveau canevas de projet</h1>
+        <h1 class="lvl1">Nouveau modèle de projet</h1>
     </div>
 
     {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
@@ -35,7 +35,7 @@
                 <h2 class="bloc__title">Informations générales</h2>
 
                 <div class="form-group">
-                    {{ form_label(form.name, "Nom du canevas", {'label_attr': {'class': 'control-label'}}) }}
+                    {{ form_label(form.name, "Nom du modèle", {'label_attr': {'class': 'control-label'}}) }}
 
                     {{ form_errors(form.name) }}
 
@@ -63,7 +63,7 @@
         <div class="col-sm-12">
             <div class="bloc bloc-inline-edition">
                   <h2 class="bloc__title">Tâches prédéfinies</h2>
-                  <p>Impossible d'ajouter des tâches pour le moment. Veuillez enregistrer le canevas de projet.</p>
+                  <p>Impossible d'ajouter des tâches pour le moment. Veuillez enregistrer le modèle de projet.</p>
             </div>
         </div>
     </div>
