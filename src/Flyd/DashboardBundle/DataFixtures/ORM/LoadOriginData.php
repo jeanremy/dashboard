@@ -12,8 +12,10 @@ class LoadOriginData extends AbstractFixture implements OrderedFixtureInterface
   public function load(ObjectManager $em)
   {
     $names = array(
-      'Démarchage Téléphonique',
-      'Copinage'
+      'Prospection',
+      'Contact entrant',
+      'Réseau',
+      'Autres'
     );
 
     foreach ($names as $name) {

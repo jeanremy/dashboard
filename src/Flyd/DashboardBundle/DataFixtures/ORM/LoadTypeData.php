@@ -14,7 +14,7 @@ class LoadTypeData extends AbstractFixture implements OrderedFixtureInterface
     $names = array(
       'Globale',
       'Facturation',
-      'Expédition'
+      'Livraison'
     );
 
     foreach ($names as $name) {
