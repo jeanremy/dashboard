@@ -24,7 +24,7 @@ class Client extends Company
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="reminder", type="date")
+     * @ORM\Column(name="reminder", type="date", nullable=true)
      */
     private $reminder;
 
@@ -33,12 +33,6 @@ class Client extends Company
     */
     private $needs;
 
-    /**
-     * @var \String
-     *
-     * @ORM\Column(name="codes", type="string", length=255, nullable=true)
-     */
-    private $codes;
 
 
 
@@ -130,26 +124,4 @@ class Client extends Company
         return $this->needs;
     }
 
-    /**
-     * Set codes
-     *
-     * @param string $codes
-     * @return Need
-     */
-    public function setCodes($codes)
-    {
-        $this->codes = $codes;
-
-        return $this;
-    }
-
-    /**
-     * Get codes
-     *
-     * @return string 
-     */
-    public function getCodes()
-    {
-        return $this->codes;
-    }
 }

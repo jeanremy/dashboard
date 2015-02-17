@@ -40,7 +40,7 @@ class Project
     private $users;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\ProjectCanvas")
+     * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\ProjectCanvas", nullable="true")
      */
     private $project_canvas;
 
@@ -87,7 +87,7 @@ class Project
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="end_date", type="date")
+     * @ORM\Column(name="end_date", type="date", nullable=true)
      */
     private $endDate;
 
