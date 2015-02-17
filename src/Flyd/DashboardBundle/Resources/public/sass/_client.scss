@@ -10,6 +10,7 @@
 		&:last-of-type {border-bottom: none;}
 	}
 	& > p {color: $darkgrey;}
+	& .address_type {font-weight: bold;}
 }
 
 p.contact__title {
