@@ -60,7 +60,7 @@ class ProjectController extends Controller
             )
             ->add('save','submit', array(
                     'attr' => array('class' => 'btn--save--reverse'),
-                    'label' => 'Enregistrer',
+                    'label' => 'Filtrer',
                 ))
             ->getForm();
     if ($request->getMethod() == "POST") {
