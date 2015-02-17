@@ -36,6 +36,13 @@ class Address
     /**
      * @var string
      *
+     * @ORM\Column(name="building", type="string", length=255)
+     */
+    private $building;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="street", type="string", length=255)
      */
     private $street;
@@ -120,6 +127,29 @@ class Address
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * Set building
+     *
+     * @param string $building
+     * @return Address
+     */
+    public function setBuilding($building)
+    {
+        $this->building = $building;
+
+        return $this;
+    }
+
+    /**
+     * Get building
+     *
+     * @return string 
+     */
+    public function getBuilding()
+    {
+        return $this->building;
     }
 
     /**
