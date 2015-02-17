@@ -33,6 +33,12 @@ class Client extends Company
     */
     private $needs;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\Origin")
+     */
+    protected $origin;
+
+
 
 
 
@@ -122,6 +128,29 @@ class Client extends Company
     public function getNeeds()
     {
         return $this->needs;
+    }
+
+    /**
+     * Set origin
+     *
+     * @param \Flyd\DashboardBundle\Entity\Origin $origin
+     * @return Company
+     */
+    public function setOrigin(\Flyd\DashboardBundle\Entity\Origin $origin = null)
+    {
+        $this->origin = $origin;
+
+        return $this;
+    }
+
+    /**
+     * Get origin
+     *
+     * @return \Flyd\DashboardBundle\Entity\Origin 
+     */
+    public function getOrigin()
+    {
+        return $this->origin;
     }
 
 }

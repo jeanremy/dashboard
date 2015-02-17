@@ -61,11 +61,7 @@ class Company
     protected $entrance;
 
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\Origin")
-     */
-    protected $origin;
-
+    
     /**
      * @ORM\Column(name="created_at", type="datetime", nullable=true)
      */
@@ -267,27 +263,6 @@ class Company
         $this->addresses->removeElement($addresses);
     }
 
-    /**
-     * Set origin
-     *
-     * @param \Flyd\DashboardBundle\Entity\Origin $origin
-     * @return Company
-     */
-    public function setOrigin(\Flyd\DashboardBundle\Entity\Origin $origin = null)
-    {
-        $this->origin = $origin;
 
-        return $this;
-    }
-
-    /**
-     * Get origin
-     *
-     * @return \Flyd\DashboardBundle\Entity\Origin 
-     */
-    public function getOrigin()
-    {
-        return $this->origin;
-    }
 
 }

@@ -40,7 +40,8 @@ class Project
     private $users;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\ProjectCanvas", nullable="true")
+     * @ORM\ManyToOne(targetEntity="Flyd\DashboardBundle\Entity\ProjectCanvas")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $project_canvas;
 
