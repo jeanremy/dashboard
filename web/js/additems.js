@@ -2,7 +2,6 @@
  
  	$.fn.addItems = function( options ) {
 		// Default options
-
 	    var parentContainer = this.parent().parent().parent();
 
 		$.ajax({
