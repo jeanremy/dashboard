@@ -91,7 +91,7 @@ gulp.task('default', function() {
     gulp.watch('web/css/main.css', ['postprocess']);
 
     // Watch .js files
-    gulp.watch('src/Flyd/DashboardBundle/Resources/public/js/*.js', ['scripts']);
+    gulp.watch('src/Flyd/DashboardBundle/Resources/public/js/*.js', ['scripts', 'copyjs']);
 
     // Copy
     gulp.watch('src/Flyd/DashboardBundle/Resources/public/js/vendor/*', ['copyjs']);

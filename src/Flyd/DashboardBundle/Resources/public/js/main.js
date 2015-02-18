@@ -31,6 +31,9 @@
 			e.preventDefault();
 			var $this = $(this);
 			$this.next().fadeToggle();
+			$text = $(this).text();
+			console.log($text);
+    		$(this).text($text === "+" ? "-":"+");
 		});
 
 
