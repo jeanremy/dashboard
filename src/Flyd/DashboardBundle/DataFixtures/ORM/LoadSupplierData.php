@@ -41,7 +41,6 @@ class LoadSupplierData extends AbstractFixture implements OrderedFixtureInterfac
         $supplier->addAddress($address);
         $supplier->addContact($contact);
         $supplier->setEntrance(new \DateTime());
-        $supplier->setOrigin($this->getReference('Copinage'));
         $this->setReference('supplier '.$i, $supplier);
      
         $em->persist($supplier);

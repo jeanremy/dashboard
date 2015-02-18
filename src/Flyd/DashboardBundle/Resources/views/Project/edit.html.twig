@@ -91,6 +91,17 @@
                         {{ form_widget(form.endDate, {'attr': {'class': 'form-control'}}) }}
                     </div>
                 </div>
+
+                <div class="form-group">
+                    {{ form_label(form.status, "Statut", {'label_attr': {'class': 'control-label'}}) }}
+
+                    {{ form_errors(form.status) }}
+
+                    <div class="data">
+                        {# Génération de l'input. #}
+                        {{ form_widget(form.status, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
                 
                 {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
                 {{ form_widget(form.save) }}

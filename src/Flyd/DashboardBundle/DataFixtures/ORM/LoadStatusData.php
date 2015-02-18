@@ -22,6 +22,8 @@ class LoadStatusData extends AbstractFixture implements OrderedFixtureInterface
       // On crée la catégorie
       $status = new Status();
       $status->setName($name);
+      $this->setReference($name, $status);
+
 
       // On la persiste
       $em->persist($status);

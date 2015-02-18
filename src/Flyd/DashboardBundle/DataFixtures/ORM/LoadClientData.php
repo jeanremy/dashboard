@@ -38,11 +38,10 @@ class LoadClientData extends AbstractFixture implements OrderedFixtureInterface
       $client = new Client();
       $client->setName('Client '.$i);
       $client->setReminder(new \DateTime());
-      $client->setCodes("Codes ovh: id: mich mdp: 5555");
       $client->setEntrance(new \DateTime());
       $client->setType(Client::ACTUAL);
       $client->setJob('Imprimeur');      
-      $client->setOrigin($this->getReference('Copinage'));
+      $client->setOrigin($this->getReference('Réseau'));
       $client->addContact($contact );
       $client->addAddress($address);
       $em->persist($client);

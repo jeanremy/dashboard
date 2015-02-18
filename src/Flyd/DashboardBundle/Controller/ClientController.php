@@ -35,7 +35,7 @@ class ClientController extends Controller
 
 		return array(
 			'entities' => $entities,
-			'menu' => 'dashboard'
+			'menu' => 'client'
 		);
 	}
 

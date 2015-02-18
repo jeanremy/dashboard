@@ -23,6 +23,7 @@ class LoadProjectData extends AbstractFixture implements OrderedFixtureInterface
       $project->addUser($this->getReference('user'));
       $project->addSupplier($this->getReference('supplier '.$i));
       $project->setNeed($this->getReference('besoin '.$i));
+      $project->setStatus($this->getReference('En cours'));
       //$project->setNeed;
       $project->setProjectCanvas($this->getReference('projectcanvas ' . mt_rand(1,4)));
 

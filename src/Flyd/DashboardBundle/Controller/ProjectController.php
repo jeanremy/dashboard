@@ -33,8 +33,6 @@ class ProjectController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('FlydDashboardBundle:Project')->findAll();
         
         $form = $this->createFormBuilder()
             ->add('users', 'entity', array(
@@ -63,18 +61,19 @@ class ProjectController extends Controller
                     'label' => 'Filtrer',
                 ))
             ->getForm();
-    if ($request->getMethod() == "POST") {
-        $form->submit($request);
-        if ($form->isValid()) {
-            //Custom method 
-            $params = $this->getRequest()->request->all();
-            $entities = $em->getRepository('FlydDashboardBundle:Project')->findPreciselyBy($params['form']['categories'], $params['form']['status'], $params['form']['users']);
+
+        if ($request->getMethod() == "POST") {
+            $form->submit($request);
+            if ($form->isValid()) {
+                //Custom method 
+                $params = $this->getRequest()->request->all();
+                $entities = $em->getRepository('FlydDashboardBundle:Project')->findPreciselyBy($params['form']['categories'], $params['form']['status'], $params['form']['users']);
+            }
         }
         else {
-            // faire appel à cette méthode, avec user par défaut
-            $entities = $em->getRepository('FlydDashboardBundle:Project')->findAll();
+            $user_id = $this->getUser()->getId();
+            $entities = $em->getRepository('FlydDashboardBundle:Project')->findPreciselyBy(null,null,null);
         }
-    }
 
         return array(
             'entities' => $entities,
@@ -204,8 +203,18 @@ class ProjectController extends Controller
         if ($form->handleRequest($request)->isValid()) {
           $em = $this->getDoctrine()->getManager();
           $em->persist($project);
-          $em->flush();
+          // Update les status de tout le monde si terminé
+          $ptus = $project->getProjectTaskUsers();
+          $project_status = $project->getStatus();
 
+          if($project_status->getName() === "Terminé") {
+              foreach ($ptus as $ptu) {
+                  $ptu->setStatus($project_status);
+                  $em->persist($ptu);
+              }
+          }
+
+          $em->flush();
           $request->getSession()->getFlashBag()->add('notice', 'Project bien enregistré.');
 
           return $this->redirect($this->generateUrl('project_show', array('id' => $project->getId())));
