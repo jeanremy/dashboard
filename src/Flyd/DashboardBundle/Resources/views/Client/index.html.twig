@@ -47,10 +47,10 @@
         (function($) {
             $('#client_sort').on('keyup', function() {
                 var $clients = $('.client'),
-                    $input = $(this).val();
+                    $input = $(this).val().toLowerCase();
                 $clients.each(function() {
                     var client = $(this),
-                        title = client.find('.bloc__title').text();
+                        title = client.find('.bloc__title').text().toLowerCase();
 
                     if(title.indexOf($input) < 0 ) {
                         client.hide(200);
