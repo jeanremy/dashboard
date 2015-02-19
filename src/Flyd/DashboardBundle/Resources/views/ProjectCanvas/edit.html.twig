@@ -1,21 +1,21 @@
 {% extends 'FlydDashboardBundle::layout.html.twig' %}
 
 {% block title %}
-    <title>{{entity.name}} - Edit</title>
+    <title>{{entity.name}} - Modifier</title>
 {% endblock %}
 
 {% block top %}
     <p>
         <span class="prev"><a href="{{ path('projectcanvas_list') }}">Modèle de projet</a></span>
         <span class="prev"><a href="{{ path('projectcanvas_show', { 'id': entity.id }) }}">{{ entity.name }}</a></span>
-        Edit
+        Modifier
     </p>
 {% endblock %}
 
 {% block body %}
     
     <div class="title__container">
-        <h1 class="lvl1">{{entity.name}} - Edit</h1>
+        <h1 class="lvl1">{{entity.name}} - Modifier</h1>
     </div>
 
 

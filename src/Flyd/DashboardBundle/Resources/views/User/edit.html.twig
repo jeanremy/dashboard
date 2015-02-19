@@ -1,21 +1,21 @@
 {% extends 'FlydDashboardBundle::layout.html.twig' %}
 
 {% block title %}
-    <title>{{entity.username}} - Edit </title>
+    <title>{{entity.username}} - Modifier</title>
 {% endblock %}
 
 {% block top %}
     <p>
         <span class="prev"><a href="{{ path('user_list') }}">Utilisateurs</a></span>
         <span class="prev"><a href="{{ path('user_list', {'id': entity.id}) }}">{{ entity.username }}</a></span>
-        Edit
+        Modifier
     </p>
 {% endblock %}
 
 {% block body %}
     
     <div class="title__container">
-      <h1 class="lvl1">{{entity.username}}</h1>
+      <h1 class="lvl1">{{entity.username}} - Modifier</h1>
     </div>
 
     {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}

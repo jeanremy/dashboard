@@ -1,7 +1,7 @@
 {% extends 'FlydDashboardBundle::layout.html.twig' %}
 
 {% block title %}
-    <title>{{entity.title}} - Supprimer </title>
+    <title>{{entity.title}} - Supprimer</title>
 {% endblock %}
 
 {% block top %}
@@ -10,7 +10,7 @@
         <span class="prev"><a href="{{ path('client_show', { 'id': entity.need.client.id }) }}">{{entity.need.client}}</a></span>
         <span class="prev"><a href="{{ path('need_show', { 'id': entity.need.id }) }}">{{entity.need}}</a></span>
         <span class="prev"><a href="{{ path('project_show', { 'id': entity.id }) }}">{{entity.title}}</a></span>
-        Delete
+        Supprimer
     </p>
 {% endblock %}
 

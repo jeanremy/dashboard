@@ -1,14 +1,14 @@
 {% extends 'FlydDashboardBundle::layout.html.twig' %}
 
 {% block title %}
-    <title>{{entity.name}} - Supprimer </title>
+    <title>{{entity.name}} - Supprimer</title>
 {% endblock %}
 
 {% block top %}
     <p>
         <span class="prev"><a href="{{ path('supplier_list') }}">Fournisseurs</a></span>
         <span class="prev"><a href="{{ path('supplier_show', { 'id': entity.id }) }}">{{ entity.name }}</a></span>
-        Delete
+        Supprimer
     </p>
 {% endblock %}
 

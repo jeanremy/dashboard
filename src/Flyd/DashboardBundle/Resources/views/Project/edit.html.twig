@@ -1,7 +1,7 @@
 {% extends 'FlydDashboardBundle::layout.html.twig' %}
 
 {% block title %}
-    <title>{{entity.title}} - Edit</title>
+    <title>{{entity.title}} - Modifier</title>
 {% endblock %}
 
 {% block top %}
@@ -10,14 +10,14 @@
         <span class="prev"><a href="{{ path('client_show', { 'id': entity.need.client.id }) }}">{{entity.need.client}}</a></span>
         <span class="prev"><a href="{{ path('need_show', { 'id': entity.need.id }) }}">{{entity.need}}</a></span>
         <span class="prev"><a href="{{ path('project_show', { 'id': entity.id }) }}">{{entity.title}}</a></span>
-        Edit
+        Modifier
     </p>
 {% endblock %}
 
 {% block body %}
 
     <div class="title__container">
-        <h1 class="lvl1">{{entity.title}} - Edit</h1>
+        <h1 class="lvl1">{{entity.title}} - Modifier</h1>
     </div>    
 
     {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
@@ -104,6 +104,7 @@
                 </div>
                 
                 {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
+                <a href="{{ path('project_delete', { 'id': entity.id }) }}" class="btn--delete--reverse">Supprimer</a>
                 {{ form_widget(form.save) }}
 
 

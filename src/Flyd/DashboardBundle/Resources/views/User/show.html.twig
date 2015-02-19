@@ -16,7 +16,7 @@
     <div class="title__container">
         {% if app.user.id == entity.id %}
             <a href="{{ path('user_delete', { 'id': entity.id }) }}" class="btn btn--delete">Supprimer</a>
-            <a href="{{ path('user_edit', { 'id': entity.id }) }}" class="btn btn--edit">Edit</a>
+            <a href="{{ path('user_edit', { 'id': entity.id }) }}" class="btn btn--edit">Modifier</a>
         {% endif %}
         {% if entity.image %}
             <img src="{{ entity.image.webPath | apply_filter('miniature') }}" class="profil__pic" />
