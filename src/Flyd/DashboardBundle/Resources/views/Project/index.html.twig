@@ -30,67 +30,72 @@
     </div>
 
     <div class="row">
-    {% for entity in entities %}
-        <div class="col-sm-12 project">
-            <div class="project__title">
-                {% if entity.status %}
-                    <div class="status {{ entity.status.slug }}"></div>
-                {% endif %}
-                {% if entity.category %}
-                    <div class="category sprite {{ entity.category.name|lower }}"></div>
-                {% endif %}
-                <h2>
-                    <span class="project__title__infos">{{ entity.need.client.name }} > {{ entity.need.title }}</span>
-                    <a href="{{ path('project_show', { 'id': entity.id }) }}">{{ entity.title }}</a>
-                </h2>
+    {% if entities %}
+        {% for entity in entities %}
+            <div class="col-sm-12 project">
+                <div class="project__title">
+                    {% if entity.status %}
+                        <div class="status {{ entity.status.slug }}"></div>
+                    {% endif %}
+                    {% if entity.category %}
+                        <div class="category sprite {{ entity.category.name|lower }}"></div>
+                    {% endif %}
+                    <h2>
+                        <span class="project__title__infos">{{ entity.need.client.name }} > {{ entity.need.title }}</span>
+                        <a href="{{ path('project_show', { 'id': entity.id }) }}">{{ entity.title }}</a>
+                    </h2>
+                </div>
+                <div class="bloc bloc--general bloc-inline-edition">
+                    <div class="form-group">                    
+                        <label class="control-label">Catégorie</label>
+                        <div class="data">
+                            {{ entity.category.name }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">                    
+                        <label class="control-label">En cours</label>
+                        <div class="data">
+                            {{ render(controller('FlydDashboardBundle:ProjectTaskUser:getFirstPendingTask', {'id': entity.id}) ) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">                    
+                        <label class="control-label">A venir</label>
+                        <div class="data">
+                                {{ render(controller('FlydDashboardBundle:ProjectTaskUser:getFirstComingTask', {'id': entity.id}) ) }}                        
+                        </div>
+                    </div>
+
+                    <div class="form-group">                    
+                        <label class="control-label">Equipe</label>
+                        <div class="data">
+                            <ul>
+                            {% for user in entity.users %}
+                                <li>{{ user.username }}</li>
+                            {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="form-group">                    
+                        <label class="control-label">Deadline</label>
+                        <div class="data">
+                            {{ entity.deadline| localizeddate('full', 'none', 'fr') }}
+                        </div>
+                    </div>
+
+                    <a href="{{ path('project_show', { 'id': entity.id }) }}" class="btn--save">Voir</a>
+                </div>
             </div>
-            <div class="bloc bloc--general bloc-inline-edition">
-                <div class="form-group">                    
-                    <label class="control-label">Catégorie</label>
-                    <div class="data">
-                        {{ entity.category.name }}
-                    </div>
+        {% endfor %}
+    {% else %}        
+            <div class="col-sm-12 project">
+                <div class="bloc bloc--general bloc-inline-edition">
+                    <p>Aucun projet pour le moment.</p>
                 </div>
-
-                <div class="form-group">                    
-                    <label class="control-label">En cours</label>
-                    <div class="data">
-                        {{ render(controller('FlydDashboardBundle:ProjectTaskUser:getFirstPendingTask', {'id': entity.id}) ) }}
-                    </div>
-                </div>
-
-                <div class="form-group">                    
-                    <label class="control-label">A venir</label>
-                    <div class="data">
-                            {{ render(controller('FlydDashboardBundle:ProjectTaskUser:getFirstComingTask', {'id': entity.id}) ) }}                        
-                    </div>
-                </div>
-
-                <div class="form-group">                    
-                    <label class="control-label">Equipe</label>
-                    <div class="data">
-                        <ul>
-                        {% for user in entity.users %}
-                            <li>{{ user.username }}</li>
-                        {% endfor %}
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="form-group">                    
-                    <label class="control-label">Deadline</label>
-                    <div class="data">
-                        {{ entity.deadline| localizeddate('full', 'none', 'fr') }}
-                    </div>
-                </div>
-
-                <a href="{{ path('project_show', { 'id': entity.id }) }}" class="btn--save">Voir</a>
-
-                
-
             </div>
-        </div>
-    {% endfor %}
+    {% endif %}
     </div>
 {% endblock %}
 

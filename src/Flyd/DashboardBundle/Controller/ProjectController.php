@@ -33,46 +33,46 @@ class ProjectController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+
+        // Set default value to current user if form not submitted
+
+        $user_field_options = array(
+            'class'             => 'FlydDashboardBundle:User'
+        );
+        if ($request->getMethod() != "POST") {
+            $user_field_options['data'] = $user;
+        }
         
         $form = $this->createFormBuilder()
-            ->add('users', 'entity', array(
-                'class' => 'FlydDashboardBundle:User',
-                'expanded'=>false,
-                'empty_value' => 'Choisissez un utilisateur',
-                'required' => false,
-                'multiple'=>false)
-            )
+            // ->add('users', 'entity', $user_field_options)
+            ->add('users', 'entity', $user_field_options)
             ->add('categories', 'entity', array(
-                'class' => 'FlydDashboardBundle:Category',
-                'expanded'=>false,
-                'empty_value' => 'Choisissez une categorie',
-                'required' => false,
-                'multiple'=>false)
+                'class'         => 'FlydDashboardBundle:Category',
+                'empty_value'   => 'Choisissez une categorie',
+                'required'      => false)
             )
             ->add('status', 'entity', array(
-                'class' => 'FlydDashboardBundle:Status',
-                'expanded'=>false,
-                'empty_value' => 'Choisissez un statut',
-                'required' => false,
-                'multiple'=>false)
+                'class'         => 'FlydDashboardBundle:Status',
+                'empty_value'   => 'Choisissez un statut',
+                'required'      => false)
             )
             ->add('save','submit', array(
-                    'attr' => array('class' => 'btn--save--reverse'),
-                    'label' => 'Filtrer',
-                ))
+                'attr'          => array('class' => 'btn--save--reverse'),
+                'label'         => 'Filtrer',
+            ))
             ->getForm();
 
         if ($request->getMethod() == "POST") {
             $form->submit($request);
             if ($form->isValid()) {
-                //Custom method 
                 $params = $this->getRequest()->request->all();
                 $entities = $em->getRepository('FlydDashboardBundle:Project')->findPreciselyBy($params['form']['categories'], $params['form']['status'], $params['form']['users']);
             }
         }
         else {
             $user_id = $this->getUser()->getId();
-            $entities = $em->getRepository('FlydDashboardBundle:Project')->findPreciselyBy(null,null,null);
+            $entities = $em->getRepository('FlydDashboardBundle:Project')->findPreciselyBy(null,null, $user_id);
         }
 
         return array(
