@@ -15,7 +15,8 @@ class ProjectRepository extends EntityRepository
 	public function findPreciselyBy($category = null, $status = null, $user = null) 
 	{
 		$query = $this->createQueryBuilder('p')
-						->add('where','p.id > 0');
+						->add('where','p.id > 0')
+						->orderBy('p.deadline', 'ASC');
 
 		if($category) {
 			$query->leftJoin('p.category', 'c')

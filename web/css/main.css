@@ -2333,6 +2333,9 @@ input:disabled {
   position: absolute;
   transition: all 200ms ease;
 }
+.project__title.mini::before {
+  content: none;
+}
 .project__title .category {
   height: 40px;
   width: 40px;
@@ -2346,19 +2349,19 @@ input:disabled {
 .project__title .category.web {
   background-position: -40px 0;
 }
-.project__title:hover > h2, .project__title:focus > h2, .active .project__title > h2 {
+.project__title:not(.mini):hover > h2, .project__title:not(.mini):focus > h2, .project__title:not(.mini).active .project__title > h2 {
   color: #fff;
 }
-.project__title:hover::before, .project__title:focus::before, .active .project__title::before {
+.project__title:not(.mini):hover::before, .project__title:not(.mini):focus::before, .project__title:not(.mini).active .project__title::before {
   width: 100%;
 }
-.project__title:hover .category.print, .project__title:focus .category.print, .active .project__title .category.print {
+.project__title:not(.mini):hover .category.print, .project__title:not(.mini):focus .category.print, .project__title:not(.mini).active .project__title .category.print {
   background-position: 0 -40px;
 }
-.project__title:hover .category.motion, .project__title:focus .category.motion, .active .project__title .category.motion {
+.project__title:not(.mini):hover .category.motion, .project__title:not(.mini):focus .category.motion, .project__title:not(.mini).active .project__title .category.motion {
   background-position: -80px -40px;
 }
-.project__title:hover .category.web, .project__title:focus .category.web, .active .project__title .category.web {
+.project__title:not(.mini):hover .category.web, .project__title:not(.mini):focus .category.web, .project__title:not(.mini).active .project__title .category.web {
   background-position: -40px -40px;
 }
 
@@ -2492,6 +2495,32 @@ p.contact__title {
   display: inline-block;
   vertical-align: middle;
   margin-right: 15px;
+}
+
+.project__mini {
+  border-right: 1px solid #D6D7D8;
+  margin-bottom: 15px;
+}
+.project__mini:nth-child(3n) {
+  border-right: none;
+}
+.project__mini:nth-child(3n +1) {
+  clear: left;
+}
+@media (max-width: 768px) {
+  .project__mini {
+    border-right: none;
+    border-bottom: 1px solid #D6D7D8;
+  }
+  .project__mini:last-of-type {
+    border-bottom: none;
+  }
+}
+.project__mini > p {
+  color: #8F979E;
+}
+.project__mini .address_type {
+  font-weight: bold;
 }
 
 /*  GLOBAL

@@ -38,7 +38,10 @@ class ProjectController extends Controller
         // Set default value to current user if form not submitted
 
         $user_field_options = array(
-            'class'             => 'FlydDashboardBundle:User'
+            'class'             => 'FlydDashboardBundle:User',
+            'empty_value'   => 'Choisissez un utilisateur',
+            'required' => false
+
         );
         if ($request->getMethod() != "POST") {
             $user_field_options['data'] = $user;

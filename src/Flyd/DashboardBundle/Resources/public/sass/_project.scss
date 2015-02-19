@@ -165,6 +165,7 @@
 		position: absolute;
 		transition: all 200ms ease;
 	}
+	&.mini::before {content: none;}
 	.category {
 		height: 40px;
 		width: 40px;
@@ -178,9 +179,9 @@
 			background-position: -40px 0;
 		}
 	}
-	&:hover,
-	&:focus,
-	.active & {
+	&:not(.mini):hover,
+	&:not(.mini):focus,
+	&:not(.mini).active & {
 		& > h2 {
 			color: #fff;
 		}

@@ -16,8 +16,18 @@
     </div>
 
     <div class="row">
-        {% for entity in entities %}
         <div class="col-sm-12">
+            <div class="bloc bloc--general bloc--search">
+                
+                    <label>Rechercher: </label>
+                    <input type="text" class="form-control" id="client_sort">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        {% for entity in entities %}
+        <div class="col-sm-12 client">
             <div class="bloc bloc--general bloc--search">
                 <div class="row">
                     <div class="col-sm-12">
@@ -30,4 +40,26 @@
         </div>
         {% endfor %}
     </div>
-    {% endblock %}
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+        (function($) {
+            $('#client_sort').on('keyup', function() {
+                var $clients = $('.client'),
+                    $input = $(this).val();
+                $clients.each(function() {
+                    var client = $(this),
+                        title = client.find('.bloc__title').text();
+
+                    console.log($input);
+                    if(title.indexOf($input) < 0 ) {
+                        client.hide(200);
+                    } else {
+                        client.show(200);
+                    }
+                });
+            });
+        })(jQuery);
+    </script>
+{% endblock %}

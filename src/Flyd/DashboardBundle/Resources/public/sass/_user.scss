@@ -21,3 +21,18 @@
 	vertical-align: middle;
 	margin-right: 15px;
 }
+
+// projects
+.project__mini {
+	border-right: 1px solid $grey;
+	margin-bottom: 15px;
+	&:nth-child(3n) {border-right: none;}
+	&:nth-child(3n +1) {clear: left;}
+	@media(max-width: $medium) {
+		border-right: none;
+		border-bottom: 1px solid $grey;
+		&:last-of-type {border-bottom: none;}
+	}
+	& > p {color: $darkgrey;}
+	& .address_type {font-weight: bold;}
+}
