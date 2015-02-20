@@ -10,10 +10,10 @@
 		&:last-of-type {border-bottom: none;}
 	}
 	& > p {color: $darkgrey;}
-	& .address_type {font-weight: bold;}
 }
 
-p.contact__title {
+p.contact__title,
+p.address_type {
 	color: $primary;
 	font-size: 16px;
 	font-family: $montserrat;

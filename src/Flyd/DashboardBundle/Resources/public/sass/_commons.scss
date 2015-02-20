@@ -109,6 +109,11 @@
 	color: $alert;
 }
 
+.line--edit {
+	font-family: $varela;
+	color: $primary;
+}
+
 /* Sprite */
 .sprite {
 	background-image: url(../img/sprite.svg);/* IE 9+ & Android 3+ */

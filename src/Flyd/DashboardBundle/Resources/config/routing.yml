@@ -99,11 +99,13 @@ contact_ajax_add:
     requirements:
         _method: POST
 
-contact_ajax_delete:
-    path:     /contact/delete
+contact_edit:
+    path:     /contact/{id}/edit
+    defaults: { _controller: FlydDashboardBundle:Contact:edit }
+
+contact_delete:
+    path:     /contact/{id}/delete
     defaults: { _controller: FlydDashboardBundle:Contact:delete }
-    requirements:
-        _method: POST
 
 
 # ADDRESS
@@ -120,11 +122,13 @@ address_ajax_add:
     requirements:
         _method: POST
 
-address_ajax_delete:
-    path:     /address/delete
+address_edit:
+    path:     /address/{id}/edit
+    defaults: { _controller: FlydDashboardBundle:Address:edit }
+
+address_delete:
+    path:     /address/{id}/delete
     defaults: { _controller: FlydDashboardBundle:Address:delete }
-    requirements:
-        _method: POST
 
 #   NEEDS
 

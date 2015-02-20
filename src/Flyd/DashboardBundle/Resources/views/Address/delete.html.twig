@@ -1,0 +1,46 @@
+{% extends 'FlydDashboardBundle::layout.html.twig' %}
+
+
+{% block title %}
+    <title>Adresse {{entity.type.name}} - Supprimer</title>
+{% endblock %}
+
+{% block top %}
+    <p>
+        <span class="prev"><a href="{{ path('client_list') }}">Clients</a></span>
+        <span class="prev"><a href="{{ path('client_show', { 'id': entity.company.id }) }}">{{ entity.company.name }}</a></span>
+        Supprimer
+    </p>
+{% endblock %}
+
+
+{% block body %}
+    
+    <div class="title__container">
+        <h1 class="lvl1">Adresse {{entity.type.name}}</h1>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="bloc bloc--general bloc-inline-edition edit">
+                <p>Êtes-vous sûr de vouloir effacer l'adresse {{entity.type.name}} ?</p>
+                 <form action="{{ path('address_delete', {'id': entity.id}) }}" method="post">
+                    <a href="{{ path('client_show', {'id': entity.company.id}) }}" class="btn--save--reverse">
+                      Retour au client
+                    </a>
+                    {# Ici j'ai écrit le bouton de soumission à la main #}
+                    <button type="submit" class="btn--delete--reverse">Supprimer</button>
+                    {# Ceci va générer le champ CSRF #}
+                    {{ form_rest(form) }}
+                  </form>
+            </div>
+        </div>
+    </div>
+
+
+
+	
+
+{% endblock %}

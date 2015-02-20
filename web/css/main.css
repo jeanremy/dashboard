@@ -1081,6 +1081,11 @@ a {
   color: #D14232;
 }
 
+.line--edit {
+  font-family: "varela", sans-serif;
+  color: #2B303E;
+}
+
 /* Sprite */
 .sprite {
   background-image: url(../img/sprite.svg);
@@ -2430,11 +2435,9 @@ input:disabled {
 .item > p {
   color: #8F979E;
 }
-.item .address_type {
-  font-weight: bold;
-}
 
-p.contact__title {
+p.contact__title,
+p.address_type {
   color: #2B303E;
   font-size: 16px;
   font-family: "montserrat", sans-serif;

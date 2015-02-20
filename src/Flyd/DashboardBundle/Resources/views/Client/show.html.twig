@@ -83,7 +83,7 @@
                       {% include "FlydDashboardBundle:Address:show.html.twig" %}                    
                     {% endfor %}
                 </div> 
-                <a href="{{ path('address_ajax_getform') }}" class="pull-right btn btn--add">+</a> 
+                <button class="pull-right btn btn--add">+</button> 
                 {{ render(controller('FlydDashboardBundle:Address:getForm', {'id': entity.id})) }}                
             </div>
         </div>
@@ -99,7 +99,7 @@
                       {% include "FlydDashboardBundle:Contact:show.html.twig" %}                    
                     {% endfor %}
                 </div> 
-                <a href="{{ path('contact_ajax_delete') }}" class="pull-right btn--add">+</a> 
+                <button class="pull-right btn--add">+</button> 
                 {{ render(controller('FlydDashboardBundle:Contact:getForm', {'id': entity.id})) }}
             </div>
         </div>
@@ -115,7 +115,7 @@
                         {% include "FlydDashboardBundle:Need:mini.html.twig" %} 
                     {% endfor %}
                 </div> 
-                <a href="{{ path('need_ajax_add') }}" class="btn--add">+</a>
+                <button class="btn--add">+</button>
                 {{ render(controller('FlydDashboardBundle:Need:getForm', {'id': entity.id})) }}
             </div>    
         </div>

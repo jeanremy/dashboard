@@ -2,6 +2,7 @@
 
 namespace Flyd\DashboardBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -74,52 +75,74 @@ class AddressController extends Controller
 		}
 	}
 
+	/**
+     * Edit address
+     *
+     * @Route("/address/{id}/edit", name="address_edit")
+     * @Template("FlydDashboardBundle:Address:edit.html.twig")
+     */
+	public function editAction(Request $request, $id)
+	{               
+		$em = $this->getDoctrine()->getManager();
+
+		$address = $em->getRepository('FlydDashboardBundle:Address')->find($id);
+
+
+		$form = $this->get('form.factory')->create(new AddressType(), $address);
+
+		if ($form->handleRequest($request)->isValid()) {
+		  $em = $this->getDoctrine()->getManager();
+		  $em->persist($address);
+		  $em->flush();
+
+		  $request->getSession()->getFlashBag()->add('notice', 'Adresse bien enregistré.');
+
+		  return $this->redirect($this->generateUrl('client_show', array('id' => $address->getCompany()->getId())));
+		}
+
+		return array(
+		  'entity' => $address,
+		  'form' => $form->createView(),		  
+		  'menu' => 'client'
+		);
+	}
+
 
     /**
-     * Remove address from clients.
-     *
-     * @Route("/address/delete", name="address_ajax_delete")
-     * @Method("POST")
-     */
-	public function deleteAction()
-	{               
-		$request = $this->container->get('request');
-		$params = $this->getRequest()->request->all();
-	    $response = new JsonResponse();
+	 * Deletes a Address entity.
+	 *
+	 * @Route("address/{id}/delete", name="address_delete")
+	 * @Method("DELETE")
+	 * @Template()
+	 */
+	public function deleteAction(Request $request, $id)
+	{
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('FlydDashboardBundle:Address')->find($id);
 
-	    if($request->isXmlHttpRequest())
-	     {
 
-	        $em = $this->container->get('doctrine')->getEntityManager();
+		if (null === $entity) {
+			throw new NotFoundHttpException("L'adresse d'id ".$id." n'existe pas.");
+		}
 
-	        if($params['element_id'] != '')
-	        {
-	               $qb = $em->createQueryBuilder();
+		// On crée un formulaire vide, qui ne contiendra que le champ CSRF
+		// Cela permet de protéger la suppression d'annonce contre cette faille
+		$form = $this->createFormBuilder()->getForm();
 
-	               $qb->delete('FlydDashboardBundle:Address', 'a')
-	                  ->where("a.id LIKE :element_id")
-	                  ->setParameter('element_id', '%'.$params['element_id'].'%');
+		if ($form->handleRequest($request)->isValid()) {
+			$em->remove($entity);
+			$em->flush();
 
-	               $query = $qb->getQuery()->getResult();           
-	        }
-	        else {
-	            return $response->setData(array(
-				    'code' => 500,
-				    'response' => 'Address ID missing'
-				));
-	        }
+			$request->getSession()->getFlashBag()->add('info', "L'adresse a bien été supprimé.");
 
-	        return $response->setData(array(
-			    'code' => 200,
-			    'response' => 'Address deleted'
-			));
-	    }
-	    else {
-	        return $response->setData(array(
-			    'code' => 500,
-			    'response' => 'Not an ajax request',
-			    'element' => $params['element_id']
-			));
-	    }
-	}
+			return $this->redirect($this->generateUrl('client_list'));
+		}
+
+		// Si la requête est en GET, on affiche une page de confirmation avant de supprimer
+		return array(
+		  'entity' => $entity,
+		  'form'   => $form->createView(),
+	  		'menu' => 'client'
+		);
+    }
 }

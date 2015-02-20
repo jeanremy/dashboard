@@ -2,6 +2,7 @@
 
 namespace Flyd\DashboardBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -78,51 +79,74 @@ class ContactController extends Controller
 	}
 
 
-    /**
-     * Remove contact from clients.
+	/**
+     * Edit contact
      *
-     * @Route("/contact/delete", name="contact_ajax_delete")
-     * @Method("POST")
+     * @Route("/contact/{id}/edit", name="contact_edit")
+     * @Template("FlydDashboardBundle:Contact:edit.html.twig")
      */
-	public function deleteAction()
+	public function editAction(Request $request, $id)
 	{               
-		$request = $this->container->get('request');
-		$params = $this->getRequest()->request->all();
-	    $response = new JsonResponse();
+		$em = $this->getDoctrine()->getManager();
 
-	    if($request->isXmlHttpRequest())
-	     {
+		$contact = $em->getRepository('FlydDashboardBundle:Contact')->find($id);
 
-	        $em = $this->container->get('doctrine')->getEntityManager();
 
-	        if($params['element_id'] != '')
-	        {
-	               $qb = $em->createQueryBuilder();
+		$form = $this->get('form.factory')->create(new ContactType(), $contact);
 
-	               $qb->delete('FlydDashboardBundle:Contact', 'a')
-	                  ->where("a.id LIKE :element_id")
-	                  ->setParameter('element_id', '%'.$params['element_id'].'%');
+		if ($form->handleRequest($request)->isValid()) {
+		  $em = $this->getDoctrine()->getManager();
+		  $em->persist($contact);
+		  $em->flush();
 
-	               $query = $qb->getQuery()->getResult();       
-	        }
-	        else {
-	            return $response->setData(array(
-				    'code' => 500,
-				    'response' => 'Contact ID missing'
-				));
-	        }
+		  $request->getSession()->getFlashBag()->add('notice', 'Adresse bien enregistré.');
 
-	        return $response->setData(array(
-			    'code' => 200,
-			    'response' => 'Contact deleted'
-			));
-	    }
-	    else {
-	        return $response->setData(array(
-			    'code' => 500,
-			    'response' => 'Not an ajax request',
-			    'element' => $params['element_id']
-			));
-	    }
+		  return $this->redirect($this->generateUrl('client_show', array('id' => $contact->getCompany()->getId())));
+		}
+
+		return array(
+		  'entity' => $contact,
+		  'form' => $form->createView(),		  
+		  'menu' => 'client'
+		);
 	}
+
+
+    /**
+	 * Deletes a Contact entity.
+	 *
+	 * @Route("contact/{id}/delete", name="contact_delete")
+	 * @Method("DELETE")
+	 * @Template()
+	 */
+	public function deleteAction(Request $request, $id)
+	{
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('FlydDashboardBundle:Contact')->find($id);
+
+
+		if (null === $entity) {
+			throw new NotFoundHttpException("Le contact d'id ".$id." n'existe pas.");
+		}
+
+		// On crée un formulaire vide, qui ne contiendra que le champ CSRF
+		// Cela permet de protéger la suppression d'annonce contre cette faille
+		$form = $this->createFormBuilder()->getForm();
+
+		if ($form->handleRequest($request)->isValid()) {
+			$em->remove($entity);
+			$em->flush();
+
+			$request->getSession()->getFlashBag()->add('info', "Le contact a bien été supprimé.");
+
+			return $this->redirect($this->generateUrl('client_list'));
+		}
+
+		// Si la requête est en GET, on affiche une page de confirmation avant de supprimer
+		return array(
+		  'entity' => $entity,
+		  'form'   => $form->createView(),
+	  		'menu' => 'client'
+		);
+    }
 }

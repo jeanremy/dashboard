@@ -4,5 +4,6 @@
     <p class="address__street">{{ address.street }}</p>
     <p class="address__street">{{ address.streetComp }}</p>
     <p class="address__city">{{ address.zipcode }} {{ address.city }} {{ address.cityComp }}</p>
-    <a class="line--remove remove" data-id="{{ address.id }}" href="{{ path('address_ajax_delete') }}">Retirer</a>
+    <a class="line--edit" data-id="{{ address.id }}" href="{{ path('address_edit', {'id':address.id}) }}">Modifier</a> - 
+    <a class="line--remove" data-id="{{ address.id }}" href="{{ path('address_delete', {'id':address.id}) }}">Supprimer</a>
 </div>
