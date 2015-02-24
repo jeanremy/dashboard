@@ -113,15 +113,17 @@
 .sortable {cursor: move;}
 .ui-sortable-placeholder {border: 1px dashed $darkgrey; height: 100px;}
 
-
 .ui-autocomplete {
+	position: absolute;
+	top: 0;
+	left: 0;
+	cursor: default;
 	background: white;
 	border-left: 1px solid $grey;
 	border-right: 1px solid $grey;
 	border-bottom: 1px solid $grey;
 	font-family: $varela;
 	padding: 5px;
-	width: auto;
 }
 .ui-menu-item:hover {
 	background: $darkgrey;

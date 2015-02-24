@@ -2285,13 +2285,16 @@ input:disabled {
 }
 
 .ui-autocomplete {
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: default;
   background: white;
   border-left: 1px solid #D6D7D8;
   border-right: 1px solid #D6D7D8;
   border-bottom: 1px solid #D6D7D8;
   font-family: "varela", sans-serif;
   padding: 5px;
-  width: auto;
 }
 
 .ui-menu-item:hover {
