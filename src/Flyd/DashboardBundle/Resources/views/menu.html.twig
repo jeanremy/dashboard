@@ -4,11 +4,17 @@
 <aside class="aside" id="aside">
 	<div class="user">
 		{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-			{% if app.user.image %}
-			<a href="{{ path('user_show', { 'id': app.user.id }) }}"><img src="{{ app.user.image.webPath | apply_filter('demi') }}" / class="profil__pic"></a>
-			{% endif %}
+			<a href="{{ path('user_show', { 'id': app.user.id }) }}" class="user__avatar">
+				{% if app.user.image %}
+				<img src="{{ app.user.image.webPath | apply_filter('demi') }}" / class="profil__pic">
+				{% endif %}
+				{{ render(controller('FlydDashboardBundle:User:getImportantPtusCount', {'id': app.user.id}) ) }}
+			</a>
 			<p class="user__name">
-				<a href="{{ path('user_show', { 'id': app.user.id }) }}">{{ app.user.username }}</a>
+				<a href="{{ path('user_show', { 'id': app.user.id }) }}">
+					{{ app.user.username }}
+				</a>
+
 			</p>
 			<p class="user__logout">
 				<a href="{{ path('fos_user_security_logout') }}">{{ 'Déconnexion' }}</a>

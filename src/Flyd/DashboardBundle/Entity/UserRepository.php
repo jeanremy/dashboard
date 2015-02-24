@@ -14,7 +14,8 @@ class UserRepository extends EntityRepository
 {
 
 
-	public function getUsersWithout($existingusers) {
+	public function getUsersWithout($existingusers) 
+	{
 		$query = $this->createQueryBuilder('a')
                       ->select(array('a.id', 'a.username', 'a.job'));
 

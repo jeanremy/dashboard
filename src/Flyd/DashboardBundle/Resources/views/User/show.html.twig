@@ -25,14 +25,27 @@
     </div>
 
     <!-- Alertes -->
+    {% if ptus %}
     <div class="row">
         <div class="col-sm-12">
-            <div class="bloc">
-                <h2 class="bloc__title">Alertes</h2>
-                
+            <div class="bloc user__alerts">
+                <h2 class="bloc__title">
+                    {{ render(controller('FlydDashboardBundle:User:getImportantPtusCount', {'id': entity.id}) ) }}
+                    Alertes
+                </h2>                
+                <ul class="alerts">
+                    {% for ptu in ptus %}
+                        <li class="alert">
+                            <span class="project__title__infos">{{ ptu.project.need.client.name }} > {{ ptu.project.need.title }} > {{ ptu.project.title }}</span>
+                            <a href="{{ path('project_show', { 'id': ptu.project.id }) }}">{{ ptu.task.name }} > {{ ptu.task.step }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
     </div>
+    {% endif %}
+
         
 
     <div class="row">

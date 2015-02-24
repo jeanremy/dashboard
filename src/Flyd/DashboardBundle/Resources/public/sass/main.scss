@@ -72,10 +72,20 @@ p {
 	.user {
 		background-color: $clearprimary;
 		padding: 30px 15px;
-		.profil__pic {
-			display: block;
-			margin: 0 auto;
+		text-align: center;
+		.user__avatar {			
+			position: relative;
+			display: inline-block;
 		}
+			.profil__pic {
+				display: block;
+				margin: 0 auto;
+			}
+			.user__notifications {
+				position: absolute;
+				top: -8px;
+				right: 0;
+			}
 		> p {
 			margin: 0 auto;
 			text-align: center;	

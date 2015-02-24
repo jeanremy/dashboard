@@ -125,6 +125,9 @@
 	font-family: $varela;
 	padding: 5px;
 }
+.ui-menu .ui-menu-item {
+	cursor: pointer;
+}
 .ui-menu-item:hover {
 	background: $darkgrey;
 	color: #fff;

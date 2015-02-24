@@ -55,5 +55,22 @@ class ProjectTaskUserRepository extends EntityRepository
 	    return $query->getOneOrNullResult();
 	}
 
+	/*
+	 * Recherche les tâches importantes non terminées pour un user
+	 */
+	public function getImportantPtus($user_id)
+	{
+		$query = $this->createQueryBuilder('ptu')
+						->where('ptu.important = 1')
+	                    ->leftJoin('ptu.user', 'u')
+						->andWhere('u.id = :id')
+	                    ->setParameter('id', $user_id)
+	                    ->leftJoin('ptu.status', 's')
+						->andWhere('s.name != :status')
+	                    ->setParameter('status', 'Terminé')
+					    ->orderBy('ptu.position', 'ASC');
+
+		return $query->getQuery()->getResult();
+	}
 
 }

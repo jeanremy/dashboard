@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Flyd\DashboardBundle\Entity\User;
 use Flyd\DashboardBundle\Form\UserType;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * User controller.
@@ -83,6 +84,8 @@ class UserController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('FlydDashboardBundle:User')->find($id);
+        $ptus = $em->getRepository('FlydDashboardBundle:ProjectTaskUser')->getImportantPtus($id);
+
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find User entity.');
@@ -90,6 +93,7 @@ class UserController extends Controller
 
         return $this->render('FlydDashboardBundle:User:show.html.twig', array(
             'entity' => $entity,
+            'ptus' => $ptus,
             'menu' => 'user'
         ));
     }
@@ -184,6 +188,19 @@ class UserController extends Controller
             'entities' => $entities,
             'entity' => $project
         ));
+    }  
+
+    /**
+     * Get number of important tasks
+     *
+     */
+    public function getImportantPtusCountAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $ptus = $em->getRepository('FlydDashboardBundle:ProjectTaskUser')->getImportantPtus($id);
+
+        $html = count($ptus) ? '<span class="user__notifications">'.count($ptus).'</span>': '';
+        return new Response($html);
     }  
 
 

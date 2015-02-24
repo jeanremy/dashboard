@@ -1,3 +1,22 @@
+.user__notifications {
+	background-color: $alert;
+	border-radius: 50%;
+	width: 25px;
+	height: 25px;
+	line-height: 25px;
+	font-size: 11px;
+	color: #fff;
+	display: inline-block;
+	font-family: $montserratbold;
+	text-align: center;
+}
+
+.profil__pic {
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 15px;
+}
+
 .user--mini {
 	margin-bottom: 15px;
 	text-align: center;
@@ -16,11 +35,6 @@
 	}
 }
 
-.profil__pic {
-	display: inline-block;
-	vertical-align: middle;
-	margin-right: 15px;
-}
 
 // projects
 .project__mini {
@@ -35,4 +49,18 @@
 	}
 	& > p {color: $darkgrey;}
 	& .address_type {font-weight: bold;}
+}
+
+// Full page
+.user__alerts {
+	.user__notifications {
+		float: left;
+		margin-right: 15px;
+	}
+	.bloc__title {color: $alert;}
+	.alerts {
+		margin-left: 40px;
+		font-family: $varela;
+	}
+	.alert {margin-bottom: 10px;}
 }
