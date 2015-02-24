@@ -40,7 +40,7 @@ $('#flyd_dashboardbundle_projecttaskuser').on('submit', function(e) {
 $(document).on('change', '.task input, .task select, .task checkbox',function(e) {
     e.preventDefault();
     var form = $(this).parents('form'),
-        statusRaw = $('#flyd_dashboardbundle_projecttaskuser_status option:selected').text(),
+        statusRaw = form.find('#flyd_dashboardbundle_projecttaskuser_status option:selected').text(),
         status = statusRaw.trim().toLowerCase().replace(/ /g,'-').replace(/[^\w-]+/g,'');
     $sort.sortable("disable");
 

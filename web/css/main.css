@@ -2234,6 +2234,9 @@ input:disabled {
 .task .task__infos .info select, .task .task__infos .info input {
   height: 30px;
 }
+.task[data-status="termin"] .task__isimportant > input:checked + label {
+  background-position: -120px 0;
+}
 .task[data-status="termin"] .task__name {
   color: #D6D7D8;
 }
