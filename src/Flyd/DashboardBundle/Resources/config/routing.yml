@@ -132,10 +132,6 @@ address_delete:
 
 #   NEEDS
 
-need_list:
-    path:     /needs
-    defaults: { _controller: FlydDashboardBundle:Need:index }
-
 need_ajax_add:
     path:     /need/ajaxadd
     defaults: { _controller: FlydDashboardBundle:Need:ajaxadd }
@@ -160,9 +156,6 @@ need_delete:
     path:     /need/{id}/delete
     defaults: { _controller: FlydDashboardBundle:Need:delete }
 
-need_ajax_delete:
-    path:     /need/{id}/ajaxdelete
-    defaults: { _controller: FlydDashboardBundle:Need:ajaxdelete }
 
 
 #   PROJECTS
