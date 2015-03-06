@@ -2,6 +2,7 @@
 
 flyd_dashboard_homepage:
     path:     /
+    methods: [ get ]
     defaults: { _controller: FlydDashboardBundle:Project:index }
 
 
@@ -9,22 +10,27 @@ flyd_dashboard_homepage:
 
 client_list:
     path:     /clients
+    methods: [ get ]
     defaults: { _controller: FlydDashboardBundle:Client:index }
 
 client_add:
     path:     /client/add
+    methods: [ get, post ]
     defaults: { _controller: FlydDashboardBundle:Client:add }
 
 client_show:
     path:     /client/{id}
+    methods: [ get ]
     defaults: { _controller: FlydDashboardBundle:Client:show }
 
 client_edit:
     path:     /client/{id}/edit
+    methods: [ get, post ]
     defaults: { _controller: FlydDashboardBundle:Client:edit }
 
 client_delete:
     path:     /client/{id}/delete
+    methods: [ get, post ]
     defaults: { _controller: FlydDashboardBundle:Client:delete }
 
 
@@ -32,27 +38,33 @@ client_delete:
 
 supplier_list:
     path:     /suppliers
+    methods: [ get ]
     defaults: { _controller: FlydDashboardBundle:Supplier:index }
 
 supplier_add:
     path:     /supplier/add
+    methods: [ get, post ]
     defaults: { _controller: FlydDashboardBundle:Supplier:add }
 
 
 supplier_get_form:
     path:     /supplier/getform
+    methods: [ post ]
     defaults: { _controller: FlydDashboardBundle:Supplier:getForm }
 
 supplier_show:
     path:     /supplier/{id}
+    methods: [ get ]
     defaults: { _controller: FlydDashboardBundle:Supplier:show }
 
 supplier_edit:
     path:     /supplier/{id}/edit
+    methods: [ get, post ]
     defaults: { _controller: FlydDashboardBundle:Supplier:edit }
 
 supplier_delete:
     path:     /supplier/{id}/delete
+    methods: [ get, post ]
     defaults: { _controller: FlydDashboardBundle:Supplier:delete }
 
 
@@ -60,28 +72,34 @@ supplier_delete:
 
 user_list:
     path:     /users
+    methods: [ get ]
     defaults: { _controller: FlydDashboardBundle:User:index }
 
 user_add:
     path:     /user/add
+    methods: [ get, post ]
     defaults: { _controller: FlydDashboardBundle:User:add }
 
 user_ajax_add:
     path:     /user/getform
+    methods: [ post ]
     defaults: { _controller: FlydDashboardBundle:User:getForm }
     requirements:
         _method: POST
 
 user_show:
     path:     /user/{id}
+    methods: [ get ]
     defaults: { _controller: FlydDashboardBundle:User:show }
 
 user_edit:
     path:     /user/{id}/edit
+    methods: [ get, post ]
     defaults: { _controller: FlydDashboardBundle:User:edit }
 
 user_delete:
     path:     /user/{id}/delete
+    methods: [ get, post ]
     defaults: { _controller: FlydDashboardBundle:User:delete }
 
 
