@@ -300,11 +300,9 @@ class ProjectCanvasController extends Controller
     public function ajaxReorderTasksAction(Request $request, $id)
     {
         $response = new JsonResponse();
-        $em = $this->getDoctrine()->getManager();        
-
+        $em = $this->getDoctrine()->getManager();    
         $request = $this->container->get('request');
         $params = $this->getRequest()->request->all();
-
         if(!$request->isXmlHttpRequest() || !$params['pct']) {
             return $response->setData(array(
                 'code' => 500,
@@ -337,7 +335,6 @@ class ProjectCanvasController extends Controller
                 'response' => $e->getMessage()
             ));
         }
-       
         return $response;
     }
 }
