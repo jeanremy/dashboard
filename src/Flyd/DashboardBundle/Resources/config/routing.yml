@@ -2,7 +2,7 @@
 
 flyd_dashboard_homepage:
     path:     /
-    methods: [ get ]
+    methods: [ get, post ]
     defaults: { _controller: FlydDashboardBundle:Project:index }
 
 
@@ -107,22 +107,22 @@ user_delete:
 
 contact_ajax_getform:
     path:     /contact/getform
+    methods: [ post ]
     defaults: { _controller: FlydDashboardBundle:Contact:getform }
-    requirements:
-        _method: POST
 
 contact_ajax_add:
     path:     /contact/add
+    methods: [ get, post ]
     defaults: { _controller: FlydDashboardBundle:Contact:add }
-    requirements:
-        _method: POST
 
 contact_edit:
     path:     /contact/{id}/edit
+    methods: [ get, post ]
     defaults: { _controller: FlydDashboardBundle:Contact:edit }
 
 contact_delete:
     path:     /contact/{id}/delete
+    methods: [ get, post, delete ]
     defaults: { _controller: FlydDashboardBundle:Contact:delete }
 
 
@@ -130,48 +130,49 @@ contact_delete:
 
 address_ajax_getform:
     path:     /address/getform
+    methods: [ post ]  
     defaults: { _controller: FlydDashboardBundle:Address:getform }
-    requirements:
-        _method: POST
 
 address_ajax_add:
     path:     /address/add
+    methods: [ post ]
     defaults: { _controller: FlydDashboardBundle:Address:add }
-    requirements:
-        _method: POST
 
 address_edit:
     path:     /address/{id}/edit
+    methods: [ get, post ]
     defaults: { _controller: FlydDashboardBundle:Address:edit }
 
 address_delete:
     path:     /address/{id}/delete
+    methods: [ get, post, delete ]
     defaults: { _controller: FlydDashboardBundle:Address:delete }
 
 #   NEEDS
 
 need_ajax_add:
     path:     /need/ajaxadd
+    methods: [ post]
     defaults: { _controller: FlydDashboardBundle:Need:ajaxadd }
-    requirements:
-        _method: POST
 
 need_add:
     path:     client/{id}/need/add
+    methods: [ get, post]
     defaults: { _controller: FlydDashboardBundle:Need:add }
-    requirements:
-        _method: POST
 
 need_show:
     path:     /need/{id}
+    methods: [ get]
     defaults: { _controller: FlydDashboardBundle:Need:show }
 
 need_edit:
     path:     /need/{id}/edit
+    methods: [ get, post]
     defaults: { _controller: FlydDashboardBundle:Need:edit }
 
 need_delete:
     path:     /need/{id}/delete
+    methods: [ get, post, delete ]
     defaults: { _controller: FlydDashboardBundle:Need:delete }
 
 
@@ -180,22 +181,27 @@ need_delete:
 
 project_list:
     path:     /projects
+    methods: [ get, post]
     defaults: { _controller: FlydDashboardBundle:Project:index }
 
 project_add:
     path:     /need/{id}/project/add
+    methods: [ get, post]
     defaults: { _controller: FlydDashboardBundle:Project:add }
 
 project_show:
     path:     /project/{id}
+    methods: [ get ]
     defaults: { _controller: FlydDashboardBundle:Project:show }
 
 project_edit:
     path:     /project/{id}/edit
+    methods: [ get, post]
     defaults: { _controller: FlydDashboardBundle:Project:edit }
 
 project_delete:
     path:     /project/{id}/delete
+    methods: [ get, post, delete ]
     defaults: { _controller: FlydDashboardBundle:Project:delete }
 
 
@@ -203,89 +209,85 @@ project_delete:
 
 project_ajax_add_supplier:
     path:     /project/{id}/addsupplier
+    methods: [ post]
     defaults: { _controller: FlydDashboardBundle:ProjectAjax:addsupplier }
-    requirements:
-        _method: POST
 
 project_ajax_remove_supplier:
     path:     /project/{id}/remove/supplier
+    methods: [ post]
     defaults: { _controller: FlydDashboardBundle:ProjectAjax:removesupplier }
-    requirements:
-        _method: POST
 
 project_ajax_add_user:
     path:     /project/{id}/ajaxadduser
+    methods: [ post]
     defaults: { _controller: FlydDashboardBundle:ProjectAjax:adduser }
-    requirements:
-        _method: POST
 
 project_ajax_remove_user:
     path:     /project/{id}/remove/user
+    methods: [ post]
     defaults: { _controller: FlydDashboardBundle:ProjectAjax:removeuser }
-    requirements:
-        _method: POST
 
 project_ajax_add_ptu:
     path:     /project/{id}/ajaxaddptu
+    methods: [ post]
     defaults: { _controller: FlydDashboardBundle:ProjectAjax:addptu }
-    requirements:
-        _method: POST
 
 project_ajax_remove_ptu:
     path:     /project/{id}/remove/ptu
+    methods: [ post]
     defaults: { _controller: FlydDashboardBundle:ProjectAjax:removeptu }
-    requirements:
-        _method: POST
 
 project_ajax_reorder_ptus:
     path:     /project/{id}/reorderptus
+    methods: [ post]
     defaults: { _controller: FlydDashboardBundle:ProjectAjax:reorderptus }
-    requirements:
-        _method: POST
 
 project_ajax_update_status:
     path:     /project/{id}/updatestatus
+    methods: [ post]
     defaults: { _controller: FlydDashboardBundle:ProjectAjax:updatestatus }
-    requirements:
-        _method: POST
 
 
 #   PROJECTS CANVAS
 
 projectcanvas_list:
     path:     /projectcanvas
+    methods: [ get]
     defaults: { _controller: FlydDashboardBundle:ProjectCanvas:index }
 
 projectcanvas_add:
     path:     /projectcanvas/add
+    methods: [ get, post]
     defaults: { _controller: FlydDashboardBundle:ProjectCanvas:add }
 
 projectcanvas_ajax_add_task:
     path:     /projectcanvas/{id}/addtask
+    methods: [ post]
     defaults: { _controller: FlydDashboardBundle:ProjectCanvas:ajaxaddtask }
-    requirements:
-        _method: POST
 
 projectcanvas_show:
     path:     /projectcanvas/{id}
+    methods: [ get ]
     defaults: { _controller: FlydDashboardBundle:ProjectCanvas:show }
 
 projectcanvas_edit:
     path:     /projectcanvas/{id}/edit
+    methods: [ get, post]
     defaults: { _controller: FlydDashboardBundle:ProjectCanvas:edit }
 
 projectcanvas_delete:
     path:     /projectcanvas/{id}/delete
+    methods: [ get, post, delete ]
     defaults: { _controller: FlydDashboardBundle:ProjectCanvas:delete }
 
 projectcanvas_ajax_delete_task:
     path:     /projectcanvas/{id}/deletetask
+    methods: [ post]
     defaults: { _controller: FlydDashboardBundle:ProjectCanvas:ajaxdeletetask }
-    requirements:
-        _method: POST
 
 projectcanvas_ajax_reorder_tasks:
     path:     /projectcanvas/{id}/reordertasks
+    methods: [ post ]
     defaults: { _controller: FlydDashboardBundle:ProjectCanvas:ajaxreordertasks }
     requirements:
         _method: POST
@@ -295,4 +297,5 @@ projectcanvas_ajax_reorder_tasks:
 
 projecttaskuser_ajax_edit_ptu:
     path:     /projecttaskuser/{id}/edit
+    methods: [ get, post]
     defaults: { _controller: FlydDashboardBundle:ProjectTaskUser:edit }
