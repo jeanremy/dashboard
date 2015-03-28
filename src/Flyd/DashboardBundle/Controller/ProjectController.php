@@ -26,9 +26,8 @@ class ProjectController extends Controller
     /**
      * Lists all Project entities.
      *
-     * @Route("/projects", name="project_list")
-     * @Method("GET")
-     * @Template()
+     * @Route("/", name="flyd_dashboard_homepage")
+     * @Template("FlydDashboardBundle:Project:index.html.twig")
      */
     public function indexAction(Request $request)
     {

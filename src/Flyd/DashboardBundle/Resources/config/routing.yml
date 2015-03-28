@@ -179,11 +179,6 @@ need_delete:
 
 #   PROJECTS
 
-project_list:
-    path:     /projects
-    methods: [ get, post]
-    defaults: { _controller: FlydDashboardBundle:Project:index }
-
 project_add:
     path:     /need/{id}/project/add
     methods: [ get, post]
