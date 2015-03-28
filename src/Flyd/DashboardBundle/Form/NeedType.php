@@ -18,18 +18,6 @@ class NeedType extends AbstractType
         $builder
             ->add('title')
             ->add('description', 'textarea')
-            ->add('startDate', 'date', array(
-                'widget' => 'single_text',
-                'required' => false
-            ))
-            ->add('endDate', 'date', array(
-                'widget' => 'single_text',
-                'required' => false
-            ))
-            ->add('deadline', 'date', array(
-                'widget' => 'single_text',
-                'required' => false
-            ))
             ->add('client', 'entity', array(
                 'class' => 'FlydDashboardBundle:Client',
                 'property' => 'name',

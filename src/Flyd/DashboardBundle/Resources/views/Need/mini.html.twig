@@ -1,11 +1,4 @@
 <div class="need col-sm-6">
-    <p class="need__dates">
-        {{ need.startDate| localizeddate('full', 'none', 'fr') }} > 
-        {% if need.endDate %}
-        {{ need.endDate| localizeddate('full', 'none', 'fr') }}
-        {% else %}...
-        {% endif %}
-    </p>
     <a href="{{ path('need_delete', { 'id': need.id }) }}" data-id="{{ need.id }}" class="pull-right btn--delete dashicons dashicons-trash"></a>
     <a href="{{ path('need_edit', { 'id': need.id }) }}" class="pull-right btn--edit dashicons dashicons-edit"></a>
 

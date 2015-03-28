@@ -48,27 +48,6 @@ class Need
      */
     private $description;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="start_date", type="date", nullable=true)
-     * @Assert\DateTime()
-     */
-    private $startDate;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="deadline", type="date", nullable=true)
-     */
-    private $deadline;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="end_date", type="date", nullable=true)
-     */
-    private $endDate;
 
     /**
      * @ORM\Column(name="created_at", type="datetime")
@@ -175,80 +154,7 @@ class Need
         return $this->description;
     }
 
-    /**
-     * Set startDate
-     *
-     * @param \DateTime $startDate
-     * @return Need
-     */
-    public function setStartDate($startDate)
-    {
-        $this->startDate = $startDate;
-
-        return $this;
-    }
-
-    /**
-     * Get startDate
-     *
-     * @return \DateTime 
-     */
-    public function getStartDate()
-    {
-        return $this->startDate;
-    }
-
-    /**
-     * Set deadline
-     *
-     * @param \DateTime $deadline
-     * @return Need
-     */
-    public function setDeadline($deadline)
-    {
-        $this->deadline = $deadline;
-
-        return $this;
-    }
-
-    /**
-     * Get deadline
-     *
-     * @return \DateTime 
-     */
-    public function getDeadline()
-    {
-        return $this->deadline;
-    }
-
-    /**
-     * Set endDate
-     *
-     * @param \DateTime $endDate
-     * @return Need
-     */
-    public function setEndDate($endDate)
-    {
-        $this->endDate = $endDate;
-
-        return $this;
-    }
-
-    /**
-     * Get endDate
-     *
-     * @return \DateTime 
-     */
-    public function getEndDate()
-    {
-        return $this->endDate;
-    }
-
-    public function setCreatedAt(\Datetime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-        return $this;
-    }
+    
 
     public function getCreatedAt()
     {

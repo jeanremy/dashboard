@@ -11,7 +11,7 @@
     <div class="col-sm-12 bloc-inline-edition edit">
         <h2 class="bloc__title">Informations générales</h2>
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-12">
                 <div class="form-group">
                     {{ form_label(form.title, "Titre", {'label_attr': {'class': 'control-label'}}) }}
 
@@ -34,45 +34,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6">
-                <div class="form-group">
-                    {{ form_label(form.startDate, "Date de début", {'label_attr': {'class': 'control-label'}}) }}
-
-                    {{ form_errors(form.startDate) }}
-
-                    <div class="data">
-                        {# Génération de l'input. #}
-                        {{ form_widget(form.startDate, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                </div>
-                <div class="form-group">
-                    {{ form_label(form.deadline, "Deadline", {'label_attr': {'class': 'control-label'}}) }}
-
-                    {{ form_errors(form.deadline) }}
-
-                    <div class="data">
-                        {# Génération de l'input. #}
-                        {{ form_widget(form.deadline, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    {{ form_label(form.endDate, "Date de fin", {'label_attr': {'class': 'control-label'}}) }}
-
-                    {{ form_errors(form.endDate) }}
-
-                    <div class="data">
-                        {# Génération de l'input. #}
-                        {{ form_widget(form.endDate, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                    {{ form_widget(form.client, {'attr': {'style': 'display: none;'}}) }}
-
-                </div>
-            
+            {{ form_widget(form.client, {'attr': {'style': 'display: none;'}}) }}
+            {{ form_widget(form.save) }}
             {{ form_rest(form) }}
-            </div>
         </div>
-        {{ form_widget(form.save) }}
     </div>
 {{ form_end(form) }}
 </div>

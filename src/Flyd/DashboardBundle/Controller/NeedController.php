@@ -28,7 +28,6 @@ class NeedController extends Controller
 		$em = $this->getDoctrine()->getManager();
 		$client = $em->getRepository('FlydDashboardBundle:Client')->find($id);
 
-		$need->setStartDate(new \DateTime() );
 		$need->setClient($client);
 
 
@@ -163,7 +162,7 @@ class NeedController extends Controller
 
 
 		if (null === $entity) {
-		throw new NotFoundHttpException("Le besoin d'id ".$id." n'existe pas.");
+			throw new NotFoundHttpException("Le besoin d'id ".$id." n'existe pas.");
 		}
 
 		// On crée un formulaire vide, qui ne contiendra que le champ CSRF
@@ -193,9 +192,6 @@ class NeedController extends Controller
 	public function getFormAction($id)
 	{
 	    $need = new Need();
-	    $need->setStartDate(new \DateTime() );
-		$need->setDeadline(new \DateTime('+1 month') );
-		$need->setEndDate(new \DateTime('+1 month') );
 
 	    $em = $this->getDoctrine()->getManager();
         $client = $em->getRepository('FlydDashboardBundle:Client')->find($id);

@@ -24,46 +24,6 @@
         <div class="col-sm-8">
             <div class="bloc bloc--general bloc-inline-edition">
                 <h2 class="bloc__title">Informations générales</h2>
-
-                <div class="form-group">
-                    
-                    <label class="control-label">Date de début</label>
-
-                    <div class="data">
-                        {{ entity.startDate| localizeddate('full', 'none', 'fr') }}
-                    </div>
-
-                </div>
-
-
-                <div class="form-group">
-                    
-                    <label class="control-label">Deadline</label>
-
-                    <div class="data">
-                        {% if entity.deadline %}
-                            {{ entity.deadline| localizeddate('full', 'none', 'fr') }}
-                        {% else %}
-                            Aucun(e)
-                        {% endif %}
-                    </div>
-
-                </div>
-
-
-                <div class="form-group">
-                    
-                    <label class="control-label">Date de fin</label>
-
-                    <div class="data">
-                        {% if entity.endDate %}
-                            {{ entity.endDate| localizeddate('full', 'none', 'fr') }}
-                        {% else %}
-                            Aucun(e)
-                        {% endif %}
-                    </div>
-
-                </div>
                 
                 <div class="form-group">
                     
