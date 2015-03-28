@@ -303,12 +303,6 @@ class ProjectCanvasController extends Controller
         $em = $this->getDoctrine()->getManager();    
         $request = $this->container->get('request');
         $params = $this->getRequest()->request->all();
-        if(!$request->isXmlHttpRequest() || !$params['pct']) {
-            return $response->setData(array(
-                'code' => 500,
-                'response' => 'not an ajax request'
-            ));
-        }
         try {      
             $i = 1;
             foreach ($params['pct'] as $pctid) {
