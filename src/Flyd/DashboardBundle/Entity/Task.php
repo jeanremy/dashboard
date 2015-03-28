@@ -30,7 +30,10 @@ class Task
     */
     private $project_task_users;
 
-    
+    /**
+     * @ORM\OneToMany(targetEntity="Flyd\DashboardBundle\Entity\ProjectCanvasTask", mappedBy="task")
+     */
+    private $project_canvas_tasks;
 
     /**
      * @var string
