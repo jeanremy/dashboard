@@ -10,7 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Flyd\DashboardBundle\Entity\Contact;
-use Flyd\DashboardBundle\Form\ContactType;
+use Flyd\DashboardBundle\Form\Type\ContactType;
 
 
 

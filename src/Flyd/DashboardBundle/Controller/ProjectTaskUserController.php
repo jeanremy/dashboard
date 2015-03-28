@@ -7,7 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Flyd\DashboardBundle\Form\ProjectTaskUserType;
+use Flyd\DashboardBundle\Form\Type\ProjectTaskUserType;
 use Doctrine\ORM\ORMException;
 
 class ProjectTaskUserController extends Controller

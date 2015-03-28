@@ -10,7 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Flyd\DashboardBundle\Entity\Address;
-use Flyd\DashboardBundle\Form\AddressType;
+use Flyd\DashboardBundle\Form\Type\AddressType;
 
 class AddressController extends Controller
 {

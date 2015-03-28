@@ -9,8 +9,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Flyd\DashboardBundle\Entity\Project;
 use Flyd\DashboardBundle\Entity\ProjectTaskUser;
 use Flyd\DashboardBundle\Entity\Task;
-use Flyd\DashboardBundle\Form\ProjectTaskUserType;
-use Flyd\DashboardBundle\Form\ProjectTaskUserMiniType;
+use Flyd\DashboardBundle\Form\Type\ProjectTaskUserType;
+use Flyd\DashboardBundle\Form\Type\ProjectTaskUserMiniType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**

@@ -10,10 +10,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Flyd\DashboardBundle\Entity\Project;
 use Flyd\DashboardBundle\Entity\ProjectTaskUser;
-use Flyd\DashboardBundle\Form\ProjectType;
-use Flyd\DashboardBundle\Form\ProjectEditType;
-use Flyd\DashboardBundle\Form\ProjectTaskUserType;
-use Flyd\DashboardBundle\Form\ProjectTaskUserMiniType;
+use Flyd\DashboardBundle\Form\Type\ProjectType;
+use Flyd\DashboardBundle\Form\Type\ProjectEditType;
+use Flyd\DashboardBundle\Form\Type\ProjectTaskUserType;
+use Flyd\DashboardBundle\Form\Type\ProjectTaskUserMiniType;
 
 /**
  * Project controller.

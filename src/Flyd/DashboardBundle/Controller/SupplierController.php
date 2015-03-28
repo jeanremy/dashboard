@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Flyd\DashboardBundle\Entity\Supplier;
-use Flyd\DashboardBundle\Form\SupplierType;
+use Flyd\DashboardBundle\Form\Type\SupplierType;
 
 /**
  * Supplier controller.
