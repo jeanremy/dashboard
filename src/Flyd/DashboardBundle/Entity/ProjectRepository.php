@@ -23,7 +23,7 @@ class ProjectRepository extends EntityRepository
 					->andWhere('c.id = :category')
 	                ->setParameter('category', $category);
 	    }
-	    if($status != null ) {
+	    if($status !== null ) {
 			$query->leftJoin('p.status', 's')
 					->andWhere('s.id = :status')
 	                ->setParameter('status', $status);
