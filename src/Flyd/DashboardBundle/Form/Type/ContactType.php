@@ -19,9 +19,9 @@ class ContactType extends AbstractType
             ->add('company')
             ->add('lastname')
             ->add('job')
-            ->add('email')
-            ->add('phone')
-            ->add('mobile')
+            ->add('email', 'text', array('required' => false))
+            ->add('phone', 'text', array('required' => false))
+            ->add('mobile', 'text', array('required' => false))
             ->add('company', 'entity', array(
                 'class' => 'FlydDashboardBundle:Company'
             ))
