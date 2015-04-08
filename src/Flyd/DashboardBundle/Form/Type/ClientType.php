@@ -28,11 +28,12 @@ class ClientType extends AbstractType
             ->add('type', 'choice', array(
                 'choices'   => array(
                     '0'   => 'Actuel',
-                    '1' => 'Prospect'
+                    '1' => 'Prospect',
                 )
             ))
             ->add('reminder', 'date', array(
                 'widget' => 'single_text'
+                'required' => false
             ))
             ->add('save','submit', array(
                 'attr' => array('class' => 'btn--save--reverse'),
