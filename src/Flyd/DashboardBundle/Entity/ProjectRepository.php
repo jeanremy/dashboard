@@ -23,20 +23,20 @@ class ProjectRepository extends EntityRepository
 					->andWhere('c.id = :category')
 	                ->setParameter('category', $category);
 	    }
-	    if($status !== null ) {
-			$query->leftJoin('p.status', 's')
-					->andWhere('s.id = :status')
-	                ->setParameter('status', $status);
-	    } 
-	    if($status === null) {
-	    	$query->leftJoin('p.status', 's')
-					->andWhere('s.name != :status')
-	                ->setParameter('status', 'Terminé');
-	    }
 	    if($user) {
 	        $query->leftJoin('p.users', 'u')
 	        		->andWhere($query->expr()->in('u', ':user'))
 	                ->setParameter('user', $user);
+	    }
+	    if($status) {
+			$query->leftJoin('p.status', 's')
+					->andWhere('s.id = :status')
+	                ->setParameter('status', $status);
+	    } 
+	    else {
+	    	$query->leftJoin('p.status', 's')
+					->andWhere('s.name != :status')
+	                ->setParameter('status', 'Terminé');
 	    }
 
         return $query->getQuery()
