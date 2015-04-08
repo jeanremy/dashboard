@@ -22,21 +22,21 @@ class ProjectType extends AbstractType
                 'empty_value' => 'Choisissez une categorie'
             ))
             ->add('startDate', 'date', array(
-                'widget' => 'single_text'
+                'widget' => 'single_text',
                 'required' => false
             ))
             ->add('deadline', 'date', array(
-                'widget' => 'single_text'
+                'widget' => 'single_text',
                 'required' => false
             ))
             ->add('endDate', 'date', array(
-                'widget' => 'single_text'
+                'widget' => 'single_text',
                 'required' => false
             ))
             ->add('project_canvas', 'entity', array(
                 'class' => 'FlydDashboardBundle:ProjectCanvas',
                 'property' => 'name',
-                'empty_value' => 'Choisissez une option'
+                'empty_value' => 'Choisissez une option',
                 'required' => false
             ))
             ->add('save','submit', array(
