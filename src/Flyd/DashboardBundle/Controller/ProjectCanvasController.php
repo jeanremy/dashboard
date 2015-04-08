@@ -38,7 +38,7 @@ class ProjectCanvasController extends Controller
 
         return array(
             'entities' => $entities,
-            'menu' => 'project'
+            'menu' => 'projectcanvas'
         );
     }
 
@@ -66,7 +66,7 @@ class ProjectCanvasController extends Controller
         return array(
             'form' => $form->createView(),
             'entity' => $projectcanvas,
-            'menu' => 'project'
+            'menu' => 'projectcanvas'
         );
     }
 
@@ -100,7 +100,7 @@ class ProjectCanvasController extends Controller
             'entity' => $entity,          
             'pctform' => $pctform->createView(),
             'minitasks' => $minitasks,          
-            'menu' => 'project'
+            'menu' => 'projectcanvas'
         );
     }
 
@@ -141,7 +141,7 @@ class ProjectCanvasController extends Controller
             'form' => $form->createView(),
             'pctform' => $pctform->createView(),
             'minitasks' => $minitasks,
-            'menu' => 'project'
+            'menu' => 'projectcanvas'
         );
     }
 
@@ -178,7 +178,7 @@ class ProjectCanvasController extends Controller
         return array(
             'entity' => $entity,
             'form'   => $form->createView(),
-            'menu' => 'project'
+            'menu' => 'projectcanvas'
         );
 
     }
