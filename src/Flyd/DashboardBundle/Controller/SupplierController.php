@@ -23,7 +23,6 @@ class SupplierController extends Controller
      * Lists all Supplier entities.
      *
      * @Route("/", name="supplier_list")
-     * @Method("GET")
      */
     public function indexAction()
     {
@@ -44,7 +43,6 @@ class SupplierController extends Controller
      * Displays a form to create a new Supplier entity.
      *
      * @Route("/supplier/add", name="supplier_add")
-     * @Method("GET")
      * @Template("FlydDashboardBundle:Supplier:add.html.twig")
      */
     public function addAction(Request $request)
@@ -73,7 +71,6 @@ class SupplierController extends Controller
      * Finds and displays a Supplier entity.
      *
      * @Route("/supplier/{id}", name="supplier_show")
-     * @Method("GET")
      * @Template()
      */
     public function showAction($id)
@@ -96,7 +93,6 @@ class SupplierController extends Controller
      * Displays a form to edit an existing Supplier entity.
      *
      * @Route("/supplier/{id}/edit", name="supplier_edit")
-     * @Method("GET")
      * @Template()
      */
     public function editAction(Request $request, $id)
@@ -132,7 +128,6 @@ class SupplierController extends Controller
      * Deletes a Supplier entity.
      *
      * @Route("supplier/{id}/delete", name="supplier_delete")
-     * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
     {
