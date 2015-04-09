@@ -25,7 +25,7 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="bloc bloc--general bloc-inline-edition edit">
-                <p>Êtes-vous sûr de vouloir effacer l'adresse {{entity.firstname}} {{entity.lastname}} ?</p>
+                <p>Êtes-vous sûr de vouloir effacer le contact {{entity.firstname}} {{entity.lastname}} ?</p>
                  <form action="{{ path('contact_delete', {'id': entity.id}) }}" method="post">
                     <a href="{{ path('client_show', {'id': entity.company.id}) }}" class="btn--save--reverse">
                       Retour au client
