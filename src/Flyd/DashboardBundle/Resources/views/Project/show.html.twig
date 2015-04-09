@@ -46,6 +46,7 @@
                 </div>
                 {% endif %}
 
+                {% if entity.startDate %}
                 <div class="form-group">
                     <label class="control-label">Date de début</label>
 
@@ -53,7 +54,9 @@
                         {{ entity.startDate| localizeddate('full', 'none', 'fr') }}
                     </div>
                 </div>
-
+                {% endif %}
+                
+                {% if entity.deadline %}
                 <div class="form-group">
                     <label class="control-label">Deadline</label>
 
@@ -61,7 +64,9 @@
                         {{ entity.deadline| localizeddate('full', 'none', 'fr') }}
                     </div>
                 </div>
+                {% endif %}
 
+                {% if entity.endDate %}
                 <div class="form-group">
                     <label class="control-label">Date de fin</label>
 
@@ -69,6 +74,7 @@
                         {{ entity.endDate| localizeddate('full', 'none', 'fr') }}
                     </div>
                 </div>
+                {% endif %}
 
 
             </div>
