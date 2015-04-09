@@ -23,7 +23,7 @@ class ClientType extends AbstractType
             ))
             ->add('origin', 'entity', array(
                 'class' => 'FlydDashboardBundle:Origin',
-                'property' => 'name',
+                'property' => 'name'
             ))
             ->add('type', 'choice', array(
                 'choices'   => array(
@@ -32,7 +32,7 @@ class ClientType extends AbstractType
                 )
             ))
             ->add('reminder', 'date', array(
-                'widget' => 'single_text'
+                'widget' => 'single_text',
                 'required' => false
             ))
             ->add('save','submit', array(
