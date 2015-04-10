@@ -140,7 +140,7 @@ class ContactController extends Controller
 
 			$request->getSession()->getFlashBag()->add('info', "Le contact a bien été supprimé.");
 
-		    return $this->redirect($this->generateUrl('client_show', array('id' => $contact->getCompany()->getId())));
+		    return $this->redirect($this->generateUrl('client_show', array('id' => $entity->getCompany()->getId())));
 		}
 
 		// Si la requête est en GET, on affiche une page de confirmation avant de supprimer
