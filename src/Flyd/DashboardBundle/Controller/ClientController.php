@@ -152,7 +152,7 @@ class ClientController extends Controller
 			$em->remove($entity);
 			$em->flush();
 
-			$request->getSession()->getFlashBag()->add('info', "Le client a bien été supprimé.");
+			$request->getSession()->getFlashBag()->add('notice', "Le client a bien été supprimé.");
 
 			return $this->redirect($this->generateUrl('client_list'));
 		}
