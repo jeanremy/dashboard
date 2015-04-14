@@ -112,21 +112,23 @@ class ProjectController extends Controller
             $em->flush();
 
             $projectcanvas = $project->getProjectCanvas();
-            $pcts = $projectcanvas->getProjectCanvasTasks();
-            $status = $em->getRepository('FlydDashboardBundle:Status')->findOneByName('A venir');
-            //exit(\Doctrine\Common\Util\Debug::dump($status));
-            foreach ($pcts as $pct) {
-                $ptu = new ProjectTaskUser();
-                $ptu->setStatus($status);
-                $ptu->setProject($project);
-                $ptu->setPosition($pct->getPosition());
-                $ptu->setTask($pct->getTask());
-                $em->persist($ptu);
-                $project->addProjectTaskUser($ptu);
+            if($projectcanvas) {
+              $pcts = $projectcanvas->getProjectCanvasTasks();
+              $status = $em->getRepository('FlydDashboardBundle:Status')->findOneByName('A venir');
+              //exit(\Doctrine\Common\Util\Debug::dump($status));
+              foreach ($pcts as $pct) {
+                  $ptu = new ProjectTaskUser();
+                  $ptu->setStatus($status);
+                  $ptu->setProject($project);
+                  $ptu->setPosition($pct->getPosition());
+                  $ptu->setTask($pct->getTask());
+                  $em->persist($ptu);
+                  $project->addProjectTaskUser($ptu);
+              }
+              $em = $this->getDoctrine()->getManager();
+              $em->persist($project);
+              $em->flush();
             }
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($project);
-            $em->flush();
 
             $request->getSession()->getFlashBag()->add('notice', 'Projet bien enregistré.');
 
@@ -217,7 +219,7 @@ class ProjectController extends Controller
           }
 
           $em->flush();
-          $request->getSession()->getFlashBag()->add('notice', 'Project bien enregistré.');
+          $request->getSession()->getFlashBag()->add('notice', 'Projet bien enregistré.');
 
           return $this->redirect($this->generateUrl('project_show', array('id' => $project->getId())));
         }
@@ -251,7 +253,7 @@ class ProjectController extends Controller
             $em->remove($entity);
             $em->flush();
 
-            $request->getSession()->getFlashBag()->add('info', "Le projet a bien été supprimé.");
+            $request->getSession()->getFlashBag()->add('notice', "Le projet a bien été supprimé.");
 
             return $this->redirect($this->generateUrl('client_list'));
         }

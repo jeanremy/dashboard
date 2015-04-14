@@ -7,49 +7,120 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 class ProjectControllerTest extends WebTestCase
 {
     /*
-    public function testCompleteScenario()
+     *
+     * Test si la page projects/ renvoie au moins un projet
+     *
+     */
+    public function testShow()
     {
-        // Create a new client to browse the application
-        $client = static::createClient();
-
-        // Create a new entry in the database
-        $crawler = $client->request('GET', '/project/');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /project/");
-        $crawler = $client->click($crawler->selectLink('Create a new entry')->link());
-
-        // Fill in the form and submit it
-        $form = $crawler->selectButton('Create')->form(array(
-            'flyd_dashboardbundle_project[field_name]'  => 'Test',
-            // ... other fields to fill
+        $client = static::createClient(array(), array(
+            'PHP_AUTH_USER' => 'jr',
+            'PHP_AUTH_PW'   => 'jr',
         ));
 
-        $client->submit($form);
-        $crawler = $client->followRedirect();
-
-        // Check data in the show view
-        $this->assertGreaterThan(0, $crawler->filter('td:contains("Test")')->count(), 'Missing element td:contains("Test")');
-
-        // Edit the entity
-        $crawler = $client->click($crawler->selectLink('Edit')->link());
-
-        $form = $crawler->selectButton('Update')->form(array(
-            'flyd_dashboardbundle_project[field_name]'  => 'Foo',
-            // ... other fields to fill
-        ));
-
-        $client->submit($form);
-        $crawler = $client->followRedirect();
-
-        // Check the element contains an attribute with value equals "Foo"
-        $this->assertGreaterThan(0, $crawler->filter('[value="Foo"]')->count(), 'Missing element [value="Foo"]');
-
-        // Delete the entity
-        $client->submit($crawler->selectButton('Delete')->form());
-        $crawler = $client->followRedirect();
-
-        // Check the entity has been delete on the list
-        $this->assertNotRegExp('/Foo/', $client->getResponse()->getContent());
+        $crawler = $client->request('GET', '/');
+        $this->assertGreaterThan(0, $crawler->filter('html:contains(".project")')->count());
     }
 
-    */
+    /*
+     *
+     * Test si l'ajout fonctionne
+     *
+     */
+    public function testAdd()
+    {
+        $client = static::createClient(array(), array(
+            'PHP_AUTH_USER' => 'jr',
+            'PHP_AUTH_PW'   => 'jr',
+        ));
+        $client->followRedirects();
+
+        $crawler = $client->request('GET', '/clients');
+        $link = $crawler->filter('.bloc__title a')->first()->link();
+        $crawler = $client->click($link);
+        $newproject = $crawler->selectLink('Ajouter un projet')->link();
+        $crawler = $client->click($newproject);
+
+        $form = $crawler->selectButton('flyd_dashboardbundle_project_save')->form();
+        //var_dump($form->getValues()); die();
+
+        // définit certaines valeurs
+        $form['flyd_dashboardbundle_project[title]']      = 'Projet de test';
+        $form['flyd_dashboardbundle_project[category]']   = 1;
+
+        // soumet le formulaire
+        $crawler = $client->submit($form);
+
+        $this->assertEquals(1, $crawler->filter('html:contains("Projet bien enregistré.")')->count());
+
+    }
+
+
+
+    /*
+     *
+     * Test si l'edit d'un client
+     *
+     */
+    public function testEdit()
+    {
+        $client = static::createClient(array(), array(
+            'PHP_AUTH_USER' => 'jr',
+            'PHP_AUTH_PW'   => 'jr',
+        ));
+        $client->followRedirects();
+
+        $client = static::createClient(array(), array(
+            'PHP_AUTH_USER' => 'jr',
+            'PHP_AUTH_PW'   => 'jr',
+        ));
+        $client->followRedirects();
+
+        $crawler = $client->request('GET', '/clients');
+        $link = $crawler->filter('.bloc__title a')->first()->link();
+        $crawler = $client->click($link);
+        $newproject = $crawler->selectLink('Projet de test')->first()->link();
+        $crawler = $client->click($newproject);
+
+        $link = $crawler->filter('.btn--edit')->first()->link();
+        $crawler = $client->click($link);
+        $form = $crawler->selectButton('Enregistrer')->form();
+        $form['flyd_dashboardbundle_project_edit[status]'] = 2;
+        $crawler = $client->submit($form);
+        $this->assertEquals(1, $crawler->filter('html:contains("Projet bien enregistré.")')->count());
+
+    }
+
+    /*
+     *
+     * Test le delete d'un client
+     *
+     */
+    public function testDelete()
+    {
+        $client = static::createClient(array(), array(
+            'PHP_AUTH_USER' => 'jr',
+            'PHP_AUTH_PW'   => 'jr',
+        ));
+        $client->followRedirects();
+
+        $client = static::createClient(array(), array(
+            'PHP_AUTH_USER' => 'jr',
+            'PHP_AUTH_PW'   => 'jr',
+        ));
+        $client->followRedirects();
+
+        $crawler = $client->request('GET', '/clients');
+        $link = $crawler->filter('.bloc__title a')->first()->link();
+        $crawler = $client->click($link);
+        $newproject = $crawler->selectLink('Projet de test')->first()->link();
+        $crawler = $client->click($newproject);
+
+        $link = $crawler->filter('.btn--delete')->first()->link();
+        $crawler = $client->click($link);
+        $form = $crawler->selectButton('Supprimer')->form();
+        $crawler = $client->submit($form);
+        $this->assertEquals(1, $crawler->filter('html:contains("Le projet a bien été supprimé.")')->count());
+
+    }
 }
