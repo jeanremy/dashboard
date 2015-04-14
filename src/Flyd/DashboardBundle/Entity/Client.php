@@ -6,7 +6,13 @@ use Doctrine\ORM\Mapping as ORM;
 use Flyd\DashboardBundle\Entity\Company;
 use Doctrine\Common\Collections\ArrayCollection;
 
-/** @ORM\Entity */
+/**
+ * Client
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Flyd\DashboardBundle\Entity\ClientRepository")
+ */
+
 class Client extends Company
 {
 

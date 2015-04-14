@@ -12,4 +12,12 @@ use Doctrine\ORM\EntityRepository;
  */
 class ClientRepository extends EntityRepository
 {
+
+	/*
+	 * Overwrite default findAll, to orderby name
+	 */
+	public function findAll()
+    {
+        return $this->findBy(array(), array('name' => 'ASC'));
+    }
 }
