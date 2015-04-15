@@ -46,10 +46,9 @@ class ClientControllerTest extends WebTestCase
 		// soumet le formulaire
 		$crawler = $client->submit($form);
 
+
 		$this->assertEquals(1, $crawler->filter('html:contains("Client bien enregistré.")')->count());
-
 	}
-
 
 
 	/*
@@ -70,7 +69,7 @@ class ClientControllerTest extends WebTestCase
 		$link = $crawler->filter('.bloc__title a:contains("Entreprise de test")')->first()->link();
 		$crawler = $client->click($link);
 		//On vérifie qu'on est bien sur la bonne page
-		$this->assertGreaterThan(0, $crawler->filter('h1:contains("Entreprise de test")')->count());
+		$this->assertEquals(1, $crawler->filter('h1:contains("Entreprise de test")')->count());
 
 		// On clique sur le bouton modifier
 		$link = $crawler->filter('.btn--edit')->first()->link();
@@ -82,6 +81,8 @@ class ClientControllerTest extends WebTestCase
 		$form = $crawler->selectButton('Enregistrer')->form();
 		$form['flyd_dashboardbundle_client[job]'] 	= 'Job de test modifié ' . rand(1,4);
 		$crawler = $client->submit($form);	
+
+
 		//On vérifie que ça a marché
 		$this->assertEquals(1, $crawler->filter('html:contains("Client bien enregistré.")')->count());
 
@@ -116,6 +117,7 @@ class ClientControllerTest extends WebTestCase
 		// On modifie le métier
 		$form = $crawler->selectButton('Supprimer')->form();
 		$crawler = $client->submit($form);	
+
 		//On vérifie que ça a marché
 		$this->assertEquals(1, $crawler->filter('html:contains("Le client a bien été supprimé.")')->count());
 
