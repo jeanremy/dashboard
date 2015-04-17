@@ -3,12 +3,11 @@
  	$.fn.addItems = function( options ) {
 		// Default options
 	    var parentContainer = this.parent().parent().parent();
-		console.log(this.serialize());
 
 		$.ajax({
 			url:            this.attr('action'),
 			type:           this.attr('method'),
-			data: 			this.serialize(),
+			data: this.serialize(),
 			beforeSend: function(data) {
 			},
 			success: function(data) {	
@@ -23,7 +22,6 @@
 				else {
 					console.log(data.response);
 				}
-			},
 			error: function(jqXHR, textStatus, errorThrown) {
 				console.log(errorThrown);
 			}

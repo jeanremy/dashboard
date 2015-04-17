@@ -19,6 +19,12 @@
 			setSize();
 		})();
 
+		setTimeout(function() {
+			$('.notice').fadeOut(400, function(){
+				$(this).remove();
+			})
+		}, 3000);
+
 		$('.notice .close').on('click', function(e) {
 			e.preventDefault();
 			console.log('click');
