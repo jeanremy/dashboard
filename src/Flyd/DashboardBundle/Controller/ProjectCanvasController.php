@@ -169,7 +169,7 @@ class ProjectCanvasController extends Controller
             $em->remove($entity);
             $em->flush();
 
-            $request->getSession()->getFlashBag()->add('info', "Le modèle de projet a bien été supprimé.");
+            $request->getSession()->getFlashBag()->add('notice', "Le modèle de projet a bien été supprimé.");
 
             return $this->redirect($this->generateUrl('projectcanvas_list'));
         }
