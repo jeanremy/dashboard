@@ -1,0 +1,39 @@
+{% extends "FlydDashboardBundle::layout.html.twig" %}
+
+
+{% block title %}
+    <title>Se connecter</title>
+{% endblock %}
+
+
+{% block body %}
+    <h1 class="lvl1">Se connecter</h1>
+    {% block fos_user_content %}
+    
+
+    {% include "FlydDashboardBundle::flash.html.twig" %}
+
+    {% trans_default_domain 'FOSUserBundle' %}
+    <div class="row">
+		<div class="col-sm-12">
+			<div class="bloc">
+		        <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
+		            <div>
+		                {% if invalid_username is defined %}
+		                    <p>{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}</p>
+		                {% endif %}
+		                <label for="username" class="control-label">{{ 'resetting.request.username'|trans }}</label>
+		                <div class="data">
+		                	<input type="text" id="username" name="username" required="required" class="form-control" />
+		                </div>
+		            </div>
+		            <div>
+		                <input type="submit" value="{{ 'resetting.request.submit'|trans }}" class="btn btn--save" />
+		            </div>
+		        </form>
+		    </div>
+		</div>
+	</div>
+
+    {% endblock fos_user_content %}
+{% endblock body %}

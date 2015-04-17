@@ -30,4 +30,12 @@ class SupplierRepository extends EntityRepository
                       ->getResult();
         
 	}
+
+	/*
+	 * Overwrite default findAll, to orderby name
+	 */
+	public function findAll()
+    {
+        return $this->findBy(array(), array('name' => 'ASC'));
+    }
 }

@@ -1,0 +1,28 @@
+{% extends "FlydDashboardBundle::layout.html.twig" %}
+
+
+{% block title %}
+    <title>Se connecter</title>
+{% endblock %}
+
+
+{% block body %}
+    <h1 class="lvl1">Se connecter</h1>
+    {% block fos_user_content %}
+    
+
+    {% include "FlydDashboardBundle::flash.html.twig" %}
+    {% trans_default_domain 'FOSUserBundle' %}
+
+    <div class="row">
+		<div class="col-sm-12">
+			<div class="bloc">
+				<p>
+				{{ 'resetting.check_email'|trans({'%email%': email}) }}
+				</p>
+			</div>
+		</div>
+	</div>
+	{% endblock %}
+
+{% endblock %}

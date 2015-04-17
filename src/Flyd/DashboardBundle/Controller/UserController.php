@@ -163,6 +163,8 @@ class UserController extends Controller
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find User entity.');
             }
+            $request->getSession()->getFlashBag()->add('notice', "L'utilisateur a bien été supprimé.");
+
 
             $em->remove($entity);
             $em->flush();

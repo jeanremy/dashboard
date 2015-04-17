@@ -1,0 +1,34 @@
+{% extends "FlydDashboardBundle::layout.html.twig" %}
+
+
+{% block title %}
+    <title>Se connecter</title>
+{% endblock %}
+
+
+{% block body %}
+    <h1 class="lvl1">Se connecter</h1>
+    {% block fos_user_content %}
+    
+
+    {% include "FlydDashboardBundle::flash.html.twig" %}
+
+    {% trans_default_domain 'FOSUserBundle' %}
+    <div class="row">
+		<div class="col-sm-12">
+			<div class="bloc">
+		        {% trans_default_domain 'FOSUserBundle' %}
+
+				<form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset">
+				    {{ form_widget(form) }}
+				    <div>
+				        <input type="submit" value="{{ 'resetting.reset.submit'|trans }}" class="btn btn--submit" />
+				    </div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+    {% endblock fos_user_content %}
+{% endblock body %}

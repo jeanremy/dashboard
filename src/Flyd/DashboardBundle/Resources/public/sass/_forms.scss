@@ -51,3 +51,11 @@ select:disabled,
 input:disabled {
 	background: none;
 }
+
+.pwd {
+	font-family: $varela;
+	font-size: 12px;
+	float: right;
+	border-bottom: 1px dashed $primary;
+
+}

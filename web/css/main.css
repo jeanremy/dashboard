@@ -2164,6 +2164,13 @@ input:disabled {
   background: none;
 }
 
+.pwd {
+  font-family: "varela", sans-serif;
+  font-size: 12px;
+  float: right;
+  border-bottom: 1px dashed #2b303e;
+}
+
 .supplier--mini span {
   color: #8f979e;
 }
