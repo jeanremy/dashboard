@@ -37,16 +37,18 @@
                             </div>
                         </div>
                         {% endif %}
+
+                        {% form_theme form 'FlydDashboardBundle::errors.html.twig' %}
                         
                         <div class="form-group">
                             {{ form_label(form.name, "Titre du projet", {'label_attr': {'class': 'control-label'}}) }}
 
-                            {{ form_errors(form.name) }}
 
-                          <div class="data">
-                            {# Génération de l'input. #}
-                            {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
-                          </div>
+                            <div class="data">
+                                {# Génération de l'input. #}
+                                {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            {{ form_errors(form.name) }}
                         </div>
 
                        

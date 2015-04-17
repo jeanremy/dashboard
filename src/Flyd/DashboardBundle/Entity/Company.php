@@ -4,7 +4,7 @@ namespace Flyd\DashboardBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Company
@@ -32,6 +32,7 @@ class Company
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Assert\Length(min=5)
      */
     protected $name;
 
@@ -49,6 +50,7 @@ class Company
      * @var string
      *
      * @ORM\Column(name="job", type="string", length=255)
+     * @Assert\Length(min=5)
      */
     protected $job;
 
@@ -57,6 +59,7 @@ class Company
      * @var \DateTime
      *
      * @ORM\Column(name="entrance", type="date")
+     * @Assert\DateTime
      */
     protected $entrance;
 

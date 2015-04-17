@@ -29,6 +29,8 @@
     </div>
     {% endif %}
 
+    {% form_theme form 'FlydDashboardBundle::errors.html.twig' %}
+
     <div class="row">
         <div class="col-sm-12">
             <div class="bloc bloc-inline-edition">
@@ -37,12 +39,12 @@
                 <div class="form-group">
                     {{ form_label(form.name, "Nom du modèle", {'label_attr': {'class': 'control-label'}}) }}
 
-                    {{ form_errors(form.name) }}
 
-                  <div class="data">
-                    {# Génération de l'input. #}
-                    {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
-                  </div>
+                    <div class="data">
+                        {# Génération de l'input. #}
+                        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    {{ form_errors(form.name) }}
                 </div>
 
                

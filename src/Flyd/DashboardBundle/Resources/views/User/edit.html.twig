@@ -30,6 +30,9 @@
 	</div>
 	{% endif %}
 
+  {% form_theme form 'FlydDashboardBundle::errors.html.twig' %}
+
+
     <div class="row">
         <div class="col-sm-12">
             <div class="bloc bloc--general bloc-inline-edition edit">
@@ -38,83 +41,74 @@
                 <div class="form-group">
                 	{{ form_label(form.username, "Nom d'utilisateur", {'label_attr': {'class': 'control-label'}}) }}
 
-        					{{ form_errors(form.username) }}
 
-        					<div class="data">
-        						{# Génération de l'input. #}
-        						{{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
-        					</div>
+                  <div class="data">
+                    {# Génération de l'input. #}
+                    {{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
+                  </div>
+        					{{ form_errors(form.username) }}
                 </div>
 
                 <div class="form-group">
                 	{{ form_label(form.job, "Profession", {'label_attr': {'class': 'control-label'}}) }}
 
-        					{{ form_errors(form.job) }}
 
-        					<div class="data">
-        						{# Génération de l'input. #}
-        						{{ form_widget(form.job, {'attr': {'class': 'form-control'}}) }}
-        					</div>
+                  <div class="data">
+                    {# Génération de l'input. #}
+                    {{ form_widget(form.job, {'attr': {'class': 'form-control'}}) }}
+                  </div>
+        					{{ form_errors(form.job) }}
                 </div>
 
                 <div class="form-group">
                   {{ form_label(form.email, "Email", {'label_attr': {'class': 'control-label'}}) }}
 
-                  {{ form_errors(form.email) }}
 
                   <div class="data">
                     {# Génération de l'input. #}
                     {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
                   </div>
+                  {{ form_errors(form.email) }}
                 </div>
 
                 <div class="form-group">
                   {{ form_label(form.password.first, "Mot de passe", {'label_attr': {'class': 'control-label'}}) }}
 
-                  {{ form_errors(form.password.first) }}
 
                   <div class="data">
                     {# Génération de l'input. #}
                     {{ form_widget(form.password.first, {'attr': {'class': 'form-control'}}) }}
                   </div>
+                  {{ form_errors(form.password.first) }}
                 </div>
 
                 <div class="form-group">
                   {{ form_label(form.password.second, "Mot de passe (encore)", {'label_attr': {'class': 'control-label'}}) }}
 
-                  {{ form_errors(form.password.second) }}
 
                   <div class="data">
                     {# Génération de l'input. #}
                     {{ form_widget(form.password.second, {'attr': {'class': 'form-control'}}) }}
                   </div>
+                  {{ form_errors(form.password.second) }}
                 </div>
 
                 <div class="form-group">
                   {{ form_label(form.image.file, "Profil", {'label_attr': {'class': 'control-label'}}) }}
 
-                  {{ form_errors(form.image.file) }}
 
                   <div class="data">
                     {# Génération de l'input. #}
                     {{ form_widget(form.image.file, {'attr': {'class': 'form-control'}}) }}
                   </div>
+                  {{ form_errors(form.image.file) }}
                 </div>
 
-	       {{ form_widget(form.save) }}
+	           {{ form_widget(form.save) }}
+	           {{ form_rest(form) }}
             </div>
         </div>
     </div>
-
-
-
-  {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
-
-
-	{# Génération automatique des champs pas encore écrits.
-	Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
-	et tous les champs cachés (type « hidden »). #}
-	{{ form_rest(form) }}
 
 	{# Fermeture de la balise <form> du formulaire HTML #}
 	{{ form_end(form) }}

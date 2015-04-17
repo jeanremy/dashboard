@@ -4,6 +4,7 @@ namespace Flyd\DashboardBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Project
@@ -67,6 +68,7 @@ class Project
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
+     * @Assert\Length(min=5)
      */
     private $title;
 
@@ -75,20 +77,23 @@ class Project
      * @var \DateTime
      *
      * @ORM\Column(name="start_date", type="date")
+     * @Assert\DateTime
      */
     private $startDate;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="deadline", type="date", nullable=true)
+     * @ORM\Column(name="deadline", type="date", nullable=true)     
+     * @Assert\DateTime
      */
     private $deadline;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="end_date", type="date", nullable=true)
+     * @ORM\Column(name="end_date", type="date", nullable=true)   
+     * @Assert\DateTime
      */
     private $endDate;
 

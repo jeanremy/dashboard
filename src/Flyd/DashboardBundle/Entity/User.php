@@ -24,6 +24,7 @@ class User extends BaseUser
      */
     protected $id;
 
+
     /**
     * @ORM\OneToMany(targetEntity="Flyd\DashboardBundle\Entity\ProjectTaskUser", mappedBy="user")
     */
