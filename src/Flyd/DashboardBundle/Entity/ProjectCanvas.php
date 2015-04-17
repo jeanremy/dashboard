@@ -29,7 +29,7 @@ class ProjectCanvas
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="Flyd\DashboardBundle\Entity\ProjectCanvasTask", mappedBy="project_canvas")
+     * @ORM\OneToMany(targetEntity="Flyd\DashboardBundle\Entity\ProjectCanvasTask", mappedBy="project_canvas", cascade={"persist", "remove"})
      * @ORM\OrderBy({"position" = "ASC"})
      */
     private $project_canvas_tasks;

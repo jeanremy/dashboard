@@ -58,7 +58,7 @@ class ProjectCanvasController extends Controller
           $em->persist($projectcanvas);
           $em->flush();
 
-          $request->getSession()->getFlashBag()->add('notice', 'Canevas de projet bien enregistré.');
+          $request->getSession()->getFlashBag()->add('notice', 'Modèle de projet bien enregistré.');
 
           return $this->redirect($this->generateUrl('projectcanvas_show', array('id' => $projectcanvas->getId())));
         }
@@ -131,7 +131,7 @@ class ProjectCanvasController extends Controller
           $em->persist($projectcanvas);
           $em->flush();
 
-          $request->getSession()->getFlashBag()->add('notice', 'Canevas de projet bien enregistré.');
+          $request->getSession()->getFlashBag()->add('notice', 'Modèle de projet bien enregistré.');
 
           return $this->redirect($this->generateUrl('projectcanvas_show', array('id' => $projectcanvas->getId())));
         }
@@ -169,7 +169,7 @@ class ProjectCanvasController extends Controller
             $em->remove($entity);
             $em->flush();
 
-            $request->getSession()->getFlashBag()->add('info', "Le canevas de projet a bien été supprimé.");
+            $request->getSession()->getFlashBag()->add('info', "Le modèle de projet a bien été supprimé.");
 
             return $this->redirect($this->generateUrl('projectcanvas_list'));
         }
