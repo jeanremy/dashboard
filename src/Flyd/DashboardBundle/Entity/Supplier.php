@@ -11,6 +11,7 @@ use Flyd\DashboardBundle\Entity\Company;
  */
 class Supplier extends Company
 {
+
 	public function __toString() {
         return $this->name;
     }

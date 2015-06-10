@@ -12,6 +12,11 @@ use Doctrine\ORM\EntityRepository;
  */
 class TaskRepository extends EntityRepository
 {
+	/**
+     * get Task Identifiers
+     *
+     * @return array
+     */
 	public function getTaskIdentifiers() {
 		return $this
 		    ->createQueryBuilder('a')

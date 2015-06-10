@@ -15,6 +15,7 @@ class ClientRepository extends EntityRepository
 
 	/*
 	 * Overwrite default findAll, to orderby name
+	 * @return ArrayList of Clients
 	 */
 	public function findAll()
     {

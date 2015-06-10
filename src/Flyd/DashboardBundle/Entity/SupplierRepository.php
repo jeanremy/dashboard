@@ -12,6 +12,11 @@ use Doctrine\ORM\EntityRepository;
  */
 class SupplierRepository extends EntityRepository
 {
+	/**
+     * get Suppliers without
+     *
+     * @return array
+     */
 	public function getSuppliersWithout($existingsuppliers) {
 
 		$query = $this->createQueryBuilder('a')
@@ -33,6 +38,8 @@ class SupplierRepository extends EntityRepository
 
 	/*
 	 * Overwrite default findAll, to orderby name
+	 *
+	 * @return array
 	 */
 	public function findAll()
     {

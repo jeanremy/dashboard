@@ -12,6 +12,15 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProjectRepository extends EntityRepository
 {
+	/*
+	 * findPreciselyBy
+     *
+     * @param int $category
+     * @param int $status
+     * @param int $user
+     * @return Arraylist of Projects
+	 *
+	 */
 	public function findPreciselyBy($category = null, $status = null, $user = null) 
 	{
 		$query = $this->createQueryBuilder('p')

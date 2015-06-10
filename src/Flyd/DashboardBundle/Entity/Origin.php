@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Origin
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Flyd\DashboardBundle\Entity\OriginRepository")
+ * @ORM\Entity()
  */
 class Origin
 {

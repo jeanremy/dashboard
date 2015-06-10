@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Contact
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Flyd\DashboardBundle\Entity\ContactRepository")
+ * @ORM\Entity()
  */
 class Contact
 {

@@ -20,8 +20,9 @@
 					}
 				}
 				else {
-					console.log(data.response);
+					console.log(JSON.parse(data.response));
 				}
+			},
 			error: function(jqXHR, textStatus, errorThrown) {
 				console.log(errorThrown);
 			}

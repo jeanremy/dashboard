@@ -14,7 +14,9 @@ use Doctrine\ORM\EntityRepository;
 class ProjectTaskUserRepository extends EntityRepository
 {
 	/*
+	 * getFirstPendingTask 
 	 * Recherche la prochaine tâche En cours
+	 * @return Task
 	 */
 	public function getFirstPendingTask($projectid)
 	{

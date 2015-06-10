@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Company
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Flyd\DashboardBundle\Entity\CompanyRepository")
+ * @ORM\Entity()
  * @ORM\HasLifecycleCallbacks()
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="discr", type="string")

@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * ProjectCanvas
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Flyd\DashboardBundle\Entity\ProjectCanvasRepository")
+ * @ORM\Entity()
  */
 class ProjectCanvas
 {

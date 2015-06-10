@@ -12,6 +12,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class NeedRepository extends EntityRepository
 {
+	/*
+	 * getDates
+	 *
+     * @param int $id
+     *
+	 * return DateTime
+	 */
 	public function getDates($id) 
 	{
 		$query = $this->createQueryBuilder('ptu')

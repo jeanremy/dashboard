@@ -13,7 +13,11 @@ use Doctrine\ORM\EntityRepository;
 class UserRepository extends EntityRepository
 {
 
-
+	/**
+     * get Users without
+     *
+     * @return array
+     */
 	public function getUsersWithout($existingusers) 
 	{
 		$query = $this->createQueryBuilder('a')

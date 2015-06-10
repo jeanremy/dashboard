@@ -14,7 +14,7 @@ $('#flyd_dashboardbundle_projecttaskuser_mini_task_name').autocomplete({
 $('#flyd_dashboardbundle_projecttaskuser').on('submit', function(e) {
     e.preventDefault();
     // to get the right position
-    $('#flyd_dashboardbundle_projecttaskuser_mini_position').val(parseInt($('.task').length() + 1);
+    $('#flyd_dashboardbundle_projecttaskuser_mini_position').val(parseInt($('.task').length + 1));
     $.ajax({
       url:            $(this).attr('action'),
       type:           $(this).attr('method'),
